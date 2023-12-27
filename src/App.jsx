@@ -1,8 +1,14 @@
 import { useState } from "react";
 import "./App.css";
-import GravityInput from "./GravityInput.jsx";
-import ABVRunButton from "./ABVRunButton.jsx";
-import ChangeToBrix from "./ChangeToBrix.jsx";
+import AbvCalculator from "./components/AbvCalculator.jsx";
+import ChangeToBrix from "./components/ChangeToBrix.jsx";
+import EstimatedOG from "./components/EstimatedOG.jsx";
+import SulfiteAddition from "./components/SulfiteAddition.jsx";
+import SorbateAddition from "./components/SorbateAddition.jsx";
+import RefractCorrect from "./components/RefractCorrect.jsx";
+import TempCorrection from "./components/TempCorrection.jsx";
+import BlendingCalc from "./components/BlendingCalc.jsx";
+
 function App() {
   const [abvArr, setAbvObj] = useState([
     {
@@ -38,6 +44,15 @@ function App() {
     );
   };
 
+  const toSg = (value) => {
+    return (
+      1.00001 +
+      0.0038661 * value +
+      1.3488 * 10 ** -5 * value ** 2 +
+      4.3074 * 10 ** -8 * value ** 3
+    );
+  };
+
   const runAbvCalc = () => {
     const ABV = abvCalc(ABVObj.og, ABVObj.fg);
     setAbvObj([
@@ -62,29 +77,96 @@ function App() {
     return toBrix(ABVObj.fg) + 4.5 * ABVObj.abv;
   }
 
+  const [estOG, setEstOG] = useState([
+    {
+      hydroFG: 1,
+      refracFG: 1,
+      estOG: 0,
+    },
+  ]);
+
+  const estOGObj = estOG[0];
+
+  const handleHydroFG = (e) => {
+    setEstOG([
+      {
+        hydroFG: e.target.value,
+        refracFG: estOGObj.refracFG,
+        estOG: estOGObj.estOG,
+      },
+    ]);
+  };
+
+  const handleRefracFG = (e) => {
+    setEstOG([
+      {
+        hydroFG: estOGObj.hydroFG,
+        refracFG: e.target.value,
+        estOG: estOGObj.estOG,
+      },
+    ]);
+  };
+
+  const handleEstOG = (value) => {
+    setEstOG([
+      {
+        hydroFG: estOGObj.hydroFG,
+        refracFG: estOGObj.refracFG,
+        estOG: value,
+      },
+    ]);
+  };
+
+  const [temp, setTemp] = useState([
+    {
+      sg: 1.1,
+      curTemp: 90,
+      calTemp: 68,
+      units: "F",
+    },
+  ]);
+
+  const tempObj = temp[0];
+  const handleTempSg = (e) => {
+    setTemp([
+      {
+        sg: e.target.value,
+        curTemp: tempObj.curTemp,
+        calTemp: tempObj.calTemp,
+        units: tempObj.units,
+      },
+    ]);
+  };
   return (
     <>
-      <h1>ABV Calculator</h1>
-
-      <GravityInput
-        gravity="og"
-        handleGravity={handleOg}
+      <AbvCalculator
         toBrix={toBrix}
-        abvObj={ABVObj}
-        readingType="og"
-        initial={""}
+        handleOg={handleOg}
+        ABVObj={ABVObj}
+        handleFg={handleFg}
+        runAbvCalc={runAbvCalc}
+        delle={delle}
       />
-      <GravityInput
-        gravity="fg"
-        handleGravity={handleFg}
-        toBrix={toBrix}
-        abvObj={ABVObj}
-        readingType="fg"
-        initial={0.996}
-      />
-      <ABVRunButton runAbvCalc={runAbvCalc} ABVObj={ABVObj} delle={delle} />
-
       <ChangeToBrix toBrix={toBrix} />
+      <EstimatedOG
+        handleGravity={handleRefracFG}
+        abvObj={estOGObj}
+        handleEstOG={handleEstOG}
+        abvCalc={abvCalc}
+        toBrix={toBrix}
+        handleHydroFG={handleHydroFG}
+        estOGObj={estOGObj}
+      />
+      <SulfiteAddition />
+      <SorbateAddition />
+      <RefractCorrect toBrix={toBrix} toSg={toSg} abvCalc={abvCalc} />
+      <TempCorrection
+        toBrix={toBrix}
+        handleTempSg={handleTempSg}
+        tempObj={tempObj}
+        setTemp={setTemp}
+      />
+      <BlendingCalc />
     </>
   );
 }

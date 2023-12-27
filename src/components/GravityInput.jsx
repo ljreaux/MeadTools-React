@@ -5,10 +5,11 @@ function GravityInput({
   abvObj,
   readingType,
   initial,
+  labelText,
 }) {
   return (
     <>
-      <label htmlFor={readingType}>Enter {readingType.toUpperCase()}: </label>
+      <label htmlFor={readingType}>{labelText} </label>
       <input defaultValue={initial} onChange={handleGravity}></input>
       <p>
         {toBrix(abvObj[gravity]).toFixed(2) > 0

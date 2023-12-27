@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Title from "./Title";
 
 function ChangeToBrix({ toBrix }) {
   const [gravity, setGravity] = useState([
@@ -39,7 +40,7 @@ function ChangeToBrix({ toBrix }) {
 
   return (
     <>
-      <h1>Brix Conversion Calculator</h1>
+      <Title header="Brix Conversion Calculator" />
       <label>Enter Gravity: </label>
       <input
         value={unitSwitch ? unitSwitch : ""}
