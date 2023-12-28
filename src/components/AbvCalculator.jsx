@@ -11,18 +11,19 @@ function AbvCalculator({
   delle,
 }) {
   return (
-    <>
+    <div className="component-div">
       <Title header="ABV Calculator" />
-
-      <GravityInput
-        gravity="og"
-        handleGravity={handleOg}
-        toBrix={toBrix}
-        abvObj={ABVObj}
-        readingType="og"
-        initial={""}
-        labelText="Enter OG: "
-      />
+      <div>
+        <GravityInput
+          gravity="og"
+          handleGravity={handleOg}
+          toBrix={toBrix}
+          abvObj={ABVObj}
+          readingType="og"
+          initial={""}
+          labelText="Enter OG: "
+        />
+      </div>
       <GravityInput
         gravity="fg"
         handleGravity={handleFg}
@@ -33,7 +34,7 @@ function AbvCalculator({
         labelText="Enter FG: "
       />
       <ABVRunButton runAbvCalc={runAbvCalc} ABVObj={ABVObj} delle={delle} />
-    </>
+    </div>
   );
 }
 

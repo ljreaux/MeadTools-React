@@ -32,78 +32,89 @@ function RefractCorrect({ toBrix, toSg, abvCalc }) {
     }
   };
   return (
-    <>
+    <div className="component-div">
       <Title header="Refractometer Correction Calculator" />
-      <label>Correction Factor: </label>
-      <input
-        defaultValue={1}
-        onChange={(e) => {
-          setRefrac([
-            {
-              cf: e.target.value,
-              og: refracObj.og,
-              units: refracObj.units,
-              fg: refracObj.fg,
-            },
-          ]);
-        }}
-      />
-      <label>Enter OG: </label>
-      <input
-        defaultValue={1.1}
-        onChange={(e) => {
-          setRefrac([
-            {
-              cf: refracObj.cf,
-              og: e.target.value,
-              units: refracObj.units,
-              fg: refracObj.fg,
-            },
-          ]);
-        }}
-      />
-      <select
-        onChange={(e) => {
-          setRefrac([
-            {
-              cf: refracObj.cf,
-              og: refracObj.og,
-              units: e.target.value,
-              fg: refracObj.fg,
-            },
-          ]);
-        }}
-      >
-        <option value="sg">SG</option>
-        <option value="brix">Brix</option>
-      </select>
-      <p>
-        {refracObj.units == "sg"
-          ? `${toBrix(refracObj.og).toFixed(2)} Brix`
-          : toSg(refracObj.og).toFixed(3)}
-      </p>
-      <label>Enter FG in Brix: </label>
-      <input
-        defaultValue={8.5}
-        onChange={(e) => {
-          setRefrac([
-            {
-              cf: refracObj.cf,
-              og: refracObj.og,
-              units: refracObj.units,
-              fg: e.target.value,
-            },
-          ]);
-        }}
-      />
-      <p>{`${checkUnits().toFixed(3)}, ${toBrix(checkUnits()).toFixed(
-        2
-      )} Brix`}</p>
-      <p>{`${checkUnitsAbv()}% ABV, ${delle(
+      <div className="text-center">
+        <label>Correction Factor: </label>
+        <input
+          className="input"
+          defaultValue={1}
+          onChange={(e) => {
+            setRefrac([
+              {
+                cf: e.target.value,
+                og: refracObj.og,
+                units: refracObj.units,
+                fg: refracObj.fg,
+              },
+            ]);
+          }}
+        />
+      </div>
+      <div className="text-center">
+        <label>Enter OG: </label>
+        <input
+          className="input"
+          defaultValue={1.1}
+          onChange={(e) => {
+            setRefrac([
+              {
+                cf: refracObj.cf,
+                og: e.target.value,
+                units: refracObj.units,
+                fg: refracObj.fg,
+              },
+            ]);
+          }}
+        />
+        <select
+          className="input hover:cursor-pointer"
+          onChange={(e) => {
+            setRefrac([
+              {
+                cf: refracObj.cf,
+                og: refracObj.og,
+                units: e.target.value,
+                fg: refracObj.fg,
+              },
+            ]);
+          }}
+        >
+          <option value="sg">SG</option>
+          <option value="brix">Brix</option>
+        </select>
+
+        <p>
+          {refracObj.units == "sg"
+            ? `${toBrix(refracObj.og).toFixed(2)} Brix`
+            : toSg(refracObj.og).toFixed(3)}
+        </p>
+      </div>
+      <div className="text-center">
+        <label>Enter FG in Brix: </label>
+        <input
+          className="input"
+          defaultValue={8.5}
+          onChange={(e) => {
+            setRefrac([
+              {
+                cf: refracObj.cf,
+                og: refracObj.og,
+                units: refracObj.units,
+                fg: e.target.value,
+              },
+            ]);
+          }}
+        />
+      </div>
+      <p className="text-center pt-4">{`${checkUnits().toFixed(3)}, ${toBrix(
+        checkUnits()
+      ).toFixed(2)} Brix`}</p>
+      <p className="pb-4">{`${checkUnitsAbv()}% ABV, ${delle(
         checkUnits(),
         checkUnitsAbv()
       ).toFixed(0)} Delle Units`}</p>
-    </>
+    </div>
   );
 }
 export default RefractCorrect;

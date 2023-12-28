@@ -55,7 +55,7 @@ function BlendingCalc() {
     ]);
   };
   return (
-    <>
+    <div className="component-div">
       <Title header="Blending Calculator" />
       <BlendingInputLine
         number={1}
@@ -68,12 +68,14 @@ function BlendingCalc() {
         valChange={val2Change}
         volChange={vol2Change}
       />
-      <p>
+      <p className="pt-4">
         Blended Value:{" "}
         {blend(valObj.val1, valObj.vol1, valObj.val2, valObj.vol2).toFixed(4)}
       </p>
-      <p>Total Volume: {Number(valObj.vol1) + Number(valObj.vol2)}</p>
-    </>
+      <p className="pb-4">
+        Total Volume: {Number(valObj.vol1) + Number(valObj.vol2)}
+      </p>
+    </div>
   );
 }
 export default BlendingCalc;

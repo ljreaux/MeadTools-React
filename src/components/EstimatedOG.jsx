@@ -18,7 +18,7 @@ function EstimatedOG({
     return (-1.728 * fgh + 0.01085 * fgr + 2.728).toFixed(3);
   }
   return (
-    <>
+    <div className="component-div">
       <Title header="Estimated OG Without Reading" />
       <GravityInput
         gravity="hydroFG"
@@ -31,7 +31,7 @@ function EstimatedOG({
       />
       <div>
         <label>Enter Refractometer FG: </label>
-        <input onChange={handleGravity}></input>
+        <input className="input" onChange={handleGravity}></input>
       </div>
       <div>
         <EstOGRunButton
@@ -43,7 +43,7 @@ function EstimatedOG({
           toBrix={toBrix}
         />
       </div>
-    </>
+    </div>
   );
 }
 

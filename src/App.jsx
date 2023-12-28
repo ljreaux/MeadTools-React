@@ -8,7 +8,8 @@ import SorbateAddition from "./components/SorbateAddition.jsx";
 import RefractCorrect from "./components/RefractCorrect.jsx";
 import TempCorrection from "./components/TempCorrection.jsx";
 import BlendingCalc from "./components/BlendingCalc.jsx";
-
+import ExtraCalcsSideBar from "./components/ExtraCalcsSideBar.jsx";
+import { Route, Routes } from "react-router-dom";
 function App() {
   const [abvArr, setAbvObj] = useState([
     {
@@ -138,36 +139,59 @@ function App() {
     ]);
   };
   return (
-    <>
-      <AbvCalculator
-        toBrix={toBrix}
-        handleOg={handleOg}
-        ABVObj={ABVObj}
-        handleFg={handleFg}
-        runAbvCalc={runAbvCalc}
-        delle={delle}
-      />
-      <ChangeToBrix toBrix={toBrix} />
-      <EstimatedOG
-        handleGravity={handleRefracFG}
-        abvObj={estOGObj}
-        handleEstOG={handleEstOG}
-        abvCalc={abvCalc}
-        toBrix={toBrix}
-        handleHydroFG={handleHydroFG}
-        estOGObj={estOGObj}
-      />
-      <SulfiteAddition />
-      <SorbateAddition />
-      <RefractCorrect toBrix={toBrix} toSg={toSg} abvCalc={abvCalc} />
-      <TempCorrection
-        toBrix={toBrix}
-        handleTempSg={handleTempSg}
-        tempObj={tempObj}
-        setTemp={setTemp}
-      />
-      <BlendingCalc />
-    </>
+    <div className="main-div-style">
+      <ExtraCalcsSideBar />
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <AbvCalculator
+              toBrix={toBrix}
+              handleOg={handleOg}
+              ABVObj={ABVObj}
+              handleFg={handleFg}
+              runAbvCalc={runAbvCalc}
+              delle={delle}
+            />
+          }
+        />
+        <Route path="/brixCalc" element={<ChangeToBrix toBrix={toBrix} />} />
+        <Route
+          path="/estOG"
+          element={
+            <EstimatedOG
+              handleGravity={handleRefracFG}
+              abvObj={estOGObj}
+              handleEstOG={handleEstOG}
+              abvCalc={abvCalc}
+              toBrix={toBrix}
+              handleHydroFG={handleHydroFG}
+              estOGObj={estOGObj}
+            />
+          }
+        />
+        <Route path="/sulfite" element={<SulfiteAddition />} />
+        <Route path="/sorbate" element={<SorbateAddition />} />
+        <Route
+          path={"/RefractometerCorrection"}
+          element={
+            <RefractCorrect toBrix={toBrix} toSg={toSg} abvCalc={abvCalc} />
+          }
+        />
+        <Route
+          path="/tempCorrection"
+          element={
+            <TempCorrection
+              toBrix={toBrix}
+              handleTempSg={handleTempSg}
+              tempObj={tempObj}
+              setTemp={setTemp}
+            />
+          }
+        />
+        <Route path="/blending" element={<BlendingCalc />} />
+      </Routes>
+    </div>
   );
 }
 

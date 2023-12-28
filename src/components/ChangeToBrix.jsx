@@ -39,14 +39,19 @@ function ChangeToBrix({ toBrix }) {
   }
 
   return (
-    <>
+    <div className="component-div">
       <Title header="Brix Conversion Calculator" />
-      <label>Enter Gravity: </label>
-      <input
-        value={unitSwitch ? unitSwitch : ""}
-        onChange={handleChange}
-      ></input>
+      <div className="items-center justify-center text-center py-2">
+        {" "}
+        <label>Enter Gravity: </label>
+        <input
+          className="input"
+          value={unitSwitch ? unitSwitch : ""}
+          onChange={handleChange}
+        ></input>
+      </div>
       <select
+        className="input hover:cursor-pointer"
         id="select"
         onChange={(e) => {
           setUnits(e.target.value);
@@ -60,8 +65,10 @@ function ChangeToBrix({ toBrix }) {
         <option value="SG">SG</option>
         <option value="Brix">Brix</option>
       </select>
-      <p>{units == "SG" ? gravityObj.brix + " Brix" : gravityObj.sg}</p>
-    </>
+      <p className="py-4">
+        {units == "SG" ? gravityObj.brix + " Brix" : gravityObj.sg}
+      </p>
+    </div>
   );
 }
 

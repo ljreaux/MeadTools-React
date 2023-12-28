@@ -11,8 +11,10 @@ function EstOGRunButton({
   }
 
   return (
-    <>
-      <button onClick={() => calcDisplay()}>Submit</button>
+    <div className="py-4">
+      <button className="btn" onClick={() => calcDisplay()}>
+        Submit
+      </button>
       <div>
         <p>
           {abvObj.estOG > 0
@@ -49,7 +51,7 @@ function EstOGRunButton({
             : null}
         </p>
       </div>
-    </>
+    </div>
   );
 }
 

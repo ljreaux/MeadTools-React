@@ -18,7 +18,7 @@ function TempCorrection({ toBrix, tempObj, handleTempSg, setTemp }) {
     return currentTemp * (9 / 5) + 32;
   }
   return (
-    <>
+    <div className="component-div">
       <Title header="Hydrometer Temperature Correction" />
       <GravityInput
         gravity="sg"
@@ -29,51 +29,58 @@ function TempCorrection({ toBrix, tempObj, handleTempSg, setTemp }) {
         initial={tempObj.sg}
         labelText="Measured SG: "
       />
-      <label>Current Temp: </label>
-      <input
-        defaultValue={tempObj.curTemp}
-        onChange={(e) => {
-          setTemp([
-            {
-              sg: tempObj.sg,
-              curTemp: e.target.value,
-              calTemp: tempObj.calTemp,
-              units: tempObj.units,
-            },
-          ]);
-        }}
-      />
-      <select
-        defaultValue={tempObj.units}
-        onChange={(e) => {
-          setTemp([
-            {
-              sg: tempObj.sg,
-              curTemp: tempObj.curTemp,
-              calTemp: tempObj.calTemp,
-              units: e.target.value,
-            },
-          ]);
-        }}
-      >
-        <option value="F">°F</option>
-        <option value="C">°C</option>
-      </select>
-      <label>Calibration Temp: </label>
-      <input
-        defaultValue={tempObj.calTemp}
-        onChange={(e) => {
-          setTemp([
-            {
-              sg: tempObj.sg,
-              curTemp: tempObj.curTemp,
-              calTemp: e.target.value,
-              units: tempObj.units,
-            },
-          ]);
-        }}
-      />
-      <p>
+      <div className="text-center">
+        <label>Current Temp: </label>
+        <input
+          className="input"
+          defaultValue={tempObj.curTemp}
+          onChange={(e) => {
+            setTemp([
+              {
+                sg: tempObj.sg,
+                curTemp: e.target.value,
+                calTemp: tempObj.calTemp,
+                units: tempObj.units,
+              },
+            ]);
+          }}
+        />
+        <select
+          className="input"
+          defaultValue={tempObj.units}
+          onChange={(e) => {
+            setTemp([
+              {
+                sg: tempObj.sg,
+                curTemp: tempObj.curTemp,
+                calTemp: tempObj.calTemp,
+                units: e.target.value,
+              },
+            ]);
+          }}
+        >
+          <option value="F">°F</option>
+          <option value="C">°C</option>
+        </select>{" "}
+      </div>
+      <div className="text-center">
+        <label>Calibration Temp: </label>
+        <input
+          className="input"
+          defaultValue={tempObj.calTemp}
+          onChange={(e) => {
+            setTemp([
+              {
+                sg: tempObj.sg,
+                curTemp: tempObj.curTemp,
+                calTemp: e.target.value,
+                units: tempObj.units,
+              },
+            ]);
+          }}
+        />
+      </div>
+      <p className="py-4">
         {tempObj.units == "F"
           ? `${temperatureCorrection(
               tempObj.sg,
@@ -98,7 +105,7 @@ function TempCorrection({ toBrix, tempObj, handleTempSg, setTemp }) {
               )
             ).toFixed(2)} Brix`}
       </p>
-    </>
+    </div>
   );
 }
 
