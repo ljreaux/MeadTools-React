@@ -1,4 +1,4 @@
-import Title from "./Title";
+import Title from "../Title";
 import BlendingInputLine from "./BlendingInputLine";
 import { useState } from "react";
 function BlendingCalc() {

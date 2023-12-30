@@ -1,5 +1,5 @@
 import GravityInput from "./GravityInput";
-import Title from "./Title";
+import Title from "../Title";
 function TempCorrection({ toBrix, tempObj, handleTempSg, setTemp }) {
   function temperatureCorrection(sg, curTemp, calTemp) {
     const tempCorrect =

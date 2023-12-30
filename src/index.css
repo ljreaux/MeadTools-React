@@ -2,18 +2,65 @@
 @tailwind components;
 @tailwind utilities;
 
-.main-div-style {
-  @apply  text-textColor text-2xl font-serif flex items-center justify-center h-screen w-screen;
+@layer base {
+  :root {
+    --color-background: 210deg, 13%, 35%;
+    --color-textColor: 45deg, 29%, 97%;
+    --color-sidebar: 0deg, 0%, 14%;
+  }
+  @media (prefers-color-scheme: light) {
+    :root{
+      --color-background: 45deg, 29%, 97%;
+      --color-textColor:  0deg, 0%, 14%;
+      --color-sidebar: 42deg, 83%, 50%
+    }
+  }
+}
+
+.main-div-style {max-height: 100%;
+  @apply  text-textColor md:text-2xl lg:text-3xl text-sm font-serif flex items-center justify-center h-screen w-screen;
 }
 
 .component-div{
-  @apply  bg-sidebar rounded-xl flex flex-col items-center 
+  @apply  bg-sidebar rounded-xl flex flex-col items-center w-11/12 sm:w-9/12 aspect-video justify-center mx-0
 }
 
 .input{
   @apply bg-background text-center text-sm rounded-xl h-5 w-1/4 border-solid border-textColor border-2 hover:bg-sidebar hover:border-background
 }
 
+.nute-input{
+  @apply bg-background text-center text-sm rounded-xl h-5 w-2/4 border-solid border-textColor border-2 hover:bg-sidebar hover:border-background
+}
+
+.nute-select{
+  @apply bg-background text-center text-sm rounded-xl h-5 w-11/12 border-solid border-textColor border-2 hover:bg-sidebar hover:border-background
+}
+
 .btn {
   @apply bg-background rounded-2xl border-solid border-textColor border-2 hover:bg-sidebar hover:border-background text-lg px-2 py-1
+}
+
+/* .sidebar-large {
+  @apply fixed left-2 right-0 top-2/4 -translate-y-2/4 bg-sidebar border-s-textColor border-2 h-fit w-12 rounded-full text-4xl
+} */
+
+.screen-transition{
+  @apply inline-block  whitespace-nowrap min-w-fit mx-2 px-4 py-2 text-sm bg-sidebar border-s-textColor border-2  opacity-0  rounded-lg group-hover:opacity-100 transition-opacity
+}
+
+.logo-styles {
+  @apply inline-block mx-1
+}
+
+.logo-labels{
+  @apply inline-block 
+}
+
+nav a.active{
+  @apply bg-background rounded-xl p-2 hover:text-sidebar
+}
+
+.navlogo .active:not(#abvCalc){
+ @apply  text-sidebar; 
 }

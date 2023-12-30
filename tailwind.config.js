@@ -4,9 +4,9 @@ export default {
   theme: {
     extend: {},
     colors: {
-      background: "#4E5A66",
-      textColor: "#FAF9F6",
-      sidebar: "#242424",
+      background: "hsl(var(--color-background))",
+      textColor: "hsl(var(--color-textColor))",
+      sidebar: "hsl(var(--color-sidebar))",
     },
   },
   plugins: [],

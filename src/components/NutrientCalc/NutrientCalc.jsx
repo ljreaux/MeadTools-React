@@ -1,0 +1,135 @@
+import Title from "../Title";
+import NutrientDisplay from "./NutrientDisplay";
+import RevealButton from "./RevealButton";
+import { useState, useEffect } from "react";
+import Stabilizers from "../Home/Stabilizers";
+function NutrientCalc() {
+  const [yeastNames, setYeastNames] = useState([{}]);
+  const [selectedBrand, setSelectedBrand] = useState([
+    {
+      selectedBrand: "",
+    },
+  ]);
+  const selectedBrandObj = selectedBrand[0];
+  const [selectedYeast, setSelectedYeast] = useState([
+    {
+      "Nitrogen Requirement": "Low",
+    },
+  ]);
+  const selectedYeastObj = selectedYeast[0];
+  const yeastObj = yeastNames[0];
+  const yeasts = "/src/yeast.json";
+  useEffect(() => {
+    getYeasts();
+  }, []);
+
+  async function getYeasts() {
+    const response = await fetch(yeasts);
+    const data = await response.json();
+
+    setYeastNames([data]);
+  }
+
+  const [displayResults, setDisplayResults] = useState(false);
+
+  return (
+    <div className="text-textColor md:text-2xl lg:text-3xl text-sm font-serif max-h-screen flex items-center flex-col">
+      <div className="mt-24 mb-4 component-div overflow-visible flex-row">
+        <Title header="Nutrient Calculator" />
+        <div
+          className="grid grid-cols-5 text-center justify-items-center"
+          id="nuteTable"
+        >
+          <h2 className="my-2">Yeast Brand</h2>
+          <h2 className="my-2">Strain</h2>
+          <span className="my-2">
+            <h2>Volume</h2>
+            <select className="my-2 nute-select">
+              <option value="gal">Gallons</option>
+              <option value="liter">Liters</option>
+            </select>
+          </span>
+          <h2 className="my-2">Specific Gravity</h2>
+          <h2 className="my-2">Offset PPM</h2>
+
+          <select
+            className="my-2 nute-select"
+            onChange={(e) => {
+              setSelectedBrand([
+                {
+                  selectedBrand: e.target.value,
+                },
+              ]);
+            }}
+          >
+            {Object.keys(yeastObj).map((item) => {
+              return (
+                <option key={item} value={item}>
+                  {item}
+                </option>
+              );
+            })}
+          </select>
+          <select
+            className="my-2 nute-select"
+            onChange={(e) => {
+              setSelectedYeast(
+                yeastObj[`${selectedBrandObj.selectedBrand}`].filter((item) => {
+                  return item.name == e.target.value;
+                })
+              );
+              console.log(selectedYeastObj["Nitrogen Requirement"]);
+            }}
+          >
+            {yeastObj[`${selectedBrandObj.selectedBrand}`]?.map((item) => {
+              return (
+                <option key={item.name} value={item.name}>
+                  {item.name}
+                </option>
+              );
+            })}
+          </select>
+          <input className="nute-input my-2" id="volume" />
+          <span>
+            <input id="specificGravity" className="nute-input my-2" />
+            <p className="my-2"></p>
+          </span>
+          <input id="offsetPPM" className="nute-input my-2" />
+
+          <h2 className="my-2">Nitrogen Requirement</h2>
+          <h2 className="my-2">Preferred Schedule</h2>
+          <h2 className="my-2">Target YAN</h2>
+          <h2 className="my-2">Number of Additions</h2>
+          <h2 className="my-2">Yeast Amount (g)</h2>
+
+          <p className="my-2">{selectedYeastObj["Nitrogen Requirement"]}</p>
+          <select className="my-2 nute-select" id="nuteSchedule">
+            <option value="tbe">TBE (All Three)</option>
+            <option value="tosna">TOSNA (Fermaid O Only)</option>
+            <option value="k">Fermaid K Only</option>
+            <option value="dap">DAP Only</option>
+            <option value="o&k">Fermaid O & K</option>
+            <option value="o&dap">Fermaid O & DAP</option>
+            <option value="k&dap">Fermaid K & DAP</option>
+          </select>
+          <p className="my-2">Target</p>
+          <select className="my-2 nute-select">
+            <option value={1}>1</option>
+            <option value={2}>2</option>
+            <option value={3}>3</option>
+            <option value={4}>4</option>
+          </select>
+          <input type="text" className="nute-input my-2" />
+          <RevealButton
+            setDisplayResults={setDisplayResults}
+            displayResults={displayResults}
+            span={"start-1 col-span-5"}
+          />
+        </div>
+      </div>
+      {displayResults ? <NutrientDisplay /> : null}
+      <Stabilizers></Stabilizers>
+    </div>
+  );
+}
+export default NutrientCalc;

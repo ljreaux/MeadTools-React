@@ -1,4 +1,4 @@
-import Title from "./Title";
+import Title from "../Title";
 import GravityInput from "./GravityInput";
 import ABVRunButton from "./ABVRunButton";
 
