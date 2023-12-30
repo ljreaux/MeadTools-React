@@ -64,3 +64,8 @@ nav a.active{
 .navlogo .active:not(#abvCalc){
  @apply  text-sidebar; 
 }
+
+
+ .active{
+  @apply  text-sidebar; 
+ }
