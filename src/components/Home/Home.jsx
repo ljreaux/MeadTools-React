@@ -3,7 +3,7 @@ import IngredientLine from "./IngredientLine";
 import { useState } from "react";
 import { MdExpandCircleDown } from "react-icons/md";
 import NutrientCalc from "../NutrientCalc/NutrientCalc";
-import Stabilizers from "./Stabilizers";
+// import Stabilizers from "./Stabilizers";
 
 function Home() {
   const [displayResults, setDisplayResults] = useState(false);
@@ -11,13 +11,13 @@ function Home() {
   const [rowCount, setRowCount] = useState(2);
 
   const [ingredientLines, setIngredientLines] = useState([]);
-  function addRows() {
-    return <IngredientLine />;
-  }
+  // function addRows() {
+  //   return <IngredientLine />;
+  // }
 
   return (
     <div className="text-textColor md:text-2xl lg:text-3xl text-sm font-serif max-h-screen flex items-center flex-col">
-      <div className="mt-24 mb-4 component-div overflow-visible flex-row">
+      <div className="mt-12 component-div overflow-visible flex-row">
         <Title header="Recipe Builder" />
         <div
           className="grid grid-cols-4 place-items-center text-center"
@@ -39,8 +39,8 @@ function Home() {
               <option value="liter">Liters</option>
             </select>
           </span>
-          <IngredientLine />
-          <IngredientLine />
+          <IngredientLine defaultSugar={79.6} />
+          <IngredientLine defaultSugar={79.6} />
           {ingredientLines.map((item, index) => {
             if (index < 9) {
               return item;
@@ -54,10 +54,10 @@ function Home() {
 
           <button
             onClick={() => {
-              if (rowCount < 10) {
+              if (rowCount <= 9) {
                 setIngredientLines([
                   ...ingredientLines,
-                  <IngredientLine key={rowCount} />,
+                  <IngredientLine key={rowCount} defaultSugar={79.6} />,
                 ]);
 
                 setRowCount(rowCount + 1);
@@ -75,7 +75,7 @@ function Home() {
             {" "}
             <MdExpandCircleDown className="group-hover:scale-125 " />
           </button>
-          <IngredientLine optionValue={"Water"} defaultSugar={0} />
+          <IngredientLine optionValue={"Water"} defaultSugar={"0"} />
           <IngredientLine optionValue={"Juice"} defaultSugar={12} />
           <button
             className="btn col-span-4 mb-4"

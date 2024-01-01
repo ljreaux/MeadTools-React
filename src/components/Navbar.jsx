@@ -1,26 +1,20 @@
-import { MdOutlineHive } from "react-icons/md";
-import { SlChemistry } from "react-icons/sl";
-import { FaBalanceScaleLeft } from "react-icons/fa";
 import { NavLink, Link } from "react-router-dom";
 import { FaGithub } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
+import logo from "../assets/ljreaux-01.png";
 function Navbar() {
   return (
-    <div className="h-20 absolute top-0">
+    <div className="h-20 sticky top-0">
       <div className="w-screen h-full bg-sidebar flex justify-center items-center text-textColor text-xl">
+        <Link
+          className="bg-background hidden md:flex md:w-32 lg:w-52 h-full md:absolute md:left-0 border-b-[1px] border-b-sidebar hover:opacity-80 transition-all"
+          to="/"
+        >
+          <span className="w-full h-full flex flex-col justify-center items-center">
+            <img src={logo} alt="MeadTools logo" />
+          </span>
+        </Link>{" "}
         <nav className="flex items-center justify-center text-sm text-center">
-          <Link
-            className="sm:flex hidden  lg:text-5xl  mx-2 hover:text-background transition-colors"
-            to="/"
-          >
-            <p className="text-sm absolute top-5 left-2 lg:top-1 lg:left-5">
-              Mead Tools
-            </p>
-            <MdOutlineHive className="absolute lg:text-5xl text-3xl left-5 lg:left-7 lg:top-6" />{" "}
-            <SlChemistry className="absolute lg:text-5xl text-3xl left-0 lg:top-6" />
-            <FaBalanceScaleLeft className="absolute lg:text-5xl text-3xl left-11 lg:left-16 lg:top-8" />
-          </Link>
-
           <NavLink
             className="hover:text-background transition-colors sm:mx-4 mx-1"
             to="/"

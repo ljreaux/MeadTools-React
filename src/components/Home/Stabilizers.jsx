@@ -1,6 +1,6 @@
 function Stabilizers() {
   return (
-    <div className="component-div my-4">
+    <div className="component-div my-4 mb-12">
       <div className="grid grid-cols-4 place-items-center text-center">
         <span className="col-start-1 col-span-2">
           <h2 className="py-6 mx-2">Are you adding stabilizers?</h2>

@@ -4,6 +4,10 @@ import RevealButton from "./RevealButton";
 import { useState, useEffect } from "react";
 import Stabilizers from "../Home/Stabilizers";
 function NutrientCalc() {
+  const ogBrix = (OG) => {
+    return -668.962 + 1262.45 * OG - 776.43 * OG ** 2 + 182.94 * OG ** 3;
+  };
+  const [displayBrix, setDisplayBrix] = useState("0");
   const [yeastNames, setYeastNames] = useState([{}]);
   const [selectedBrand, setSelectedBrand] = useState([
     {
@@ -55,6 +59,7 @@ function NutrientCalc() {
       },
     ]);
     determineYeastAmount();
+    calcPPM();
   };
 
   const setUnits = (e) => {
@@ -68,6 +73,7 @@ function NutrientCalc() {
       },
     ]);
     determineYeastAmount();
+    calcPPM();
   };
 
   const setSg = (e) => {
@@ -81,6 +87,8 @@ function NutrientCalc() {
       },
     ]);
     determineYeastAmount();
+    setDisplayBrix(ogBrix(e.target.value).toFixed(2));
+    calcPPM();
   };
 
   const setOffset = (e) => {
@@ -93,6 +101,7 @@ function NutrientCalc() {
         offset: e.target.value,
       },
     ]);
+    calcPPM();
   };
 
   const [yeastAmount, setYeastAmount] = useState(0);
@@ -112,9 +121,32 @@ function NutrientCalc() {
     }
     setYeastAmount((volume * multiplier).toFixed(2));
   }
+  const [targetYAN, setTargetYAN] = useState(0);
+  function calcPPM() {
+    let multiplier = 1;
+    const nitroRequirement = selectedYeastObj["Nitrogen Requirement"];
+
+    // determines yeast nitrogen requirement and sets multiplier
+    nitroRequirement == "Low"
+      ? (multiplier *= 0.75)
+      : nitroRequirement == "Medium"
+      ? (multiplier *= 0.9)
+      : nitroRequirement == "High"
+      ? (multiplier *= 1.25)
+      : (multiplier *= 1.8);
+    const gpl = displayBrix * nuteInfoObj.sg * 10;
+    let targetYan = gpl * multiplier;
+    console.log(nuteInfoObj.sg);
+    const offsetPPM = nuteInfoObj.offset;
+    targetYan = targetYan - offsetPPM;
+    const roundedYan = targetYan.toFixed(0);
+
+    setTargetYAN(roundedYan);
+  }
+
   return (
-    <div className="text-textColor md:text-2xl lg:text-3xl text-sm font-serif max-h-screen flex items-center flex-col mt-12">
-      <div className="mt-24 mb-4 component-div overflow-visible flex-row">
+    <div className="text-textColor md:text-2xl lg:text-3xl text-sm font-serif max-h-screen flex items-center flex-col ">
+      <div className="mt-12 mb-4 component-div overflow-visible flex-row">
         <Title header="Nutrient Calculator" />
         <div
           className="grid grid-cols-5 text-center justify-items-center"
@@ -170,13 +202,13 @@ function NutrientCalc() {
             })}
           </select>
           <input className="nute-input my-2" id="volume" onChange={setVol} />
-          <span>
+          <span className="flex space-x-2 ">
             <input
               id="specificGravity"
               className="nute-input my-2"
               onChange={setSg}
             />
-            <p className="my-2"></p>
+            <p className="my-2 text-base">{displayBrix + " Brix"}</p>
           </span>
           <input
             id="offsetPPM"
@@ -220,6 +252,7 @@ function NutrientCalc() {
             displayResults={displayResults}
             span={"start-1 col-span-5"}
           />
+          <p>{targetYAN}</p>
         </div>
       </div>
       {displayResults ? <NutrientDisplay /> : null}

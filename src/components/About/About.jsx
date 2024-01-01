@@ -2,8 +2,8 @@ import Title from "../Title";
 
 function About() {
   return (
-    <div className="w-fit h-fit flex items-center justify-center ">
-      <div className="component-div text-textColor flex flex-col items-center justify-center my-56">
+    <div className="w-fit h-fit flex items-center justify-center my-12">
+      <div className="component-div text-textColor flex flex-col items-center justify-center ">
         {" "}
         <Title header="About MeadTools" />
         <div className="px-12">

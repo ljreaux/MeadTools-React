@@ -29,7 +29,9 @@ function IngredientLine({ optionValue, defaultSugar }) {
   return (
     <>
       <select className="my-4 nute-select" onChange={ingredientChange}>
-        <option value={optionValue}>{optionValue}</option>
+        {optionValue ? (
+          <option value={optionValue}>{optionValue}</option>
+        ) : null}
         {ingredients
           ? ingredients.ingredients.map((ingredient) => {
               return (
