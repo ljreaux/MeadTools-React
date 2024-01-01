@@ -81,9 +81,9 @@ function Navbar() {
           </div>
           <NavLink
             className="hover:text-background transition-colors sm:mx-4 mx-1 pr-12"
-            to="/documentation"
+            to="/about"
           >
-            Documentation
+            About
           </NavLink>
           <span className="lg:text-3xl medium:text-xl absolute right-2">
             <div className="flex">

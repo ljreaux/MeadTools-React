@@ -7,7 +7,7 @@ function NutrientCalc() {
   const [yeastNames, setYeastNames] = useState([{}]);
   const [selectedBrand, setSelectedBrand] = useState([
     {
-      selectedBrand: "",
+      selectedBrand: "Lalvin",
     },
   ]);
   const selectedBrandObj = selectedBrand[0];
@@ -32,8 +32,88 @@ function NutrientCalc() {
 
   const [displayResults, setDisplayResults] = useState(false);
 
+  const [nuteInfo, setNuteInfo] = useState([
+    selectedYeastObj,
+    {
+      units: "gal",
+      vol: 1,
+      sg: 1.1,
+      offset: 0,
+    },
+  ]);
+
+  const nuteInfoObj = nuteInfo[1];
+
+  const setVol = (e) => {
+    setNuteInfo([
+      selectedYeastObj,
+      {
+        units: nuteInfoObj.units,
+        vol: e.target.value,
+        sg: nuteInfoObj.sg,
+        offset: nuteInfoObj.offset,
+      },
+    ]);
+    determineYeastAmount();
+  };
+
+  const setUnits = (e) => {
+    setNuteInfo([
+      selectedYeastObj,
+      {
+        units: e.target.value,
+        vol: nuteInfoObj.vol,
+        sg: nuteInfoObj.sg,
+        offset: nuteInfoObj.offset,
+      },
+    ]);
+    determineYeastAmount();
+  };
+
+  const setSg = (e) => {
+    setNuteInfo([
+      selectedYeastObj,
+      {
+        units: nuteInfoObj.units,
+        vol: nuteInfoObj.vol,
+        sg: e.target.value,
+        offset: nuteInfoObj.offset,
+      },
+    ]);
+    determineYeastAmount();
+  };
+
+  const setOffset = (e) => {
+    setNuteInfo([
+      selectedYeastObj,
+      {
+        units: nuteInfoObj.units,
+        vol: nuteInfoObj.vol,
+        sg: nuteInfoObj.sg,
+        offset: e.target.value,
+      },
+    ]);
+  };
+
+  const [yeastAmount, setYeastAmount] = useState(0);
+  function determineYeastAmount() {
+    let multiplier = 1;
+    const volume = nuteInfoObj.vol;
+    const SG = nuteInfoObj.sg;
+    if (nuteInfoObj.units != "gal") {
+      multiplier /= 3.785;
+    }
+    if (SG > 1.125) {
+      multiplier *= 4;
+    } else if (SG > 1.1 && SG < 1.125) {
+      multiplier *= 3;
+    } else {
+      multiplier *= 2;
+    }
+    setYeastAmount((volume * multiplier).toFixed(2));
+  }
   return (
-    <div className="text-textColor md:text-2xl lg:text-3xl text-sm font-serif max-h-screen flex items-center flex-col">
+    <div className="text-textColor md:text-2xl lg:text-3xl text-sm font-serif max-h-screen flex items-center flex-col mt-12">
       <div className="mt-24 mb-4 component-div overflow-visible flex-row">
         <Title header="Nutrient Calculator" />
         <div
@@ -44,7 +124,7 @@ function NutrientCalc() {
           <h2 className="my-2">Strain</h2>
           <span className="my-2">
             <h2>Volume</h2>
-            <select className="my-2 nute-select">
+            <select onChange={setUnits} className="my-2 nute-select">
               <option value="gal">Gallons</option>
               <option value="liter">Liters</option>
             </select>
@@ -89,12 +169,20 @@ function NutrientCalc() {
               );
             })}
           </select>
-          <input className="nute-input my-2" id="volume" />
+          <input className="nute-input my-2" id="volume" onChange={setVol} />
           <span>
-            <input id="specificGravity" className="nute-input my-2" />
+            <input
+              id="specificGravity"
+              className="nute-input my-2"
+              onChange={setSg}
+            />
             <p className="my-2"></p>
           </span>
-          <input id="offsetPPM" className="nute-input my-2" />
+          <input
+            id="offsetPPM"
+            className="nute-input my-2"
+            onChange={setOffset}
+          />
 
           <h2 className="my-2">Nitrogen Requirement</h2>
           <h2 className="my-2">Preferred Schedule</h2>
@@ -119,7 +207,14 @@ function NutrientCalc() {
             <option value={3}>3</option>
             <option value={4}>4</option>
           </select>
-          <input type="text" className="nute-input my-2" />
+          <input
+            value={yeastAmount ? yeastAmount : ""}
+            type="text"
+            className="nute-input my-2"
+            onChange={(e) => {
+              setYeastAmount(e.target.value);
+            }}
+          />
           <RevealButton
             setDisplayResults={setDisplayResults}
             displayResults={displayResults}

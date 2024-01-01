@@ -3,6 +3,7 @@ import NutrientCalc from "./components/NutrientCalc/NutrientCalc";
 import Navbar from "./components/Navbar";
 import Home from "./components/Home/Home";
 import { Outlet, Route, Routes } from "react-router-dom";
+import About from "./components/About/About";
 function App() {
   return (
     <>
@@ -13,7 +14,7 @@ function App() {
         <Route path="/ExtraCalcs/*" element={<ExtraCalcs />}>
           {" "}
         </Route>
-        <Route path="/documentation" />
+        <Route path="/about" element={<About />} />
       </Routes>
       <Outlet />
     </>
