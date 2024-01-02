@@ -7,7 +7,7 @@ function Navbar() {
     <div className="h-20 sticky top-0">
       <div className="w-screen h-full bg-sidebar flex justify-center items-center text-textColor text-xl">
         <Link
-          className="bg-background hidden md:flex md:w-32 lg:w-52 h-full md:absolute md:left-0 border-b-[1px] border-b-sidebar hover:opacity-80 transition-all"
+          className="bg-background hidden md:flex md:w-32 lg:w-52 h-full md:absolute md:left-0 border-[1px] border-sidebar hover:opacity-80 transition-all"
           to="/"
         >
           <span className="w-full h-full flex flex-col justify-center items-center">
@@ -29,12 +29,12 @@ function Navbar() {
           </NavLink>
           <div className="flex flex-col group">
             <NavLink
-              className="hover:text-background transition-colors sm:mx-4 mx-1 translate-y-44"
+              className="hover:text-background transition-colors sm:mx-4 mx-1 translate-y-[10.5rem]"
               to="/ExtraCalcs"
             >
               Extra Calculators
             </NavLink>
-            <div className="mt-48 h-fit w-full bg-sidebar grid rounded-xl opacity-0 group-hover:opacity-100 transition-all">
+            <div className="mt-44 h-fit w-full bg-sidebar grid rounded-xl opacity-0 group-hover:opacity-100 transition-all">
               <Link to="/ExtraCalcs/" className="hover:text-background ">
                 ABV Calculator
               </Link>{" "}

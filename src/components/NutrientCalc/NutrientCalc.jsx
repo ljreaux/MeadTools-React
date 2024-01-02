@@ -2,8 +2,20 @@ import Title from "../Title";
 import NutrientDisplay from "./NutrientDisplay";
 import RevealButton from "./RevealButton";
 import { useState, useEffect } from "react";
-import Stabilizers from "../Home/Stabilizers";
+
 function NutrientCalc() {
+  const maxGpl = {
+    tbe: [0.45, 0.5, 0.96],
+    tosna: [2.5, 0, 0],
+    justK: [0, 3, 0],
+    dap: [0, 0, 1.5],
+    oAndkLow: [0.6, 0.81, 0],
+    oAndkMed: [0.9, 0.81, 0],
+    oAndkHigh: [1.1, 1, 0],
+    oAndDap: [1, 0, 0.96],
+    kAndDap: [0, 1, 0.96],
+  };
+  const [gplInput, setGplInput] = useState([...maxGpl.tbe]);
   const ogBrix = (OG) => {
     return -668.962 + 1262.45 * OG - 776.43 * OG ** 2 + 182.94 * OG ** 3;
   };
@@ -136,7 +148,6 @@ function NutrientCalc() {
       : (multiplier *= 1.8);
     const gpl = displayBrix * nuteInfoObj.sg * 10;
     let targetYan = gpl * multiplier;
-    console.log(nuteInfoObj.sg);
     const offsetPPM = nuteInfoObj.offset;
     targetYan = targetYan - offsetPPM;
     const roundedYan = targetYan.toFixed(0);
@@ -145,8 +156,8 @@ function NutrientCalc() {
   }
 
   return (
-    <div className="text-textColor md:text-2xl lg:text-3xl text-sm font-serif max-h-screen flex items-center flex-col ">
-      <div className="mt-12 mb-4 component-div overflow-visible flex-row">
+    <div className="text-textColor md:text-2xl lg:text-3xl text-sm font-serif flex items-center flex-col mb-[2rem]">
+      <div className="mt-12 mb-4 component-div flex-row">
         <Title header="Nutrient Calculator" />
         <div
           className="grid grid-cols-5 text-center justify-items-center"
@@ -190,7 +201,6 @@ function NutrientCalc() {
                   return item.name == e.target.value;
                 })
               );
-              console.log(selectedYeastObj["Nitrogen Requirement"]);
             }}
           >
             {yeastObj[`${selectedBrandObj.selectedBrand}`]?.map((item) => {
@@ -214,6 +224,7 @@ function NutrientCalc() {
             id="offsetPPM"
             className="nute-input my-2"
             onChange={setOffset}
+            defaultValue={0}
           />
 
           <h2 className="my-2">Nitrogen Requirement</h2>
@@ -222,17 +233,48 @@ function NutrientCalc() {
           <h2 className="my-2">Number of Additions</h2>
           <h2 className="my-2">Yeast Amount (g)</h2>
 
-          <p className="my-2">{selectedYeastObj["Nitrogen Requirement"]}</p>
-          <select className="my-2 nute-select" id="nuteSchedule">
+          <p className="my-2 text-base">
+            {selectedYeastObj["Nitrogen Requirement"]}
+          </p>
+          <select
+            className="my-2 nute-select"
+            id="nuteSchedule"
+            onChange={(e) => {
+              for (let key in maxGpl) {
+                if (key == e.target.value) {
+                  setGplInput(...[maxGpl[key]]);
+                } else if (
+                  Number(nuteInfoObj.sg) <= 1.08 &&
+                  key == "oAndkLow" &&
+                  key.includes(e.target.value)
+                ) {
+                  setGplInput(...[maxGpl[key]]);
+                } else if (
+                  Number(nuteInfoObj.sg) > 1.08 &&
+                  Number(nuteInfoObj.sg) <= 1.11 &&
+                  key == "oAndkMed" &&
+                  key.includes(e.target.value)
+                ) {
+                  setGplInput(...[maxGpl[key]]);
+                } else if (
+                  Number(nuteInfoObj.sg) > 1.11 &&
+                  key == "oAndkHigh" &&
+                  key.includes(e.target.value)
+                ) {
+                  setGplInput(...[maxGpl[key]]);
+                }
+              }
+            }}
+          >
             <option value="tbe">TBE (All Three)</option>
             <option value="tosna">TOSNA (Fermaid O Only)</option>
-            <option value="k">Fermaid K Only</option>
+            <option value="justK">Fermaid K Only</option>
             <option value="dap">DAP Only</option>
-            <option value="o&k">Fermaid O & K</option>
-            <option value="o&dap">Fermaid O & DAP</option>
-            <option value="k&dap">Fermaid K & DAP</option>
+            <option value="oAndk">Fermaid O & K</option>
+            <option value="oAndDap">Fermaid O & DAP</option>
+            <option value="kAndDap">Fermaid K & DAP</option>
           </select>
-          <p className="my-2">Target</p>
+          <p className="my-2 text-base">{targetYAN + " PPM"}</p>
           <select className="my-2 nute-select">
             <option value={1}>1</option>
             <option value={2}>2</option>
@@ -250,13 +292,18 @@ function NutrientCalc() {
           <RevealButton
             setDisplayResults={setDisplayResults}
             displayResults={displayResults}
+            calcPPM={calcPPM}
             span={"start-1 col-span-5"}
           />
-          <p>{targetYAN}</p>
         </div>
       </div>
-      {displayResults ? <NutrientDisplay /> : null}
-      <Stabilizers></Stabilizers>
+      {displayResults ? (
+        <NutrientDisplay
+          targetYAN={targetYAN}
+          gplInput={gplInput}
+          setGplInput={setGplInput}
+        />
+      ) : null}
     </div>
   );
 }

@@ -1,12 +1,13 @@
 import { MdExpandCircleDown } from "react-icons/md";
 import { useState } from "react";
-function RevealButton({ setDisplayResults, displayResults, span }) {
+function RevealButton({ setDisplayResults, displayResults, span, calcPPM }) {
   const [rotate, setRotate] = useState("");
   return (
     <button
       onClick={() => {
         setDisplayResults(!displayResults);
         rotate == "rotate-180" ? setRotate("") : setRotate("rotate-180");
+        calcPPM();
       }}
       className={`btn text-2xl text-sidebar hover:text-textColor col-${span} group w-1/4 flex flex-col  items-center transition-colors my-8`}
     >

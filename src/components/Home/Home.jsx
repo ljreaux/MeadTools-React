@@ -3,7 +3,7 @@ import IngredientLine from "./IngredientLine";
 import { useState } from "react";
 import { MdExpandCircleDown } from "react-icons/md";
 import NutrientCalc from "../NutrientCalc/NutrientCalc";
-// import Stabilizers from "./Stabilizers";
+import Stabilizers from "./Stabilizers";
 
 function Home() {
   const [displayResults, setDisplayResults] = useState(false);
@@ -16,7 +16,7 @@ function Home() {
   // }
 
   return (
-    <div className="text-textColor md:text-2xl lg:text-3xl text-sm font-serif max-h-screen flex items-center flex-col">
+    <div className="text-textColor md:text-2xl lg:text-3xl text-sm font-serif max-h-screen flex items-center flex-col ">
       <div className="mt-12 component-div overflow-visible flex-row">
         <Title header="Recipe Builder" />
         <div
@@ -100,8 +100,11 @@ function Home() {
           </div>
         ) : null}
       </div>{" "}
-      <div className="">
+      <div className="mb-[5%] h-full w-full ">
         <NutrientCalc></NutrientCalc>
+      </div>
+      <div className=" h-full w-full flex items-center flex-col">
+        <Stabilizers></Stabilizers>
       </div>
     </div>
   );
