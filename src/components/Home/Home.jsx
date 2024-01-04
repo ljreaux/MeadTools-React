@@ -11,9 +11,8 @@ function Home() {
   const [rowCount, setRowCount] = useState(2);
 
   const [ingredientLines, setIngredientLines] = useState([]);
-  // function addRows() {
-  //   return <IngredientLine />;
-  // }
+  const [units, setUnits] = useState("lbs");
+  const [volUnits, setVolUnits] = useState("lbs");
 
   return (
     <div className="text-textColor md:text-2xl lg:text-3xl text-sm font-serif max-h-screen flex items-center flex-col ">
@@ -26,7 +25,12 @@ function Home() {
           <h2>Ingredient</h2>
           <span>
             <h2>Amount to Add in</h2>
-            <select className="nute-select">
+            <select
+              className="nute-select"
+              onChange={(e) => {
+                setUnits(e.target.value);
+              }}
+            >
               <option value="lbs">lbs</option>
               <option value="kg">kg</option>
             </select>
@@ -34,13 +38,26 @@ function Home() {
           <h2>Sugar Percentage (Brix)</h2>
           <span>
             <h2>Total Volume</h2>
-            <select className="nute-select">
+            <select
+              className="nute-select"
+              onChange={(e) => {
+                setVolUnits(e.target.value);
+              }}
+            >
               <option value="gal">Gallons</option>
               <option value="liter">Liters</option>
             </select>
           </span>
-          <IngredientLine defaultSugar={79.6} />
-          <IngredientLine defaultSugar={79.6} />
+          <IngredientLine
+            volUnits={volUnits}
+            units={units}
+            defaultSugar={79.6}
+          />
+          <IngredientLine
+            volUnits={volUnits}
+            units={units}
+            defaultSugar={79.6}
+          />
           {ingredientLines.map((item, index) => {
             if (index < 9) {
               return item;
@@ -57,7 +74,12 @@ function Home() {
               if (rowCount <= 9) {
                 setIngredientLines([
                   ...ingredientLines,
-                  <IngredientLine key={rowCount} defaultSugar={79.6} />,
+                  <IngredientLine
+                    volUnits={volUnits}
+                    units={units}
+                    key={rowCount}
+                    defaultSugar={79.6}
+                  />,
                 ]);
 
                 setRowCount(rowCount + 1);
@@ -75,8 +97,18 @@ function Home() {
             {" "}
             <MdExpandCircleDown className="group-hover:scale-125 " />
           </button>
-          <IngredientLine optionValue={"Water"} defaultSugar={"0"} />
-          <IngredientLine optionValue={"Juice"} defaultSugar={12} />
+          <IngredientLine
+            volUnits={volUnits}
+            units={units}
+            optionValue={"Water"}
+            defaultSugar={"0"}
+          />
+          <IngredientLine
+            volUnits={volUnits}
+            units={units}
+            optionValue={"Juice"}
+            defaultSugar={12}
+          />
           <button
             className="btn col-span-4 mb-4"
             onClick={() => {
