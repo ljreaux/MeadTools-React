@@ -16,9 +16,102 @@ function NutrientCalc() {
     kAndDap: [0, 1, 0.96],
   };
   const [gplInput, setGplInput] = useState([...maxGpl.tbe]);
+  const [gplToAdd, setGplToAdd] = useState([...gplInput]);
+  const [fermOgpl, setFermOgpl] = useState(0);
+  const [fermKgpl, setFermKgpl] = useState(0);
+  const [targetYAN, setTargetYAN] = useState(0);
+  const [ppmYanO, setPpmYanO] = useState(0);
+  const [ppmYanK, setPpmYanK] = useState(0);
+  const [ppmYanDap, setPpmYanDap] = useState(0);
+  const [addedYan, setAddedYan] = useState([ppmYanO, ppmYanK, ppmYanDap]);
+
+  const [leftOver, setLeftover] = useState(targetYAN);
+  useEffect(() => {
+    console.log(leftOver);
+  }, [leftOver]);
+  function toAddOPPM() {
+    const totalPPM = targetYAN;
+    const maxGpl = gplInput[0];
+    const target = totalPPM / 160;
+    let extra;
+    if (target > maxGpl) {
+      setGplToAdd([maxGpl.toFixed(2), gplToAdd[1], gplToAdd[2]]);
+      setFermOgpl(maxGpl);
+      extra = totalPPM - maxGpl * 160;
+    } else {
+      setGplToAdd([target.toFixed(2), gplToAdd[1], gplToAdd[2]]);
+      extra = totalPPM - target * 160;
+      setFermOgpl(target);
+    }
+    setLeftover(extra);
+  }
+  useEffect(toAddKPPM, [fermOgpl]);
+  function toAddKPPM() {
+    const totalPPM = leftOver;
+    const maxGpl = gplInput[1];
+    const target = totalPPM / 100;
+    let extra;
+    if (target > maxGpl) {
+      setGplToAdd([gplToAdd[0], maxGpl.toFixed(2), gplToAdd[2]]);
+      extra = totalPPM - maxGpl * 100;
+      setFermKgpl(maxGpl);
+    } else {
+      setGplToAdd([gplToAdd[0], target.toFixed(2), gplToAdd[2]]);
+      extra = totalPPM - target * 100;
+      setFermKgpl(target);
+    }
+    setLeftover(extra);
+  }
+  useEffect(toAddDAPPPM, [fermKgpl]);
+  function toAddDAPPPM() {
+    const totalPPM = leftOver;
+    const maxGpl = gplInput[2];
+    const target = totalPPM / 210;
+    let extra;
+    if (target > maxGpl) {
+      setGplToAdd([gplToAdd[0], gplToAdd[1], maxGpl.toFixed(2)]);
+      extra = totalPPM - maxGpl * 210;
+    } else {
+      setGplToAdd([gplToAdd[0], gplToAdd[1], target.toFixed(2)]);
+      extra = totalPPM - target * 210;
+    }
+    setLeftover(extra);
+  }
+  //
+  //
+  //
+  //
+  // console.log(leftOver);
+  // totalPPM = leftOver;
+  // maxGpl = gplInput[2];
+  // target = totalPPM / 210;
+  // if (target > maxGpl) {
+  //   setGplToAdd([gplToAdd[0], gplToAdd[1], maxGpl]);
+  //   leftOver = totalPPM - maxGpl * 210;
+  // } else {
+  //   setGplToAdd([gplToAdd[0], gplToAdd[1], target]);
+  //   leftOver = totalPPM - target * 210;
+  // }
+  // console.log(leftOver);
+
+  // function checkFermKPPM() {
+  //   const
+  //   console.log(totalPPM);
+  //   const
+  //   let toAddGPL;
+  //   const
+
+  //   // setRemainingYan([remainingYan, fermKNppm]);
+
+  // }
+
   const ogBrix = (OG) => {
     return -668.962 + 1262.45 * OG - 776.43 * OG ** 2 + 182.94 * OG ** 3;
   };
+
+  const [remainingYanO, setRemainingYanO] = useState(targetYAN);
+  const [remainingYanK, setRemainingYanK] = useState(remainingYanO);
+  const [remainingYanDap, setRemainingYanDap] = useState(remainingYanO);
   const [displayBrix, setDisplayBrix] = useState("0");
   const [yeastNames, setYeastNames] = useState([{}]);
   const [selectedBrand, setSelectedBrand] = useState([
@@ -36,15 +129,19 @@ function NutrientCalc() {
   const yeastObj = yeastNames[0];
   const yeasts = "/src/yeast.json";
   useEffect(() => {
+    async function getYeasts() {
+      try {
+        const response = await fetch(yeasts);
+        const data = await response.json();
+
+        setYeastNames([data]);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+
     getYeasts();
   }, []);
-
-  async function getYeasts() {
-    const response = await fetch(yeasts);
-    const data = await response.json();
-
-    setYeastNames([data]);
-  }
 
   const [displayResults, setDisplayResults] = useState(false);
 
@@ -70,8 +167,6 @@ function NutrientCalc() {
         offset: nuteInfoObj.offset,
       },
     ]);
-    determineYeastAmount();
-    calcPPM();
   };
 
   const setUnits = (e) => {
@@ -84,8 +179,6 @@ function NutrientCalc() {
         offset: nuteInfoObj.offset,
       },
     ]);
-    determineYeastAmount();
-    calcPPM();
   };
 
   const setSg = (e) => {
@@ -98,9 +191,8 @@ function NutrientCalc() {
         offset: nuteInfoObj.offset,
       },
     ]);
-    determineYeastAmount();
+
     setDisplayBrix(ogBrix(e.target.value).toFixed(2));
-    calcPPM();
   };
 
   const setOffset = (e) => {
@@ -113,7 +205,6 @@ function NutrientCalc() {
         offset: e.target.value,
       },
     ]);
-    calcPPM();
   };
 
   const [yeastAmount, setYeastAmount] = useState(0);
@@ -133,7 +224,7 @@ function NutrientCalc() {
     }
     setYeastAmount((volume * multiplier).toFixed(2));
   }
-  const [targetYAN, setTargetYAN] = useState(0);
+
   function calcPPM() {
     let multiplier = 1;
     const nitroRequirement = selectedYeastObj["Nitrogen Requirement"];
@@ -155,6 +246,16 @@ function NutrientCalc() {
     setTargetYAN(roundedYan);
   }
 
+  useEffect(() => {
+    calcPPM();
+    determineYeastAmount();
+  }, [nuteInfo]);
+
+  useEffect(() => {
+    toAddOPPM();
+    // toAddKPPM();
+    // toAddDAPPPM();
+  }, [targetYAN, gplInput]);
   return (
     <div className="text-textColor md:text-2xl lg:text-3xl text-sm font-serif flex items-center flex-col mb-[2rem]">
       <div className="mt-12 mb-4 component-div flex-row">
@@ -201,6 +302,7 @@ function NutrientCalc() {
                   return item.name == e.target.value;
                 })
               );
+              setNuteInfo([...nuteInfo]);
             }}
           >
             {yeastObj[`${selectedBrandObj.selectedBrand}`]?.map((item) => {
@@ -264,6 +366,8 @@ function NutrientCalc() {
                   setGplInput(...[maxGpl[key]]);
                 }
               }
+              // checkFermOPPM();
+              // checkFermKPPM();
             }}
           >
             <option value="tbe">TBE (All Three)</option>
@@ -292,7 +396,7 @@ function NutrientCalc() {
           <RevealButton
             setDisplayResults={setDisplayResults}
             displayResults={displayResults}
-            calcPPM={calcPPM}
+            // calcPPM={calcPPM}
             span={"start-1 col-span-5"}
           />
         </div>
@@ -302,6 +406,13 @@ function NutrientCalc() {
           targetYAN={targetYAN}
           gplInput={gplInput}
           setGplInput={setGplInput}
+          ppmYanO={ppmYanO}
+          // checkFermOPPM={checkFermOPPM}
+          ppmYanK={ppmYanK}
+          ppmYanDap={ppmYanDap}
+          // checkFermKPPM={checkFermKPPM}
+          addedYan={addedYan}
+          gplToAdd={gplToAdd}
         />
       ) : null}
     </div>

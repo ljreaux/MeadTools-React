@@ -20,7 +20,7 @@
       "ABV Tolerance": 14,
       "LowTemp": 59,
       "High Temp": 86
-    }, 
+    },
     {
       "name": "ALCHEMY I",
       "Nitrogen Requirement": "Medium",
@@ -55,7 +55,7 @@
       "ABV Tolerance": 16,
       "LowTemp": 59,
       "High Temp": 77
-    }, 
+    },
     {
       "name": "BDX",
       "Nitrogen Requirement": "Medium",
@@ -83,7 +83,7 @@
       "ABV Tolerance": 16,
       "LowTemp": 62,
       "High Temp": 85
-    },  
+    },
     {
       "name": "C",
       "Nitrogen Requirement": "Low",
@@ -98,49 +98,49 @@
       "LowTemp": 57,
       "High Temp": 90
     },
-     {
+    {
       "name": "CROSS EVOLUTION",
       "Nitrogen Requirement": "Low",
       "ABV Tolerance": 15,
       "LowTemp": 58,
       "High Temp": 68
     },
-     {
+    {
       "name": "CSM",
       "Nitrogen Requirement": "Medium",
       "ABV Tolerance": 15,
       "LowTemp": 59,
       "High Temp": 90
     },
-     {
+    {
       "name": "CVRP",
       "Nitrogen Requirement": "Medium",
       "ABV Tolerance": 16,
       "LowTemp": 64,
       "High Temp": 90
     },
-     {
+    {
       "name": "CVW5",
       "Nitrogen Requirement": "Low",
       "ABV Tolerance": 15,
       "LowTemp": 57,
       "High Temp": 82
     },
-     {
+    {
       "name": "CY17",
       "Nitrogen Requirement": "Low",
       "ABV Tolerance": 14,
       "LowTemp": 61,
       "High Temp": 75
     },
-     {
+    {
       "name": "CY3079 (BOURGOBLANC)",
       "Nitrogen Requirement": "High",
       "ABV Tolerance": 15,
       "LowTemp": 59,
       "High Temp": 77
     },
-     {
+    {
       "name": "DV10",
       "Nitrogen Requirement": "Low",
       "ABV Tolerance": 17,
@@ -225,13 +225,6 @@
       "High Temp": 75
     },
     {
-      "name": "EC1118",
-      "Nitrogen Requirement": "Low",
-      "ABV Tolerance": 17,
-      "LowTemp": 50,
-      "High Temp": 86
-    },
-    {
       "name": "ICV D21",
       "Nitrogen Requirement": "Medium",
       "ABV Tolerance": 16,
@@ -293,7 +286,7 @@
       "ABV Tolerance": 15,
       "LowTemp": 59,
       "High Temp": 77
-    }, 
+    },
     {
       "name": "K1V1116",
       "Nitrogen Requirement": "Low",
@@ -363,7 +356,7 @@
       "ABV Tolerance": 15,
       "LowTemp": 61,
       "High Temp": 68
-    }, 
+    },
     {
       "name": "OENOFERM FREDDO",
       "Nitrogen Requirement": "Low",
@@ -406,112 +399,112 @@
       "LowTemp": 59,
       "High Temp": 82
     },
-      {
+    {
       "name": "QA23",
       "Nitrogen Requirement": "Low",
       "ABV Tolerance": 16,
       "LowTemp": 59,
       "High Temp": 90
     },
-      {
+    {
       "name": "R-HST",
       "Nitrogen Requirement": "Medium",
       "ABV Tolerance": 15,
       "LowTemp": 50,
       "High Temp": 86
     },
-      {
+    {
       "name": "R2",
       "Nitrogen Requirement": "Medium",
       "ABV Tolerance": 16,
       "LowTemp": 50,
       "High Temp": 86
     },
-      {
+    {
       "name": "RA17",
       "Nitrogen Requirement": "High",
       "ABV Tolerance": 15,
       "LowTemp": 61,
       "High Temp": 84
     },
-      {
+    {
       "name": "RC212 (BOURGOROUGE)",
       "Nitrogen Requirement": "Medium",
       "ABV Tolerance": 16,
       "LowTemp": 60,
       "High Temp": 86
     },
-      {
+    {
       "name": "RHÔNE 2056",
       "Nitrogen Requirement": "High",
       "ABV Tolerance": 16,
       "LowTemp": 59,
       "High Temp": 82
     },
-      {
+    {
       "name": "RHÔNE 2226",
       "Nitrogen Requirement": "High",
       "ABV Tolerance": 18,
       "LowTemp": 59,
       "High Temp": 82
     },
-      {
+    {
       "name": "RHÔNE 4600",
       "Nitrogen Requirement": "Low",
       "ABV Tolerance": 15,
       "LowTemp": 56,
       "High Temp": 72
     },
-      {
+    {
       "name": "RP15",
       "Nitrogen Requirement": "Medium",
       "ABV Tolerance": 17,
       "LowTemp": 68,
       "High Temp": 86
     },
-      {
+    {
       "name": "SAUVY",
       "Nitrogen Requirement": "Medium",
       "ABV Tolerance": 14,
       "LowTemp": 57,
       "High Temp": 68
     },
-      {
+    {
       "name": "SENSY",
       "Nitrogen Requirement": "Low",
       "ABV Tolerance": 15,
       "LowTemp": 54,
       "High Temp": 64
     },
-      {
+    {
       "name": "STEINBERGER",
       "Nitrogen Requirement": "Medium",
       "ABV Tolerance": 13,
       "LowTemp": 59,
       "High Temp": 77
     },
-      {
+    {
       "name": "SVG",
       "Nitrogen Requirement": "Medium",
       "ABV Tolerance": 15,
       "LowTemp": 61,
       "High Temp": 82
     },
-      {
+    {
       "name": "TANGO",
       "Nitrogen Requirement": "Medium",
       "ABV Tolerance": 15.5,
       "LowTemp": 59,
       "High Temp": 82
     },
-      {
+    {
       "name": "UVAFERM 43",
       "Nitrogen Requirement": "Low",
       "ABV Tolerance": 17,
       "LowTemp": 55,
       "High Temp": 95
     },
-      {
+    {
       "name": "UVAFERM CEG (EPERNAY II)",
       "Nitrogen Requirement": "Medium",
       "ABV Tolerance": 13.5,
@@ -531,7 +524,7 @@
       "ABV Tolerance": 15.5,
       "LowTemp": 55,
       "High Temp": 61
-    }, 
+    },
     {
       "name": "VITIFERM ALBA FRIA (ORGANIC)",
       "Nitrogen Requirement": "Low",
@@ -645,7 +638,7 @@
       "ABV Tolerance": 17.5,
       "LowTemp": 54,
       "High Temp": 82
-    }, 
+    },
     {
       "name": "M05",
       "Nitrogen Requirement": "Medium",
@@ -660,14 +653,14 @@
       "LowTemp": 64,
       "High Temp": 82
     },
-      {
+    {
       "name": "R56",
       "Nitrogen Requirement": "Low",
       "ABV Tolerance": 15,
       "LowTemp": 64,
       "High Temp": 82
     },
-      {
+    {
       "name": "SN9",
       "Nitrogen Requirement": "Low",
       "ABV Tolerance": 18,
@@ -703,7 +696,7 @@
       "ABV Tolerance": 13,
       "LowTemp": 59,
       "High Temp": 86
-    }, 
+    },
     {
       "name": "Premier Cuvee",
       "Nitrogen Requirement": "Medium",

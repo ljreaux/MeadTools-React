@@ -2,16 +2,22 @@ import { NavLink, Link } from "react-router-dom";
 import { FaGithub } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 import logo from "../assets/ljreaux-01.png";
+import logoOnly from "../assets/logoOnly.png";
 function Navbar() {
   return (
     <div className="h-20 sticky top-0">
       <div className="w-screen h-full bg-sidebar flex justify-center items-center text-textColor text-xl">
         <Link
-          className="bg-background hidden md:flex md:w-32 lg:w-52 h-full md:absolute md:left-0 border-[1px] border-sidebar hover:opacity-80 transition-all"
+          className="bg-background w-[3rem] md:flex md:w-24 lg:w-52 h-full md:absolute md:left-0 border-[1px] border-sidebar hover:opacity-80 transition-all"
           to="/"
         >
           <span className="w-full h-full flex flex-col justify-center items-center">
-            <img src={logo} alt="MeadTools logo" />
+            <img src={logo} alt="MeadTools logo" className="hidden lg:flex" />
+            <img
+              src={logoOnly}
+              alt="MeadTools logo"
+              className="lg:hidden w-[50%]"
+            />
           </span>
         </Link>{" "}
         <nav className="flex items-center justify-center text-sm text-center">
@@ -27,14 +33,14 @@ function Navbar() {
           >
             Nutrient Calculator
           </NavLink>
-          <div className="flex flex-col group">
+          <div className="relative group flex flex-col">
             <NavLink
-              className="hover:text-background transition-colors sm:mx-4 mx-1 translate-y-[10.5rem]"
+              className="hover:text-background transition-colors sm:mx-4 mx-1"
               to="/ExtraCalcs"
             >
               Extra Calculators
             </NavLink>
-            <div className="mt-44 h-fit w-full bg-sidebar grid rounded-xl opacity-0 group-hover:opacity-100 transition-all">
+            <div className="absolute grid translate-y-[29%] md:translate-y-[25%] h-fit w-full bg-sidebar rounded-xl opacity-0 group-hover:opacity-100 transition-all text-[10px] md:text-[1rem] border-[1px]  border-s-textColor">
               <Link to="/ExtraCalcs/" className="hover:text-background ">
                 ABV Calculator
               </Link>{" "}
@@ -67,14 +73,14 @@ function Navbar() {
               </Link>
               <Link
                 to="/ExtraCalcs/blending"
-                className="hover:text-background "
+                className="hover:text-background pb-2"
               >
                 Blending
               </Link>
             </div>
           </div>
           <NavLink
-            className="hover:text-background transition-colors sm:mx-4 mx-1 pr-12"
+            className="hover:text-background transition-colors sm:mx-4 mx-1 pr-[3.5rem]"
             to="/about"
           >
             About

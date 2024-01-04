@@ -1,20 +1,17 @@
 import { useState } from "react";
 
-function NutrientDisplay({ targetYAN, gplInput, setGplInput }) {
-  const [gplToAdd, setGplToAdd] = useState([...gplInput]);
-  function checkFermOPPM() {
-    const totalPPM = targetYAN;
-    const maxGPL = gplInput[0];
-    let toAddGPL;
-    const target = totalPPM / 160;
-
-    if (target > maxGPL) {
-      toAddGPL = maxGPL.toFixed(2);
-    } else {
-      toAddGPL = target.toFixed(2);
-    }
-    setGplToAdd([toAddGPL, gplToAdd[1], gplToAdd[2]]);
-  }
+function NutrientDisplay({
+  targetYAN,
+  gplInput,
+  setGplInput,
+  ppmYanO,
+  // checkFermOPPM,
+  ppmYanK,
+  ppmYanDap,
+  addedYan,
+  // checkFermKPPM,
+  gplToAdd,
+}) {
   return (
     <div className="component-div">
       <div
@@ -39,7 +36,8 @@ function NutrientDisplay({ targetYAN, gplInput, setGplInput }) {
           value={gplInput[0]}
           onChange={(e) => {
             setGplInput([Number(e.target.value), gplInput[1], gplInput[2]]);
-            checkFermOPPM();
+            // checkFermOPPM();
+            // checkFermKPPM();
           }}
         />
         <input
@@ -48,7 +46,8 @@ function NutrientDisplay({ targetYAN, gplInput, setGplInput }) {
           value={gplInput[1]}
           onChange={(e) => {
             setGplInput([gplInput[0], Number(e.target.value), gplInput[2]]);
-            checkFermOPPM();
+            // checkFermOPPM();
+            // checkFermKPPM();
           }}
         />
         <input
@@ -58,6 +57,7 @@ function NutrientDisplay({ targetYAN, gplInput, setGplInput }) {
           onChange={(e) => {
             setGplInput([gplInput[0], gplInput[1], Number(e.target.value)]);
             checkFermOPPM();
+            // checkFermKPPM();
           }}
         />
         <p className="my-2 text-base">0g</p>
@@ -67,9 +67,15 @@ function NutrientDisplay({ targetYAN, gplInput, setGplInput }) {
         <p className="my-2 text-base">{gplToAdd[2]}</p>
         <h2 className="my-2">Water for Go-Ferm</h2>
         <h2 className="my-2">PPM YAN</h2>
-        <p className="my-2 text-base">0</p>
-        <p className="my-2 text-base">0</p>
-        <p className="my-2 text-base">0</p>
+        <p className="my-2 text-base">
+          {ppmYanO >= 0 ? ppmYanO.toFixed(2) : 0}
+        </p>
+        <p className="my-2 text-base">
+          {ppmYanK >= 0 ? ppmYanK.toFixed(2) : 0}
+        </p>
+        <p className="my-2 text-base">
+          {ppmYanDap >= 0 ? ppmYanDap.toFixed(2) : 0}
+        </p>
         <p className="my-2 text-base">0ml</p>
         <h2 className="my-2">Total Grams</h2>
         <p className="my-2 text-base">0</p>
@@ -78,7 +84,11 @@ function NutrientDisplay({ targetYAN, gplInput, setGplInput }) {
         <h2 className="my-2 col-start-2">Total YAN</h2>
         <h2 className="my-2 col-start-4 col-span-2">Remaining YAN</h2>
         <p className="my-2 text-base col-start-2">{targetYAN + " PPM"}</p>
-        <p className="my-2 text-base col-start-4 col-span-2">0 PPM</p>
+        <p className="my-2 text-base col-start-4 col-span-2">
+          {addedYan[0] + addedYan[1] + addedYan[2] >= targetYAN
+            ? "O PPM"
+            : `${targetYAN - (addedYan[0] + addedYan[1] + addedYan[2])} PPM`}
+        </p>
         <h2 className="my-2 col-span-3">Amount per Addition</h2>
         <h2 className="my-2 col-start-4 col-span-2">1/3 Sugar Break</h2>
         <p className="my-2 text-base col-start-1">0g Ferm O</p>
