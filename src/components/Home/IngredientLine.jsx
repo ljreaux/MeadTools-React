@@ -21,6 +21,7 @@ function IngredientLine({
   }, []);
 
   const [ingredientDetails, setIngredientDetails] = useState();
+  const [ingredientCat, setIngredientCat] = useState("sugar");
 
   function ingredientChange(e) {
     const found = ingredients.ingredients.filter(
@@ -32,6 +33,9 @@ function IngredientLine({
   useEffect(() => {
     ingredientDetails && ingredientDetails[0]
       ? setBrix(ingredientDetails[0].sugarContent)
+      : "";
+    ingredientDetails && ingredientDetails[0]
+      ? setIngredientCat(ingredientDetails[0].category)
       : "";
   }, [ingredientDetails]);
   useEffect(() => {}, [brix]);
@@ -114,10 +118,15 @@ function IngredientLine({
     setStoredInput((prev) => {
       return {
         ...prev,
-        [inputNum]: { weight: weight.weight, brix: brix, vol: volume.vol },
+        [inputNum]: {
+          weight: weight.weight,
+          brix: brix,
+          volume: volume.vol,
+          cat: ingredientCat,
+        },
       };
     });
-  }, [weight, brix, volume]);
+  }, [weight, brix, volume, ingredientCat]);
   return (
     <div
       className={`col-start-1 col-span-4 grid grid-cols-4 place-items-center text-center ${hidden}`}

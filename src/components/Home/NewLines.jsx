@@ -7,6 +7,8 @@ export default function NewLines({
   rowCount,
   storedInput,
   setStoredInput,
+  ingredientCat,
+  setIngredientCat,
 }) {
   return (
     <>

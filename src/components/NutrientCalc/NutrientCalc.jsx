@@ -3,7 +3,14 @@ import NutrientDisplay from "./NutrientDisplay";
 import RevealButton from "./RevealButton";
 import { useState, useEffect } from "react";
 
-function NutrientCalc() {
+function NutrientCalc({
+  mainCalcVol,
+  setMainCalcVol,
+  mainCalcSG,
+  setMainCalcSG,
+  mainCalcOffset,
+  setMainCalcOffset,
+}) {
   const maxGpl = {
     tbe: [0.45, 0.5, 0.96],
     tosna: [2.5, 0, 0],
@@ -137,6 +144,18 @@ function NutrientCalc() {
     },
   ]);
 
+  useEffect(() => {
+    setNuteInfo([
+      selectedYeastObj,
+      {
+        units: "gal",
+        vol: mainCalcVol,
+        sg: mainCalcSG,
+        offset: mainCalcOffset,
+      },
+    ]);
+    setDisplayBrix(Number(ogBrix(mainCalcSG)).toFixed(2));
+  }, [mainCalcSG, mainCalcVol]);
   const nuteInfoObj = nuteInfo[1];
 
   const setVol = (e) => {
@@ -149,6 +168,7 @@ function NutrientCalc() {
         offset: nuteInfoObj.offset,
       },
     ]);
+    setMainCalcVol(e.target.value);
   };
 
   const setUnits = (e) => {
@@ -175,6 +195,7 @@ function NutrientCalc() {
     ]);
 
     setDisplayBrix(ogBrix(e.target.value).toFixed(2));
+    setMainCalcSG(e.target.value);
   };
 
   const setOffset = (e) => {
@@ -187,6 +208,7 @@ function NutrientCalc() {
         offset: e.target.value,
       },
     ]);
+    setMainCalcOffset(e.target.value);
   };
 
   const [yeastAmount, setYeastAmount] = useState(0);
@@ -338,12 +360,14 @@ function NutrientCalc() {
             type="number"
             className="nute-input my-2"
             id="volume"
+            value={mainCalcVol || ""}
             onChange={setVol}
           />
           <span className="flex space-x-2 ">
             <input
               type="number"
               id="specificGravity"
+              value={mainCalcSG}
               className="nute-input my-2"
               onChange={setSg}
             />
@@ -354,7 +378,7 @@ function NutrientCalc() {
             id="offsetPPM"
             className="nute-input my-2"
             onChange={setOffset}
-            defaultValue={0}
+            value={mainCalcOffset}
           />
 
           <h2 className="my-2">Nitrogen Requirement</h2>
@@ -421,7 +445,6 @@ function NutrientCalc() {
           <input
             type="number"
             value={yeastAmount ? yeastAmount : ""}
-            type="text"
             className="nute-input my-2"
             onChange={(e) => {
               setYeastAmount(e.target.value);
@@ -453,7 +476,9 @@ function NutrientCalc() {
           yeastAmount={yeastAmount}
           oneThirdBreak={oneThirdBreak}
         />
-      ) : null}
+      ) : (
+        ""
+      )}
     </div>
   );
 }

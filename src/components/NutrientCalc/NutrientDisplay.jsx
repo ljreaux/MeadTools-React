@@ -90,7 +90,7 @@ function NutrientDisplay({
             setGplInput([gplInput[0], gplInput[1], Number(e.target.value)]);
           }}
         />
-        <p className="my-2 text-base">{goFermGrams + "g"}</p>
+        <p className="my-2 text-base">{Number(goFermGrams).toFixed(2) + "g"}</p>
         <h2 className="my-2">g/L to add</h2>
         {gplToAdd.map((gpl) => {
           {
@@ -106,18 +106,26 @@ function NutrientDisplay({
             </p>
           );
         })}
-        <p className="my-2 text-base">{goFermWater + "ml"}</p>
+        <p className="my-2 text-base">{goFermWater.toFixed(2) + "ml"}</p>
         <h2 className="my-2">Total Grams</h2>
-        {gramsToAdd.map((gram) => {
+        {gramsToAdd.map((gram, i) => {
           {
-            return <p className="my-2 text-base">{gram + "g"}</p>;
+            return (
+              <p key={gram + i} className="my-2 text-base">
+                {gram + "g"}
+              </p>
+            );
           }
         })}{" "}
         <h2 className="my-2">1/3 Sugar Break</h2>
         <h2 className="my-2 col-start-1">Amount per Addition</h2>
-        {amountPerAddition.map((gram) => {
+        {amountPerAddition.map((gram, i) => {
           {
-            return <p className="my-2 text-base">{gram.toFixed(2) + "g"}</p>;
+            return (
+              <p key={gram + i} className="my-2 text-base">
+                {gram.toFixed(2) + "g"}
+              </p>
+            );
           }
         })}
         <p className="my-2 text-base">{oneThirdBreak}</p>{" "}

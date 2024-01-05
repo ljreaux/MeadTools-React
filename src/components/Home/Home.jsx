@@ -1,6 +1,6 @@
 import Title from "../Title";
 import IngredientLine from "./IngredientLine";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { MdExpandCircleDown } from "react-icons/md";
 import NutrientCalc from "../NutrientCalc/NutrientCalc";
 import Stabilizers from "./Stabilizers";
@@ -12,81 +12,176 @@ function Home() {
       weight: 0,
       brix: 79.6,
       volume: 0,
+      cat: "sugar",
     },
     input2: {
       weight: 0,
       brix: 79.6,
       volume: 0,
+      cat: "sugar",
     },
     input3: {
       weight: 0,
       brix: 79.6,
       volume: 0,
+      cat: "sugar",
     },
     input4: {
       weight: 0,
       brix: 79.6,
       volume: 0,
+      cat: "sugar",
     },
     input5: {
       weight: 0,
       brix: 79.6,
       volume: 0,
+      cat: "sugar",
     },
     input6: {
       weight: 0,
       brix: 79.6,
       volume: 0,
+      cat: "sugar",
     },
     input7: {
       weight: 0,
       brix: 79.6,
       volume: 0,
+      cat: "sugar",
     },
     input8: {
       weight: 0,
       brix: 79.6,
       volume: 0,
+      cat: "sugar",
     },
     input9: {
       weight: 0,
       brix: 79.6,
       volume: 0,
+      cat: "sugar",
     },
     input10: {
       weight: 0,
       brix: 79.6,
       volume: 0,
+      cat: "sugar",
+    },
+    input11: {
+      weight: 0,
+      brix: 79.6,
+      volume: 0,
+      cat: "sugar",
+    },
+    input12: {
+      weight: 0,
+      brix: 79.6,
+      volume: 0,
+      cat: "sugar",
     },
   });
 
   const [displayResults, setDisplayResults] = useState(false);
 
   const [rowCount, setRowCount] = useState(0);
-
-  const [ingredientLines, setIngredientLines] = useState([]);
   const [units, setUnits] = useState("lbs");
   const [volUnits, setVolUnits] = useState("gal");
 
   const [totalVolume, setTotalVolume] = useState(0);
+  const [OG, setOG] = useState(1);
+  const [FG, setFG] = useState(0.996);
+  const [abv, setAbv] = useState(0);
+  const [delle, setDelle] = useState(0);
 
-  function totalVolumeFunc(e) {
-    const targetArr = [...e.target];
+  const [mainCalcVol, setMainCalcVol] = useState(null);
+  const [mainCalcSG, setMainCalcSG] = useState(null);
+  const [mainCalcOffset, setMainCalcOffset] = useState(0);
 
-    const filteredArr = targetArr.filter((item) => {
-      return item.className.indexOf("vol") != -1;
-    });
-    const valueArr = filteredArr.map((item) => item.value);
-    const initialValue = 0;
+  const abvCalc = (OG, FG) => {
+    const OE = -668.962 + 1262.45 * OG - 776.43 * OG ** 2 + 182.94 * OG ** 3;
+    const AE = -668.962 + 1262.45 * FG - 776.43 * FG ** 2 + 182.94 * FG ** 3;
+    const q = 0.22 + 0.001 * OE;
+    const RE = (q * OE + AE) / (1 + q);
+    const ABW = (OE - RE) / (2.0665 - 0.010665 * OE);
+    const ABV = ABW * (FG / 0.794);
 
-    setTotalVolume(
-      valueArr
-        .reduce((acc, cur) => {
-          return Number(acc) + Number(cur);
-        }, initialValue)
-        .toFixed(3)
+    return ABV.toFixed(2);
+  };
+
+  const toBrix = (value) => {
+    return (
+      -668.962 + 1262.45 * value - 776.43 * value ** 2 + 182.94 * value ** 3
     );
+  };
+
+  function totalVolumeFunc() {
+    const volumeArr = [];
+    const volumeTimesSugarArr = [];
+    const offsetArr = [];
+
+    for (let key in storedInput) {
+      const input = storedInput[`${key}`];
+      const toSG =
+        1.00001 +
+        0.0038661 * input.brix +
+        1.3488 * 10 ** -5 * input.brix ** 2 +
+        4.3074 * 10 ** -8 * input.brix ** 3;
+
+      volumeArr.push(Number(input.volume));
+      volumeTimesSugarArr.push(input.volume * toSG);
+      if (input.cat == "fruit") {
+        if (units == "lbs") {
+          offsetArr.push(Number(input.weight));
+        } else {
+          offsetArr.push(input.weight * 2.20462);
+        }
+      }
+    }
+    let initialVol = 0;
+    const addedVol = volumeArr.reduce((acc, cur) => acc + cur, initialVol);
+
+    let initialNum = 0;
+    const addedSug = volumeTimesSugarArr.reduce(
+      (acc, cur) => acc + cur,
+      initialNum
+    );
+
+    let initialOs = 0;
+    const addedLbs = offsetArr.reduce((acc, cur) => acc + cur, initialOs);
+
+    let volInGal = 0;
+    if (volUnits == "gal") {
+      volInGal = addedVol;
+    } else {
+      volInGal = addedVol / 3.785;
+    }
+
+    const ppmOs = (addedLbs / volInGal) * 25;
+
+    setMainCalcOffset(ppmOs.toFixed(0));
+    setOG(addedSug / addedVol);
+    setTotalVolume(addedVol);
+    const alcohol = abvCalc(addedSug / addedVol, FG);
+    setAbv(alcohol);
+    const fgBrix = toBrix(FG);
+    const du = fgBrix + 4.5 * alcohol;
+    setDelle(du);
   }
+
+  useEffect(() => {
+    const alcohol = abvCalc(OG, FG);
+    setAbv(alcohol);
+    const fgBrix = toBrix(FG);
+    const du = fgBrix + 4.5 * alcohol;
+    setDelle(du);
+  }, [OG, FG]);
+
+  useEffect(() => {
+    setMainCalcVol(totalVolume);
+    setMainCalcSG((OG - FG + 1).toFixed(3));
+  }, [totalVolume, OG, FG]);
+
   return (
     <div className="text-textColor md:text-2xl lg:text-3xl text-sm font-serif max-h-screen flex items-center flex-col ">
       <div className="mt-12 component-div overflow-visible flex-row">
@@ -94,7 +189,7 @@ function Home() {
         <form
           onSubmit={(e) => {
             e.preventDefault();
-            totalVolumeFunc(e);
+            totalVolumeFunc();
           }}
           className="grid grid-cols-4 place-items-center text-center"
           id="recipeBuilder"
@@ -195,7 +290,7 @@ function Home() {
             type="submit"
             className="btn col-span-4 mb-4"
             onClick={() => {
-              setDisplayResults(!displayResults);
+              setDisplayResults(true);
             }}
           >
             Submit
@@ -208,22 +303,39 @@ function Home() {
             <h2>ABV:</h2>
             <h2>Delle Units:</h2>
 
-            <p>1.1</p>
-            <input className="nute-input" />
-            <p>12% ABV</p>
-            <p>45 Delle Units</p>
+            <p>
+              {isNaN(OG) || OG > 1.22 ? "Enter a valid input" : OG.toFixed(3)}
+            </p>
+            <input
+              className="nute-input"
+              value={FG}
+              onChange={(e) => setFG(e.target.value)}
+            />
+            <p>{`${Number(abv).toFixed(2)}% ABV`}</p>
+            <p>{`${Number(delle).toFixed(0)} Delle Units`} </p>
             <span>
               <h1>Total Volume</h1>
-              <p>{`${totalVolume} ${volUnits}`}</p>
+              <p>{`${totalVolume.toFixed(3)} ${volUnits}`}</p>
             </span>
           </div>
         ) : null}
       </div>{" "}
       <div className="mb-[5%] h-full w-full ">
-        <NutrientCalc></NutrientCalc>
+        <NutrientCalc
+          mainCalcVol={mainCalcVol}
+          setMainCalcVol={setMainCalcVol}
+          mainCalcSG={mainCalcSG}
+          setMainCalcSG={setMainCalcSG}
+          mainCalcOffset={mainCalcOffset}
+          setMainCalcOffset={setMainCalcOffset}
+        ></NutrientCalc>
       </div>
       <div className=" h-full w-full flex items-center flex-col">
-        <Stabilizers></Stabilizers>
+        <Stabilizers
+          volUnits={volUnits}
+          abv={abv}
+          totalVolume={totalVolume}
+        ></Stabilizers>
       </div>
     </div>
   );
