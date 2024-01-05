@@ -1,6 +1,15 @@
 import { useState, useEffect } from "react";
 
-function IngredientLine({ optionValue, defaultSugar, units, volUnits }) {
+function IngredientLine({
+  optionValue,
+  defaultSugar,
+  units,
+  volUnits,
+  hidden,
+  storedInput,
+  setStoredInput,
+  inputNum,
+}) {
   const [ingredients, setIngredients] = useState();
   async function getIngredients() {
     const response = await fetch("src/fermentables.json");
@@ -101,8 +110,18 @@ function IngredientLine({ optionValue, defaultSugar, units, volUnits }) {
     });
   }
 
+  useEffect(() => {
+    setStoredInput((prev) => {
+      return {
+        ...prev,
+        [inputNum]: { weight: weight.weight, brix: brix, vol: volume.vol },
+      };
+    });
+  }, [weight, brix, volume]);
   return (
-    <>
+    <div
+      className={`col-start-1 col-span-4 grid grid-cols-4 place-items-center text-center ${hidden}`}
+    >
       <select className="my-4 nute-select" onChange={ingredientChange}>
         {optionValue ? (
           <option value={optionValue}>{optionValue}</option>
@@ -118,7 +137,7 @@ function IngredientLine({ optionValue, defaultSugar, units, volUnits }) {
           : null}
       </select>
       <input
-        className="my-4 nute-input"
+        className="my-4 nute-input weight"
         value={weight.weight}
         onChange={(e) => {
           setWeight({
@@ -129,15 +148,15 @@ function IngredientLine({ optionValue, defaultSugar, units, volUnits }) {
         }}
       />
       <input
-        className="my-4 nute-input"
-        defaultValue={defaultSugar}
+        className="my-4 nute-input brix"
+        // defaultValue={defaultSugar}
         value={brix}
         onChange={(e) => {
           setBrix(e.target.value);
         }}
       />
       <input
-        className="my-4 nute-input"
+        className="my-4 nute-input vol"
         value={volume.vol}
         onChange={(e) => {
           setVolume({
@@ -147,7 +166,7 @@ function IngredientLine({ optionValue, defaultSugar, units, volUnits }) {
           calcWeight(e);
         }}
       />
-    </>
+    </div>
   );
 }
 export default IngredientLine;

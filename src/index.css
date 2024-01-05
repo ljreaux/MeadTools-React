@@ -5,14 +5,14 @@
 @layer base {
   :root {
     --color-background: 210deg, 13%, 35%;
-    --color-textColor: 45deg, 29%, 97%;
+    --color-textColor: 36deg, 16%, 82%;
     --color-sidebar: 0deg, 0%, 14%;
   }
   @media (prefers-color-scheme: light) {
     :root{
-      --color-background: 45deg, 29%, 97%;
+      --color-background: 36deg, 16%, 82%;
       --color-textColor:  0deg, 0%, 14%;
-      --color-sidebar: 42deg, 83%, 50%
+      --color-sidebar: 35deg, 90%, 42%
     }
   }
 }
@@ -38,7 +38,7 @@
 }
 
 .btn {
-  @apply bg-background rounded-2xl border-solid border-textColor border-2 hover:bg-sidebar hover:border-background text-lg px-2 py-1
+  @apply bg-background rounded-2xl border-solid border-textColor border-2 hover:bg-sidebar hover:border-background text-lg px-2 py-1 disabled:bg-sidebar disabled:hover:border-textColor disabled:hover:text-sidebar disabled:cursor-not-allowed
 }
 
 /* .sidebar-large {
