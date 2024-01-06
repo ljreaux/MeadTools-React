@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-
+import fermentables from "/src/fermentables.json";
 function IngredientLine({
   optionValue,
   defaultSugar,
@@ -11,9 +11,10 @@ function IngredientLine({
   inputNum,
 }) {
   const [ingredients, setIngredients] = useState();
-  async function getIngredients() {
-    const response = await fetch("src/fermentables.json");
-    const json = await response.json();
+  function getIngredients() {
+    const response = JSON.parse(JSON.stringify(fermentables));
+    const json = response;
+    console.log(json);
     setIngredients(json);
   }
   useEffect(() => {
@@ -129,7 +130,7 @@ function IngredientLine({
   }, [weight, brix, volume, ingredientCat]);
   return (
     <div
-      className={`col-start-1 col-span-4 grid grid-cols-4 place-items-center text-center ${hidden}`}
+      className={`col-start-1 col-span-4 grid grid-cols-4 place-items-center text-center ${hidden} w-full`}
     >
       <select className="my-4 nute-select" onChange={ingredientChange}>
         {optionValue ? (

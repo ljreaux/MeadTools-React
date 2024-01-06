@@ -2,6 +2,7 @@ import Title from "../Title";
 import NutrientDisplay from "./NutrientDisplay";
 import RevealButton from "./RevealButton";
 import { useState, useEffect } from "react";
+import yeasts from "/src/yeast.json";
 
 function NutrientCalc({
   mainCalcVol,
@@ -116,13 +117,12 @@ function NutrientCalc({
   ]);
   const selectedYeastObj = selectedYeast[0];
   const yeastObj = yeastNames[0];
-  const yeasts = "/src/yeast.json";
-  useEffect(() => {
-    async function getYeasts() {
-      try {
-        const response = await fetch(yeasts);
-        const data = await response.json();
 
+  useEffect(() => {
+    function getYeasts() {
+      try {
+        const response = JSON.parse(JSON.stringify(yeasts));
+        const data = response;
         setYeastNames([data]);
       } catch (error) {
         console.error(error);
