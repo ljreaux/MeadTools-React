@@ -2,6 +2,8 @@ import { useRef, useState } from "react";
 import emailjs from "@emailjs/browser";
 import Title from "../Title";
 
+// most of this code is taken directly from the emailjs website, added styling, and a success and error message
+// sends an email to contact@meadtools.com
 const ContactUs = () => {
   const form = useRef();
   const [status, setStatus] = useState("");

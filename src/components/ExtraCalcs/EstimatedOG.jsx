@@ -1,14 +1,14 @@
+import GravityInput from "./GravityInput";
 import EstOGRunButton from "./EstOGRunButton";
 import Title from "../Title";
-import GravityInput from "./GravityInput";
 
 function EstimatedOG({
   handleGravity,
-  abvObj,
+  handleHydroFG,
   handleEstOG,
   abvCalc,
+  abvObj,
   toBrix,
-  handleHydroFG,
   estOGObj,
 }) {
   function delle(fg, abv) {
@@ -17,6 +17,7 @@ function EstimatedOG({
   function estimatedOG(fgh, fgr) {
     return (-1.728 * fgh + 0.01085 * fgr + 2.728).toFixed(3);
   }
+
   return (
     <div className="component-div">
       <Title header="Estimated OG Without Reading" />

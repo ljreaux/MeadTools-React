@@ -10,6 +10,7 @@ function SulfiteAddition() {
     },
   ]);
   const sulfiteObj = sulfite[0];
+
   return (
     <div className="component-div">
       <Title header="Sulfite Addition Calculator" />

@@ -9,8 +9,10 @@ function ChangeToBrix({ toBrix }) {
     },
   ]);
   const gravityObj = gravity[0];
-  const [unitSwitch, setUnitSwitch] = useState("");
+
   const [units, setUnits] = useState("SG");
+  const [unitSwitch, setUnitSwitch] = useState("");
+
   const handleChange = (e) => {
     setUnitSwitch(e.target.value);
     if (units == "SG") {
@@ -29,6 +31,8 @@ function ChangeToBrix({ toBrix }) {
       ]);
     }
   };
+
+  // converts a gravity reading to SG
   function toSG(gravityReading) {
     return (
       1.00001 +
@@ -42,7 +46,6 @@ function ChangeToBrix({ toBrix }) {
     <div className="component-div">
       <Title header="Brix Conversion Calculator" />
       <div className="items-center justify-center text-center py-2">
-        {" "}
         <label>Enter Gravity: </label>
         <input
           className="input w-1/4"

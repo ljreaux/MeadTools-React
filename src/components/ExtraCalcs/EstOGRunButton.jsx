@@ -1,7 +1,7 @@
 function EstOGRunButton({
   estimatedOG,
-  abvObj,
   handleEstOG,
+  abvObj,
   abvCalc,
   delle,
   toBrix,

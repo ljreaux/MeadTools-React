@@ -10,7 +10,7 @@ function GravityInput({
   return (
     <div className="flex justify-center items-center">
       <label className="text-center mx-2 my-2" htmlFor={readingType}>
-        {labelText}{" "}
+        {labelText}
       </label>
       <input
         className="input w-1/4"

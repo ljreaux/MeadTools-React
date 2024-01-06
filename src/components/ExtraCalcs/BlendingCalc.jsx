@@ -6,6 +6,7 @@ function BlendingCalc() {
   function blend(val1, vol1, val2, vol2) {
     return (val1 * vol1 + val2 * vol2) / (vol1 + vol2);
   }
+
   const [val, setVal] = useState([
     {
       val1: 1,
@@ -14,6 +15,8 @@ function BlendingCalc() {
       vol2: 2,
     },
   ]);
+
+  // there is likely an easier way to do this, I imagine destructuring would make the below code cleaner.
   const valObj = val[0];
   const val1Change = (e) => {
     setVal([
@@ -35,6 +38,7 @@ function BlendingCalc() {
       },
     ]);
   };
+
   const val2Change = (e) => {
     setVal([
       {
@@ -55,6 +59,7 @@ function BlendingCalc() {
       },
     ]);
   };
+
   return (
     <div className="component-div">
       <Title header="Blending Calculator" />
@@ -79,4 +84,5 @@ function BlendingCalc() {
     </div>
   );
 }
+
 export default BlendingCalc;

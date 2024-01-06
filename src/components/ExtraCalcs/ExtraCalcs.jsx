@@ -1,5 +1,8 @@
+// consider refactoring with useEffect hook so that its not directly calculating values on jsx elements
 import { useState } from "react";
+import { Route, Routes } from "react-router-dom";
 
+import ExtraCalcsSideBar from "./ExtraCalcsSideBar.jsx";
 import AbvCalculator from "./AbvCalculator.jsx";
 import ChangeToBrix from "./ChangeToBrix.jsx";
 import EstimatedOG from "./EstimatedOG.jsx";
@@ -8,10 +11,9 @@ import SorbateAddition from "./SorbateAddition.jsx";
 import RefractCorrect from "./RefractCorrect.jsx";
 import TempCorrection from "./TempCorrection.jsx";
 import BlendingCalc from "./BlendingCalc.jsx";
-import ExtraCalcsSideBar from "./ExtraCalcsSideBar.jsx";
-import { Route, Routes } from "react-router-dom";
 
 function ExtraCalcs() {
+  // refractometer calc
   const [abvArr, setAbvObj] = useState([
     {
       og: null,
@@ -45,7 +47,6 @@ function ExtraCalcs() {
       -668.962 + 1262.45 * value - 776.43 * value ** 2 + 182.94 * value ** 3
     );
   };
-
   const toSg = (value) => {
     return (
       1.00001 +
@@ -86,7 +87,6 @@ function ExtraCalcs() {
       estOG: 0,
     },
   ]);
-
   const estOGObj = estOG[0];
 
   const handleHydroFG = (e) => {
@@ -98,7 +98,6 @@ function ExtraCalcs() {
       },
     ]);
   };
-
   const handleRefracFG = (e) => {
     setEstOG([
       {
@@ -108,7 +107,6 @@ function ExtraCalcs() {
       },
     ]);
   };
-
   const handleEstOG = (value) => {
     setEstOG([
       {
@@ -119,6 +117,7 @@ function ExtraCalcs() {
     ]);
   };
 
+  // temperature correction calc
   const [temp, setTemp] = useState([
     {
       sg: 1.1,
@@ -127,7 +126,6 @@ function ExtraCalcs() {
       units: "F",
     },
   ]);
-
   const tempObj = temp[0];
   const handleTempSg = (e) => {
     setTemp([

@@ -1,3 +1,4 @@
+// react icons
 import { TbBeer } from "react-icons/tb";
 import { FaPercent } from "react-icons/fa";
 import { FaBalanceScaleLeft } from "react-icons/fa";
@@ -6,19 +7,22 @@ import { GiPowder } from "react-icons/gi";
 import { PiRainbow } from "react-icons/pi";
 import { TiThermometer } from "react-icons/ti";
 import { RxBlendingMode } from "react-icons/rx";
+
+// Logos component
 import Logos from "./Logos";
 
 function ExtraCalcsSideBar() {
   return (
-    <div className="fixed sm:w-12 sm:h-fit w-fit sm:left-2 sm:right-0 sm:top-2/4  bottom-0 sm:-translate-y-2/4 text-4xl bg-sidebar border-2 border-s-textColor rounded-full">
+    <div
+      className="fixed sm:w-12 sm:h-fit w-fit sm:left-2 sm:right-0 sm:top-2/4 bottom-0 sm:-translate-y-2/4 
+    text-4xl bg-sidebar border-2 border-s-textColor rounded-full"
+    >
       <nav className="flex sm:flex-col justify-center text-center space-y-2 mx-1">
-        <Logos link="/ExtraCalcs/" logo={<TbBeer />} calc="ABV" />
-
+        <Logos link="/ExtraCalcs/" logo={<TbBeer />} calc="ABV" id="abvCalc" />
         <Logos
           link="/ExtraCalcs/brixCalc"
           logo={<FaPercent />}
           calc="Brix Conversion"
-          id="abvCalc"
         />
         <Logos
           link="/ExtraCalcs/estOG"
@@ -54,4 +58,5 @@ function ExtraCalcsSideBar() {
     </div>
   );
 }
+
 export default ExtraCalcsSideBar;

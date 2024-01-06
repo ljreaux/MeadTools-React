@@ -4,7 +4,6 @@ function About() {
   return (
     <div className="w-fit h-fit flex items-center justify-center my-12">
       <div className="component-div flex flex-col items-center justify-center text-textColor">
-        {" "}
         <Title header="About MeadTools" />
         <div className="px-12">
           <p className="text-center py-4">
@@ -202,7 +201,7 @@ function About() {
           <div className="text-center text-2xl py-12">
             <p>
               To the entire mead making community, or all of the help,
-              inspiration, and knowledge I have gained over the past 4 years{" "}
+              inspiration, and knowledge I have gained over the past 4 years
             </p>
             <p className="text-4xl py-[3rem]">Thank you</p>
           </div>

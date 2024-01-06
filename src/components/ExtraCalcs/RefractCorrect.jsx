@@ -2,12 +2,6 @@ import Title from "../Title";
 import { useState } from "react";
 
 function RefractCorrect({ toBrix, toSg, abvCalc }) {
-  function refracCalc(ogBr, fgBr, corFac) {
-    return -0.002349 * (ogBr / corFac) + 0.006276 * (fgBr / corFac) + 1;
-  }
-  function delle(fg, abv) {
-    return toBrix(fg) + 4.5 * abv;
-  }
   const [refrac, setRefrac] = useState([
     {
       cf: 1,
@@ -17,6 +11,7 @@ function RefractCorrect({ toBrix, toSg, abvCalc }) {
     },
   ]);
   const refracObj = refrac[0];
+
   const checkUnits = () => {
     if (refracObj.units == "brix") {
       return refracCalc(refracObj.og, refracObj.fg, refracObj.cf);
@@ -24,6 +19,7 @@ function RefractCorrect({ toBrix, toSg, abvCalc }) {
       return refracCalc(toBrix(refracObj.og), refracObj.fg, refracObj.cf);
     }
   };
+  // refactor to a useEffect at a later date
   const checkUnitsAbv = () => {
     if (refracObj.units == "brix") {
       return abvCalc(toSg(refracObj.og), checkUnits().toFixed(3));
@@ -31,6 +27,15 @@ function RefractCorrect({ toBrix, toSg, abvCalc }) {
       return abvCalc(refracObj.og, checkUnits().toFixed(3));
     }
   };
+
+  function refracCalc(ogBr, fgBr, corFac) {
+    return -0.002349 * (ogBr / corFac) + 0.006276 * (fgBr / corFac) + 1;
+  }
+  // this could probably be it's own component
+  function delle(fg, abv) {
+    return toBrix(fg) + 4.5 * abv;
+  }
+
   return (
     <div className="component-div">
       <Title header="Refractometer Correction Calculator" />

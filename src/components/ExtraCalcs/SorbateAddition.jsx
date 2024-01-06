@@ -1,5 +1,6 @@
-import Title from "../Title";
 import { useState } from "react";
+import Title from "../Title";
+
 function SorbateAddition() {
   const [sorbate, setsorbate] = useState([
     {
@@ -9,6 +10,7 @@ function SorbateAddition() {
     },
   ]);
   const sorbateObj = sorbate[0];
+
   return (
     <div className="component-div">
       <Title header="Sorbate Addition Calculator" />
