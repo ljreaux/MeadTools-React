@@ -1,12 +1,16 @@
 import { useEffect, useState } from "react";
 
 function Stabilizers({ volUnits, abv, totalVolume }) {
+  // hides stabilizers
   const [using, setUsing] = useState(false);
+
+  // allows user to put in pH reading and handles change
   const [ph, setPh] = useState(false);
   const [phInput, setPhInput] = useState(3.6);
   const [phReading, setPhReading] = useState(50);
 
   function determinePPM(input) {
+    // would love to have a formula instead of fixed values, but these are the values I have. I should probably just find a line of best fit.
     const oneDec = Number(input).toFixed(1);
     let ppm = 50;
     if (oneDec <= 2.9) {
@@ -99,4 +103,5 @@ function Stabilizers({ volUnits, abv, totalVolume }) {
     </div>
   );
 }
+
 export default Stabilizers;

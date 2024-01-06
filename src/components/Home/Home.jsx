@@ -1,12 +1,14 @@
+import { useEffect, useState } from "react";
+
 import Title from "../Title";
 import IngredientLine from "./IngredientLine";
-import { useEffect, useState } from "react";
+import NewLines from "./NewLines";
 import { MdExpandCircleDown } from "react-icons/md";
 import NutrientCalc from "../NutrientCalc/NutrientCalc";
 import Stabilizers from "./Stabilizers";
-import NewLines from "./NewLines";
 
 function Home() {
+  // stores input from all ingredient lines for final calcs
   const [storedInput, setStoredInput] = useState({
     input1: {
       weight: 0,
@@ -81,23 +83,19 @@ function Home() {
       cat: "sugar",
     },
   });
-
+  //  used to reveal new ingredient lines
   const [displayMainResults, setDisplayMainResults] = useState(false);
-
   const [rowCount, setRowCount] = useState(0);
+
   const [units, setUnits] = useState("lbs");
   const [volUnits, setVolUnits] = useState("gal");
 
+  // final calculation data
   const [totalVolume, setTotalVolume] = useState(0);
   const [OG, setOG] = useState(1);
   const [FG, setFG] = useState(0.996);
   const [abv, setAbv] = useState(0);
   const [delle, setDelle] = useState(0);
-
-  const [mainCalcVol, setMainCalcVol] = useState(0);
-  const [mainCalcSG, setMainCalcSG] = useState(0);
-  const [mainCalcOffset, setMainCalcOffset] = useState(0);
-  const [mainCalcUnits, setMainCalcUnits] = useState("gal");
 
   const abvCalc = (OG, FG) => {
     const OE = -668.962 + 1262.45 * OG - 776.43 * OG ** 2 + 182.94 * OG ** 3;
@@ -116,7 +114,15 @@ function Home() {
     );
   };
 
+  // nutrient calc data
+  const [mainCalcVol, setMainCalcVol] = useState(0);
+  const [mainCalcSG, setMainCalcSG] = useState(0);
+  const [mainCalcOffset, setMainCalcOffset] = useState(0);
+  const [mainCalcUnits, setMainCalcUnits] = useState("gal");
+
+  // onSubmit function
   function totalVolumeFunc() {
+    // arrays used for gravity calculation
     const volumeArr = [];
     const volumeTimesSugarArr = [];
     const offsetArr = [];
@@ -131,6 +137,7 @@ function Home() {
 
       volumeArr.push(Number(input.volume));
       volumeTimesSugarArr.push(input.volume * toSG);
+      // calculating amount of fruit for offset
       if (input.cat == "fruit") {
         if (units == "lbs") {
           offsetArr.push(Number(input.weight));
@@ -139,6 +146,7 @@ function Home() {
         }
       }
     }
+
     let initialVol = 0;
     const addedVol = volumeArr.reduce((acc, cur) => acc + cur, initialVol);
 
@@ -151,6 +159,7 @@ function Home() {
     let initialOs = 0;
     const addedLbs = offsetArr.reduce((acc, cur) => acc + cur, initialOs);
 
+    // checks units for offset of 25ppm per lb per gallon
     let volInGal = 0;
     if (volUnits == "gal") {
       volInGal = addedVol;
@@ -160,6 +169,7 @@ function Home() {
 
     const ppmOs = (addedLbs / volInGal) * 25;
 
+    // sets state for all calculations
     setMainCalcOffset(ppmOs.toFixed(0));
     setOG(addedSug / addedVol);
     setTotalVolume(addedVol);
@@ -170,6 +180,7 @@ function Home() {
     setDelle(du);
   }
 
+  // calculates abv when data changes
   useEffect(() => {
     const alcohol = abvCalc(OG, FG);
     setAbv(alcohol);
@@ -178,6 +189,7 @@ function Home() {
     setDelle(du);
   }, [OG, FG]);
 
+  // changes data in nutrient calc based of ingredient calc
   useEffect(() => {
     setMainCalcVol(totalVolume);
     setMainCalcSG((OG - FG + 1).toFixed(3));
@@ -238,6 +250,8 @@ function Home() {
             setStoredInput={setStoredInput}
             inputNum="input2"
           />
+
+          {/* new lines added when button is pushed */}
           <NewLines
             volUnits={volUnits}
             units={units}
@@ -246,6 +260,7 @@ function Home() {
             setStoredInput={setStoredInput}
           />
 
+          {/* checks row count and displays when max rows is reached */}
           {rowCount <= 8 ? (
             <h2 className="col-start-1 col-span-4 pt-4">
               Add Another Ingredient Row?
@@ -259,10 +274,10 @@ function Home() {
             onClick={() => {
               setRowCount(rowCount + 1);
             }}
-            className={`btn group  w-1/4 col-span-4 flex flex-col items-center text-2xl text-sidebar hover:text-textColor my-8 transition-colors`}
+            className={`btn group w-1/4 col-span-4 flex flex-col items-center text-2xl text-sidebar hover:text-textColor my-8 transition-colors`}
+            // disabled when 10 rows are reached
             disabled={rowCount >= 9}
           >
-            {" "}
             <MdExpandCircleDown className="group-hover:scale-125" />
           </button>
           <IngredientLine
@@ -317,7 +332,7 @@ function Home() {
             </span>
           </div>
         ) : null}
-      </div>{" "}
+      </div>
       <div className="w-full h-full mb-[5%]">
         <NutrientCalc
           mainCalcVol={mainCalcVol}
@@ -341,4 +356,5 @@ function Home() {
     </div>
   );
 }
+
 export default Home;

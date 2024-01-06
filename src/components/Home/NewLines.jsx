@@ -1,5 +1,6 @@
 import IngredientLine from "./IngredientLine";
 
+// unhides lines as button is clicked. Could probably be done dynamically, but I was having issues with useEffect when adding them dynamically
 export default function NewLines({
   volUnits,
   units,

@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+
+// wil likely refactor and add both json files into API
 import fermentables from "/src/fermentables.json";
 
 function IngredientLine({
@@ -10,6 +12,7 @@ function IngredientLine({
   setStoredInput,
   inputNum,
 }) {
+  // sets ingredient select
   const [ingredients, setIngredients] = useState();
   function getIngredients() {
     const response = JSON.parse(JSON.stringify(fermentables));
@@ -20,9 +23,11 @@ function IngredientLine({
     getIngredients();
   }, []);
 
+  // stores selected ingredients
   const [ingredientDetails, setIngredientDetails] = useState();
   const [ingredientCat, setIngredientCat] = useState("sugar");
 
+  // handles ingredient changes
   function ingredientChange(e) {
     const found = ingredients.ingredients.filter(
       (ingredient) => ingredient.name == e.target.value
@@ -30,6 +35,8 @@ function IngredientLine({
     setIngredientDetails(found);
   }
   const [brix, setBrix] = useState(defaultSugar || 79.6);
+
+  // sets details when they change
   useEffect(() => {
     ingredientDetails && ingredientDetails[0]
       ? setBrix(ingredientDetails[0].sugarContent)
@@ -40,6 +47,7 @@ function IngredientLine({
   }, [ingredientDetails]);
   useEffect(() => {}, [brix]);
 
+  // sets weight when volume changes
   const [weight, setWeight] = useState({ unit: "lbs", weight: 0 });
   useEffect(() => {
     if (weight.unit == "lbs") {
@@ -67,6 +75,7 @@ function IngredientLine({
     [brix]
   );
 
+  // sets volume when weight changes
   const [volume, setVolume] = useState({ unit: "gal", vol: 0 });
   useEffect(() => {
     if (volume.unit == "liter") {
@@ -127,6 +136,7 @@ function IngredientLine({
       };
     });
   }, [weight, brix, volume, ingredientCat]);
+
   return (
     <div
       className={`col-start-1 col-span-4 grid grid-cols-4 place-items-center text-center ${hidden} w-full`}
@@ -177,4 +187,5 @@ function IngredientLine({
     </div>
   );
 }
+
 export default IngredientLine;
