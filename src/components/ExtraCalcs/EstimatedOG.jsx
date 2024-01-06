@@ -31,7 +31,7 @@ function EstimatedOG({
       />
       <div>
         <label>Enter Refractometer FG: </label>
-        <input className="input" onChange={handleGravity}></input>
+        <input className="input w=1/4" onChange={handleGravity}></input>
       </div>
       <div>
         <EstOGRunButton

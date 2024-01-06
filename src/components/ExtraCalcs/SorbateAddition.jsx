@@ -28,7 +28,7 @@ function SorbateAddition() {
           }}
         />
         <select
-          className="input"
+          className="input w-1/4"
           defaultValue={"gal"}
           onChange={(e) => {
             setsorbate([
@@ -47,7 +47,7 @@ function SorbateAddition() {
       <div className="justify-center items-center text-center">
         <label>ABV: </label>
         <input
-          className="input"
+          className="input w-1/4"
           defaultValue={12}
           onChange={(e) => {
             setsorbate([

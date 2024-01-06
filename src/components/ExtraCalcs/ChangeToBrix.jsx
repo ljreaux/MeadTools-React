@@ -45,13 +45,13 @@ function ChangeToBrix({ toBrix }) {
         {" "}
         <label>Enter Gravity: </label>
         <input
-          className="input"
+          className="input w-1/4"
           value={unitSwitch ? unitSwitch : ""}
           onChange={handleChange}
         ></input>
       </div>
       <select
-        className="input hover:cursor-pointer"
+        className="input w-1/4 hover:cursor-pointer"
         id="select"
         onChange={(e) => {
           setUnits(e.target.value);

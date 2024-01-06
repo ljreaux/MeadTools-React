@@ -54,7 +54,7 @@ function RefractCorrect({ toBrix, toSg, abvCalc }) {
       <div className="text-center">
         <label>Enter OG: </label>
         <input
-          className="input"
+          className="input w-1/4"
           defaultValue={1.1}
           onChange={(e) => {
             setRefrac([
@@ -68,7 +68,7 @@ function RefractCorrect({ toBrix, toSg, abvCalc }) {
           }}
         />
         <select
-          className="input hover:cursor-pointer"
+          className="input w-1/4 hover:cursor-pointer"
           onChange={(e) => {
             setRefrac([
               {
@@ -93,7 +93,7 @@ function RefractCorrect({ toBrix, toSg, abvCalc }) {
       <div className="text-center">
         <label>Enter FG in Brix: </label>
         <input
-          className="input"
+          className="input w-1/4"
           defaultValue={8.5}
           onChange={(e) => {
             setRefrac([

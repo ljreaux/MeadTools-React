@@ -1,5 +1,6 @@
 import Title from "../Title";
 import { useState } from "react";
+
 function SulfiteAddition() {
   const [sulfite, setSulfite] = useState([
     {
@@ -28,7 +29,7 @@ function SulfiteAddition() {
           }}
         />
         <select
-          className="input mx-4"
+          className="input w-1/4 mx-4"
           defaultValue={"gal"}
           onChange={(e) => {
             setSulfite([
@@ -46,7 +47,7 @@ function SulfiteAddition() {
       </div>
       <label className="py-4">Desired PPM: </label>
       <input
-        className="input"
+        className="input w-1/4"
         defaultValue={50}
         onChange={(e) => {
           setSulfite([

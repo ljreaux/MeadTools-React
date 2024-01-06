@@ -45,7 +45,7 @@ function Stabilizers({ volUnits, abv, totalVolume }) {
         <span className="col-start-1 col-span-2">
           <h2 className="py-6 mx-2">Are you adding stabilizers?</h2>
           <select
-            className="nute-select"
+            className="input w-11/12"
             onChange={() => {
               setUsing(!using);
             }}
@@ -56,7 +56,7 @@ function Stabilizers({ volUnits, abv, totalVolume }) {
         <span className="col-start-3 col-span-2">
           <h2 className="py-6 mx-2">Are you taking a pH Reading?</h2>
           <select
-            className="nute-select"
+            className="input w-11/12"
             onChange={() => {
               setPh(!ph);
               setPhReading(50);
@@ -82,7 +82,7 @@ function Stabilizers({ volUnits, abv, totalVolume }) {
             </p>
             {ph && (
               <input
-                className="nute-input col-span-2"
+                className="input w-2/4 col-span-2"
                 value={phInput}
                 onChange={(e) => setPhInput(e.target.value)}
               />

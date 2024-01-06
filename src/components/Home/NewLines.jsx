@@ -1,5 +1,4 @@
 import IngredientLine from "./IngredientLine";
-import { useState } from "react";
 
 export default function NewLines({
   volUnits,
@@ -7,8 +6,6 @@ export default function NewLines({
   rowCount,
   storedInput,
   setStoredInput,
-  ingredientCat,
-  setIngredientCat,
 }) {
   return (
     <>
@@ -29,7 +26,7 @@ export default function NewLines({
         storedInput={storedInput}
         setStoredInput={setStoredInput}
         inputNum="input4"
-      />{" "}
+      />
       <IngredientLine
         volUnits={volUnits}
         units={units}
@@ -47,7 +44,7 @@ export default function NewLines({
         storedInput={storedInput}
         setStoredInput={setStoredInput}
         inputNum="input6"
-      />{" "}
+      />
       <IngredientLine
         volUnits={volUnits}
         units={units}
@@ -65,7 +62,7 @@ export default function NewLines({
         storedInput={storedInput}
         setStoredInput={setStoredInput}
         inputNum="input8"
-      />{" "}
+      />
       <IngredientLine
         volUnits={volUnits}
         units={units}

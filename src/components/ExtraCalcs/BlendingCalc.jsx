@@ -1,6 +1,7 @@
 import Title from "../Title";
 import BlendingInputLine from "./BlendingInputLine";
 import { useState } from "react";
+
 function BlendingCalc() {
   function blend(val1, vol1, val2, vol2) {
     return (val1 * vol1 + val2 * vol2) / (vol1 + vol2);

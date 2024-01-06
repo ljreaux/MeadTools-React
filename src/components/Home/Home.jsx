@@ -184,8 +184,8 @@ function Home() {
   }, [totalVolume, OG, FG]);
 
   return (
-    <div className="text-textColor md:text-2xl lg:text-3xl text-sm font-serif max-h-screen flex items-center flex-col ">
-      <div className="mt-12 component-div overflow-visible flex-row">
+    <div className="max-h-screen flex items-center flex-col font-serif md:text-2xl lg:text-3xl text-textColor text-sm">
+      <div className="component-div flex-row mt-12 ">
         <Title header="Recipe Builder" />
         <form
           onSubmit={(e) => {
@@ -199,7 +199,7 @@ function Home() {
           <span>
             <h2>Amount to Add in</h2>
             <select
-              className="nute-select"
+              className="input w-11/12"
               onChange={(e) => {
                 setUnits(e.target.value);
               }}
@@ -212,7 +212,7 @@ function Home() {
           <span>
             <h2>Total Volume</h2>
             <select
-              className="nute-select"
+              className="input w-11/12"
               onChange={(e) => {
                 setVolUnits(e.target.value);
                 setMainCalcUnits(e.target.value);
@@ -245,11 +245,6 @@ function Home() {
             storedInput={storedInput}
             setStoredInput={setStoredInput}
           />
-          {/* {ingredientLines.map((item, index) => {
-            if (index < 9) {
-              return item;
-            }
-          })} */}
 
           {rowCount <= 8 ? (
             <h2 className="col-start-1 col-span-4 pt-4">
@@ -264,11 +259,11 @@ function Home() {
             onClick={() => {
               setRowCount(rowCount + 1);
             }}
-            className={`btn text-2xl text-sidebar hover:text-textColor col-span-4 group w-1/4 flex flex-col  items-center transition-colors my-8`}
+            className={`btn group  w-1/4 col-span-4 flex flex-col items-center text-2xl text-sidebar hover:text-textColor my-8 transition-colors`}
             disabled={rowCount >= 9}
           >
             {" "}
-            <MdExpandCircleDown className="group-hover:scale-125 " />
+            <MdExpandCircleDown className="group-hover:scale-125" />
           </button>
           <IngredientLine
             volUnits={volUnits}
@@ -299,7 +294,7 @@ function Home() {
           </button>
         </form>
         {displayMainResults ? (
-          <div className="grid grid-cols-4 py-4 text-center place-items-center ">
+          <div className="grid grid-cols-4 place-items-center text-center py-4">
             <h2>Estimated OG:</h2>
             <h2>Estimated FG:</h2>
             <h2>ABV:</h2>
@@ -310,7 +305,7 @@ function Home() {
             </p>
             <input
               required
-              className="nute-input"
+              className="input w-2/4"
               value={FG}
               onChange={(e) => setFG(e.target.value)}
             />
@@ -323,7 +318,7 @@ function Home() {
           </div>
         ) : null}
       </div>{" "}
-      <div className="mb-[5%] h-full w-full ">
+      <div className="w-full h-full mb-[5%]">
         <NutrientCalc
           mainCalcVol={mainCalcVol}
           setMainCalcVol={setMainCalcVol}
@@ -336,7 +331,7 @@ function Home() {
           displayMainResults={displayMainResults}
         ></NutrientCalc>
       </div>
-      <div className=" h-full w-full flex items-center flex-col">
+      <div className="w-full h-full flex flex-col items-center">
         <Stabilizers
           volUnits={volUnits}
           abv={abv}

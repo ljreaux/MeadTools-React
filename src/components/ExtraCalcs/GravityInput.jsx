@@ -9,11 +9,11 @@ function GravityInput({
 }) {
   return (
     <div className="flex justify-center items-center">
-      <label className="mx-2 my-2 text-center" htmlFor={readingType}>
+      <label className="text-center mx-2 my-2" htmlFor={readingType}>
         {labelText}{" "}
       </label>
       <input
-        className="input"
+        className="input w-1/4"
         defaultValue={initial}
         onChange={handleGravity}
       ></input>

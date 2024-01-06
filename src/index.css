@@ -2,81 +2,81 @@
 @tailwind components;
 @tailwind utilities;
 
+/* set default colors */
 @layer base {
   :root {
     --color-background: 210deg, 13%, 35%;
     --color-textColor: 36deg, 16%, 82%;
     --color-sidebar: 0deg, 0%, 14%;
   }
+  /* light theme colors */
   @media (prefers-color-scheme: light) {
-    :root{
+    :root {
       --color-background: 36deg, 16%, 82%;
-      --color-textColor:  0deg, 0%, 14%;
-      --color-sidebar: 35deg, 90%, 42%
+      --color-textColor: 0deg, 0%, 14%;
+      --color-sidebar: 35deg, 90%, 42%;
     }
   }
 }
 
-.main-div-style {max-height: 100%;
-  @apply  text-textColor md:text-2xl lg:text-3xl text-xs font-serif flex items-center justify-center h-screen w-screen;
+/* sets up page */
+.main-div-style {
+  max-height: 100%;
+  @apply h-screen w-screen flex items-center justify-center font-serif text-textColor md:text-2xl lg:text-3xl text-xs;
 }
 
-.component-div{
-  @apply  bg-sidebar rounded-xl flex flex-col items-center w-11/12 sm:w-9/12 aspect-video justify-center px-8
+/* sets up box for individual components */
+.component-div {
+  @apply w-11/12 sm:w-9/12 flex flex-col items-center justify-center rounded-xl bg-sidebar aspect-video px-8;
 }
 
-.input{
-  @apply bg-background text-center text-[.5rem]  md:text-sm rounded-xl h-5 w-1/4 border-solid border-textColor border-2 hover:bg-sidebar hover:border-background
-}
 
-.nute-input{
-  @apply bg-background text-center text-[.5rem] md:text-sm rounded-xl h-5 w-2/4 border-solid border-textColor border-2 hover:bg-sidebar hover:border-background
-}
-
-.nute-select{
-  @apply bg-background text-center text-[.5rem] md:text-sm rounded-xl h-5 w-11/12 border-solid border-textColor border-2 hover:bg-sidebar hover:border-background
+.input {
+  @apply h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-textColor hover:bg-sidebar hover:border-background;
 }
 
 .btn {
-  @apply bg-background rounded-2xl border-solid border-textColor border-2 hover:bg-sidebar hover:border-background md:text-lg text-base px-2 py-1 disabled:bg-sidebar disabled:hover:border-textColor disabled:hover:text-sidebar disabled:cursor-not-allowed
+  @apply bg-background rounded-2xl border-2 border-solid border-textColor  hover:bg-sidebar hover:border-background md:text-lg text-base px-2 py-1 disabled:bg-sidebar disabled:hover:border-textColor disabled:hover:text-sidebar disabled:cursor-not-allowed;
 }
 
-/* .sidebar-large {
-  @apply fixed left-2 right-0 top-2/4 -translate-y-2/4 bg-sidebar border-s-textColor border-2 h-fit w-12 rounded-full text-4xl
-} */
 
-.screen-transition{
-  @apply inline-block  whitespace-nowrap min-w-fit mx-2 px-4 py-2 text-sm bg-sidebar border-s-textColor border-2  opacity-0  rounded-lg group-hover:opacity-100 transition-opacity
+/* Extra calcs dropdown */
+.screen-transition {
+  @apply inline-block  whitespace-nowrap min-w-fit mx-2 px-4 py-2 text-sm bg-sidebar border-s-textColor border-2  opacity-0  rounded-lg group-hover:opacity-100 transition-opacity;
 }
+
 
 .logo-styles {
-  @apply inline-block mx-1
+  @apply inline-block mx-1;
 }
 
-.logo-labels{
-  @apply inline-block 
-}
-
-nav a.active{
-  @apply bg-background rounded-xl p-2 hover:text-sidebar}
-
-.navlogo .active{
- @apply  text-4xl;
+.logo-labels {
+  @apply inline-block;
 }
 
 
- .active{
-  @apply  text-sidebar; 
- }
+nav a.active {
+  @apply bg-background rounded-xl p-2 hover:text-sidebar;
+}
 
- .link {
-  @apply text-background underline hover:text-textColor hover:font-bold transition-all
- }
+.navlogo .active {
+  @apply text-4xl;
+}
 
- h2 {
-  @apply px-2
- }
+.active {
+  @apply text-sidebar;
+}
 
- .form-input {
-  @apply bg-background text-[.5rem] md:text-sm rounded-xl border-solid border-textColor border-2 px-2 hover:bg-sidebar hover:border-background
- }
+.link {
+  @apply text-background underline hover:text-textColor hover:font-bold transition-all;
+}
+
+
+h2 {
+  @apply px-2;
+}
+
+
+.form-input {
+  @apply bg-background text-[.5rem] md:text-sm rounded-xl border-2 border-solid border-textColor px-2 hover:bg-sidebar hover:border-background;
+}

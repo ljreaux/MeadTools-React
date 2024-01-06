@@ -10,8 +10,8 @@ import Logos from "./Logos";
 
 function ExtraCalcsSideBar() {
   return (
-    <div className="fixed sm:left-2 sm:right-0 sm:top-2/4 sm:-translate-y-2/4 bg-sidebar border-s-textColor border-2 sm:h-fit sm:w-12 rounded-full text-4xl w-fit bottom-0">
-      <nav className="flex sm:flex-col space-y-2 mx-1 justify-center text-center">
+    <div className="fixed sm:w-12 sm:h-fit w-fit sm:left-2 sm:right-0 sm:top-2/4  bottom-0 sm:-translate-y-2/4 text-4xl bg-sidebar border-2 border-s-textColor rounded-full">
+      <nav className="flex sm:flex-col justify-center text-center space-y-2 mx-1">
         <Logos link="/ExtraCalcs/" logo={<TbBeer />} calc="ABV" />
 
         <Logos

@@ -3,7 +3,7 @@ import Title from "../Title";
 function About() {
   return (
     <div className="w-fit h-fit flex items-center justify-center my-12">
-      <div className="component-div text-textColor flex flex-col items-center justify-center ">
+      <div className="component-div flex flex-col items-center justify-center text-textColor">
         {" "}
         <Title header="About MeadTools" />
         <div className="px-12">
@@ -36,8 +36,7 @@ function About() {
                 rel="noreferrer"
                 href="https://fdc.nal.usda.gov/"
               >
-                {" "}
-                FoodData Central
+                {" FoodData Central"}
               </a>
             </li>
             <li>
@@ -62,8 +61,7 @@ function About() {
                     rel="noreferrer"
                     href="https://docs.google.com/document/d/e/2PACX-1vR89nFNsnMTrIpykZpciqHeRXpO6ysy8MmlBczpLv0ziBxkQ0Qn2B3EiFH7vvNwODOjMJmOvZMqabtj/pub"
                   >
-                    {"  "}
-                    On Calculating ABV
+                    {"  On Calculating ABV"}
                   </a>
                 </li>
               </ul>
@@ -104,8 +102,8 @@ function About() {
               </ul>
             </li>
             <li>
-              {" "}
-              Nutrient schedule and requirement information
+              {"  Nutrient schedule and requirement information"}
+
               <ul className="list-disc ml-8">
                 <li>
                   <a
@@ -129,7 +127,9 @@ function About() {
                     rel="noreferrer"
                     href="https://meadmaking.wiki/en/faq/stabilization_and_backsweetening"
                   >
-                    Modern Meadmaking wiki - "Stabilization and Back Sweetening"
+                    {
+                      'Modern Meadmaking wiki - "Stabilization and Back Sweetening"'
+                    }
                   </a>
                 </li>
               </ul>
@@ -150,8 +150,8 @@ function About() {
               </ul>
             </li>
             <li>
-              {" "}
-              Refractometer calculator
+              {" Refractometer calculator"}
+
               <ul className="list-disc ml-8">
                 <li>
                   <a
@@ -166,8 +166,8 @@ function About() {
               </ul>
             </li>
             <li>
-              {" "}
-              Calculating OG without reading
+              {" Calculating OG without reading"}
+
               <ul className="list-disc ml-8">
                 <li>
                   <a
@@ -177,13 +177,13 @@ function About() {
                     href="http://www.woodlandbrew.com/2013/02/abv-without-og.html"
                   >
                     Woodlandbrew article
-                  </a>{" "}
+                  </a>
                 </li>
               </ul>
             </li>
             <li>
-              {" "}
-              General inspiration
+              {" General inspiration"}
+
               <ul className="list-disc ml-8">
                 <li>
                   <a
@@ -199,7 +199,7 @@ function About() {
             </li>
             <li>Ash and StormBeforeDawn from the Mead Hall discord</li>
           </ol>
-          <div className="py-12 text-2xl text-center">
+          <div className="text-center text-2xl py-12">
             <p>
               To the entire mead making community, or all of the help,
               inspiration, and knowledge I have gained over the past 4 years{" "}

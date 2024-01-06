@@ -102,9 +102,6 @@ function NutrientCalc({
     return -668.962 + 1262.45 * OG - 776.43 * OG ** 2 + 182.94 * OG ** 3;
   };
 
-  const [remainingYanO, setRemainingYanO] = useState(targetYAN);
-  const [remainingYanK, setRemainingYanK] = useState(remainingYanO);
-  const [remainingYanDap, setRemainingYanDap] = useState(remainingYanO);
   const [displayBrix, setDisplayBrix] = useState("0");
   const [yeastNames, setYeastNames] = useState([{}]);
   const [selectedBrand, setSelectedBrand] = useState([
@@ -316,11 +313,11 @@ function NutrientCalc({
   }, [mainCalcUnits]);
 
   return (
-    <div className="text-textColor md:text-2xl lg:text-3xl text-xs font-serif flex items-center flex-col mb-[2rem]">
-      <div className="mt-12 mb-4 component-div flex-row">
+    <div className="flex flex-col items-center font-serif text-textColor md:text-2xl lg:text-3xl text-xs mb-[2rem]">
+      <div className="component-div flex-row mt-12 mb-4">
         <Title header="Nutrient Calculator" />
         <div
-          className="grid grid-cols-5 text-center justify-items-center"
+          className="grid grid-cols-5 justify-items-center text-center"
           id="nuteTable"
         >
           <h2 className="my-2">Yeast Brand</h2>
@@ -330,7 +327,7 @@ function NutrientCalc({
             <select
               disabled={displayMainResults}
               onChange={setUnits}
-              className="my-2 nute-select"
+              className="input w-11/12 my-2"
               value={mainCalcUnits}
             >
               <option value="gal">Gallons</option>
@@ -341,7 +338,7 @@ function NutrientCalc({
           <h2 className="my-2">Offset PPM</h2>
 
           <select
-            className="my-2 nute-select"
+            className="input w-11/12 my-2"
             onChange={(e) => {
               setSelectedBrand([
                 {
@@ -359,7 +356,7 @@ function NutrientCalc({
             })}
           </select>
           <select
-            className="my-2 nute-select"
+            className="input w-11/12 my-2"
             onChange={(e) => {
               setSelectedYeast(
                 yeastObj[`${selectedBrandObj.selectedBrand}`].filter((item) => {
@@ -380,7 +377,7 @@ function NutrientCalc({
           <input
             required
             type="number"
-            className="nute-input my-2"
+            className="input w-2/4 my-2"
             id="volume"
             value={mainCalcVol}
             onChange={setVol}
@@ -391,7 +388,7 @@ function NutrientCalc({
               type="number"
               id="specificGravity"
               value={mainCalcSG}
-              className="nute-input my-2 w-[3.25rem]"
+              className="input w-[3.25rem] my-2 "
               onChange={setSg}
             />
             <p className="my-2 lg:text-base md:text-sm text-xs">
@@ -402,7 +399,7 @@ function NutrientCalc({
             required
             type="number"
             id="offsetPPM"
-            className="nute-input my-2"
+            className="input w-2/4 my-2"
             onChange={setOffset}
             value={mainCalcOffset}
           />
@@ -413,11 +410,11 @@ function NutrientCalc({
           <h2 className="my-2">Number of Additions</h2>
           <h2 className="my-2">Yeast Amount (g)</h2>
 
-          <p className="my-2 lg:text-base md:text-sm text-xs">
+          <p className="lg:text-base md:text-sm text-xs my-2">
             {selectedYeastObj["Nitrogen Requirement"]}
           </p>
           <select
-            className="my-2 nute-select"
+            className="input w-11/12 my-2 "
             id="nuteSchedule"
             onChange={(e) => {
               for (let key in maxGpl) {
@@ -456,11 +453,11 @@ function NutrientCalc({
             <option value="oAndDap">Fermaid O & DAP</option>
             <option value="kAndDap">Fermaid K & DAP</option>
           </select>
-          <p className="my-2 lg:text-base md:text-sm text-xs">
+          <p className="lg:text-base md:text-sm text-xs my-2">
             {targetYAN + " PPM"}
           </p>
           <select
-            className="my-2 nute-select"
+            className="input w-11/12 my-2 "
             onChange={(e) => {
               setAdditions(e.target.value);
             }}
@@ -474,7 +471,7 @@ function NutrientCalc({
             required
             type="number"
             value={yeastAmount ? yeastAmount : ""}
-            className="nute-input my-2"
+            className="input w-2/4 my-2"
             onChange={(e) => {
               setYeastAmount(e.target.value);
             }}

@@ -8,7 +8,7 @@ function RevealButton({ setDisplayResults, displayResults, span }) {
         setDisplayResults(!displayResults);
         rotate == "rotate-180" ? setRotate("") : setRotate("rotate-180");
       }}
-      className={`btn text-2xl text-sidebar hover:text-textColor col-${span} group w-1/4 flex flex-col  items-center transition-colors my-8`}
+      className={`col-${span} btn group w-1/4 flex flex-col items-center text-2xl text-sidebar hover:text-textColor transition-colors my-8`}
     >
       {" "}
       <MdExpandCircleDown

@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
 import fermentables from "/src/fermentables.json";
+
 function IngredientLine({
   optionValue,
   defaultSugar,
   units,
   volUnits,
   hidden,
-  storedInput,
   setStoredInput,
   inputNum,
 }) {
@@ -131,7 +131,7 @@ function IngredientLine({
     <div
       className={`col-start-1 col-span-4 grid grid-cols-4 place-items-center text-center ${hidden} w-full`}
     >
-      <select className="my-4 nute-select" onChange={ingredientChange}>
+      <select className="input w-11/12 my-4 " onChange={ingredientChange}>
         {optionValue ? (
           <option value={optionValue}>{optionValue}</option>
         ) : null}
@@ -146,7 +146,7 @@ function IngredientLine({
           : null}
       </select>
       <input
-        className="my-4 nute-input weight"
+        className="input w-2/4 my-4"
         value={weight.weight}
         onChange={(e) => {
           setWeight({
@@ -157,15 +157,14 @@ function IngredientLine({
         }}
       />
       <input
-        className="my-4 nute-input brix"
-        // defaultValue={defaultSugar}
+        className="input w-2/4 my-4"
         value={brix}
         onChange={(e) => {
           setBrix(e.target.value);
         }}
       />
       <input
-        className="my-4 nute-input vol"
+        className="input w-2/4 my-4"
         value={volume.vol}
         onChange={(e) => {
           setVolume({
