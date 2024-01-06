@@ -58,11 +58,10 @@
 }
 
 nav a.active{
-  @apply bg-background rounded-xl p-2 hover:text-sidebar
-}
+  @apply bg-background rounded-xl p-2 hover:text-sidebar}
 
-.navlogo .active:not(#abvCalc){
- @apply  text-sidebar; 
+.navlogo .active{
+ @apply  text-4xl;
 }
 
 
