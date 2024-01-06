@@ -82,7 +82,7 @@ function Home() {
     },
   });
 
-  const [displayResults, setDisplayResults] = useState(false);
+  const [displayMainResults, setDisplayMainResults] = useState(false);
 
   const [rowCount, setRowCount] = useState(0);
   const [units, setUnits] = useState("lbs");
@@ -94,9 +94,10 @@ function Home() {
   const [abv, setAbv] = useState(0);
   const [delle, setDelle] = useState(0);
 
-  const [mainCalcVol, setMainCalcVol] = useState(null);
-  const [mainCalcSG, setMainCalcSG] = useState(null);
+  const [mainCalcVol, setMainCalcVol] = useState(0);
+  const [mainCalcSG, setMainCalcSG] = useState(0);
   const [mainCalcOffset, setMainCalcOffset] = useState(0);
+  const [mainCalcUnits, setMainCalcUnits] = useState("gal");
 
   const abvCalc = (OG, FG) => {
     const OE = -668.962 + 1262.45 * OG - 776.43 * OG ** 2 + 182.94 * OG ** 3;
@@ -214,6 +215,7 @@ function Home() {
               className="nute-select"
               onChange={(e) => {
                 setVolUnits(e.target.value);
+                setMainCalcUnits(e.target.value);
               }}
             >
               <option value="gal">Gallons</option>
@@ -290,13 +292,13 @@ function Home() {
             type="submit"
             className="btn col-span-4 mb-4"
             onClick={() => {
-              setDisplayResults(true);
+              setDisplayMainResults(true);
             }}
           >
             Submit
           </button>
         </form>
-        {displayResults ? (
+        {displayMainResults ? (
           <div className="grid grid-cols-4 py-4 text-center place-items-center ">
             <h2>Estimated OG:</h2>
             <h2>Estimated FG:</h2>
@@ -307,6 +309,7 @@ function Home() {
               {isNaN(OG) || OG > 1.22 ? "Enter a valid input" : OG.toFixed(3)}
             </p>
             <input
+              required
               className="nute-input"
               value={FG}
               onChange={(e) => setFG(e.target.value)}
@@ -328,6 +331,9 @@ function Home() {
           setMainCalcSG={setMainCalcSG}
           mainCalcOffset={mainCalcOffset}
           setMainCalcOffset={setMainCalcOffset}
+          mainCalcUnits={mainCalcUnits}
+          setMainCalcUnits={setMainCalcUnits}
+          displayMainResults={displayMainResults}
         ></NutrientCalc>
       </div>
       <div className=" h-full w-full flex items-center flex-col">

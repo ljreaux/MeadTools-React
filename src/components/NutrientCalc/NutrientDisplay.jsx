@@ -92,9 +92,13 @@ function NutrientDisplay({
         />
         <p className="my-2 text-base">{Number(goFermGrams).toFixed(2) + "g"}</p>
         <h2 className="my-2">g/L to add</h2>
-        {gplToAdd.map((gpl) => {
+        {gplToAdd.map((gpl, i) => {
           {
-            return <p className="my-2 text-base">{gpl}</p>;
+            return (
+              <p className="my-2 text-base" key={gpl + i}>
+                {gpl}
+              </p>
+            );
           }
         })}
         <h2 className="my-2">Water for Go-Ferm</h2>

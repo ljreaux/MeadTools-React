@@ -10,7 +10,10 @@ function NutrientCalc({
   mainCalcSG,
   setMainCalcSG,
   mainCalcOffset,
+  mainCalcUnits,
   setMainCalcOffset,
+  setMainCalcUnits,
+  displayMainResults,
 }) {
   const maxGpl = {
     tbe: [0.45, 0.5, 0.96],
@@ -181,6 +184,7 @@ function NutrientCalc({
         offset: nuteInfoObj.offset,
       },
     ]);
+    setMainCalcUnits(e.target.value);
   };
 
   const setSg = (e) => {
@@ -263,7 +267,7 @@ function NutrientCalc({
     () => {
       calcTotalGrams();
     },
-    [gplToAdd],
+    [gplToAdd, nuteInfo],
     multiplier
   );
 
@@ -299,6 +303,18 @@ function NutrientCalc({
     setOneThirdBreak(oneThird.toFixed(3));
   }, [nuteInfo]);
 
+  useEffect(() => {
+    setNuteInfo([
+      selectedYeastObj,
+      {
+        units: mainCalcUnits,
+        vol: nuteInfoObj.vol,
+        sg: nuteInfoObj.sg,
+        offset: nuteInfoObj.offset,
+      },
+    ]);
+  }, [mainCalcUnits]);
+
   return (
     <div className="text-textColor md:text-2xl lg:text-3xl text-sm font-serif flex items-center flex-col mb-[2rem]">
       <div className="mt-12 mb-4 component-div flex-row">
@@ -311,7 +327,12 @@ function NutrientCalc({
           <h2 className="my-2">Strain</h2>
           <span className="my-2">
             <h2>Volume</h2>
-            <select onChange={setUnits} className="my-2 nute-select">
+            <select
+              disabled={displayMainResults}
+              onChange={setUnits}
+              className="my-2 nute-select"
+              value={mainCalcUnits || nuteInfoObj.units}
+            >
               <option value="gal">Gallons</option>
               <option value="liter">Liters</option>
             </select>
@@ -357,28 +378,31 @@ function NutrientCalc({
             })}
           </select>
           <input
+            required
             type="number"
             className="nute-input my-2"
             id="volume"
-            value={mainCalcVol || ""}
+            value={mainCalcVol || nuteInfoObj.vol}
             onChange={setVol}
           />
           <span className="flex space-x-2 ">
             <input
+              required
               type="number"
               id="specificGravity"
-              value={mainCalcSG}
+              value={mainCalcSG || nuteInfoObj.sg}
               className="nute-input my-2"
               onChange={setSg}
             />
             <p className="my-2 text-base">{displayBrix + " Brix"}</p>
           </span>
           <input
+            required
             type="number"
             id="offsetPPM"
             className="nute-input my-2"
             onChange={setOffset}
-            value={mainCalcOffset}
+            value={mainCalcOffset || nuteInfoObj.offset}
           />
 
           <h2 className="my-2">Nitrogen Requirement</h2>
@@ -443,6 +467,7 @@ function NutrientCalc({
             <option value={4}>4</option>
           </select>
           <input
+            required
             type="number"
             value={yeastAmount ? yeastAmount : ""}
             className="nute-input my-2"

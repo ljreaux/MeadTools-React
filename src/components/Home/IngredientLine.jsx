@@ -14,7 +14,6 @@ function IngredientLine({
   function getIngredients() {
     const response = JSON.parse(JSON.stringify(fermentables));
     const json = response;
-    console.log(json);
     setIngredients(json);
   }
   useEffect(() => {
