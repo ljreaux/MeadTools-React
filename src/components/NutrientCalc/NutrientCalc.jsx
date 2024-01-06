@@ -316,7 +316,7 @@ function NutrientCalc({
   }, [mainCalcUnits]);
 
   return (
-    <div className="text-textColor md:text-2xl lg:text-3xl text-sm font-serif flex items-center flex-col mb-[2rem]">
+    <div className="text-textColor md:text-2xl lg:text-3xl text-xs font-serif flex items-center flex-col mb-[2rem]">
       <div className="mt-12 mb-4 component-div flex-row">
         <Title header="Nutrient Calculator" />
         <div
@@ -391,10 +391,10 @@ function NutrientCalc({
               type="number"
               id="specificGravity"
               value={mainCalcSG || nuteInfoObj.sg}
-              className="nute-input my-2"
+              className="nute-input my-2 px-2"
               onChange={setSg}
             />
-            <p className="my-2 text-base">{displayBrix + " Brix"}</p>
+            <p className="my-2 text-xs">{displayBrix + " Brix"}</p>
           </span>
           <input
             required
@@ -411,7 +411,7 @@ function NutrientCalc({
           <h2 className="my-2">Number of Additions</h2>
           <h2 className="my-2">Yeast Amount (g)</h2>
 
-          <p className="my-2 text-base">
+          <p className="my-2 text-xs">
             {selectedYeastObj["Nitrogen Requirement"]}
           </p>
           <select
@@ -454,7 +454,7 @@ function NutrientCalc({
             <option value="oAndDap">Fermaid O & DAP</option>
             <option value="kAndDap">Fermaid K & DAP</option>
           </select>
-          <p className="my-2 text-base">{targetYAN + " PPM"}</p>
+          <p className="my-2 text-xs">{targetYAN + " PPM"}</p>
           <select
             className="my-2 nute-select"
             onChange={(e) => {

@@ -18,7 +18,7 @@
 }
 
 .main-div-style {max-height: 100%;
-  @apply  text-textColor md:text-2xl lg:text-3xl text-sm font-serif flex items-center justify-center h-screen w-screen;
+  @apply  text-textColor md:text-2xl lg:text-3xl text-xs font-serif flex items-center justify-center h-screen w-screen;
 }
 
 .component-div{
@@ -26,19 +26,19 @@
 }
 
 .input{
-  @apply bg-background text-center text-sm rounded-xl h-5 w-1/4 border-solid border-textColor border-2 hover:bg-sidebar hover:border-background
+  @apply bg-background text-center text-[.5rem]  md:text-sm rounded-xl h-5 w-1/4 border-solid border-textColor border-2 hover:bg-sidebar hover:border-background
 }
 
 .nute-input{
-  @apply bg-background text-center text-sm rounded-xl h-5 w-2/4 border-solid border-textColor border-2 hover:bg-sidebar hover:border-background
+  @apply bg-background text-center text-[.5rem] md:text-sm rounded-xl h-5 w-2/4 border-solid border-textColor border-2 hover:bg-sidebar hover:border-background
 }
 
 .nute-select{
-  @apply bg-background text-center text-sm rounded-xl h-5 w-11/12 border-solid border-textColor border-2 hover:bg-sidebar hover:border-background
+  @apply bg-background text-center text-[.5rem] md:text-sm rounded-xl h-5 w-11/12 border-solid border-textColor border-2 hover:bg-sidebar hover:border-background
 }
 
 .btn {
-  @apply bg-background rounded-2xl border-solid border-textColor border-2 hover:bg-sidebar hover:border-background text-lg px-2 py-1 disabled:bg-sidebar disabled:hover:border-textColor disabled:hover:text-sidebar disabled:cursor-not-allowed
+  @apply bg-background rounded-2xl border-solid border-textColor border-2 hover:bg-sidebar hover:border-background md:text-lg text-base px-2 py-1 disabled:bg-sidebar disabled:hover:border-textColor disabled:hover:text-sidebar disabled:cursor-not-allowed
 }
 
 /* .sidebar-large {
