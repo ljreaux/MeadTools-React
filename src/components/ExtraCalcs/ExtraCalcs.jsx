@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "/Users/larryreaux/Developer/Basic Coding/MeadTools React/src/App.css";
+
 import AbvCalculator from "./AbvCalculator.jsx";
 import ChangeToBrix from "./ChangeToBrix.jsx";
 import EstimatedOG from "./EstimatedOG.jsx";
