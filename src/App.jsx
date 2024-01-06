@@ -4,6 +4,7 @@ import Home from "./components/Home/Home";
 import { Outlet, Route, Routes } from "react-router-dom";
 import About from "./components/About/About";
 import NuteContainer from "./components/NutrientCalc/NuteContainer";
+import ContactUs from "./components/About/ContactUs";
 function App() {
   return (
     <>
@@ -15,6 +16,7 @@ function App() {
           {" "}
         </Route>
         <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<ContactUs />}></Route>
       </Routes>
       <Outlet />
     </>

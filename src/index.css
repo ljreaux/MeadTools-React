@@ -76,3 +76,7 @@ nav a.active{
  h2 {
   @apply px-2
  }
+
+ .form-input {
+  @apply bg-background text-[.5rem] md:text-sm rounded-xl border-solid border-textColor border-2 px-2 hover:bg-sidebar hover:border-background
+ }

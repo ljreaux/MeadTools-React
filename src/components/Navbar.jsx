@@ -94,12 +94,12 @@ function Navbar() {
               >
                 <FaGithub />
               </a>
-              <a
-                href=""
+              <Link
+                to="/contact"
                 className="hover:text-background md:hover:scale-105 transition-all"
               >
                 <MdEmail />
-              </a>
+              </Link>
             </div>
           </span>
         </nav>
