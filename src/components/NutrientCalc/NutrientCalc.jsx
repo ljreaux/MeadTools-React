@@ -331,7 +331,7 @@ function NutrientCalc({
               disabled={displayMainResults}
               onChange={setUnits}
               className="my-2 nute-select"
-              value={mainCalcUnits || nuteInfoObj.units}
+              value={mainCalcUnits}
             >
               <option value="gal">Gallons</option>
               <option value="liter">Liters</option>
@@ -382,7 +382,7 @@ function NutrientCalc({
             type="number"
             className="nute-input my-2"
             id="volume"
-            value={mainCalcVol || nuteInfoObj.vol}
+            value={mainCalcVol}
             onChange={setVol}
           />
           <span className="flex space-x-2 ">
@@ -390,11 +390,13 @@ function NutrientCalc({
               required
               type="number"
               id="specificGravity"
-              value={mainCalcSG || nuteInfoObj.sg}
-              className="nute-input my-2 px-2"
+              value={mainCalcSG}
+              className="nute-input my-2 w-[3.25rem]"
               onChange={setSg}
             />
-            <p className="my-2 text-xs">{displayBrix + " Brix"}</p>
+            <p className="my-2 lg:text-base md:text-sm text-xs">
+              {displayBrix + " Brix"}
+            </p>
           </span>
           <input
             required
@@ -402,7 +404,7 @@ function NutrientCalc({
             id="offsetPPM"
             className="nute-input my-2"
             onChange={setOffset}
-            value={mainCalcOffset || nuteInfoObj.offset}
+            value={mainCalcOffset}
           />
 
           <h2 className="my-2">Nitrogen Requirement</h2>
@@ -411,7 +413,7 @@ function NutrientCalc({
           <h2 className="my-2">Number of Additions</h2>
           <h2 className="my-2">Yeast Amount (g)</h2>
 
-          <p className="my-2 text-xs">
+          <p className="my-2 lg:text-base md:text-sm text-xs">
             {selectedYeastObj["Nitrogen Requirement"]}
           </p>
           <select
@@ -454,7 +456,9 @@ function NutrientCalc({
             <option value="oAndDap">Fermaid O & DAP</option>
             <option value="kAndDap">Fermaid K & DAP</option>
           </select>
-          <p className="my-2 text-xs">{targetYAN + " PPM"}</p>
+          <p className="my-2 lg:text-base md:text-sm text-xs">
+            {targetYAN + " PPM"}
+          </p>
           <select
             className="my-2 nute-select"
             onChange={(e) => {

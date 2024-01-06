@@ -69,3 +69,11 @@ nav a.active{
  .active{
   @apply  text-sidebar; 
  }
+
+ .link {
+  @apply text-background underline hover:text-textColor hover:font-bold transition-all
+ }
+
+ h2 {
+  @apply px-2
+ }

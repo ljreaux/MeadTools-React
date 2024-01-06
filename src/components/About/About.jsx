@@ -31,96 +31,181 @@ function About() {
           <ol className="list-decimal pt-8">
             <li>
               Almost all of the ingredient data was gathered from the USDA
-              FoodData Central https://fdc.nal.usda.gov/
+              <a
+                target="_blank"
+                rel="noreferrer"
+                href="https://fdc.nal.usda.gov/"
+              >
+                {" "}
+                FoodData Central
+              </a>
             </li>
             <li>
               ABV formula was taken from
-              <ul className="list-disc ml-8 break-all">
+              <ul className="list-disc ml-8">
                 <li>
-                  https://www.homebrewersassociation.org/attachments/0000/2497/Math_in_Mash_SummerZym95.pdf
+                  <a
+                    className="link"
+                    target="_blank"
+                    rel="noreferrer"
+                    href=" https://www.homebrewersassociation.org/attachments/0000/2497/Math_in_Mash_SummerZym95.pdf"
+                  >
+                    This Zymergy Article
+                  </a>
                 </li>
                 <li>
                   Important reading on ABV can be found from the person that
-                  gave MeadTools it’s name.
-                  https://docs.google.com/document/d/e/2PACX-1vR89nFNsnMTrIpykZpciqHeRXpO6ysy8MmlBczpLv0ziBxkQ0Qn2B3EiFH7vvNwODOjMJmOvZMqabtj/pub
+                  gave MeadTools it’s name:
+                  <a
+                    className="link"
+                    target="_blank"
+                    rel="noreferrer"
+                    href="https://docs.google.com/document/d/e/2PACX-1vR89nFNsnMTrIpykZpciqHeRXpO6ysy8MmlBczpLv0ziBxkQ0Qn2B3EiFH7vvNwODOjMJmOvZMqabtj/pub"
+                  >
+                    {"  "}
+                    On Calculating ABV
+                  </a>
                 </li>
               </ul>
             </li>
             <li>
               Yeast information
-              <ul className="list-disc ml-8 break-all">
+              <ul className="list-disc ml-8">
                 <li>
-                  https://scottlabsltd.com/content/files/documents/sll/handbooks/scott%20canada%202023%20handbook.pdf
+                  <a
+                    className="link"
+                    target="_blank"
+                    rel="noreferrer"
+                    href="https://scottlabsltd.com/content/files/documents/sll/handbooks/scott%20canada%202023%20handbook.pdf"
+                  >
+                    Scott Labs Yeast Handbook
+                  </a>
                 </li>
                 <li>
-                  https://help.mangrovejacks.com/hc/en-us/article_attachments/13551379984785
+                  <a
+                    className="link"
+                    target="_blank"
+                    rel="noreferrer"
+                    href="https://help.mangrovejacks.com/hc/en-us/article_attachments/13551379984785"
+                  >
+                    Mangrove Jack Yeast Information
+                  </a>
                 </li>
                 <li>
-                  https://www.piwine.com/media/pdf/yeast-selection-chart.pdf
+                  <a
+                    className="link"
+                    target="_blank"
+                    rel="noreferrer"
+                    href="https://www.piwine.com/media/pdf/yeast-selection-chart.pdf"
+                  >
+                    Piwine Yeast Chart
+                  </a>
                 </li>
               </ul>
             </li>
             <li>
               {" "}
               Nutrient schedule and requirement information
-              <ul className="list-disc ml-8 break-all">
+              <ul className="list-disc ml-8">
                 <li>
-                  https://docs.google.com/document/d/11pW-dC91OupCYKX-zld73ckg9ximXwxbmpLFOqv6JEk/edit
+                  <a
+                    className="link"
+                    target="_blank"
+                    rel="noreferrer"
+                    href="https://docs.google.com/document/d/11pW-dC91OupCYKX-zld73ckg9ximXwxbmpLFOqv6JEk/edit"
+                  >
+                    Advanced Nutrients in Meadmaking
+                  </a>
                 </li>
               </ul>
             </li>
             <li>
               Sorbate and Sulfite information, as well as SO many other things
-              <ul className="list-disc ml-8 break-all">
+              <ul className="list-disc ml-8">
                 <li>
-                  {" "}
-                  https://meadmaking.wiki/en/faq/stabilization_and_backsweetening
+                  <a
+                    className="link"
+                    target="_blank"
+                    rel="noreferrer"
+                    href="https://meadmaking.wiki/en/faq/stabilization_and_backsweetening"
+                  >
+                    Modern Meadmaking wiki - "Stabilization and Back Sweetening"
+                  </a>
                 </li>
               </ul>
             </li>
             <li>
               Hydrometer Temperature correction
-              <ul className="list-disc ml-8 break-all">
+              <ul className="list-disc ml-8">
                 <li>
-                  {" "}
-                  https://www.homebrewtalk.com/threads/temp-correction-formula-for-hydrometer.10684/
+                  <a
+                    className="link"
+                    target="_blank"
+                    rel="noreferrer"
+                    href="https://www.homebrewtalk.com/threads/temp-correction-formula-for-hydrometer.10684/"
+                  >
+                    Homebrewtalk thread
+                  </a>
                 </li>
               </ul>
             </li>
             <li>
               {" "}
               Refractometer calculator
-              <ul className="list-disc ml-8 break-all">
+              <ul className="list-disc ml-8">
                 <li>
-                  https://www.homebrewersassociation.org/zymurgy-magazine/jul-aug-2017/
+                  <a
+                    className="link"
+                    target="_blank"
+                    rel="noreferrer"
+                    href="https://www.homebrewersassociation.org/zymurgy-magazine/jul-aug-2017/ "
+                  >
+                    This Zymergy Article
+                  </a>
                 </li>
               </ul>
             </li>
             <li>
               {" "}
               Calculating OG without reading
-              <ul className="list-disc ml-8 break-all">
+              <ul className="list-disc ml-8">
                 <li>
-                  {" "}
-                  http://www.woodlandbrew.com/2013/02/abv-without-og.html{" "}
+                  <a
+                    className="link"
+                    target="_blank"
+                    rel="noreferrer"
+                    href="http://www.woodlandbrew.com/2013/02/abv-without-og.html"
+                  >
+                    Woodlandbrew article
+                  </a>{" "}
                 </li>
               </ul>
             </li>
             <li>
               {" "}
               General inspiration
-              <ul className="list-disc ml-8 break-all">
-                <li>https://gotmead.com/blog/the-mead-calculator/ </li>
+              <ul className="list-disc ml-8">
+                <li>
+                  <a
+                    className="link"
+                    target="_blank"
+                    rel="noreferrer"
+                    href="https://gotmead.com/blog/the-mead-calculator/"
+                  >
+                    MeadCalc from Got Mead
+                  </a>
+                </li>
               </ul>
             </li>
             <li>Ash and StormBeforeDawn from the Mead Hall discord</li>
           </ol>
-
-          <p className="py-12 text-2xl text-center">
-            To the entire mead making community, or all of the help,
-            inspiration, and knowledge I have gained over the past 4 years{" "}
-            <h1 className="text-4xl py-8">Thank you</h1>
-          </p>
+          <div className="py-12 text-2xl text-center">
+            <p>
+              To the entire mead making community, or all of the help,
+              inspiration, and knowledge I have gained over the past 4 years{" "}
+            </p>
+            <p className="text-4xl py-[3rem]">Thank you</p>
+          </div>
         </div>
       </div>
     </div>
