@@ -42,12 +42,22 @@ const ContactUs = () => {
         >
           <div>
             <label className="p-6">Name</label>
-            <input className="form-input" type="text" name="user_name" />
+            <input
+              className="form-input"
+              type="text"
+              name="user_name"
+              required
+            />
             <label className="p-6">Email</label>
-            <input className="form-input" type="email" name="user_email" />
+            <input
+              className="form-input"
+              type="email"
+              name="user_email"
+              required
+            />
           </div>
           <label className="py-6">Message</label>
-          <textarea className="form-input w-full" name="message" />
+          <textarea className="form-input w-full" name="message" required />
           <input className="my-6 btn" type="submit" value="Send" />
         </form>
         <h1>{status}</h1>
