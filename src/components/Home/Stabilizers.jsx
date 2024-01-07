@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 
+import Sorbate from "./Sorbate";
+
 function Stabilizers({ volUnits, abv, totalVolume }) {
   // hides stabilizers
   const [using, setUsing] = useState(false);
@@ -72,18 +74,7 @@ function Stabilizers({ volUnits, abv, totalVolume }) {
         {using && (
           <>
             <h2 className="py-6 mx-2">Potassium Sorbate:</h2>
-            <p className="py-4">
-              {volUnits == "gal"
-                ? `${(
-                    ((-abv * 25 + 400) / 0.75) *
-                    totalVolume *
-                    0.003785411784
-                  ).toFixed(3)}g`
-                : `${(
-                    (((-abv * 25 + 400) / 0.75) * totalVolume) /
-                    1000
-                  ).toFixed(3)}g`}
-            </p>
+            <Sorbate volUnits={volUnits} abv={abv} totalVolume={totalVolume} />
             {ph && (
               <input
                 className="input w-2/4 col-span-2"

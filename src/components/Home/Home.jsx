@@ -271,6 +271,7 @@ function Home() {
             </h2>
           )}
           <button
+            type="button"
             onClick={() => {
               setRowCount(rowCount + 1);
             }}
@@ -280,6 +281,10 @@ function Home() {
           >
             <MdExpandCircleDown className="group-hover:scale-125" />
           </button>
+          <h2>Ingredient</h2>
+          <h2>Weight</h2>
+          <h2>Brix</h2>
+          <h2>Volume</h2>
           <IngredientLine
             volUnits={volUnits}
             units={units}
