@@ -7,6 +7,7 @@ import Title from "../Title";
 const ContactUs = () => {
   const form = useRef();
   const [status, setStatus] = useState("");
+  const [disabled, setDisabled] = useState(false);
 
   const sendEmail = (e) => {
     e.preventDefault();
@@ -23,6 +24,7 @@ const ContactUs = () => {
           console.log(result.text);
           e.target.reset();
           setStatus("Your message was successfully sent!");
+          setDisabled(true);
         },
         (error) => {
           console.log(error.text);
@@ -58,7 +60,12 @@ const ContactUs = () => {
           </div>
           <label className="py-6">Message</label>
           <textarea className="form-input w-full" name="message" required />
-          <input className="my-6 btn" type="submit" value="Send" />
+          <input
+            className="my-6 btn"
+            type="submit"
+            value="Send"
+            disabled={disabled}
+          />
         </form>
         <h1>{status}</h1>
       </div>
