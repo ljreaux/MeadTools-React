@@ -1,5 +1,6 @@
-import { MdExpandCircleDown } from "react-icons/md";
 import { useState } from "react";
+import { MdExpandCircleDown } from "react-icons/md";
+
 function RevealButton({ setDisplayResults, displayResults, span }) {
   const [rotate, setRotate] = useState("");
   return (

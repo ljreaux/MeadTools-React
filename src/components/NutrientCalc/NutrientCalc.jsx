@@ -1,3 +1,4 @@
+// refactor with more components later
 import Title from "../Title";
 import NutrientDisplay from "./NutrientDisplay";
 import RevealButton from "./RevealButton";
@@ -15,6 +16,7 @@ function NutrientCalc({
   setMainCalcUnits,
   displayMainResults,
 }) {
+  // object contains values for all nutrient regimens
   const maxGpl = {
     tbe: [0.45, 0.5, 0.96],
     tosna: [2.5, 0, 0],
@@ -26,6 +28,8 @@ function NutrientCalc({
     oAndDap: [1, 0, 0.96],
     kAndDap: [0, 1, 0.96],
   };
+
+  // state objects for all needed inputs
   const [gplInput, setGplInput] = useState([...maxGpl.tbe]);
   const [gplToAdd, setGplToAdd] = useState([...gplInput]);
   const [targetYAN, setTargetYAN] = useState(0);
@@ -33,8 +37,8 @@ function NutrientCalc({
   const [ppmYanK, setPpmYanK] = useState(0);
   const [ppmYanDap, setPpmYanDap] = useState(0);
   const [addedYan, setAddedYan] = useState([ppmYanO, ppmYanK, ppmYanDap]);
-
   const [multiplier, setMultiplier] = useState(4);
+
   function runToAddGpl() {
     const totalPPMO = targetYAN;
     const maxGplO = gplInput[0];
@@ -102,6 +106,7 @@ function NutrientCalc({
     return -668.962 + 1262.45 * OG - 776.43 * OG ** 2 + 182.94 * OG ** 3;
   };
 
+  // display states
   const [displayBrix, setDisplayBrix] = useState("0");
   const [yeastNames, setYeastNames] = useState([{}]);
   const [selectedBrand, setSelectedBrand] = useState([
@@ -118,6 +123,7 @@ function NutrientCalc({
   const selectedYeastObj = selectedYeast[0];
   const yeastObj = yeastNames[0];
 
+  // gets yeasts from json data
   useEffect(() => {
     function getYeasts() {
       try {
@@ -132,6 +138,7 @@ function NutrientCalc({
     getYeasts();
   }, []);
 
+  // state for display button
   const [displayResults, setDisplayResults] = useState(false);
 
   const [nuteInfo, setNuteInfo] = useState([
@@ -143,7 +150,7 @@ function NutrientCalc({
       offset: 0,
     },
   ]);
-
+  const nuteInfoObj = nuteInfo[1];
   useEffect(() => {
     setNuteInfo([
       selectedYeastObj,
@@ -156,7 +163,6 @@ function NutrientCalc({
     ]);
     setDisplayBrix(Number(ogBrix(mainCalcSG)).toFixed(2));
   }, [mainCalcSG, mainCalcVol]);
-  const nuteInfoObj = nuteInfo[1];
 
   const setVol = (e) => {
     setNuteInfo([
@@ -170,7 +176,6 @@ function NutrientCalc({
     ]);
     setMainCalcVol(e.target.value);
   };
-
   const setUnits = (e) => {
     setNuteInfo([
       selectedYeastObj,
@@ -183,7 +188,6 @@ function NutrientCalc({
     ]);
     setMainCalcUnits(e.target.value);
   };
-
   const setSg = (e) => {
     setNuteInfo([
       selectedYeastObj,
@@ -198,7 +202,6 @@ function NutrientCalc({
     setDisplayBrix(ogBrix(e.target.value).toFixed(2));
     setMainCalcSG(e.target.value);
   };
-
   const setOffset = (e) => {
     setNuteInfo([
       selectedYeastObj,
@@ -255,11 +258,9 @@ function NutrientCalc({
     calcPPM();
     determineYeastAmount();
   }, [nuteInfo, multiplier]);
-
   useEffect(() => {
     runToAddGpl();
   }, [targetYAN, gplInput, multiplier]);
-
   useEffect(
     () => {
       calcTotalGrams();
@@ -285,7 +286,6 @@ function NutrientCalc({
 
   const [additions, setAdditions] = useState(1);
   const [amountPerAddition, setAmountPerAddition] = useState([...gramsToAdd]);
-
   useEffect(() => {
     const perAdd = gramsToAdd.map((gram) => {
       return gram / additions;

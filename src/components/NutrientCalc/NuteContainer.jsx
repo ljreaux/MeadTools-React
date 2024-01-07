@@ -1,6 +1,7 @@
 import { useState } from "react";
 import NutrientCalc from "./NutrientCalc";
 
+// this container exists to remove errors caused by not having input from mainCalc
 export default function NuteContainer() {
   const [dummyVol, setDummyVol] = useState(1);
   const [dummySG, setDummySG] = useState(1);

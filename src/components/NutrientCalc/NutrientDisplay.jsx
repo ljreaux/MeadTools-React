@@ -148,4 +148,5 @@ function NutrientDisplay({
     </div>
   );
 }
+
 export default NutrientDisplay;
