@@ -155,7 +155,7 @@ function NutrientCalc({
     setNuteInfo([
       selectedYeastObj,
       {
-        units: "gal",
+        units: mainCalcUnits,
         vol: mainCalcVol,
         sg: mainCalcSG,
         offset: mainCalcOffset,
