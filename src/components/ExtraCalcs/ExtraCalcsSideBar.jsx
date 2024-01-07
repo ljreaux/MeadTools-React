@@ -14,7 +14,7 @@ import Logos from "./Logos";
 function ExtraCalcsSideBar() {
   return (
     <div
-      className="fixed max-h-max sm:w-12 w-fit sm:left-2 sm:right-0 sm:top-2/4 bottom-0 sm:-translate-y-2/4 
+      className="fixed sm:w-12 w-fit sm:left-2 sm:right-0 sm:top-2/4 bottom-0 sm:-translate-y-2/4 
     text-4xl bg-sidebar border-2 border-s-textColor rounded-full"
     >
       <nav className="flex  sm:flex-col text-center space-y-2 mx-1">
