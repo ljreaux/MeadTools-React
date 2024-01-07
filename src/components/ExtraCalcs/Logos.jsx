@@ -1,10 +1,10 @@
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function Logos({ logo, link, calc }) {
   return (
     <div className="flex items-center group">
-      <div className="navlogo inline-block bg-background rounded-full hover:text-background hover:bg-textColor transition-colors">
-        <NavLink to={link}>{logo}</NavLink>
+      <div className="navlogo bg-background rounded-full hover:text-background hover:bg-textColor transition-colors">
+        <Link to={link}>{logo}</Link>
       </div>
       <span
         className="sm:inline-block sm:whitespace-nowrap sm:min-w-fit sm:mx-2 sm:px-4 sm:py-2 
