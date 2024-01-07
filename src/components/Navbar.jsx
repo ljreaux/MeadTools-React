@@ -1,7 +1,7 @@
 import { NavLink, Link } from "react-router-dom";
 import { FaGithub } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
-import logo from "../assets/ljreaux-01.png";
+import logo from "../assets/full-logo.png";
 import logoOnly from "../assets/logoOnly.png";
 function Navbar() {
   return (
