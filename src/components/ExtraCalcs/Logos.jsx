@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 function Logos({ logo, link, calc }) {
   return (
     <div className="flex items-center group">
-      <div className="navlogo bg-background rounded-full hover:text-background hover:bg-textColor transition-colors">
+      <div className="navlogo justify-center bg-background rounded-full hover:text-background hover:bg-textColor transition-colors mx-[.25rem] sm:mx-0">
         <Link to={link}>{logo}</Link>
       </div>
       <span
