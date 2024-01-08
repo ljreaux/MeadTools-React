@@ -8,9 +8,11 @@ const ContactUs = () => {
   const form = useRef();
   const [status, setStatus] = useState("");
   const [disabled, setDisabled] = useState(false);
+  const [messageColor, setMessageColor] = useState("green");
 
   const sendEmail = (e) => {
     e.preventDefault();
+    setDisabled(true);
 
     emailjs
       .sendForm(
@@ -23,12 +25,15 @@ const ContactUs = () => {
         (result) => {
           console.log(result.text);
           e.target.reset();
+          setMessageColor("green");
           setStatus("Your message was successfully sent!");
-          setDisabled(true);
+          setDisabled(false);
         },
         (error) => {
           console.log(error.text);
-          setStatus(`Error: ${error.text}`);
+          setMessageColor("red");
+          setStatus(`Something went wrong`);
+          setDisabled(false);
         }
       );
   };
@@ -67,7 +72,7 @@ const ContactUs = () => {
             disabled={disabled}
           />
         </form>
-        <h1>{status}</h1>
+        <h1 className={`text-${messageColor}-500`}>{status}</h1>
       </div>
     </div>
   );
