@@ -12,9 +12,9 @@
   /* light theme colors */
   @media (prefers-color-scheme: light) {
     :root {
-      --color-background: 36deg, 16%, 82%;
+      --color-background: 0deg, 0%, 100%;
       --color-textColor: 0deg, 0%, 14%;
-      --color-sidebar: 35deg, 90%, 42%;
+      --color-sidebar: 38deg, 54%, 56%;
     }
   }
 }

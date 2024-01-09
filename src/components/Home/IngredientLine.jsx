@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 
 // wil likely refactor and add both json files into API
 import fermentables from "/src/fermentables.json";
+import IngredientOptions from "./IngredientOptions";
+import FilteredIngredients from "./FilteredIngredients";
 
 function IngredientLine({
   optionValue,
@@ -141,20 +143,19 @@ function IngredientLine({
     <div
       className={`col-start-1 col-span-4 grid grid-cols-4 place-items-center text-center ${hidden} w-full`}
     >
-      <select className="input w-11/12 my-4 " onChange={ingredientChange}>
-        {optionValue ? (
-          <option value={optionValue}>{optionValue}</option>
-        ) : null}
-        {ingredients
-          ? ingredients.ingredients.map((ingredient) => {
-              return (
-                <option key={ingredient.name} value={ingredient.name}>
-                  {ingredient.name}
-                </option>
-              );
-            })
-          : null}
-      </select>
+      {optionValue == "liquid" ? (
+        <FilteredIngredients
+          ingredientChange={ingredientChange}
+          ingredients={ingredients}
+        />
+      ) : (
+        <IngredientOptions
+          ingredientChange={ingredientChange}
+          ingredients={ingredients}
+        />
+      )}
+      {/* */}
+
       <input
         className="input w-2/4 my-4"
         value={weight.weight}

@@ -207,7 +207,11 @@ function Home() {
           className="grid grid-cols-4 place-items-center text-center"
           id="recipeBuilder"
         >
-          <h2>Ingredient</h2>
+          {/* <h2>Liquid Ingredients</h2>
+          <h2>Weight</h2>
+          <h2>Brix</h2>
+          <h2>Volume</h2> */}
+          <h2>Ingredients</h2>
           <span>
             <h2>Amount to Add in</h2>
             <select
@@ -233,7 +237,25 @@ function Home() {
               <option value="gal">Gallons</option>
               <option value="liter">Liters</option>
             </select>
-          </span>
+          </span>{" "}
+          <IngredientLine
+            volUnits={volUnits}
+            units={units}
+            optionValue={"liquid"}
+            defaultSugar={"0"}
+            storedInput={storedInput}
+            setStoredInput={setStoredInput}
+            inputNum="input11"
+          />
+          <IngredientLine
+            volUnits={volUnits}
+            units={units}
+            optionValue={"liquid"}
+            defaultSugar={"0"}
+            storedInput={storedInput}
+            setStoredInput={setStoredInput}
+            inputNum="input12"
+          />
           <IngredientLine
             volUnits={volUnits}
             units={units}
@@ -250,7 +272,6 @@ function Home() {
             setStoredInput={setStoredInput}
             inputNum="input2"
           />
-
           {/* new lines added when button is pushed */}
           <NewLines
             volUnits={volUnits}
@@ -259,7 +280,6 @@ function Home() {
             storedInput={storedInput}
             setStoredInput={setStoredInput}
           />
-
           {/* checks row count and displays when max rows is reached */}
           {rowCount <= 8 ? (
             <h2 className="col-start-1 col-span-4 pt-4">
@@ -281,28 +301,6 @@ function Home() {
           >
             <MdExpandCircleDown className="group-hover:scale-125" />
           </button>
-          <h2>Ingredient</h2>
-          <h2>Weight</h2>
-          <h2>Brix</h2>
-          <h2>Volume</h2>
-          <IngredientLine
-            volUnits={volUnits}
-            units={units}
-            optionValue={"Water"}
-            defaultSugar={"0"}
-            storedInput={storedInput}
-            setStoredInput={setStoredInput}
-            inputNum="input11"
-          />
-          <IngredientLine
-            volUnits={volUnits}
-            units={units}
-            optionValue={"Juice"}
-            defaultSugar={12}
-            storedInput={storedInput}
-            setStoredInput={setStoredInput}
-            inputNum="input12"
-          />
           <button
             type="submit"
             className="btn col-span-4 mb-4"
