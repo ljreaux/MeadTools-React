@@ -19,10 +19,28 @@
       "category": "other"
     },
     {
+      "name": "Water",
+      "sugarContent": 0,
+      "waterContent": 100,
+      "category": "water"
+    }, 
+    {
+      "name": "Juice",
+      "sugarContent": 12,
+      "waterContent": 88,
+      "category": "juice"
+    },
+    {
       "name": "Apples",
       "sugarContent": 11.58,
       "waterContent": 84.6,
       "category": "fruit"
+    },
+    {
+      "name": "Apple Juice",
+      "sugarContent": 10.3,
+      "waterContent": 89.7,
+      "category": "juice"
     },
     {
       "name": "Apricot",
@@ -85,6 +103,12 @@
       "category": "fruit"
     },
     {
+      "name": "Cranberry Juice",
+      "sugarContent": 7.26,
+      "waterContent": 92.3,
+      "category": "fruit"
+    },
+    {
       "name": "Currant, Black",
       "sugarContent": 9.3,
       "waterContent": 82,
@@ -133,10 +157,28 @@
       "category": "fruit"
     },
     {
+      "name": "Grapefruit Juice",
+      "sugarContent": 7.59,
+      "waterContent": 90.1,
+      "category": "fruit"
+    },
+    {
       "name": "Grapes, Concord",
       "sugarContent": 8.89,
       "waterContent": 83,
       "category": "fruit"
+    },
+    {
+      "name": "Grape Juice, Purple",
+      "sugarContent": 15.6,
+      "waterContent": 83.7,
+      "category": "juice"
+    }, 
+     {
+      "name": "Grape Juice, White",
+      "sugarContent": 15.8,
+      "waterContent": 83.7,
+      "category": "juice"
     },
     {
       "name": "Guava",
@@ -305,6 +347,12 @@
       "sugarContent": 2.7,
       "waterContent": 94.33,
       "category": "vegetable"
+    },
+    {
+      "name": "Tomato Juice",
+      "sugarContent": 4.32,
+      "waterContent": 93.4,
+      "category": "juice"
     },
     {
       "name": "Watermelon",
