@@ -207,13 +207,9 @@ function Home() {
           className="grid grid-cols-4 place-items-center text-center"
           id="recipeBuilder"
         >
-          {/* <h2>Liquid Ingredients</h2>
-          <h2>Weight</h2>
-          <h2>Brix</h2>
-          <h2>Volume</h2> */}
           <h2>Ingredients</h2>
           <span>
-            <h2>Amount to Add in</h2>
+            <h2>Weight</h2>
             <select
               className="input w-11/12"
               onChange={(e) => {
@@ -226,7 +222,7 @@ function Home() {
           </span>
           <h2>Sugar Percentage (Brix)</h2>
           <span>
-            <h2>Total Volume</h2>
+            <h2>Volume</h2>
             <select
               className="input w-11/12"
               onChange={(e) => {
