@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import Title from "../Title";
 import IngredientLine from "./IngredientLine";
 import NewLines from "./NewLines";
-import { MdExpandCircleDown } from "react-icons/md";
+import { FaPlusSquare } from "react-icons/fa";
 import NutrientCalc from "../NutrientCalc/NutrientCalc";
 import Stabilizers from "./Stabilizers";
 
@@ -295,7 +295,7 @@ function Home() {
             // disabled when 10 rows are reached
             disabled={rowCount >= 9}
           >
-            <MdExpandCircleDown className="group-hover:scale-125" />
+            <FaPlusSquare className="group-hover:scale-125" />
           </button>
           <button
             type="submit"
