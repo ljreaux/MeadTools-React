@@ -200,7 +200,7 @@ function About() {
           </ol>
           <div className="text-center text-2xl py-12">
             <p>
-              To the entire mead making community, or all of the help,
+              To the entire mead making community, for all of the help,
               inspiration, and knowledge I have gained over the past 4 years
             </p>
             <p className="text-4xl py-[3rem]">Thank you</p>
