@@ -5,84 +5,136 @@ import Title from "../Title";
 import IngredientLine from "./IngredientLine";
 import NewLines from "./NewLines";
 import { FaPlusSquare } from "react-icons/fa";
+import { MdPictureAsPdf } from "react-icons/md";
 import NutrientCalc from "../NutrientCalc/NutrientCalc";
 import Stabilizers from "./Stabilizers";
 import PDF from "../PDF";
+import Additives from "../Additives";
 
 function Home() {
+  const [preferred, setPreferred] = useState("TBE (All Three)");
+  const [gfType, setGFType] = useState("go-ferm");
+  const [goFermGrams, setGoFermGrams] = useState(0);
+  const [goFermWater, setGoFermWater] = useState(0);
+  const [remainingYan, setRemainingYan] = useState(0);
+  const [mainCalcNuteInfo, setMainCalcNuteInfo] = useState({
+    totalGrams: [0, 0, 0],
+    perAdd: [0, 0, 0],
+    addNum: 1,
+  });
   // stores input from all ingredient lines for final calcs
   const [storedInput, setStoredInput] = useState({
     input1: {
+      name: "Honey",
       weight: 0,
       brix: 79.6,
       volume: 0,
       cat: "sugar",
     },
     input2: {
+      name: "Honey",
       weight: 0,
       brix: 79.6,
       volume: 0,
       cat: "sugar",
     },
     input3: {
+      name: "Honey",
       weight: 0,
       brix: 79.6,
       volume: 0,
       cat: "sugar",
     },
     input4: {
+      name: "Honey",
       weight: 0,
       brix: 79.6,
       volume: 0,
       cat: "sugar",
     },
     input5: {
+      name: "Honey",
       weight: 0,
       brix: 79.6,
       volume: 0,
       cat: "sugar",
     },
     input6: {
+      name: "Honey",
       weight: 0,
       brix: 79.6,
       volume: 0,
       cat: "sugar",
     },
     input7: {
+      name: "Honey",
       weight: 0,
       brix: 79.6,
       volume: 0,
       cat: "sugar",
     },
     input8: {
+      name: "Honey",
       weight: 0,
       brix: 79.6,
       volume: 0,
       cat: "sugar",
     },
     input9: {
+      name: "Honey",
       weight: 0,
       brix: 79.6,
       volume: 0,
       cat: "sugar",
     },
     input10: {
+      name: "Honey",
       weight: 0,
       brix: 79.6,
       volume: 0,
       cat: "sugar",
     },
     input11: {
+      name: "Water",
       weight: 0,
       brix: 79.6,
       volume: 0,
       cat: "sugar",
     },
     input12: {
+      name: "Water",
       weight: 0,
       brix: 79.6,
       volume: 0,
       cat: "sugar",
+    },
+  });
+
+  const [extraIngredients, setExtraIngredients] = useState({
+    input1: {
+      name: "",
+      amount: 0,
+      units: "g",
+    },
+    input2: {
+      name: "",
+      amount: 0,
+      units: "g",
+    },
+    input3: {
+      name: "",
+      amount: 0,
+      units: "g",
+    },
+    input4: {
+      name: "",
+      amount: 0,
+      units: "g",
+    },
+    input5: {
+      name: "",
+      amount: 0,
+      units: "g",
     },
   });
 
@@ -99,6 +151,8 @@ function Home() {
   const [FG, setFG] = useState(0.996);
   const [abv, setAbv] = useState(0);
   const [delle, setDelle] = useState(0);
+  const [sorbAmount, setSorbAmount] = useState("");
+  const [sulfiteAmount, setSulfiteAmount] = useState("");
 
   const abvCalc = (OG, FG) => {
     const OE = -668.962 + 1262.45 * OG - 776.43 * OG ** 2 + 182.94 * OG ** 3;
@@ -122,13 +176,14 @@ function Home() {
   const [mainCalcSG, setMainCalcSG] = useState(0);
   const [mainCalcOffset, setMainCalcOffset] = useState(0);
   const [mainCalcUnits, setMainCalcUnits] = useState("gal");
+  const [mainCalcSugarBreak, setMainCalcSugarBreak] = useState(1);
   const [mainCalcYeastInfo, setMainCalcYeastInfo] = useState([
     {
       name: "18-2007",
       "Nitrogen Requirement": "Low",
       "ABV Tolerance": 15,
       LowTemp: 50,
-      "High Temp": 90,
+      HighTemp: 90,
     },
   ]);
 
@@ -256,6 +311,7 @@ function Home() {
             storedInput={storedInput}
             setStoredInput={setStoredInput}
             inputNum="input11"
+            initialIngredient={"Water"}
           />
           <IngredientLine
             volUnits={volUnits}
@@ -265,6 +321,7 @@ function Home() {
             storedInput={storedInput}
             setStoredInput={setStoredInput}
             inputNum="input12"
+            initialIngredient={"Water"}
           />
           <IngredientLine
             volUnits={volUnits}
@@ -273,6 +330,7 @@ function Home() {
             storedInput={storedInput}
             setStoredInput={setStoredInput}
             inputNum="input1"
+            initialIngredient={"Honey"}
           />
           <IngredientLine
             volUnits={volUnits}
@@ -281,6 +339,7 @@ function Home() {
             storedInput={storedInput}
             setStoredInput={setStoredInput}
             inputNum="input2"
+            initialIngredient={"Honey"}
           />
           {/* new lines added when button is pushed */}
           <NewLines
@@ -356,8 +415,20 @@ function Home() {
           setMainCalcOffset={setMainCalcOffset}
           mainCalcUnits={mainCalcUnits}
           setMainCalcUnits={setMainCalcUnits}
+          mainCalcYeastInfo={mainCalcYeastInfo}
           setMainCalcYeastInfo={setMainCalcYeastInfo}
+          setMainCalcSugarBreak={setMainCalcSugarBreak}
           displayMainResults={displayMainResults}
+          setMainCalcNuteInfo={setMainCalcNuteInfo}
+          remainingYan={remainingYan}
+          setRemainingYan={setRemainingYan}
+          gfType={gfType}
+          setGFType={setGFType}
+          goFermGrams={goFermGrams}
+          setGoFermGrams={setGoFermGrams}
+          goFermWater={goFermWater}
+          setGoFermWater={setGoFermWater}
+          setPreferred={setPreferred}
         ></NutrientCalc>
       </div>
       <div className="w-full h-full flex flex-col items-center">
@@ -365,11 +436,21 @@ function Home() {
           volUnits={volUnits}
           abv={abv}
           totalVolume={totalVolume}
+          sorbAmount={sorbAmount}
+          setSorbAmount={setSorbAmount}
+          sulfiteAmount={sulfiteAmount}
+          setSulfiteAmount={setSulfiteAmount}
         ></Stabilizers>
+        <Additives
+          extraIngredients={extraIngredients}
+          setExtraIngredients={setExtraIngredients}
+        ></Additives>
         <div className="flex flex-col justify-center">
           <ReactToPrint
             trigger={() => (
-              <button className="btn mb-[4rem]">Save Your Recipe PDF</button>
+              <button className="btn my-[4rem] hover:border-textColor flex flex-col text-center justify-center items-center">
+                Get Recipe <MdPictureAsPdf />
+              </button>
             )}
             content={() => componentRef.current}
           />
@@ -378,13 +459,25 @@ function Home() {
               ref={componentRef}
               totalVolume={totalVolume}
               volUnits={volUnits}
+              units={units}
               OG={OG}
               FG={FG}
               abv={abv}
               delle={delle}
               OGBrix={toBrix(OG)}
               FGBrix={toBrix(FG)}
-              yeastObj={mainCalcYeastInfo[0]}
+              yeastObj={mainCalcYeastInfo}
+              mainCalcSugarBreak={mainCalcSugarBreak}
+              sorbAmount={sorbAmount}
+              sulfiteAmount={sulfiteAmount}
+              mainCalcNuteInfo={mainCalcNuteInfo}
+              remainingYan={remainingYan}
+              gfType={gfType}
+              goFermGrams={goFermGrams}
+              goFermWater={goFermWater}
+              preferred={preferred}
+              storedInput={storedInput}
+              extraIngredients={extraIngredients}
             />
           </div>
         </div>

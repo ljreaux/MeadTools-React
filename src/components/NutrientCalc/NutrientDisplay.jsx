@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import RemainingYan from "./RemainingYan";
 
 function NutrientDisplay({
   targetYAN,
@@ -11,10 +12,15 @@ function NutrientDisplay({
   setMultiplier,
   yeastAmount,
   oneThirdBreak,
+  remainingYan,
+  setRemainingYan,
+  gfType,
+  setGFType,
+  goFermGrams,
+  setGoFermGrams,
+  goFermWater,
+  setGoFermWater,
 }) {
-  const [gfType, setGFType] = useState("go-ferm");
-  const [goFermGrams, setGoFermGrams] = useState(0);
-  const [goFermWater, setGoFermWater] = useState(0);
   useEffect(() => {
     goFerm();
   }, [gfType, yeastAmount]);
@@ -136,14 +142,12 @@ function NutrientDisplay({
         <h2 className="col-start-2 my-2">Total YAN</h2>
         <h2 className="col-start-4 col-span-2 my-2">Remaining YAN</h2>
         <p className="text-base col-start-2 my-2">{targetYAN + "PPM"}</p>
-        <p className="text-base col-start-4 col-span-2 my-2">
-          {addedYan[0] + addedYan[1] + addedYan[2] >= targetYAN
-            ? "O PPM"
-            : `${(
-                targetYAN -
-                (addedYan[0] + addedYan[1] + addedYan[2])
-              ).toFixed(2)} PPM`}
-        </p>
+        <RemainingYan
+          addedYan={addedYan}
+          targetYAN={targetYAN}
+          setRemainingYan={setRemainingYan}
+          remainingYan={remainingYan}
+        />
       </div>
     </div>
   );

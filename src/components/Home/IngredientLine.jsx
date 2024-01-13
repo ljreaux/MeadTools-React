@@ -13,6 +13,7 @@ function IngredientLine({
   hidden,
   setStoredInput,
   inputNum,
+  initialIngredient,
 }) {
   // sets ingredient select
   const [ingredients, setIngredients] = useState();
@@ -28,6 +29,7 @@ function IngredientLine({
   // stores selected ingredients
   const [ingredientDetails, setIngredientDetails] = useState();
   const [ingredientCat, setIngredientCat] = useState("sugar");
+  const [ingredientName, setIngredientName] = useState(initialIngredient);
 
   // handles ingredient changes
   function ingredientChange(e) {
@@ -45,6 +47,9 @@ function IngredientLine({
       : "";
     ingredientDetails && ingredientDetails[0]
       ? setIngredientCat(ingredientDetails[0].category)
+      : "";
+    ingredientDetails && ingredientDetails[0]
+      ? setIngredientName(ingredientDetails[0].name)
       : "";
   }, [ingredientDetails]);
   useEffect(() => {}, [brix]);
@@ -130,6 +135,7 @@ function IngredientLine({
       return {
         ...prev,
         [inputNum]: {
+          name: ingredientName,
           weight: weight.weight,
           brix: brix,
           volume: volume.vol,
