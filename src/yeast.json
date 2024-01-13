@@ -684,13 +684,6 @@
       "HighTemp": 86
     },
     {
-      "name": "Premier Blanc",
-      "Nitrogen Requirement": "Low",
-      "ABV Tolerance": 18,
-      "LowTemp": 59,
-      "HighTemp": 86
-    },
-    {
       "name": "Premier Classique",
       "Nitrogen Requirement": "Low",
       "ABV Tolerance": 13,
@@ -714,25 +707,11 @@
   ],
   "Other": [
     {
-      "name": "Generic Beer Yeast",
-      "Nitrogen Requirement": "Medium",
+      "name": "Other Low N Yeast",
+      "Nitrogen Requirement": "Low",
       "ABV Tolerance": 12,
       "LowTemp": 50,
       "HighTemp": 65
-    },
-    {
-      "name": "Kveik Yeast",
-      "Nitrogen Requirement": "Very High",
-      "ABV Tolerance": 12,
-      "LowTemp": 70,
-      "HighTemp": 100
-    },
-    {
-      "name": "Other High N Yeast",
-      "Nitrogen Requirement": "High",
-      "ABV Tolerance": 12,
-      "LowTemp": 55,
-      "HighTemp": 70
     },
     {
       "name": "Other Medium N Yeast",
@@ -742,11 +721,25 @@
       "HighTemp": 70
     },
     {
-      "name": "Other Low N Yeast",
-      "Nitrogen Requirement": "Low",
+      "name": "Other High N Yeast",
+      "Nitrogen Requirement": "High",
       "ABV Tolerance": 12,
       "LowTemp": 55,
       "HighTemp": 70
+    },
+   {
+      "name": "Generic Beer Yeast",
+      "Nitrogen Requirement": "Medium",
+      "ABV Tolerance": 12,
+      "LowTemp": 55,
+      "HighTemp": 70
+    },
+    {
+      "name": "Kveik Yeast",
+      "Nitrogen Requirement": "Very High",
+      "ABV Tolerance": 12,
+      "LowTemp": 70,
+      "HighTemp": 100
     }
   ]
 }
