@@ -5,6 +5,7 @@ import Title from "../Title";
 import IngredientLine from "./IngredientLine";
 import NewLines from "./NewLines";
 import { FaPlusSquare } from "react-icons/fa";
+import { MdPictureAsPdf } from "react-icons/md";
 import NutrientCalc from "../NutrientCalc/NutrientCalc";
 import Stabilizers from "./Stabilizers";
 import PDF from "../PDF";
@@ -106,6 +107,34 @@ function Home() {
       brix: 79.6,
       volume: 0,
       cat: "sugar",
+    },
+  });
+
+  const [extraIngredients, setExtraIngredients] = useState({
+    input1: {
+      name: "",
+      amount: 0,
+      units: "g",
+    },
+    input2: {
+      name: "",
+      amount: 0,
+      units: "g",
+    },
+    input3: {
+      name: "",
+      amount: 0,
+      units: "g",
+    },
+    input4: {
+      name: "",
+      amount: 0,
+      units: "g",
+    },
+    input5: {
+      name: "",
+      amount: 0,
+      units: "g",
     },
   });
 
@@ -232,10 +261,6 @@ function Home() {
     setMainCalcVol(totalVolume);
     setMainCalcSG((OG - FG + 1).toFixed(3));
   }, [totalVolume, OG, FG]);
-
-  useEffect(() => {
-    console.log(storedInput);
-  }, [storedInput]);
 
   const componentRef = useRef();
 
@@ -416,11 +441,16 @@ function Home() {
           sulfiteAmount={sulfiteAmount}
           setSulfiteAmount={setSulfiteAmount}
         ></Stabilizers>
-        <Additives></Additives>
+        <Additives
+          extraIngredients={extraIngredients}
+          setExtraIngredients={setExtraIngredients}
+        ></Additives>
         <div className="flex flex-col justify-center">
           <ReactToPrint
             trigger={() => (
-              <button className="btn mb-[4rem]">Save Your Recipe PDF</button>
+              <button className="btn my-[4rem] hover:border-textColor flex flex-col text-center justify-center items-center">
+                Get Recipe <MdPictureAsPdf />
+              </button>
             )}
             content={() => componentRef.current}
           />
@@ -447,6 +477,7 @@ function Home() {
               goFermWater={goFermWater}
               preferred={preferred}
               storedInput={storedInput}
+              extraIngredients={extraIngredients}
             />
           </div>
         </div>

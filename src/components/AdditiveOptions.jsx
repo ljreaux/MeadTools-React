@@ -1,4 +1,4 @@
-export default function AdditiveOptions() {
+export default function AdditiveOptions({ additiveName, setAdditiveName }) {
   return (
     <div>
       <label htmlFor="additionalIngredients"></label>
@@ -7,6 +7,10 @@ export default function AdditiveOptions() {
         type="text"
         list="additives"
         id="additionalIngredients"
+        value={additiveName}
+        onChange={(e) => {
+          setAdditiveName(e.target.value);
+        }}
       />
       <datalist id="additives">
         <option value="Red Wine Tannin"></option>

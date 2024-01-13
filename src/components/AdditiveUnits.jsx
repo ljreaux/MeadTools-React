@@ -1,8 +1,16 @@
-export default function AdditiveUnits() {
+export default function AdditiveUnits({ additiveUnits, setAdditiveUnits }) {
   return (
     <div>
       <label htmlFor="addUnits"></label>
-      <select className="input" name="units" id="addUnits">
+      <select
+        className="input"
+        name="units"
+        id="addUnits"
+        value={additiveUnits}
+        onChange={(e) => {
+          setAdditiveUnits(e.target.value);
+        }}
+      >
         <option value="g">g</option>
         <option value="kg">kg</option>
         <option value="oz">oz</option>

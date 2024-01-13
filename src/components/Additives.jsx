@@ -3,7 +3,7 @@ import { useState } from "react";
 import NewAddLines from "./NewAddLines";
 import { FaPlusSquare } from "react-icons/fa";
 
-export default function Additives() {
+export default function Additives({ setExtraIngredients, inputNum }) {
   const [addRowCount, setAddRowCount] = useState(0);
   return (
     <div className="component-div">
@@ -14,8 +14,15 @@ export default function Additives() {
         <h3>Additional </h3>
         <h3>Amount</h3>
         <h3>Units</h3>
-        <AdditiveLine />
-        <NewAddLines addRowCount={addRowCount} />
+        <AdditiveLine
+          inputNum={"input1"}
+          setExtraIngredients={setExtraIngredients}
+        />
+        <NewAddLines
+          addRowCount={addRowCount}
+          setExtraIngredients={setExtraIngredients}
+          inputNum={inputNum}
+        />
         <div className="col-span-3 w-full flex items-center justify-center text-center">
           <button
             type="button"

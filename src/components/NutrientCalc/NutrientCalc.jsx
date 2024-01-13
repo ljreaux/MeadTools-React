@@ -342,10 +342,6 @@ function NutrientCalc({
   }, [yeastAmount]);
 
   useEffect(() => {
-    console.log(mainCalcYeastInfo);
-  }, [mainCalcYeastInfo]);
-
-  useEffect(() => {
     setMainCalcNuteInfo({
       totalGrams: [...gramsToAdd],
       perAdd: [...amountPerAddition],
