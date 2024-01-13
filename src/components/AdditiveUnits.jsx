@@ -22,6 +22,7 @@ export default function AdditiveUnits({ additiveUnits, setAdditiveUnits }) {
         <option value="gal">gal</option>
         <option value="tsp">tsp</option>
         <option value="tbsp">tbsp</option>
+        <option value="units"></option>
       </select>
     </div>
   );

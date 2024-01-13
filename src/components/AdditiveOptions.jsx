@@ -27,6 +27,11 @@ export default function AdditiveOptions({ additiveName, setAdditiveName }) {
         <option value="Chitosan"></option>
         <option value="Kieselsol"></option>
         <option value="Sparkolloid"></option>
+        <option value="Pectic Enzyme"></option>
+        <option value="Lallzyme EX-V"></option>
+        <option value="Oak Chips"></option>
+        <option value="Oak Spirals"></option>
+        <option value="Oak Cubes"></option>
         <option value="Potassium Carbonate"></option>
       </datalist>{" "}
     </div>
