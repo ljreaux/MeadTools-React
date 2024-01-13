@@ -6,6 +6,7 @@ import NuteContainer from "./components/NutrientCalc/NuteContainer";
 import ExtraCalcs from "./components/ExtraCalcs/ExtraCalcs";
 import About from "./components/About/About";
 import ContactUs from "./components/About/ContactUs";
+import PDF from "./components/PDF";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/ExtraCalcs/*" element={<ExtraCalcs />} />
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<ContactUs />} />
+        <Route path="/pdf" element={<PDF />} />
       </Routes>
       <Outlet />
     </>

@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
+import ReactToPrint from "react-to-print";
 
 import Title from "../Title";
 import IngredientLine from "./IngredientLine";
@@ -6,6 +7,7 @@ import NewLines from "./NewLines";
 import { FaPlusSquare } from "react-icons/fa";
 import NutrientCalc from "../NutrientCalc/NutrientCalc";
 import Stabilizers from "./Stabilizers";
+import PDF from "../PDF";
 
 function Home() {
   // stores input from all ingredient lines for final calcs
@@ -83,6 +85,7 @@ function Home() {
       cat: "sugar",
     },
   });
+
   //  used to reveal new ingredient lines
   const [displayMainResults, setDisplayMainResults] = useState(false);
   const [rowCount, setRowCount] = useState(0);
@@ -119,6 +122,15 @@ function Home() {
   const [mainCalcSG, setMainCalcSG] = useState(0);
   const [mainCalcOffset, setMainCalcOffset] = useState(0);
   const [mainCalcUnits, setMainCalcUnits] = useState("gal");
+  const [mainCalcYeastInfo, setMainCalcYeastInfo] = useState([
+    {
+      name: "18-2007",
+      "Nitrogen Requirement": "Low",
+      "ABV Tolerance": 15,
+      LowTemp: 50,
+      "High Temp": 90,
+    },
+  ]);
 
   // onSubmit function
   function totalVolumeFunc() {
@@ -194,6 +206,8 @@ function Home() {
     setMainCalcVol(totalVolume);
     setMainCalcSG((OG - FG + 1).toFixed(3));
   }, [totalVolume, OG, FG]);
+
+  const componentRef = useRef();
 
   return (
     <div className="max-h-screen flex items-center flex-col font-serif md:text-2xl lg:text-3xl text-textColor text-sm">
@@ -342,6 +356,7 @@ function Home() {
           setMainCalcOffset={setMainCalcOffset}
           mainCalcUnits={mainCalcUnits}
           setMainCalcUnits={setMainCalcUnits}
+          setMainCalcYeastInfo={setMainCalcYeastInfo}
           displayMainResults={displayMainResults}
         ></NutrientCalc>
       </div>
@@ -351,6 +366,28 @@ function Home() {
           abv={abv}
           totalVolume={totalVolume}
         ></Stabilizers>
+        <div className="flex flex-col justify-center">
+          <ReactToPrint
+            trigger={() => (
+              <button className="btn mb-[4rem]">Save Your Recipe PDF</button>
+            )}
+            content={() => componentRef.current}
+          />
+          <div className="hidden">
+            <PDF
+              ref={componentRef}
+              totalVolume={totalVolume}
+              volUnits={volUnits}
+              OG={OG}
+              FG={FG}
+              abv={abv}
+              delle={delle}
+              OGBrix={toBrix(OG)}
+              FGBrix={toBrix(FG)}
+              yeastObj={mainCalcYeastInfo[0]}
+            />
+          </div>
+        </div>
       </div>
     </div>
   );

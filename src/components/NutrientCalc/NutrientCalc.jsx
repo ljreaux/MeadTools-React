@@ -14,6 +14,7 @@ function NutrientCalc({
   mainCalcUnits,
   setMainCalcOffset,
   setMainCalcUnits,
+  setMainCalcYeastInfo,
   displayMainResults,
 }) {
   // object contains values for all nutrient regimens
@@ -117,7 +118,11 @@ function NutrientCalc({
   const selectedBrandObj = selectedBrand[0];
   const [selectedYeast, setSelectedYeast] = useState([
     {
+      name: "18-2007",
       "Nitrogen Requirement": "Low",
+      "ABV Tolerance": 15,
+      LowTemp: 50,
+      "High Temp": 90,
     },
   ]);
   const selectedYeastObj = selectedYeast[0];
@@ -311,6 +316,10 @@ function NutrientCalc({
       },
     ]);
   }, [mainCalcUnits]);
+
+  useEffect(() => {
+    setMainCalcYeastInfo(selectedYeast);
+  }, [selectedYeast, selectedBrand]);
 
   return (
     <div className="flex flex-col items-center font-serif text-textColor md:text-2xl lg:text-3xl text-xs mb-[2rem]">
