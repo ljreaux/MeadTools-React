@@ -1,8 +1,17 @@
 import { useEffect, useState } from "react";
 
 import Sorbate from "./Sorbate";
+import Sulfite from "./Sulfite";
 
-function Stabilizers({ volUnits, abv, totalVolume }) {
+function Stabilizers({
+  volUnits,
+  abv,
+  totalVolume,
+  sorbAmount,
+  setSorbAmount,
+  sulfiteAmount,
+  setSulfiteAmount,
+}) {
   // hides stabilizers
   const [using, setUsing] = useState(false);
 
@@ -74,7 +83,13 @@ function Stabilizers({ volUnits, abv, totalVolume }) {
         {using && (
           <>
             <h2 className="py-6 mx-2">Potassium Sorbate:</h2>
-            <Sorbate volUnits={volUnits} abv={abv} totalVolume={totalVolume} />
+            <Sorbate
+              volUnits={volUnits}
+              abv={abv}
+              totalVolume={totalVolume}
+              sorbAmount={sorbAmount}
+              setSorbAmount={setSorbAmount}
+            />
             {ph && (
               <input
                 className="input w-2/4 col-span-2"
@@ -83,11 +98,13 @@ function Stabilizers({ volUnits, abv, totalVolume }) {
               />
             )}
             <h2 className="py-6 mx-2">Potassium Metabisulfite:</h2>
-            <p className="py-4">
-              {volUnits == "gal"
-                ? `${((totalVolume * 3.785 * phReading) / 570).toFixed(3)}g`
-                : `${((totalVolume * phReading) / 570).toFixed(3)}g`}
-            </p>
+            <Sulfite
+              volUnits={volUnits}
+              totalVolume={totalVolume}
+              phReading={phReading}
+              sulfiteAmount={sulfiteAmount}
+              setSulfiteAmount={setSulfiteAmount}
+            />
           </>
         )}
       </div>

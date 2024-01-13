@@ -1,8 +1,12 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 
-export default function Sorbate({ volUnits, abv, totalVolume }) {
-  const [sorbAmount, setSorbAmount] = useState("");
-
+export default function Sorbate({
+  volUnits,
+  abv,
+  totalVolume,
+  sorbAmount,
+  setSorbAmount,
+}) {
   useEffect(() => {
     let vol = totalVolume;
     if (volUnits == "gal") {

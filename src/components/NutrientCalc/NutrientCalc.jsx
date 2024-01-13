@@ -14,8 +14,20 @@ function NutrientCalc({
   mainCalcUnits,
   setMainCalcOffset,
   setMainCalcUnits,
+  mainCalcYeastInfo,
   setMainCalcYeastInfo,
+  setMainCalcSugarBreak,
   displayMainResults,
+  setMainCalcNuteInfo,
+  remainingYan,
+  setRemainingYan,
+  gfType,
+  setGFType,
+  goFermGrams,
+  setGoFermGrams,
+  goFermWater,
+  setGoFermWater,
+  setPreferred,
 }) {
   // object contains values for all nutrient regimens
   const maxGpl = {
@@ -122,7 +134,7 @@ function NutrientCalc({
       "Nitrogen Requirement": "Low",
       "ABV Tolerance": 15,
       LowTemp: 50,
-      "High Temp": 90,
+      HighTemp: 90,
     },
   ]);
   const selectedYeastObj = selectedYeast[0];
@@ -321,6 +333,26 @@ function NutrientCalc({
     setMainCalcYeastInfo(selectedYeast);
   }, [selectedYeast, selectedBrand]);
 
+  useEffect(() => {
+    setMainCalcSugarBreak(oneThirdBreak);
+  }, [oneThirdBreak]);
+
+  useEffect(() => {
+    setMainCalcYeastInfo({ ...mainCalcYeastInfo, yeastAmount: yeastAmount });
+  }, [yeastAmount]);
+
+  useEffect(() => {
+    console.log(mainCalcYeastInfo);
+  }, [mainCalcYeastInfo]);
+
+  useEffect(() => {
+    setMainCalcNuteInfo({
+      totalGrams: [...gramsToAdd],
+      perAdd: [...amountPerAddition],
+      addNum: additions,
+    });
+  }, [gramsToAdd, amountPerAddition, additions]);
+
   return (
     <div className="flex flex-col items-center font-serif text-textColor md:text-2xl lg:text-3xl text-xs mb-[2rem]">
       <div className="component-div flex-row mt-12 mb-4">
@@ -354,6 +386,7 @@ function NutrientCalc({
                   selectedBrand: e.target.value,
                 },
               ]);
+              setSelectedYeast([yeastObj[e.target.value][0]]);
             }}
           >
             {Object.keys(yeastObj).map((item) => {
@@ -450,8 +483,7 @@ function NutrientCalc({
                   setGplInput(...[maxGpl[key]]);
                 }
               }
-              // checkFermOPPM();
-              // checkFermKPPM();
+              setPreferred(e.target.selectedOptions[0].innerText);
             }}
           >
             <option value="tbe">TBE (All Three)</option>
@@ -510,6 +542,14 @@ function NutrientCalc({
           setMultiplier={setMultiplier}
           yeastAmount={yeastAmount}
           oneThirdBreak={oneThirdBreak}
+          remainingYan={remainingYan}
+          setRemainingYan={setRemainingYan}
+          gfType={gfType}
+          setGFType={setGFType}
+          goFermGrams={goFermGrams}
+          setGoFermGrams={setGoFermGrams}
+          goFermWater={goFermWater}
+          setGoFermWater={setGoFermWater}
         />
       ) : (
         ""

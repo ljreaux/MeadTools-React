@@ -4,9 +4,31 @@ import { forwardRef } from "react";
 
 const PDF = forwardRef(
   (
-    { totalVolume, volUnits, OG, FG, OGBrix, FGBrix, abv, delle, yeastObj },
+    {
+      totalVolume,
+      volUnits,
+      units,
+      OG,
+      FG,
+      OGBrix,
+      FGBrix,
+      abv,
+      delle,
+      yeastObj,
+      mainCalcSugarBreak,
+      sorbAmount,
+      sulfiteAmount,
+      mainCalcNuteInfo,
+      remainingYan,
+      gfType,
+      goFermGrams,
+      goFermWater,
+      preferred,
+      storedInput,
+    },
     ref
   ) => {
+    const newYeastObj = yeastObj[0];
     return (
       <div ref={ref} className="page">
         <div className="header">
@@ -36,32 +58,64 @@ const PDF = forwardRef(
                 </tr>
                 <tr className="text-start">
                   <td>
-                    <p>1.</p>
+                    <p>
+                      {storedInput.input1.volume > 0
+                        ? `1.${storedInput.input1.name}`
+                        : "1."}
+                    </p>
                   </td>
                   <td>
-                    <p></p>
+                    <p>
+                      {storedInput.input1.volume > 0
+                        ? `${storedInput.input1.weight}${units}`
+                        : ""}
+                    </p>
                   </td>
                   <td>
-                    <p></p>
+                    <p>
+                      {storedInput.input11.volume > 0
+                        ? `${storedInput.input11.volume}${volUnits} ${storedInput.input11.name}`
+                        : ""}
+                    </p>
                   </td>
                 </tr>
                 <tr className="text-start">
                   <td>
-                    <p>2.</p>
+                    <p>
+                      {storedInput.input2.volume > 0
+                        ? `2.${storedInput.input2.name}`
+                        : "2."}
+                    </p>
                   </td>
                   <td>
-                    <p></p>
+                    <p>
+                      {storedInput.input2.volume > 0
+                        ? `${storedInput.input2.weight}${units}`
+                        : ""}
+                    </p>
                   </td>
                   <td>
-                    <p></p>
+                    <p>
+                      {storedInput.input12.volume > 0
+                        ? `${storedInput.input12.volume}${volUnits} ${storedInput.input12.name}`
+                        : ""}
+                    </p>
                   </td>
                 </tr>
                 <tr className="text-start">
                   <td>
-                    <p>3.</p>
+                    <p>
+                      {storedInput.input3.volume > 0
+                        ? `3.${storedInput.input3.name}`
+                        : "3."}
+                    </p>
                   </td>
                   <td>
-                    <p></p>
+                    <p>
+                      {storedInput.input3.volume > 0
+                        ? `${storedInput.input3.weight}${units}`
+                        : ""}
+                    </p>
                   </td>
                   <td className="no_border">
                     <p></p>
@@ -69,10 +123,18 @@ const PDF = forwardRef(
                 </tr>
                 <tr className="text-start">
                   <td>
-                    <p>4.</p>
+                    <p>
+                      {storedInput.input4.volume > 0
+                        ? `4.${storedInput.input4.name}`
+                        : "4."}
+                    </p>
                   </td>
                   <td>
-                    <p></p>
+                    <p>
+                      {storedInput.input4.volume > 0
+                        ? `${storedInput.input4.weight}${units}`
+                        : ""}
+                    </p>
                   </td>
                   <td className="no_border">
                     <p></p>
@@ -80,10 +142,18 @@ const PDF = forwardRef(
                 </tr>
                 <tr className="text-start">
                   <td>
-                    <p>5.</p>
+                    <p>
+                      {storedInput.input5.volume > 0
+                        ? `5.${storedInput.input5.name}`
+                        : "5."}
+                    </p>
                   </td>
                   <td>
-                    <p></p>
+                    <p>
+                      {storedInput.input5.volume > 0
+                        ? `${storedInput.input5.weight}${units}`
+                        : ""}
+                    </p>
                   </td>
                   <td className="no_border">
                     <p></p>
@@ -91,10 +161,18 @@ const PDF = forwardRef(
                 </tr>
                 <tr className="text-start">
                   <td>
-                    <p>6.</p>
+                    <p>
+                      {storedInput.input6.volume > 0
+                        ? `6.${storedInput.input6.name}`
+                        : "6."}
+                    </p>
                   </td>
                   <td>
-                    <p></p>
+                    <p>
+                      {storedInput.input6.volume > 0
+                        ? `${storedInput.input6.weight}${units}`
+                        : ""}
+                    </p>
                   </td>
                   <td className="no_border">
                     <p></p>
@@ -102,10 +180,18 @@ const PDF = forwardRef(
                 </tr>
                 <tr className="text-start">
                   <td>
-                    <p>7.</p>
+                    <p>
+                      {storedInput.input7.volume > 0
+                        ? `7.${storedInput.input7.name}`
+                        : "7."}
+                    </p>
                   </td>
                   <td>
-                    <p></p>
+                    <p>
+                      {storedInput.input7.volume > 0
+                        ? `${storedInput.input7.weight}${units}`
+                        : ""}
+                    </p>
                   </td>
                   <td className="no_border">
                     <p></p>
@@ -113,10 +199,18 @@ const PDF = forwardRef(
                 </tr>
                 <tr className="text-start">
                   <td>
-                    <p>8.</p>
+                    <p>
+                      {storedInput.input8.volume > 0
+                        ? `8.${storedInput.input8.name}`
+                        : "8."}
+                    </p>
                   </td>
                   <td>
-                    <p></p>
+                    <p>
+                      {storedInput.input8.volume > 0
+                        ? `${storedInput.input8.weight}${units}`
+                        : ""}
+                    </p>
                   </td>
                   <td className="no_border">
                     <p></p>
@@ -124,10 +218,18 @@ const PDF = forwardRef(
                 </tr>
                 <tr className="text-start">
                   <td>
-                    <p>9.</p>
+                    <p>
+                      {storedInput.input9.volume > 0
+                        ? `9.${storedInput.input9.name}`
+                        : "9."}
+                    </p>
                   </td>
                   <td>
-                    <p></p>
+                    <p>
+                      {storedInput.input9.volume > 0
+                        ? `${storedInput.input9.weight}${units}`
+                        : ""}
+                    </p>
                   </td>
                   <td className="no_border">
                     <p></p>
@@ -135,10 +237,18 @@ const PDF = forwardRef(
                 </tr>
                 <tr className="text-start">
                   <td>
-                    <p>10.</p>
+                    <p>
+                      {storedInput.input10.volume > 0
+                        ? `10.${storedInput.input10.name}`
+                        : "10."}
+                    </p>
                   </td>
                   <td>
-                    <p></p>
+                    <p>
+                      {storedInput.input10.volume > 0
+                        ? `${storedInput.input10.weight}${units}`
+                        : ""}
+                    </p>
                   </td>
                   <td className="no_border">
                     <p></p>
@@ -238,20 +348,28 @@ const PDF = forwardRef(
                   <td rowSpan="2">
                     {totalVolume && volUnits
                       ? `${totalVolume.toFixed(3)} ${volUnits}`
-                      : null}
+                      : ""}
                   </td>
-                  <td>{OG?.toFixed(3)}</td>
-                  <td>{FG?.toFixed(3)}</td>
-                  <td rowSpan="2">
-                    {yeastObj && yeastObj.name && `0g ${yeastObj.name}`}
+                  <td>{Number(OG)?.toFixed(3)}</td>
+                  <td>{Number(FG)?.toFixed(3)}</td>
+                  <td>
+                    {newYeastObj &&
+                      newYeastObj.name &&
+                      `${yeastObj.yeastAmount}g ${newYeastObj.name}`}
                   </td>
-                  <td>dummy sg</td>
+                  <td>{newYeastObj && `${newYeastObj["ABV Tolerance"]}%`}</td>
                   <td>{abv && `${Number(abv).toFixed(2)}% ABV`}</td>
                 </tr>
                 <tr>
                   <td>{OGBrix && `${OGBrix.toFixed(2)} Brix`}</td>
                   <td>{FGBrix && `${FGBrix.toFixed(2)} Brix`}</td>
-                  <td>brix</td>
+                  <td>
+                    {newYeastObj &&
+                      `Temp Range: ${newYeastObj.LowTemp}-${newYeastObj.HighTemp}°F`}
+                  </td>
+                  <td>
+                    {mainCalcSugarBreak && `1/3 SB: ${mainCalcSugarBreak}`}
+                  </td>
                   <td>{delle && `${Number(delle).toFixed(0)} Delle Units`}</td>
                 </tr>
               </table>
@@ -270,20 +388,40 @@ const PDF = forwardRef(
                     <th>Total:</th>
                   </tr>
                   <tr>
-                    <td>Tosna</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td>{preferred}</td>
+                    <td>{mainCalcNuteInfo.addNum}</td>
+                    <td>{`${Number(mainCalcNuteInfo.perAdd[0]).toFixed(
+                      3
+                    )}g Ferm O`}</td>
+                    <td>{`${Number(mainCalcNuteInfo.totalGrams[0]).toFixed(
+                      3
+                    )}g Ferm O`}</td>
                   </tr>
                   <tr>
-                    <td rowSpan="2">go-ferm</td>
+                    <td rowSpan="2">
+                      {gfType != "none"
+                        ? `${goFermGrams.toFixed(
+                            2
+                          )}g of ${gfType}; ${goFermWater.toFixed(
+                            2
+                          )}ml of water`
+                        : "No Go Ferm"}
+                    </td>
                     <td rowSpan="2">schedule</td>
-                    <td>test</td>
-                    <td></td>
+                    <td>{`${Number(mainCalcNuteInfo.perAdd[1]).toFixed(
+                      3
+                    )}g Ferm K`}</td>
+                    <td>{`${Number(mainCalcNuteInfo.totalGrams[1]).toFixed(
+                      3
+                    )}g Ferm K`}</td>
                   </tr>
                   <tr>
-                    <td>test</td>
-                    <td>test</td>
+                    <td>{`${Number(mainCalcNuteInfo.perAdd[2]).toFixed(
+                      3
+                    )}g DAP`}</td>
+                    <td>{`${Number(mainCalcNuteInfo.totalGrams[2]).toFixed(
+                      3
+                    )}g DAP`}</td>
                   </tr>
                   <tr>
                     <th colSpan="2">
@@ -294,9 +432,9 @@ const PDF = forwardRef(
                     </th>
                   </tr>
                   <tr>
-                    <td>k-sorb</td>
-                    <td>k-meta</td>
-                    <td colSpan="2">remaining</td>
+                    <td>{`Sorbate: ${sorbAmount}`}</td>
+                    <td>{`Metabisulfite: ${sulfiteAmount}`}</td>
+                    <td colSpan="2">{remainingYan}</td>
                   </tr>
                 </table>
               </div>
