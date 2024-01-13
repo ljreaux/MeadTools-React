@@ -1,5 +1,6 @@
 import { NavLink, Link } from "react-router-dom";
 import { FaGithub } from "react-icons/fa";
+import { FaDiscord } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 import logo from "../assets/full-logo.png";
 import logoOnly from "../assets/logoOnly.png";
@@ -94,6 +95,14 @@ function Navbar() {
               >
                 <FaGithub />
               </a>
+              <a
+                className="mx-0.5 hover:text-background md:hover:scale-105 transition-all"
+                href="https://discord.gg/8sycKxYF"
+                target="to_blank"
+              >
+                <FaDiscord />
+              </a>
+
               <Link
                 to="/contact"
                 className="hover:text-background md:hover:scale-105 transition-all"

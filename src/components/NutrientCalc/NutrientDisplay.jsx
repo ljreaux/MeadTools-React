@@ -27,8 +27,10 @@ function NutrientDisplay({
   function goFerm() {
     let multiplier = 0;
     let waterMultiplier = 20;
-    if (gfType != "none") {
+    if (gfType != "none" || gfType != "go-ferm-sterol") {
       multiplier = 1.25;
+    } else if (gfType == "go-ferm-sterol") {
+      multiplier = 1.2;
     } else {
       waterMultiplier *= 0;
     }
