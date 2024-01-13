@@ -3,7 +3,7 @@ export default function AdditiveUnits({ additiveUnits, setAdditiveUnits }) {
     <div>
       <label htmlFor="addUnits"></label>
       <select
-        className="input"
+        className="input w-2/4 my-4"
         name="units"
         id="addUnits"
         value={additiveUnits}

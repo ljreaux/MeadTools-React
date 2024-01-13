@@ -6,7 +6,7 @@ export default function AdditiveAmount({ additiveAmount, setAdditiveAmount }) {
         type="text"
         name="amount"
         id="amount"
-        className="input"
+        className="input w-2/4 my-4"
         value={additiveAmount}
         onChange={(e) => {
           setAdditiveAmount(e.target.value);

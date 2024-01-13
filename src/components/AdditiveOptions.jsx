@@ -3,7 +3,7 @@ export default function AdditiveOptions({ additiveName, setAdditiveName }) {
     <div>
       <label htmlFor="additionalIngredients"></label>
       <input
-        className="input"
+        className="input w-2/4 my-4"
         type="text"
         list="additives"
         id="additionalIngredients"
