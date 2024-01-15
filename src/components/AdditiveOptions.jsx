@@ -3,6 +3,7 @@ export default function AdditiveOptions({ additiveName, setAdditiveName }) {
     <div>
       <label htmlFor="additionalIngredients"></label>
       <input
+        onFocus={(e) => e.target.select()}
         className="input w-2/4 my-4"
         type="text"
         list="additives"

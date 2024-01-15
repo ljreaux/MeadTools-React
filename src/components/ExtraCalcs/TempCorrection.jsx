@@ -34,6 +34,7 @@ function TempCorrection({ toBrix, tempObj, handleTempSg, setTemp }) {
       <div className="text-center">
         <label>Current Temp: </label>
         <input
+          onFocus={(e) => e.target.select()}
           className="input w-1/4"
           defaultValue={tempObj.curTemp}
           onChange={(e) => {
@@ -68,6 +69,7 @@ function TempCorrection({ toBrix, tempObj, handleTempSg, setTemp }) {
       <div className="text-center">
         <label>Calibration Temp: </label>
         <input
+          onFocus={(e) => e.target.select()}
           className="input w-1/4"
           defaultValue={tempObj.calTemp}
           onChange={(e) => {

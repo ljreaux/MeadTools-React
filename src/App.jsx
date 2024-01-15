@@ -7,6 +7,7 @@ import ExtraCalcs from "./components/ExtraCalcs/ExtraCalcs";
 import About from "./components/About/About";
 import ContactUs from "./components/About/ContactUs";
 import PDF from "./components/PDF";
+import BottomBar from "./components/BottomBar";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route path="/contact" element={<ContactUs />} />
         <Route path="/pdf" element={<PDF />} />
       </Routes>
+      <BottomBar />
       <Outlet />
     </>
   );

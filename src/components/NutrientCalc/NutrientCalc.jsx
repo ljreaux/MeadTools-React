@@ -413,6 +413,7 @@ function NutrientCalc({
             })}
           </select>
           <input
+            onFocus={(e) => e.target.select()}
             required
             type="number"
             className="input w-2/4 my-2"
@@ -422,6 +423,7 @@ function NutrientCalc({
           />
           <span className="flex space-x-2 ">
             <input
+              onFocus={(e) => e.target.select()}
               required
               type="number"
               id="specificGravity"
@@ -434,6 +436,7 @@ function NutrientCalc({
             </p>
           </span>
           <input
+            onFocus={(e) => e.target.select()}
             required
             type="number"
             id="offsetPPM"
@@ -505,6 +508,7 @@ function NutrientCalc({
             <option value={4}>4</option>
           </select>
           <input
+            onFocus={(e) => e.target.select()}
             required
             type="number"
             value={yeastAmount ? yeastAmount : ""}

@@ -72,6 +72,7 @@ function NutrientDisplay({
         </span>
         <h2 className="my-2">Max g/L</h2>
         <input
+          onFocus={(e) => e.target.select()}
           type="number"
           id="fermogpl"
           className="input w-2/4 my-2"
@@ -81,6 +82,7 @@ function NutrientDisplay({
           }}
         />
         <input
+          onFocus={(e) => e.target.select()}
           type="number"
           id="fermkgpl"
           className="input w-2/4 my-2"
@@ -90,6 +92,7 @@ function NutrientDisplay({
           }}
         />
         <input
+          onFocus={(e) => e.target.select()}
           type="number"
           id="dapgpl"
           className="input w-2/4 my-2"

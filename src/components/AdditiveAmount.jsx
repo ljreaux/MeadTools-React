@@ -3,6 +3,7 @@ export default function AdditiveAmount({ additiveAmount, setAdditiveAmount }) {
     <div>
       <label htmlFor="amount"></label>
       <input
+        onFocus={(e) => e.target.select()}
         type="text"
         name="amount"
         id="amount"

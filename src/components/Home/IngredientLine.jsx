@@ -163,6 +163,7 @@ function IngredientLine({
       {/* */}
 
       <input
+        onFocus={(e) => e.target.select()}
         className="input w-2/4 my-4"
         value={weight.weight}
         onChange={(e) => {
@@ -174,6 +175,7 @@ function IngredientLine({
         }}
       />
       <input
+        onFocus={(e) => e.target.select()}
         className="input w-2/4 my-4"
         value={brix}
         onChange={(e) => {
@@ -181,6 +183,7 @@ function IngredientLine({
         }}
       />
       <input
+        onFocus={(e) => e.target.select()}
         className="input w-2/4 my-4"
         value={volume.vol}
         onChange={(e) => {

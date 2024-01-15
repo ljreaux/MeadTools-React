@@ -448,7 +448,7 @@ function Home() {
         <div className="flex flex-col justify-center">
           <ReactToPrint
             trigger={() => (
-              <button className="btn my-[4rem] hover:border-textColor flex flex-col text-center justify-center items-center">
+              <button className="btn my-[6rem] hover:border-textColor flex flex-col text-center justify-center items-center">
                 Get Recipe <MdPictureAsPdf />
               </button>
             )}

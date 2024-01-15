@@ -92,6 +92,7 @@ function Stabilizers({
             />
             {ph && (
               <input
+                onFocus={(e) => e.target.select()}
                 className="input w-2/4 col-span-2"
                 value={phInput}
                 onChange={(e) => setPhInput(e.target.value)}

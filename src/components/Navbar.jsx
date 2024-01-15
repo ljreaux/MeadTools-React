@@ -1,7 +1,4 @@
 import { NavLink, Link } from "react-router-dom";
-import { FaGithub } from "react-icons/fa";
-import { FaDiscord } from "react-icons/fa";
-import { MdEmail } from "react-icons/md";
 import logo from "../assets/full-logo.png";
 import logoOnly from "../assets/logoOnly.png";
 function Navbar() {
@@ -86,31 +83,6 @@ function Navbar() {
           >
             About
           </NavLink>
-          <span className="lg:text-3xl medium:text-xl absolute right-2 sm:bottom-[40%] bottom-2">
-            <div className="flex">
-              <a
-                className="mx-0.5 hover:text-background md:hover:scale-105 transition-all"
-                href="https://github.com/ljreaux/MeadTools-React/tree/main"
-                target="to_blank"
-              >
-                <FaGithub />
-              </a>
-              <a
-                className="mx-0.5 hover:text-background md:hover:scale-105 transition-all"
-                href="https://discord.gg/8sycKxYF"
-                target="to_blank"
-              >
-                <FaDiscord />
-              </a>
-
-              <Link
-                to="/contact"
-                className="hover:text-background md:hover:scale-105 transition-all"
-              >
-                <MdEmail />
-              </Link>
-            </div>
-          </span>
         </nav>
       </div>
     </div>

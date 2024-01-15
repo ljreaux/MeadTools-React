@@ -17,6 +17,7 @@ function SulfiteAddition() {
       <div className="text-center">
         <label>Batch Size: </label>
         <input
+          onFocus={(e) => e.target.select()}
           className="input"
           defaultValue={1}
           onChange={(e) => {
@@ -48,6 +49,7 @@ function SulfiteAddition() {
       </div>
       <label className="py-4">Desired PPM: </label>
       <input
+        onFocus={(e) => e.target.select()}
         className="input w-1/4"
         defaultValue={50}
         onChange={(e) => {
