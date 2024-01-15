@@ -33,6 +33,7 @@ function EstimatedOG({
       <div>
         <label>Enter Refractometer FG: </label>
         <input
+          type="number"
           onFocus={(e) => e.target.select()}
           className="input w=1/4"
           onChange={handleGravity}

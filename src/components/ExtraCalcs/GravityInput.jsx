@@ -13,6 +13,7 @@ function GravityInput({
         {labelText}
       </label>
       <input
+        type="number"
         onFocus={(e) => e.target.select()}
         className="input w-1/4"
         defaultValue={initial}

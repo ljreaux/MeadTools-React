@@ -50,14 +50,14 @@ const ContactUs = () => {
           <div>
             <label className="p-6">Name</label>
             <input
-              className="form-input"
+              className="form-input w-[20%]"
               type="text"
               name="user_name"
               required
             />
             <label className="p-6">Email</label>
             <input
-              className="form-input"
+              className="form-input w-[20%]"
               type="email"
               name="user_email"
               required

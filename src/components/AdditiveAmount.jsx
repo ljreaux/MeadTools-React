@@ -4,7 +4,7 @@ export default function AdditiveAmount({ additiveAmount, setAdditiveAmount }) {
       <label htmlFor="amount"></label>
       <input
         onFocus={(e) => e.target.select()}
-        type="text"
+        type="number"
         name="amount"
         id="amount"
         className="input w-2/4 my-4"

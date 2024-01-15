@@ -14,10 +14,10 @@ import Logos from "./Logos";
 function ExtraCalcsSideBar() {
   return (
     <div
-      className="fixed max-h-max sm:w-12 w-fit sm:left-2 sm:right-0 sm:top-2/4 bottom-0 sm:-translate-y-2/4 
-    text-4xl bg-sidebar border-2 border-s-textColor rounded-full"
+      className="fixed max-h-max sm:w-12 w-fit sm:left-2 sm:right-0 sm:top-2/4 bottom-[2.5rem] sm:-translate-y-2/4 
+    text-4xl bg-sidebar border-2 border-s-textColor rounded-full justify-center items-center"
     >
-      <nav className="flex  sm:flex-col justify-center text-center space-y-2 mx-1">
+      <nav className="flex  sm:flex-col justify-center items-centertext-center space-y-2 mx-1">
         <Logos link="/ExtraCalcs/" logo={<TbBeer />} calc="ABV" id="abvCalc" />
         <Logos
           link="/ExtraCalcs/brixCalc"

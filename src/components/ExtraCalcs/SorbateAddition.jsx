@@ -17,6 +17,7 @@ function SorbateAddition() {
       <div className="justify-center items-center text-center py-2">
         <label>Batch Size: </label>
         <input
+          type="number"
           onFocus={(e) => e.target.select()}
           className="input"
           defaultValue={1}
