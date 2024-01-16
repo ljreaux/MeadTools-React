@@ -51,8 +51,8 @@ const PDF = forwardRef(
         </div>
         <div className="flex flex-col items-center">
           <div className="body">
-            <p>Name: __________</p>
-            <p>Style: ___________</p>
+            <p>Name: ____________________</p>
+            <p>Style: _____________________</p>
             <p>Start Date: __________</p>
             <p>Secondary Date: _____</p>
           </div>
