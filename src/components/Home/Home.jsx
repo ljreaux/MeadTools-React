@@ -361,13 +361,13 @@ function Home() {
               Cannot add any more rows.
             </h2>
           )}
-          <div className="btn bg-background rounded-2xl px-2 py-[.25rem] col-span-4 items-center flex justify-center gap-8 my-8 w-1/4 group">
+          <div className="btn bg-background rounded-2xl px-2 py-[.25rem] col-span-4 items-center flex justify-center sm:gap-8 gap-4 my-8 w-1/4 group text-lg">
             <button
               type="button"
               onClick={() => {
                 setRowCount(rowCount + 1);
               }}
-              className={`group w-fit text-2xl text-sidebar hover:text-textColor transition-colors`}
+              className={`group w-fit text-sidebar hover:text-textColor transition-colors`}
               // disabled when 10 rows are reached
               disabled={rowCount >= 9}
             >
@@ -378,7 +378,7 @@ function Home() {
               onClick={() => {
                 if (rowCount > 0) setRowCount(rowCount - 1);
               }}
-              className={`group w-fit text-2xl text-sidebar hover:text-textColor transition-colors disabled:cursor-not-allowed`}
+              className={`group w-fit text-sidebar hover:text-textColor transition-colors disabled:cursor-not-allowed`}
               // disabled when 10 rows are reached
               disabled={rowCount <= 0}
             >
