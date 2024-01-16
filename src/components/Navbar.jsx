@@ -78,10 +78,16 @@ function Navbar() {
             </div>
           </div>
           <NavLink
-            className="hover:text-background transition-colors sm:mx-4 mx-1 pr-[3.5rem]"
+            className="hover:text-background transition-colors sm:mx-4 mx-1"
             to="/about"
           >
             About
+          </NavLink>
+          <NavLink
+            className="hover:text-background transition-colors sm:mx-4 mx-1"
+            to="/contact"
+          >
+            Contact
           </NavLink>
         </nav>
       </div>
