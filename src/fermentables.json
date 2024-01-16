@@ -23,7 +23,7 @@
       "sugarContent": 0,
       "waterContent": 100,
       "category": "water"
-    }, 
+    },
     {
       "name": "Juice",
       "sugarContent": 12,
@@ -173,8 +173,8 @@
       "sugarContent": 15.6,
       "waterContent": 83.7,
       "category": "juice"
-    }, 
-     {
+    },
+    {
       "name": "Grape Juice, White",
       "sugarContent": 15.8,
       "waterContent": 83.7,
@@ -245,6 +245,12 @@
       "sugarContent": 7.76,
       "waterContent": 87.6,
       "category": "fruit"
+    },
+    {
+      "name": "Onion",
+      "sugarContent": 5.82,
+      "waterContent": 90.1,
+      "category": "vegetable"
     },
     {
       "name": "Orange Juice",
