@@ -163,6 +163,7 @@ function IngredientLine({
       {/* */}
 
       <input
+        step="0.1"
         type="number"
         onFocus={(e) => e.target.select()}
         className="input w-2/4 my-4"
@@ -185,6 +186,7 @@ function IngredientLine({
         }}
       />
       <input
+        step="0.1"
         type="number"
         onFocus={(e) => e.target.select()}
         className="input w-2/4 my-4"

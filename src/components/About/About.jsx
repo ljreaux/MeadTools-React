@@ -16,10 +16,11 @@ function About() {
           <p className="text-center py-4">
             Below I have listed all of the resources that I used in the creation
             of MeadTools as well as additional mead making resources. I can’t
-            think my personal mead community enough for making this project
+            thank my personal mead community enough for making this project
             possible. I can be found on discord in the Doin’ the Most and Man
-            Made Mead Mazer servers. My user name is larry_r. I can also be
-            contacted through the link in the top right.
+            Made Mead Mazer servers. My user name is larry_r. There is also a
+            brand new MeadTools discord. I can be contacted through the contact
+            page, linked on the bottom bar directly at contact@meadtools.com.
           </p>
           <p className="text-center py-4">
             MeadTools is completely open source under a MIT license, so if you

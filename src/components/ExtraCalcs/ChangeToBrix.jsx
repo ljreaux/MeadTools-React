@@ -48,6 +48,7 @@ function ChangeToBrix({ toBrix }) {
       <div className="items-center justify-center text-center py-2">
         <label>Enter Gravity: </label>
         <input
+          step="0.01"
           type="number"
           onFocus={(e) => e.target.select()}
           className="input w-1/4"

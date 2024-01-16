@@ -391,6 +391,8 @@ function Home() {
               {isNaN(OG) || OG > 1.22 ? "Enter a valid input" : OG.toFixed(3)}
             </p>
             <input
+              step="0.001"
+              type="number"
               required
               className="input w-2/4"
               value={FG}

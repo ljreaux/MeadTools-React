@@ -42,6 +42,7 @@ function RefractCorrect({ toBrix, toSg, abvCalc }) {
       <div className="text-center">
         <label>Correction Factor: </label>
         <input
+          step="0.001"
           type="number"
           onFocus={(e) => e.target.select()}
           className="input"
@@ -61,6 +62,7 @@ function RefractCorrect({ toBrix, toSg, abvCalc }) {
       <div className="text-center">
         <label>Enter OG: </label>
         <input
+          step="0.001"
           type="number"
           onFocus={(e) => e.target.select()}
           className="input w-1/4"
@@ -102,6 +104,7 @@ function RefractCorrect({ toBrix, toSg, abvCalc }) {
       <div className="text-center">
         <label>Enter FG in Brix: </label>
         <input
+          step="0.001"
           type="number"
           onFocus={(e) => e.target.select()}
           className="input w-1/4"

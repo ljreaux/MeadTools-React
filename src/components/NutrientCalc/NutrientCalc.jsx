@@ -413,6 +413,7 @@ function NutrientCalc({
             })}
           </select>
           <input
+            step="0.1"
             onFocus={(e) => e.target.select()}
             required
             type="number"
@@ -423,6 +424,7 @@ function NutrientCalc({
           />
           <span className="flex space-x-2 ">
             <input
+              step="0.001"
               onFocus={(e) => e.target.select()}
               required
               type="number"
@@ -436,6 +438,7 @@ function NutrientCalc({
             </p>
           </span>
           <input
+            step="5"
             onFocus={(e) => e.target.select()}
             required
             type="number"
@@ -508,6 +511,7 @@ function NutrientCalc({
             <option value={4}>4</option>
           </select>
           <input
+            step="0.1"
             onFocus={(e) => e.target.select()}
             required
             type="number"
@@ -517,6 +521,9 @@ function NutrientCalc({
               setYeastAmount(e.target.value);
             }}
           />
+          <p className="col-span-5 text-center mt-8 -mb-4">
+            {!displayResults ? "Show More" : "Show Less"}
+          </p>
           <RevealButton
             setDisplayResults={setDisplayResults}
             displayResults={displayResults}
@@ -531,10 +538,8 @@ function NutrientCalc({
           gplInput={gplInput}
           setGplInput={setGplInput}
           ppmYanO={ppmYanO}
-          // checkFermOPPM={checkFermOPPM}
           ppmYanK={ppmYanK}
           ppmYanDap={ppmYanDap}
-          // checkFermKPPM={checkFermKPPM}
           addedYan={addedYan}
           gplToAdd={gplToAdd}
           gramsToAdd={gramsToAdd}
