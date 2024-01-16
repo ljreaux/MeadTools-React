@@ -5,6 +5,7 @@ import Title from "../Title";
 import IngredientLine from "./IngredientLine";
 import NewLines from "./NewLines";
 import { FaPlusSquare } from "react-icons/fa";
+import { FaMinusSquare } from "react-icons/fa";
 import { MdPictureAsPdf } from "react-icons/md";
 import NutrientCalc from "../NutrientCalc/NutrientCalc";
 import Stabilizers from "./Stabilizers";
@@ -323,6 +324,7 @@ function Home() {
             inputNum="input12"
             initialIngredient={"Water"}
           />
+          <div className="col-span-5 w-11/12 h-fit border-dotted border-b-[1px] border-textColor my-2"></div>
           <IngredientLine
             volUnits={volUnits}
             units={units}
@@ -359,17 +361,30 @@ function Home() {
               Cannot add any more rows.
             </h2>
           )}
-          <button
-            type="button"
-            onClick={() => {
-              setRowCount(rowCount + 1);
-            }}
-            className={`btn group w-1/4 col-span-4 flex flex-col items-center text-2xl text-sidebar hover:text-textColor my-8 transition-colors`}
-            // disabled when 10 rows are reached
-            disabled={rowCount >= 9}
-          >
-            <FaPlusSquare className="group-hover:scale-125" />
-          </button>
+          <div className="btn bg-background rounded-2xl px-2 py-[.25rem] col-span-4 items-center flex justify-center gap-8 my-8 w-1/4 group">
+            <button
+              type="button"
+              onClick={() => {
+                setRowCount(rowCount + 1);
+              }}
+              className={`group w-fit text-2xl text-sidebar hover:text-textColor transition-colors`}
+              // disabled when 10 rows are reached
+              disabled={rowCount >= 9}
+            >
+              <FaPlusSquare className="group-hover:scale-125 group-hover:text-textColor disabled:cursor-not-allowed" />
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                if (rowCount > 0) setRowCount(rowCount - 1);
+              }}
+              className={`group w-fit text-2xl text-sidebar hover:text-textColor transition-colors disabled:cursor-not-allowed`}
+              // disabled when 10 rows are reached
+              disabled={rowCount <= 0}
+            >
+              <FaMinusSquare className="group-hover:scale-125 group-hover:text-textColor" />
+            </button>
+          </div>
           <button
             type="submit"
             className="btn col-span-4 mb-4"
