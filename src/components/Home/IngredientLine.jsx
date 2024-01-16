@@ -88,12 +88,12 @@ function IngredientLine({
     if (volume.unit == "liter") {
       setVolume({
         unit: volUnits,
-        vol: (volume.vol / 3.87541).toFixed(3),
+        vol: (volume.vol / 3.78541).toFixed(3),
       });
     } else {
       setVolume({
         unit: volUnits,
-        vol: (volume.vol * 3.87541).toFixed(3),
+        vol: (volume.vol * 3.78541).toFixed(3),
       });
     }
   }, [volUnits]);
@@ -105,7 +105,7 @@ function IngredientLine({
       calcedWeight *= 2.20462;
     }
     if (volume.unit == "liter") {
-      calcedVol /= 3.87541;
+      calcedVol /= 3.78541;
     }
     const volOfIng = (calcedWeight / calcedVol / sg).toFixed(3);
     setVolume({
@@ -122,7 +122,7 @@ function IngredientLine({
       calcedWeight /= 2.20462;
     }
     if (volume.unit == "liter") {
-      calcedWeight /= 3.87541;
+      calcedWeight /= 3.78541;
     }
     setWeight({
       unit: weight.unit,
