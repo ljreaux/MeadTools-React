@@ -4,7 +4,11 @@ export default function IngredientOptions({
   ingredients,
 }) {
   return (
-    <select className="input w-11/12 my-4 " onChange={ingredientChange}>
+    <select
+      className="input w-11/12 my-4 "
+      onChange={ingredientChange}
+      value={optionValue}
+    >
       {ingredients
         ? ingredients.ingredients.map((ingredient) => {
             return (

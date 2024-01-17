@@ -11,6 +11,7 @@ function IngredientLine({
   units,
   volUnits,
   hidden,
+  storedInput,
   setStoredInput,
   inputNum,
   initialIngredient,
@@ -29,7 +30,9 @@ function IngredientLine({
   // stores selected ingredients
   const [ingredientDetails, setIngredientDetails] = useState();
   const [ingredientCat, setIngredientCat] = useState("sugar");
-  const [ingredientName, setIngredientName] = useState(initialIngredient);
+  const [ingredientName, setIngredientName] = useState(
+    storedInput[inputNum].name
+  );
 
   // handles ingredient changes
   function ingredientChange(e) {
@@ -38,7 +41,9 @@ function IngredientLine({
     );
     setIngredientDetails(found);
   }
-  const [brix, setBrix] = useState(defaultSugar || 79.6);
+  const [brix, setBrix] = useState(
+    storedInput[inputNum].brix || defaultSugar || 79.6
+  );
 
   // sets details when they change
   useEffect(() => {
@@ -55,14 +60,17 @@ function IngredientLine({
   useEffect(() => {}, [brix]);
 
   // sets weight when volume changes
-  const [weight, setWeight] = useState({ unit: "lbs", weight: 0 });
+  const [weight, setWeight] = useState({
+    unit: units,
+    weight: storedInput[inputNum].weight,
+  });
   useEffect(() => {
-    if (weight.unit == "lbs") {
+    if (weight.unit == "lbs" && units != weight.unit) {
       setWeight({
         unit: units,
         weight: (weight.weight / 2.20462).toFixed(3),
       });
-    } else {
+    } else if (weight.unit == "kg" && units != weight.unit) {
       setWeight({
         unit: units,
         weight: (weight.weight * 2.20462).toFixed(3),
@@ -70,7 +78,7 @@ function IngredientLine({
     }
   }, [units]);
 
-  const [sg, setSg] = useState(1);
+  const [sg, setSg] = useState(storedInput[inputNum].brix);
   useEffect(
     () =>
       setSg(
@@ -83,14 +91,17 @@ function IngredientLine({
   );
 
   // sets volume when weight changes
-  const [volume, setVolume] = useState({ unit: "gal", vol: 0 });
+  const [volume, setVolume] = useState({
+    unit: volUnits,
+    vol: storedInput[inputNum].volume,
+  });
   useEffect(() => {
-    if (volume.unit == "liter") {
+    if (volume.unit == "liter" && volUnits != volume.unit) {
       setVolume({
         unit: volUnits,
         vol: (volume.vol / 3.78541).toFixed(3),
       });
-    } else {
+    } else if (volume.unit == "gal" && volUnits != volume.unit) {
       setVolume({
         unit: volUnits,
         vol: (volume.vol * 3.78541).toFixed(3),
@@ -153,6 +164,7 @@ function IngredientLine({
         <FilteredIngredients
           ingredientChange={ingredientChange}
           ingredients={ingredients}
+          optionValue={storedInput[inputNum].name}
         />
       ) : (
         <IngredientOptions

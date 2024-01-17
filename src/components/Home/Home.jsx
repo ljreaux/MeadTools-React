@@ -24,92 +24,94 @@ function Home() {
     addNum: 1,
   });
   // stores input from all ingredient lines for final calcs
-  const [storedInput, setStoredInput] = useState({
-    input1: {
-      name: "Honey",
-      weight: 0,
-      brix: 79.6,
-      volume: 0,
-      cat: "sugar",
-    },
-    input2: {
-      name: "Honey",
-      weight: 0,
-      brix: 79.6,
-      volume: 0,
-      cat: "sugar",
-    },
-    input3: {
-      name: "Honey",
-      weight: 0,
-      brix: 79.6,
-      volume: 0,
-      cat: "sugar",
-    },
-    input4: {
-      name: "Honey",
-      weight: 0,
-      brix: 79.6,
-      volume: 0,
-      cat: "sugar",
-    },
-    input5: {
-      name: "Honey",
-      weight: 0,
-      brix: 79.6,
-      volume: 0,
-      cat: "sugar",
-    },
-    input6: {
-      name: "Honey",
-      weight: 0,
-      brix: 79.6,
-      volume: 0,
-      cat: "sugar",
-    },
-    input7: {
-      name: "Honey",
-      weight: 0,
-      brix: 79.6,
-      volume: 0,
-      cat: "sugar",
-    },
-    input8: {
-      name: "Honey",
-      weight: 0,
-      brix: 79.6,
-      volume: 0,
-      cat: "sugar",
-    },
-    input9: {
-      name: "Honey",
-      weight: 0,
-      brix: 79.6,
-      volume: 0,
-      cat: "sugar",
-    },
-    input10: {
-      name: "Honey",
-      weight: 0,
-      brix: 79.6,
-      volume: 0,
-      cat: "sugar",
-    },
-    input11: {
-      name: "Water",
-      weight: 0,
-      brix: 79.6,
-      volume: 0,
-      cat: "sugar",
-    },
-    input12: {
-      name: "Water",
-      weight: 0,
-      brix: 79.6,
-      volume: 0,
-      cat: "sugar",
-    },
-  });
+  const [storedInput, setStoredInput] = useState(
+    JSON.parse(sessionStorage.getItem("storedInput")) || {
+      input1: {
+        name: "Honey",
+        weight: 0,
+        brix: 79.6,
+        volume: 0,
+        cat: "sugar",
+      },
+      input2: {
+        name: "Honey",
+        weight: 0,
+        brix: 79.6,
+        volume: 0,
+        cat: "sugar",
+      },
+      input3: {
+        name: "Honey",
+        weight: 0,
+        brix: 79.6,
+        volume: 0,
+        cat: "sugar",
+      },
+      input4: {
+        name: "Honey",
+        weight: 0,
+        brix: 79.6,
+        volume: 0,
+        cat: "sugar",
+      },
+      input5: {
+        name: "Honey",
+        weight: 0,
+        brix: 79.6,
+        volume: 0,
+        cat: "sugar",
+      },
+      input6: {
+        name: "Honey",
+        weight: 0,
+        brix: 79.6,
+        volume: 0,
+        cat: "sugar",
+      },
+      input7: {
+        name: "Honey",
+        weight: 0,
+        brix: 79.6,
+        volume: 0,
+        cat: "sugar",
+      },
+      input8: {
+        name: "Honey",
+        weight: 0,
+        brix: 79.6,
+        volume: 0,
+        cat: "sugar",
+      },
+      input9: {
+        name: "Honey",
+        weight: 0,
+        brix: 79.6,
+        volume: 0,
+        cat: "sugar",
+      },
+      input10: {
+        name: "Honey",
+        weight: 0,
+        brix: 79.6,
+        volume: 0,
+        cat: "sugar",
+      },
+      input11: {
+        name: "Water",
+        weight: 0,
+        brix: 79.6,
+        volume: 0,
+        cat: "sugar",
+      },
+      input12: {
+        name: "Water",
+        weight: 0,
+        brix: 79.6,
+        volume: 0,
+        cat: "sugar",
+      },
+    }
+  );
 
   const [extraIngredients, setExtraIngredients] = useState({
     input1: {
@@ -141,10 +143,16 @@ function Home() {
 
   //  used to reveal new ingredient lines
   const [displayMainResults, setDisplayMainResults] = useState(false);
-  const [rowCount, setRowCount] = useState(0);
+  const [rowCount, setRowCount] = useState(
+    JSON.parse(sessionStorage.getItem("rowCount")) || 0
+  );
 
-  const [units, setUnits] = useState("lbs");
-  const [volUnits, setVolUnits] = useState("gal");
+  const [units, setUnits] = useState(
+    JSON.parse(sessionStorage.getItem("units")) || "lbs"
+  );
+  const [volUnits, setVolUnits] = useState(
+    JSON.parse(sessionStorage.getItem("volUnits")) || "gal"
+  );
 
   // final calculation data
   const [totalVolume, setTotalVolume] = useState(0);
@@ -176,7 +184,9 @@ function Home() {
   const [mainCalcVol, setMainCalcVol] = useState(0);
   const [mainCalcSG, setMainCalcSG] = useState(0);
   const [mainCalcOffset, setMainCalcOffset] = useState(0);
-  const [mainCalcUnits, setMainCalcUnits] = useState("gal");
+  const [mainCalcUnits, setMainCalcUnits] = useState(
+    JSON.parse(sessionStorage.getItem("volUnits")) || "gal"
+  );
   const [mainCalcSugarBreak, setMainCalcSugarBreak] = useState(1);
   const [mainCalcYeastInfo, setMainCalcYeastInfo] = useState([
     {
@@ -264,6 +274,24 @@ function Home() {
   }, [totalVolume, OG, FG]);
 
   const componentRef = useRef();
+  // useEffect(() => {
+  //   const sessionData = sessionStorage.getItem("storedInput");
+  //   if (sessionData) {
+  //     setStoredInput(JSON.parse(sessionData));
+  //   }
+  // }, []);
+  useEffect(() => {
+    if (storedInput.input1.weight > 0 || storedInput.input11.weight > 0) {
+      sessionStorage.setItem("storedInput", JSON.stringify(storedInput));
+    }
+    sessionStorage.setItem("units", JSON.stringify(units));
+    sessionStorage.setItem("volUnits", JSON.stringify(volUnits));
+    sessionStorage.setItem("rowCount", rowCount);
+  }, [storedInput, units, volUnits, rowCount]);
+
+  useEffect(() => {
+    console.log(storedInput);
+  }, [storedInput]);
 
   return (
     <div className="max-h-screen flex items-center flex-col font-serif md:text-2xl lg:text-3xl text-textColor text-sm">
@@ -285,6 +313,7 @@ function Home() {
               onChange={(e) => {
                 setUnits(e.target.value);
               }}
+              value={units}
             >
               <option value="lbs">lbs</option>
               <option value="kg">kg</option>
@@ -299,6 +328,7 @@ function Home() {
                 setVolUnits(e.target.value);
                 setMainCalcUnits(e.target.value);
               }}
+              value={volUnits}
             >
               <option value="gal">Gallons</option>
               <option value="liter">Liters</option>
