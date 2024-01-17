@@ -13,16 +13,27 @@ import PDF from "../PDF";
 import Additives from "../Additives";
 
 function Home() {
+  const [preferredSchedule, setPreferredSchedule] = useState(
+    JSON.parse(sessionStorage.getItem("nuteSchedule")) || "tbe"
+  );
   const [preferred, setPreferred] = useState("TBE (All Three)");
   const [gfType, setGFType] = useState("go-ferm");
   const [goFermGrams, setGoFermGrams] = useState(0);
   const [goFermWater, setGoFermWater] = useState(0);
   const [remainingYan, setRemainingYan] = useState(0);
-  const [mainCalcNuteInfo, setMainCalcNuteInfo] = useState({
-    totalGrams: [0, 0, 0],
-    perAdd: [0, 0, 0],
-    addNum: 1,
-  });
+  const [mainCalcNuteInfo, setMainCalcNuteInfo] = useState(
+    sessionStorage.getItem("numOfAdditions")
+      ? {
+          totalGrams: [0, 0, 0],
+          perAdd: [0, 0, 0],
+          addNum: JSON.parse(sessionStorage.getItem("numOfAdditions")),
+        }
+      : {
+          totalGrams: [0, 0, 0],
+          perAdd: [0, 0, 0],
+          addNum: 1,
+        }
+  );
   // stores input from all ingredient lines for final calcs
   const [storedInput, setStoredInput] = useState(
     JSON.parse(sessionStorage.getItem("storedInput")) || {
@@ -99,14 +110,14 @@ function Home() {
       input11: {
         name: "Water",
         weight: 0,
-        brix: 79.6,
+        brix: 0,
         volume: 0,
         cat: "sugar",
       },
       input12: {
         name: "Water",
         weight: 0,
-        brix: 79.6,
+        brix: 0,
         volume: 0,
         cat: "sugar",
       },
@@ -142,7 +153,9 @@ function Home() {
   });
 
   //  used to reveal new ingredient lines
-  const [displayMainResults, setDisplayMainResults] = useState(false);
+  const [displayMainResults, setDisplayMainResults] = useState(
+    JSON.parse(sessionStorage.getItem("submitted")) || false
+  );
   const [rowCount, setRowCount] = useState(
     JSON.parse(sessionStorage.getItem("rowCount")) || 0
   );
@@ -188,15 +201,20 @@ function Home() {
     JSON.parse(sessionStorage.getItem("volUnits")) || "gal"
   );
   const [mainCalcSugarBreak, setMainCalcSugarBreak] = useState(1);
-  const [mainCalcYeastInfo, setMainCalcYeastInfo] = useState([
-    {
-      name: "18-2007",
-      "Nitrogen Requirement": "Low",
-      "ABV Tolerance": 15,
-      LowTemp: 50,
-      HighTemp: 90,
-    },
-  ]);
+  const [mainCalcYeastInfo, setMainCalcYeastInfo] = useState(
+    JSON.parse(sessionStorage.getItem("yeastInfo")) || [
+      {
+        name: "18-2007",
+        "Nitrogen Requirement": "Low",
+        "ABV Tolerance": 15,
+        LowTemp: 50,
+        HighTemp: 90,
+      },
+    ]
+  );
+  const [mainCalcYeastBrand, setMainCalcYeastBrand] = useState(
+    JSON.parse(sessionStorage.getItem("yeastBrand")) || "Lalvin"
+  );
 
   // onSubmit function
   function totalVolumeFunc() {
@@ -287,7 +305,26 @@ function Home() {
     sessionStorage.setItem("units", JSON.stringify(units));
     sessionStorage.setItem("volUnits", JSON.stringify(volUnits));
     sessionStorage.setItem("rowCount", rowCount);
-  }, [storedInput, units, volUnits, rowCount]);
+    sessionStorage.setItem("submitted", JSON.stringify(displayMainResults));
+    totalVolumeFunc();
+    sessionStorage.setItem("yeastInfo", JSON.stringify(mainCalcYeastInfo));
+    sessionStorage.setItem("yeastBrand", JSON.stringify(mainCalcYeastBrand));
+    sessionStorage.setItem("nuteSchedule", JSON.stringify(preferredSchedule));
+    sessionStorage.setItem(
+      "numOfAdditions",
+      JSON.stringify(mainCalcNuteInfo.addNum)
+    );
+  }, [
+    storedInput,
+    units,
+    volUnits,
+    rowCount,
+    displayMainResults,
+    mainCalcYeastInfo,
+    mainCalcYeastBrand,
+    preferredSchedule,
+    mainCalcNuteInfo,
+  ]);
 
   useEffect(() => {
     console.log(storedInput);
@@ -464,6 +501,8 @@ function Home() {
           setMainCalcUnits={setMainCalcUnits}
           mainCalcYeastInfo={mainCalcYeastInfo}
           setMainCalcYeastInfo={setMainCalcYeastInfo}
+          mainCalcYeastBrand={mainCalcYeastBrand}
+          setMainCalcYeastBrand={setMainCalcYeastBrand}
           setMainCalcSugarBreak={setMainCalcSugarBreak}
           displayMainResults={displayMainResults}
           setMainCalcNuteInfo={setMainCalcNuteInfo}
@@ -476,6 +515,8 @@ function Home() {
           goFermWater={goFermWater}
           setGoFermWater={setGoFermWater}
           setPreferred={setPreferred}
+          preferredSchedule={preferredSchedule}
+          setPreferredSchedule={setPreferredSchedule}
         ></NutrientCalc>
       </div>
       <div className="w-full h-full flex flex-col items-center">

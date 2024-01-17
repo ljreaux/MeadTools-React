@@ -25,6 +25,10 @@ export default function NuteContainer() {
   const [gfType, setGFType] = useState("go-ferm");
   const [goFermGrams, setGoFermGrams] = useState(0);
   const [goFermWater, setGoFermWater] = useState(0);
+  const [dummyYeastBrand, setDummyYeastBrand] = useState(0);
+  const [dummySchedule, setDummySchedule] = useState(
+    JSON.parse(sessionStorage.getItem("nuteSchedule")) || "tbe"
+  );
   return (
     <NutrientCalc
       mainCalcVol={dummyVol}
@@ -37,6 +41,8 @@ export default function NuteContainer() {
       setMainCalcUnits={setDummyUnits}
       mainCalcYeastInfo={dummyYeast}
       setMainCalcYeastInfo={setDummyYeastInfo}
+      setMainCalcYeastBrand={setDummyYeastBrand}
+      mainCalcYeastBrand={dummyYeastBrand}
       setMainCalcSugarBreak={setDummySugar}
       displayMainResults={displayMainResults}
       setMainCalcNuteInfo={setDummyNuteInfo}
@@ -49,6 +55,8 @@ export default function NuteContainer() {
       goFermWater={goFermWater}
       setGoFermWater={setGoFermWater}
       setPreferred={setPreferred}
+      preferredSchedule={dummySchedule}
+      setPreferredSchedule={setDummySchedule}
     ></NutrientCalc>
   );
 }

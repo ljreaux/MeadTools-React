@@ -29,7 +29,9 @@ function IngredientLine({
 
   // stores selected ingredients
   const [ingredientDetails, setIngredientDetails] = useState();
-  const [ingredientCat, setIngredientCat] = useState("sugar");
+  const [ingredientCat, setIngredientCat] = useState(
+    storedInput[inputNum].cat || "sugar"
+  );
   const [ingredientName, setIngredientName] = useState(
     storedInput[inputNum].name
   );
@@ -170,6 +172,7 @@ function IngredientLine({
         <IngredientOptions
           ingredientChange={ingredientChange}
           ingredients={ingredients}
+          optionValue={storedInput[inputNum].name}
         />
       )}
       {/* */}
