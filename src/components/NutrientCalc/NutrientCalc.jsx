@@ -121,7 +121,7 @@ function NutrientCalc({
 
   // display states
   const [displayBrix, setDisplayBrix] = useState("0");
-  const [yeastNames, setYeastNames] = useState([{}]);
+  const [yeastNames, setYeastNames] = useState({});
   const [selectedBrand, setSelectedBrand] = useState([
     {
       selectedBrand: "Lalvin",
@@ -138,7 +138,7 @@ function NutrientCalc({
     },
   ]);
   const selectedYeastObj = selectedYeast[0];
-  const yeastObj = yeastNames[0];
+  const yeastObj = yeastNames;
 
   // gets yeasts from json data
   useEffect(() => {
@@ -146,7 +146,7 @@ function NutrientCalc({
       try {
         const response = JSON.parse(JSON.stringify(yeasts));
         const data = response;
-        setYeastNames([data]);
+        setYeastNames(data);
       } catch (error) {
         console.error(error);
       }
