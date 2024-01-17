@@ -7,9 +7,13 @@ export default function AdditiveLine({
   inputNum,
   setExtraIngredients,
 }) {
-  const [additiveName, setAdditiveName] = useState("");
-  const [additiveAmount, setAdditiveAmount] = useState(0);
-  const [additiveUnits, setAdditiveUnits] = useState("g");
+  const { name, amount, units } = JSON.parse(
+    sessionStorage.getItem("extraIngredients")
+  )[inputNum];
+
+  const [additiveName, setAdditiveName] = useState(name || "");
+  const [additiveAmount, setAdditiveAmount] = useState(amount || 0);
+  const [additiveUnits, setAdditiveUnits] = useState(units || "g");
   useEffect(() => {
     setExtraIngredients((prev) => {
       return {

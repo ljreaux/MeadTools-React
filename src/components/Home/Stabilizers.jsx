@@ -13,11 +13,17 @@ function Stabilizers({
   setSulfiteAmount,
 }) {
   // hides stabilizers
-  const [using, setUsing] = useState(false);
+  const [using, setUsing] = useState(
+    JSON.parse(sessionStorage.getItem("usingStabilizers")) || false
+  );
 
   // allows user to put in pH reading and handles change
-  const [ph, setPh] = useState(false);
-  const [phInput, setPhInput] = useState(3.6);
+  const [ph, setPh] = useState(
+    JSON.parse(sessionStorage.getItem("takingPh")) || false
+  );
+  const [phInput, setPhInput] = useState(
+    JSON.parse(sessionStorage.getItem("inputPh")) || 3.6
+  );
   const [phReading, setPhReading] = useState(50);
 
   function determinePPM(input) {
@@ -54,6 +60,12 @@ function Stabilizers({
     determinePPM(phInput);
   }, [phInput]);
 
+  useEffect(() => {
+    sessionStorage.setItem("usingStabilizers", JSON.stringify(using));
+    sessionStorage.setItem("takingPh", JSON.stringify(ph));
+    sessionStorage.setItem("inputPh", JSON.stringify(phInput));
+  }, [using, ph, phInput]);
+
   return (
     <div className="component-div my-4 mb-12">
       <div className="grid grid-cols-4 place-items-center text-center">
@@ -61,6 +73,7 @@ function Stabilizers({
           <h2 className="py-6 mx-2">Are you adding stabilizers?</h2>
           <select
             className="input w-11/12"
+            value={using ? "yes" : "no"}
             onChange={() => {
               setUsing(!using);
             }}
@@ -72,6 +85,7 @@ function Stabilizers({
           <h2 className="py-6 mx-2">Are you taking a pH Reading?</h2>
           <select
             className="input w-11/12"
+            value={ph ? "yes" : "no"}
             onChange={() => {
               setPh(!ph);
               setPhReading(50);

@@ -124,33 +124,35 @@ function Home() {
     }
   );
 
-  const [extraIngredients, setExtraIngredients] = useState({
-    input1: {
-      name: "",
-      amount: 0,
-      units: "g",
-    },
-    input2: {
-      name: "",
-      amount: 0,
-      units: "g",
-    },
-    input3: {
-      name: "",
-      amount: 0,
-      units: "g",
-    },
-    input4: {
-      name: "",
-      amount: 0,
-      units: "g",
-    },
-    input5: {
-      name: "",
-      amount: 0,
-      units: "g",
-    },
-  });
+  const [extraIngredients, setExtraIngredients] = useState(
+    JSON.parse(sessionStorage.getItem("extraIngredients")) || {
+      input1: {
+        name: "",
+        amount: 0,
+        units: "g",
+      },
+      input2: {
+        name: "",
+        amount: 0,
+        units: "g",
+      },
+      input3: {
+        name: "",
+        amount: 0,
+        units: "g",
+      },
+      input4: {
+        name: "",
+        amount: 0,
+        units: "g",
+      },
+      input5: {
+        name: "",
+        amount: 0,
+        units: "g",
+      },
+    }
+  );
 
   //  used to reveal new ingredient lines
   const [displayMainResults, setDisplayMainResults] = useState(
@@ -314,6 +316,10 @@ function Home() {
       "numOfAdditions",
       JSON.stringify(mainCalcNuteInfo.addNum)
     );
+    sessionStorage.setItem(
+      "extraIngredients",
+      JSON.stringify(extraIngredients)
+    );
   }, [
     storedInput,
     units,
@@ -324,11 +330,8 @@ function Home() {
     mainCalcYeastBrand,
     preferredSchedule,
     mainCalcNuteInfo,
+    extraIngredients,
   ]);
-
-  useEffect(() => {
-    console.log(storedInput);
-  }, [storedInput]);
 
   return (
     <div className="max-h-screen flex items-center flex-col font-serif md:text-2xl lg:text-3xl text-textColor text-sm">
