@@ -58,12 +58,14 @@ function BlendingCalc() {
     <div className="component-div">
       <Title header="Blending Calculator" />
       <BlendingInputLine
+        number={1}
         valObj={valObj}
         valChange={val1Change}
         volChange={vol1Change}
       />
       <br />
       <BlendingInputLine
+        number={2}
         valObj={valObj}
         valChange={val2Change}
         volChange={vol2Change}
