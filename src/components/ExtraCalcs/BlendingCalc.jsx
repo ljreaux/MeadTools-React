@@ -24,7 +24,7 @@ function BlendingCalc() {
     setValObj(
       {
         ...valObj,
-        val1: e.target.value,
+        val1: Number(e.target.value),
       },
     );
   };
@@ -32,7 +32,7 @@ function BlendingCalc() {
      setValObj(
       {
         ...valObj,
-        vol1: e.target.value,
+        vol1: Number(e.target.value),
       },
     );
   };
@@ -41,7 +41,7 @@ function BlendingCalc() {
    setValObj(
       {
         ...valObj,
-        val2: e.target.value,
+        val2: Number(e.target.value),
       },
     );
   };
@@ -49,7 +49,7 @@ function BlendingCalc() {
     setValObj(
       {
         ...valObj,
-        vol2: e.target.value,
+        vol2: Number(e.target.value),
       },
     );
   };
