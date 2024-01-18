@@ -1,10 +1,15 @@
 import AdditiveLine from "./AdditiveLine";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import NewAddLines from "./NewAddLines";
 import { FaPlusSquare } from "react-icons/fa";
 
 export default function Additives({ setExtraIngredients, inputNum }) {
-  const [addRowCount, setAddRowCount] = useState(0);
+  const [addRowCount, setAddRowCount] = useState(
+    JSON.parse(sessionStorage.getItem("addRowCount")) || 0
+  );
+  useEffect(() => {
+    sessionStorage.setItem("addRowCount", JSON.stringify(addRowCount));
+  }, [addRowCount]);
   return (
     <div className="component-div">
       <form className="w-full grid grid-cols-3 gap-x-4 items-center justify-center text-center">

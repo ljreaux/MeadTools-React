@@ -16,6 +16,8 @@ function NutrientCalc({
   setMainCalcUnits,
   mainCalcYeastInfo,
   setMainCalcYeastInfo,
+  mainCalcYeastBrand,
+  setMainCalcYeastBrand,
   setMainCalcSugarBreak,
   displayMainResults,
   setMainCalcNuteInfo,
@@ -28,6 +30,8 @@ function NutrientCalc({
   goFermWater,
   setGoFermWater,
   setPreferred,
+  preferredSchedule,
+  setPreferredSchedule,
 }) {
   // object contains values for all nutrient regimens
   const maxGpl = {
@@ -122,21 +126,22 @@ function NutrientCalc({
   // display states
   const [displayBrix, setDisplayBrix] = useState("0");
   const [yeastNames, setYeastNames] = useState({});
-  const [selectedBrand, setSelectedBrand] = useState([
-    {
-      selectedBrand: "Lalvin",
-    },
-  ]);
+  const [selectedBrand, setSelectedBrand] = useState(
+    JSON.parse(sessionStorage.getItem("yeastBrand")) || "Lalvin"
+  );
   const selectedBrandObj = selectedBrand[0];
-  const [selectedYeast, setSelectedYeast] = useState([
-    {
-      name: "18-2007",
-      "Nitrogen Requirement": "Low",
-      "ABV Tolerance": 15,
-      LowTemp: 50,
-      HighTemp: 90,
-    },
-  ]);
+  const [selectedYeast, setSelectedYeast] = useState(
+    JSON.parse(sessionStorage.getItem("yeastInfo")) || [
+      {
+        brand: "Lalvin",
+        name: "18-2007",
+        "Nitrogen Requirement": "Low",
+        "ABV Tolerance": 15,
+        LowTemp: 50,
+        HighTemp: 90,
+      },
+    ]
+  );
   const selectedYeastObj = selectedYeast[0];
   const yeastObj = yeastNames;
 
@@ -301,7 +306,9 @@ function NutrientCalc({
     setGramsToAdd([...gramsArr]);
   }
 
-  const [additions, setAdditions] = useState(1);
+  const [additions, setAdditions] = useState(
+    JSON.parse(sessionStorage.getItem("numOfAdditions")) || 1
+  );
   const [amountPerAddition, setAmountPerAddition] = useState([...gramsToAdd]);
   useEffect(() => {
     const perAdd = gramsToAdd.map((gram) => {
@@ -331,6 +338,7 @@ function NutrientCalc({
 
   useEffect(() => {
     setMainCalcYeastInfo(selectedYeast);
+    setMainCalcYeastBrand(selectedBrand);
   }, [selectedYeast, selectedBrand]);
 
   useEffect(() => {
@@ -375,13 +383,10 @@ function NutrientCalc({
           <h2 className="my-2">Offset PPM</h2>
 
           <select
+            value={selectedBrand}
             className="input w-11/12 my-2"
             onChange={(e) => {
-              setSelectedBrand([
-                {
-                  selectedBrand: e.target.value,
-                },
-              ]);
+              setSelectedBrand(e.target.value);
               setSelectedYeast([yeastObj[e.target.value][0]]);
             }}
           >
@@ -394,17 +399,18 @@ function NutrientCalc({
             })}
           </select>
           <select
+            value={selectedYeast[0].name}
             className="input w-11/12 my-2"
             onChange={(e) => {
               setSelectedYeast(
-                yeastObj[`${selectedBrandObj.selectedBrand}`].filter((item) => {
+                yeastObj[selectedBrand].filter((item) => {
                   return item.name == e.target.value;
                 })
               );
               setNuteInfo([...nuteInfo]);
             }}
           >
-            {yeastObj[`${selectedBrandObj.selectedBrand}`]?.map((item) => {
+            {yeastObj[selectedBrand]?.map((item) => {
               return (
                 <option key={item.name} value={item.name}>
                   {item.name}
@@ -460,6 +466,7 @@ function NutrientCalc({
           <select
             className="input w-11/12 my-2 "
             id="nuteSchedule"
+            value={preferredSchedule}
             onChange={(e) => {
               for (let key in maxGpl) {
                 if (key == e.target.value) {
@@ -486,6 +493,7 @@ function NutrientCalc({
                 }
               }
               setPreferred(e.target.selectedOptions[0].innerText);
+              setPreferredSchedule(e.target.value);
             }}
           >
             <option value="tbe">TBE (All Three)</option>
@@ -500,6 +508,7 @@ function NutrientCalc({
             {targetYAN + " PPM"}
           </p>
           <select
+            value={additions}
             className="input w-11/12 my-2 "
             onChange={(e) => {
               setAdditions(e.target.value);

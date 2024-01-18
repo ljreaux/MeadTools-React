@@ -13,138 +13,161 @@ import PDF from "../PDF";
 import Additives from "../Additives";
 
 function Home() {
+  const [preferredSchedule, setPreferredSchedule] = useState(
+    JSON.parse(sessionStorage.getItem("nuteSchedule")) || "tbe"
+  );
   const [preferred, setPreferred] = useState("TBE (All Three)");
   const [gfType, setGFType] = useState("go-ferm");
   const [goFermGrams, setGoFermGrams] = useState(0);
   const [goFermWater, setGoFermWater] = useState(0);
   const [remainingYan, setRemainingYan] = useState(0);
-  const [mainCalcNuteInfo, setMainCalcNuteInfo] = useState({
-    totalGrams: [0, 0, 0],
-    perAdd: [0, 0, 0],
-    addNum: 1,
-  });
+  const [mainCalcNuteInfo, setMainCalcNuteInfo] = useState(
+    sessionStorage.getItem("numOfAdditions")
+      ? {
+          totalGrams: [0, 0, 0],
+          perAdd: [0, 0, 0],
+          addNum: JSON.parse(sessionStorage.getItem("numOfAdditions")),
+        }
+      : {
+          totalGrams: [0, 0, 0],
+          perAdd: [0, 0, 0],
+          addNum: 1,
+        }
+  );
   // stores input from all ingredient lines for final calcs
-  const [storedInput, setStoredInput] = useState({
-    input1: {
-      name: "Honey",
-      weight: 0,
-      brix: 79.6,
-      volume: 0,
-      cat: "sugar",
-    },
-    input2: {
-      name: "Honey",
-      weight: 0,
-      brix: 79.6,
-      volume: 0,
-      cat: "sugar",
-    },
-    input3: {
-      name: "Honey",
-      weight: 0,
-      brix: 79.6,
-      volume: 0,
-      cat: "sugar",
-    },
-    input4: {
-      name: "Honey",
-      weight: 0,
-      brix: 79.6,
-      volume: 0,
-      cat: "sugar",
-    },
-    input5: {
-      name: "Honey",
-      weight: 0,
-      brix: 79.6,
-      volume: 0,
-      cat: "sugar",
-    },
-    input6: {
-      name: "Honey",
-      weight: 0,
-      brix: 79.6,
-      volume: 0,
-      cat: "sugar",
-    },
-    input7: {
-      name: "Honey",
-      weight: 0,
-      brix: 79.6,
-      volume: 0,
-      cat: "sugar",
-    },
-    input8: {
-      name: "Honey",
-      weight: 0,
-      brix: 79.6,
-      volume: 0,
-      cat: "sugar",
-    },
-    input9: {
-      name: "Honey",
-      weight: 0,
-      brix: 79.6,
-      volume: 0,
-      cat: "sugar",
-    },
-    input10: {
-      name: "Honey",
-      weight: 0,
-      brix: 79.6,
-      volume: 0,
-      cat: "sugar",
-    },
-    input11: {
-      name: "Water",
-      weight: 0,
-      brix: 79.6,
-      volume: 0,
-      cat: "sugar",
-    },
-    input12: {
-      name: "Water",
-      weight: 0,
-      brix: 79.6,
-      volume: 0,
-      cat: "sugar",
-    },
-  });
+  const [storedInput, setStoredInput] = useState(
+    JSON.parse(sessionStorage.getItem("storedInput")) || {
+      input1: {
+        name: "Honey",
+        weight: 0,
+        brix: 79.6,
+        volume: 0,
+        cat: "sugar",
+      },
+      input2: {
+        name: "Honey",
+        weight: 0,
+        brix: 79.6,
+        volume: 0,
+        cat: "sugar",
+      },
+      input3: {
+        name: "Honey",
+        weight: 0,
+        brix: 79.6,
+        volume: 0,
+        cat: "sugar",
+      },
+      input4: {
+        name: "Honey",
+        weight: 0,
+        brix: 79.6,
+        volume: 0,
+        cat: "sugar",
+      },
+      input5: {
+        name: "Honey",
+        weight: 0,
+        brix: 79.6,
+        volume: 0,
+        cat: "sugar",
+      },
+      input6: {
+        name: "Honey",
+        weight: 0,
+        brix: 79.6,
+        volume: 0,
+        cat: "sugar",
+      },
+      input7: {
+        name: "Honey",
+        weight: 0,
+        brix: 79.6,
+        volume: 0,
+        cat: "sugar",
+      },
+      input8: {
+        name: "Honey",
+        weight: 0,
+        brix: 79.6,
+        volume: 0,
+        cat: "sugar",
+      },
+      input9: {
+        name: "Honey",
+        weight: 0,
+        brix: 79.6,
+        volume: 0,
+        cat: "sugar",
+      },
+      input10: {
+        name: "Honey",
+        weight: 0,
+        brix: 79.6,
+        volume: 0,
+        cat: "sugar",
+      },
+      input11: {
+        name: "Water",
+        weight: 0,
+        brix: 0,
+        volume: 0,
+        cat: "sugar",
+      },
+      input12: {
+        name: "Water",
+        weight: 0,
+        brix: 0,
+        volume: 0,
+        cat: "sugar",
+      },
+    }
+  );
 
-  const [extraIngredients, setExtraIngredients] = useState({
-    input1: {
-      name: "",
-      amount: 0,
-      units: "g",
-    },
-    input2: {
-      name: "",
-      amount: 0,
-      units: "g",
-    },
-    input3: {
-      name: "",
-      amount: 0,
-      units: "g",
-    },
-    input4: {
-      name: "",
-      amount: 0,
-      units: "g",
-    },
-    input5: {
-      name: "",
-      amount: 0,
-      units: "g",
-    },
-  });
+  const [extraIngredients, setExtraIngredients] = useState(
+    JSON.parse(sessionStorage.getItem("extraIngredients")) || {
+      input1: {
+        name: "",
+        amount: 0,
+        units: "g",
+      },
+      input2: {
+        name: "",
+        amount: 0,
+        units: "g",
+      },
+      input3: {
+        name: "",
+        amount: 0,
+        units: "g",
+      },
+      input4: {
+        name: "",
+        amount: 0,
+        units: "g",
+      },
+      input5: {
+        name: "",
+        amount: 0,
+        units: "g",
+      },
+    }
+  );
 
   //  used to reveal new ingredient lines
-  const [displayMainResults, setDisplayMainResults] = useState(false);
-  const [rowCount, setRowCount] = useState(0);
+  const [displayMainResults, setDisplayMainResults] = useState(
+    JSON.parse(sessionStorage.getItem("submitted")) || false
+  );
+  const [rowCount, setRowCount] = useState(
+    JSON.parse(sessionStorage.getItem("rowCount")) || 0
+  );
 
-  const [units, setUnits] = useState("lbs");
-  const [volUnits, setVolUnits] = useState("gal");
+  const [units, setUnits] = useState(
+    JSON.parse(sessionStorage.getItem("units")) || "lbs"
+  );
+  const [volUnits, setVolUnits] = useState(
+    JSON.parse(sessionStorage.getItem("volUnits")) || "gal"
+  );
 
   // final calculation data
   const [totalVolume, setTotalVolume] = useState(0);
@@ -176,17 +199,24 @@ function Home() {
   const [mainCalcVol, setMainCalcVol] = useState(0);
   const [mainCalcSG, setMainCalcSG] = useState(0);
   const [mainCalcOffset, setMainCalcOffset] = useState(0);
-  const [mainCalcUnits, setMainCalcUnits] = useState("gal");
+  const [mainCalcUnits, setMainCalcUnits] = useState(
+    JSON.parse(sessionStorage.getItem("volUnits")) || "gal"
+  );
   const [mainCalcSugarBreak, setMainCalcSugarBreak] = useState(1);
-  const [mainCalcYeastInfo, setMainCalcYeastInfo] = useState([
-    {
-      name: "18-2007",
-      "Nitrogen Requirement": "Low",
-      "ABV Tolerance": 15,
-      LowTemp: 50,
-      HighTemp: 90,
-    },
-  ]);
+  const [mainCalcYeastInfo, setMainCalcYeastInfo] = useState(
+    JSON.parse(sessionStorage.getItem("yeastInfo")) || [
+      {
+        name: "18-2007",
+        "Nitrogen Requirement": "Low",
+        "ABV Tolerance": 15,
+        LowTemp: 50,
+        HighTemp: 90,
+      },
+    ]
+  );
+  const [mainCalcYeastBrand, setMainCalcYeastBrand] = useState(
+    JSON.parse(sessionStorage.getItem("yeastBrand")) || "Lalvin"
+  );
 
   // onSubmit function
   function totalVolumeFunc() {
@@ -264,6 +294,44 @@ function Home() {
   }, [totalVolume, OG, FG]);
 
   const componentRef = useRef();
+  // useEffect(() => {
+  //   const sessionData = sessionStorage.getItem("storedInput");
+  //   if (sessionData) {
+  //     setStoredInput(JSON.parse(sessionData));
+  //   }
+  // }, []);
+  useEffect(() => {
+    if (storedInput.input1.weight > 0 || storedInput.input11.weight > 0) {
+      sessionStorage.setItem("storedInput", JSON.stringify(storedInput));
+    }
+    sessionStorage.setItem("units", JSON.stringify(units));
+    sessionStorage.setItem("volUnits", JSON.stringify(volUnits));
+    sessionStorage.setItem("rowCount", rowCount);
+    sessionStorage.setItem("submitted", JSON.stringify(displayMainResults));
+    totalVolumeFunc();
+    sessionStorage.setItem("yeastInfo", JSON.stringify(mainCalcYeastInfo));
+    sessionStorage.setItem("yeastBrand", JSON.stringify(mainCalcYeastBrand));
+    sessionStorage.setItem("nuteSchedule", JSON.stringify(preferredSchedule));
+    sessionStorage.setItem(
+      "numOfAdditions",
+      JSON.stringify(mainCalcNuteInfo.addNum)
+    );
+    sessionStorage.setItem(
+      "extraIngredients",
+      JSON.stringify(extraIngredients)
+    );
+  }, [
+    storedInput,
+    units,
+    volUnits,
+    rowCount,
+    displayMainResults,
+    mainCalcYeastInfo,
+    mainCalcYeastBrand,
+    preferredSchedule,
+    mainCalcNuteInfo,
+    extraIngredients,
+  ]);
 
   return (
     <div className="max-h-screen flex items-center flex-col font-serif md:text-2xl lg:text-3xl text-textColor text-sm">
@@ -285,6 +353,7 @@ function Home() {
               onChange={(e) => {
                 setUnits(e.target.value);
               }}
+              value={units}
             >
               <option value="lbs">lbs</option>
               <option value="kg">kg</option>
@@ -299,6 +368,7 @@ function Home() {
                 setVolUnits(e.target.value);
                 setMainCalcUnits(e.target.value);
               }}
+              value={volUnits}
             >
               <option value="gal">Gallons</option>
               <option value="liter">Liters</option>
@@ -434,6 +504,8 @@ function Home() {
           setMainCalcUnits={setMainCalcUnits}
           mainCalcYeastInfo={mainCalcYeastInfo}
           setMainCalcYeastInfo={setMainCalcYeastInfo}
+          mainCalcYeastBrand={mainCalcYeastBrand}
+          setMainCalcYeastBrand={setMainCalcYeastBrand}
           setMainCalcSugarBreak={setMainCalcSugarBreak}
           displayMainResults={displayMainResults}
           setMainCalcNuteInfo={setMainCalcNuteInfo}
@@ -446,6 +518,8 @@ function Home() {
           goFermWater={goFermWater}
           setGoFermWater={setGoFermWater}
           setPreferred={setPreferred}
+          preferredSchedule={preferredSchedule}
+          setPreferredSchedule={setPreferredSchedule}
         ></NutrientCalc>
       </div>
       <div className="w-full h-full flex flex-col items-center">

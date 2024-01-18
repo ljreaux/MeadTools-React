@@ -1,6 +1,14 @@
-export default function FilteredIngredients({ ingredientChange, ingredients }) {
+export default function FilteredIngredients({
+  ingredientChange,
+  ingredients,
+  optionValue,
+}) {
   return (
-    <select className="input w-11/12 my-4 " onChange={ingredientChange}>
+    <select
+      className="input w-11/12 my-4 "
+      onChange={ingredientChange}
+      value={optionValue}
+    >
       {ingredients
         ? ingredients.ingredients.map((ingredient) => {
             return ingredient.category == "juice" ||

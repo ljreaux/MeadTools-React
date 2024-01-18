@@ -30,7 +30,7 @@ const ContactUs = () => {
           setDisabled(false);
         },
         (error) => {
-          console.log(error.text);
+          console.error(error.text);
           setMessageColor("red");
           setStatus(`Something went wrong`);
           setDisabled(false);
