@@ -6,7 +6,7 @@ function BlendingInputLine({ valObj, number, valChange, volChange }) {
         type="number"
         onFocus={(e) => e.target.select()}
         className="input w-1/4"
-        value={valObj[`val`number]}
+        value={valObj[`val${number}`]}
         onChange={valChange}
       />
       <label className="px-4">Volume {number}: </label>
@@ -14,7 +14,7 @@ function BlendingInputLine({ valObj, number, valChange, volChange }) {
         type="number"
         onFocus={(e) => e.target.select()}
         className="input w-1/4"
-        value={valObj[`vol`number]}
+        value={valObj[`vol${number}`]}
         onChange={volChange}
       />
     </div>
