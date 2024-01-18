@@ -3,80 +3,74 @@ import BlendingInputLine from "./BlendingInputLine";
 import { useState } from "react";
 
 function BlendingCalc() {
-  function blend(val1, vol1, val2, vol2) {
-    return (val1 * vol1 + val2 * vol2) / (vol1 + vol2);
+  function blend(obj) {
+    const {val1, vol1, val2, vol2} = obj
+    const input1 = val1*vol1
+    const input2 = val2*vol2
+    const totalVol = vol1+vol2
+    return (input1+input2) / (totalVol);
   }
 
-  const [val, setVal] = useState([
+  const [valObj, setValObj] = useState(
     {
       val1: 1,
       vol1: 1,
       val2: 2,
       vol2: 2,
     },
-  ]);
+  );
 
-  // there is likely an easier way to do this, I imagine destructuring would make the below code cleaner.
-  const valObj = val[0];
   const val1Change = (e) => {
-    setVal([
+    setValObj(
       {
+        ...valObj,
         val1: e.target.value,
-        vol1: valObj.vol1,
-        val2: valObj.val2,
-        vol2: valObj.vol2,
       },
-    ]);
+    );
   };
   const vol1Change = (e) => {
-    setVal([
+     setValObj(
       {
-        val1: valObj.val1,
+        ...valObj,
         vol1: e.target.value,
-        val2: valObj.val2,
-        vol2: valObj.vol2,
       },
-    ]);
+    );
   };
 
   const val2Change = (e) => {
-    setVal([
+   setValObj(
       {
+        ...valObj,
         val2: e.target.value,
-        vol2: valObj.vol2,
-        val1: valObj.val1,
-        vol1: valObj.vol1,
       },
-    ]);
+    );
   };
   const vol2Change = (e) => {
-    setVal([
+    setValObj(
       {
-        val2: valObj.val2,
+        ...valObj,
         vol2: e.target.value,
-        val1: valObj.val1,
-        vol1: valObj.vol1,
       },
-    ]);
+    );
   };
 
   return (
     <div className="component-div">
       <Title header="Blending Calculator" />
       <BlendingInputLine
-        number={1}
+        valObj={valObj}
         valChange={val1Change}
         volChange={vol1Change}
       />
       <br />
       <BlendingInputLine
-        number={2}
+        valObj={valObj}
         valChange={val2Change}
         volChange={vol2Change}
       />
       <p className="pt-4">
         Blended Value:{" "}
-        {blend(valObj.val1, valObj.vol1, valObj.val2, valObj.vol2).toFixed(4)}
+        {blend(valObj).toFixed(4)}
       </p>
       <p className="pb-4">
         Total Volume: {Number(valObj.vol1) + Number(valObj.vol2)}
