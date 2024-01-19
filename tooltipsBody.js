@@ -8,17 +8,13 @@ export const toolTipBody {
   offsetPpm: "Some musts contain some YAN by themselves. This calculator automatically assumes 25ppm per pound of fruit per gallon, but if you would like to change the offset the field is editable.",
   nitrogenRequirements: "Determined by your yeast strain. If your yeast is not on the list, and you do not know its nitrogen requirement, enter it as Other: Other Medium N Yeast.",
   preferredSchedule: "This calculator allows you to enter any combination of Fermaid O, K, and DAP. It is really up to you which nutrients/combinations you decide to use, but certain combos are better for certain situations. Read more about nutrients and schedules here.",
+  yan: "Yeast Assimilable Nitrogen (YAN) is the amount of nitrogen needed by your yeast to have a healthy fermentation. Your target YAN is determined by your initial gravity and your yeast's nitrogen requirements.",
+  numberOfAdditions: "Staggered nutrient additions are useful in preventing temperature spikes during fermentation that can stress the yeast. Four nutrient additions is probably the most common regimen, but I personally use three additions or a single addition in most cases.",
+  yeastAmount: "The yeast amount in this calculator is based on the gravity reading and total volume. The amount is editable, and I recommend that you round up to the nearest packet in most cases.",
+  maxGpl:  "These numbers are calculated based on the nutrient schedule you pick. They are editable if you choose, but that is not recommended unless you know what you're doing.",
+  goFerm: "Type of Go-ferm effects the amount of water needed for rehydration and the effectiveness of the Fermaid O.",
+  oneThird: "When 1/3 of the sugars in the must have been consumed. This number is often used for the timing of the final nutrient addition.",
+  remainingYan: "If your remaining YAN is more than 0, you should consider adjusting the max g/L field. Keep in mind you should probably keep your amount of DAP under .96g/L for risk of off-flavors. Also the TTB limit on Fermaid K is .5g/L due to the limit on thiamine. This is not a concern for homebrewers.",
+  stabilizers: "Potassium sorbate (k-sorb) AND potassium metabisulfite (k-meta) are both needed to prevent refermentation. They cannot be reliably used to STOP fermentation in most cases. Amounts of k-meta needed for stabilizing are based on your pH. MeadTools assumes 50ppm if you choose not to take a pH reading. K-sorb amount is based on your ABV. It is not effective above around 16%. More info can be found here. ",
+  additives: "Any ingredient that doesn't provide fermentable sugars is best placed here. You can use one of the suggested ingredients or add your own.",
 }
-
-
-// Nitrogen Requirements: 
-// Preferred Schedule: 
-// YAN: Yeast Assimilable Nitrogen (YAN) is the amount of nitrogen needed by your yeast to have a healthy fermentation. Your target YAN is determined by your initial gravity and your yeast's nitrogen requirements. 
-// Number of Additions: Staggered nutrient additions are useful in preventing temperature spikes during fermentation that can stress the yeast. Four nutrient additions is probably the most common regimen, but I personally use three additions or a single addition in most cases.
-// Yeast Amount: The yeast amount in this calculator is based on the gravity reading and total volume. The amount is editable, and I recommend that you round up to the nearest packet in most cases.
-// Max g/L: These numbers are calculated based on the nutrient schedule you pick. They are editable if you choose, but that is not recommended unless you know what you're doing. 
-// Go-ferm: Type of Go-ferm effects the amount of water needed for rehydration and the effectiveness of the Fermaid O.
-// 1/3 SB: When 1/3 of the sugars in the must have been consumed. This number is often used for the timing of the final nutrient addition. 
-// Remaining YAN: If your remaining YAN is more than 0, you should consider adjusting the max g/L field. Keep in mind you should probably keep your amount of DAP under .96g/L for risk of off-flavors. Also the TTB limit on Fermaid K is .5g/L due to the limit on thiamine. This is not a concern for homebrewers.
-// Stabilizers: Potassium sorbate (k-sorb) AND potassium metabisulfite (k-meta) are both needed to prevent refermentation. They cannot be reliably used to STOP fermentation in most cases. Amounts of k-meta needed for stabilizing are based on your pH. MeadTools assumes 50ppm if you choose not to take a pH reading. K-sorb amount is based on your ABV. It is not effective above around 16%. More info can be found here. 
-// Additives: Any ingredient that doesn't provide fermentable sugars is best placed here. You can use one of the suggested ingredients or add your own. 
