@@ -18,6 +18,8 @@ export default function RemainingYan({
     }
   }, [addedYan, targetYAN]);
   return (
-    <p className="text-base col-start-4 col-span-2 my-2">{remainingYan}</p>
+    <p className="sm:text-base text-[.9em] col-start-4 col-span-2 my-2">
+      {remainingYan}
+    </p>
   );
 }

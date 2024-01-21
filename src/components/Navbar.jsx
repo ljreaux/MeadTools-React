@@ -3,10 +3,10 @@ import logo from "../assets/full-logo.png";
 import logoOnly from "../assets/logoOnly.png";
 function Navbar() {
   return (
-    <div className="h-20 sticky top-0">
-      <div className="w-screen h-full bg-sidebar flex justify-center items-center text-textColor text-xl">
+    <div className="h-20 sticky top-0 z-[51]">
+      <div className="w-screen h-full bg-sidebar flex justify-space-between items-center text-textColor text-xl text-center relative">
         <Link
-          className="bg-background w-[3rem] md:flex md:w-24 lg:w-52 h-full md:absolute md:left-0 border-[1px] border-sidebar hover:opacity-80 transition-all"
+          className="bg-background w-[3rem] md:flex md:w-24 lg:w-52 h-full left-0 border-[1px] border-sidebar hover:opacity-80 transition-all"
           to="/"
         >
           <span className="w-full h-full flex flex-col justify-center items-center">
@@ -18,27 +18,27 @@ function Navbar() {
             />
           </span>
         </Link>{" "}
-        <nav className="flex items-center justify-center text-sm text-center">
+        <nav className="flex items-center justify-center sm:text-[1rem] text-[.6rem] my-0 mx-auto">
           <NavLink
-            className="hover:text-background transition-colors sm:mx-4 mx-1"
+            className="hover:text-background transition-colors sm:mx-4 mx-[.125rem]"
             to="/"
           >
             Home
           </NavLink>
           <NavLink
-            className="hover:text-background transition-colors sm:mx-4 mx-1"
+            className="hover:text-background transition-colors sm:mx-4 mx-[.125rem] leading-[.9rem]"
             to="/NuteCalc/"
           >
             Nutrient Calculator
           </NavLink>
-          <div className="relative group flex flex-col">
+          <div className="extra_calc">
             <NavLink
-              className="hover:text-background transition-colors sm:mx-4 mx-1"
+              className="hover:text-background transition-colors sm:mx-4 mx-[.125rem]"
               to="/ExtraCalcs"
             >
               Extra Calculators
             </NavLink>
-            <div className="absolute grid translate-y-[29%] md:translate-y-[25%] h-fit w-full bg-sidebar rounded-xl opacity-0 group-hover:opacity-100 transition-all text-[10px] md:text-[1rem] border-[1px]  border-s-textColor">
+            <div className="extra_links">
               <Link to="/ExtraCalcs/" className="hover:text-background ">
                 ABV Calculator
               </Link>{" "}
@@ -59,7 +59,7 @@ function Navbar() {
               </Link>
               <Link
                 to="/ExtraCalcs/RefractometerCorrection"
-                className="px-2 hover:text-background "
+                className="hover:text-background "
               >
                 Refractometer Correction
               </Link>
@@ -78,13 +78,13 @@ function Navbar() {
             </div>
           </div>
           <NavLink
-            className="hover:text-background transition-colors sm:mx-4 mx-1"
+            className="hover:text-background transition-colors sm:mx-4 mx-[.125rem]"
             to="/about"
           >
             About
           </NavLink>
           <NavLink
-            className="hover:text-background transition-colors sm:mx-4 mx-1"
+            className="hover:text-background transition-colors sm:mx-4 mx-[.125rem]"
             to="/contact"
           >
             Contact

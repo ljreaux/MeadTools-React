@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 
 import Sorbate from "./Sorbate";
 import Sulfite from "./Sulfite";
+import Tooltip from "../Tooltip";
+import { toolTipBody } from "../tooltipsBody";
 
 function Stabilizers({
   volUnits,
@@ -70,7 +72,13 @@ function Stabilizers({
     <div className="component-div my-4 mb-12">
       <div className="grid grid-cols-4 place-items-center text-center">
         <span className="col-start-1 col-span-2">
-          <h2 className="py-6 mx-2">Are you adding stabilizers?</h2>
+          <div className="flex items-baseline justify-center py-6 mx-2">
+            <h2>Are you adding stabilizers? </h2>
+            <Tooltip
+              body={toolTipBody.stabilizers}
+              link={"https://meadmaking.wiki/en/process/stabilization"}
+            />
+          </div>
           <select
             className="input w-11/12"
             value={using ? "yes" : "no"}

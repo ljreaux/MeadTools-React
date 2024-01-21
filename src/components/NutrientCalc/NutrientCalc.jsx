@@ -4,6 +4,8 @@ import NutrientDisplay from "./NutrientDisplay";
 import RevealButton from "./RevealButton";
 import { useState, useEffect } from "react";
 import yeasts from "/src/yeast.json";
+import Tooltip from "../Tooltip";
+import { toolTipBody } from "../tooltipsBody";
 
 function NutrientCalc({
   mainCalcVol,
@@ -379,8 +381,14 @@ function NutrientCalc({
               <option value="liter">Liters</option>
             </select>
           </span>
-          <h2 className="my-2">Specific Gravity</h2>
-          <h2 className="my-2">Offset PPM</h2>
+          <div className="flex items-baseline justify-center my-2">
+            <h2>Specific Gravity</h2>
+            <Tooltip body={toolTipBody.nutrientSg} />
+          </div>
+          <div className="flex items-baseline justify-center my-2">
+            <h2>Offset PPM</h2>
+            <Tooltip body={toolTipBody.offsetPpm} />
+          </div>
 
           <select
             value={selectedBrand}
@@ -428,7 +436,7 @@ function NutrientCalc({
             value={mainCalcVol}
             onChange={setVol}
           />
-          <span className="flex space-x-2 ">
+          <span className="flex space-x-[.25rem] ">
             <input
               step="0.001"
               onFocus={(e) => e.target.select()}
@@ -439,7 +447,7 @@ function NutrientCalc({
               className="input w-[3.25rem] my-2 "
               onChange={setSg}
             />
-            <p className="my-2 lg:text-base md:text-sm text-xs">
+            <p className="my-2 lg:text-base md:text-sm text-[.75em]">
               {displayBrix + " Brix"}
             </p>
           </span>
@@ -454,11 +462,29 @@ function NutrientCalc({
             value={mainCalcOffset}
           />
 
-          <h2 className="my-2">Nitrogen Requirement</h2>
-          <h2 className="my-2">Preferred Schedule</h2>
-          <h2 className="my-2">Target YAN</h2>
-          <h2 className="my-2">Number of Additions</h2>
-          <h2 className="my-2">Yeast Amount (g)</h2>
+          <div className="flex items-baseline justify-center my-2">
+            <h2>Nitrogen Requirement </h2>{" "}
+            <Tooltip body={toolTipBody.nitrogenRequirements} />
+          </div>
+          <div className="flex items-baseline justify-center my-2">
+            <h2>Preferred Schedule</h2>
+            <Tooltip
+              body={toolTipBody.preferredSchedule}
+              link={"https://meadmaking.wiki/en/ingredients/nutrients"}
+            />
+          </div>
+          <div className="flex items-baseline justify-center my-2">
+            <h2>Target YAN</h2>
+            <Tooltip body={toolTipBody.yan} />
+          </div>
+          <div className="flex items-baseline justify-center my-2">
+            <h2>Number of Additions</h2>
+            <Tooltip body={toolTipBody.numberOfAdditions} />
+          </div>
+          <div className="flex items-baseline justify-center my-2">
+            <h2>Yeast Amount (g)</h2>
+            <Tooltip body={toolTipBody.yeastAmount} />
+          </div>
 
           <p className="lg:text-base md:text-sm text-xs my-2">
             {selectedYeastObj["Nitrogen Requirement"]}
@@ -504,7 +530,7 @@ function NutrientCalc({
             <option value="oAndDap">Fermaid O & DAP</option>
             <option value="kAndDap">Fermaid K & DAP</option>
           </select>
-          <p className="lg:text-base md:text-sm text-xs my-2">
+          <p className="lg:text-base md:text-sm text-[.75em] my-2">
             {targetYAN + " PPM"}
           </p>
           <select
@@ -564,6 +590,8 @@ function NutrientCalc({
           setGoFermGrams={setGoFermGrams}
           goFermWater={goFermWater}
           setGoFermWater={setGoFermWater}
+          Tooltip={Tooltip}
+          toolTipBody={toolTipBody}
         />
       ) : (
         ""
