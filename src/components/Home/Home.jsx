@@ -482,7 +482,12 @@ function Home() {
             <h2>ABV:</h2>
             <div className="flex items-baseline justify-center">
               <h2>Delle Units:</h2>
-              <Tooltip body={toolTipBody.delleUnits} />
+              <Tooltip
+                body={toolTipBody.delleUnits}
+                link={
+                  "https://meadmaking.wiki/en/process/stabilization#via-yeast-alcohol-tolerance"
+                }
+              />
             </div>
 
             <p>

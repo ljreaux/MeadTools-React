@@ -129,7 +129,7 @@ p {
   position: absolute;
   min-width: max-content;
   left: 50%;
-  top: 65%;
+  top: 50%;
   transform: translate(-50%, 0);
   display: none;
   flex-direction: column;

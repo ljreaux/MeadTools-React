@@ -3,7 +3,7 @@ import logo from "../assets/full-logo.png";
 import logoOnly from "../assets/logoOnly.png";
 function Navbar() {
   return (
-    <div className="h-20 sticky top-0 z-50">
+    <div className="h-20 sticky top-0 z-[51]">
       <div className="w-screen h-full bg-sidebar flex justify-space-between items-center text-textColor text-xl text-center relative">
         <Link
           className="bg-background w-[3rem] md:flex md:w-24 lg:w-52 h-full left-0 border-[1px] border-sidebar hover:opacity-80 transition-all"

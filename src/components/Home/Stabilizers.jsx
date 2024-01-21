@@ -74,7 +74,10 @@ function Stabilizers({
         <span className="col-start-1 col-span-2">
           <div className="flex items-baseline justify-center py-6 mx-2">
             <h2>Are you adding stabilizers? </h2>
-            <Tooltip body={toolTipBody.stabilizers} />
+            <Tooltip
+              body={toolTipBody.stabilizers}
+              link={"https://meadmaking.wiki/en/process/stabilization"}
+            />
           </div>
           <select
             className="input w-11/12"

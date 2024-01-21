@@ -2,7 +2,7 @@ import { FaCircleInfo } from "react-icons/fa6";
 import { FaWindowClose } from "react-icons/fa";
 import { useState } from "react";
 
-export default function Tooltip({ body }) {
+export default function Tooltip({ body, link }) {
   const [hide, setHide] = useState(true);
   function toggleTooltip(e) {
     e.preventDefault();
@@ -19,14 +19,21 @@ export default function Tooltip({ body }) {
       <div
         className={`info_div translate-1/2 ${
           hide && "hidden"
-        } bg-sidebar max-h-[15em] w-[15em] p-[1em] mt-4 overflow-y-auto rounded-lg border-2 border-s-textColor text-left`}
+        } bg-sidebar max-h-[15em] w-[15em] p-[1em] mt-4 overflow-y-auto rounded-lg border-2 border-s-textColor text-left z-50`}
       >
         <div className=" flex justify-end">
           <button type="button" onClick={toggleTooltip}>
             <FaWindowClose />
           </button>
         </div>
-        <p>{body}</p>
+        <p>
+          {body}
+          {link && (
+            <a href={link} className="underline">
+              here.
+            </a>
+          )}
+        </p>
       </div>
     </div>
   );

@@ -7,7 +7,7 @@ export const toolTipBody = {
   estimatedFg:
     "Unless you are planning for this mead to stop early, it is best to leave this field at .996, this estimate will be close enough for most recipes.",
   delleUnits:
-    "Delle units are a measure of microbial stability. The higher the number, the more likely the brew is stable without the need for additional additives or stabilization methods. Delle units are calculated based on the amount of residual sugar and the ABV of the brew. 73 delle units is considered stable by most, but the actual number varies. Alcohol tolerance is NOT considered in delle stability. Read more here.",
+    "Delle units are a measure of microbial stability. The higher the number, the more likely the brew is stable without the need for additional additives or stabilization methods. Delle units are calculated based on the amount of residual sugar and the ABV of the brew. 73 delle units is considered stable by most, but the actual number varies. Alcohol tolerance is NOT considered in delle stability. Read more ",
   nutrientSg:
     "This is the difference in gravity, taking FG into account. For example, if your OG is listed as 1.100 and your FG is 1.010, this field will read 1.090. This can field can be edited.",
   offsetPpm:
@@ -15,7 +15,7 @@ export const toolTipBody = {
   nitrogenRequirements:
     "Determined by your yeast strain. If your yeast is not on the list, and you do not know its nitrogen requirement, enter it as Other: Other Medium N Yeast.",
   preferredSchedule:
-    "This calculator allows you to enter any combination of Fermaid O, K, and DAP. It is really up to you which nutrients/combinations you decide to use, but certain combos are better for certain situations. Read more about nutrients and schedules here.",
+    "This calculator allows you to enter any combination of Fermaid O, K, and DAP. It is really up to you which nutrients or combinations you decide to use, but certain combos are better for certain situations. Read more about nutrients and schedules ",
   yan: "Yeast Assimilable Nitrogen (YAN) is the amount of nitrogen needed by your yeast to have a healthy fermentation. Your target YAN is determined by your initial gravity and your yeast's nitrogen requirements.",
   numberOfAdditions:
     "Staggered nutrient additions are useful in preventing temperature spikes during fermentation that can stress the yeast. Four nutrient additions is probably the most common regimen, but I personally use three additions or a single addition in most cases.",
@@ -30,7 +30,7 @@ export const toolTipBody = {
   remainingYan:
     "If your remaining YAN is more than 0, you should consider adjusting the max g/L field. Keep in mind you should probably keep your amount of DAP under .96g/L for risk of off-flavors. Also the TTB limit on Fermaid K is .5g/L due to the limit on thiamine. This is not a concern for homebrewers.",
   stabilizers:
-    "Potassium sorbate (k-sorb) AND potassium metabisulfite (k-meta) are both needed to prevent refermentation. They cannot be reliably used to STOP fermentation in most cases. Amounts of k-meta needed for stabilizing are based on your pH. MeadTools assumes 50ppm if you choose not to take a pH reading. K-sorb amount is based on your ABV. It is not effective above around 16%. More info can be found here. ",
+    "Potassium sorbate (k-sorb) AND potassium metabisulfite (k-meta) are both needed to prevent refermentation. They cannot be reliably used to STOP fermentation in most cases. Amounts of k-meta needed for stabilizing are based on your pH. MeadTools assumes 50ppm if you choose not to take a pH reading. K-sorb amount is based on your ABV. It is not effective above around 16%. More info can be found ",
   additives:
     "Any ingredient that doesn't provide fermentable sugars is best placed here. You can use one of the suggested ingredients or add your own.",
 };

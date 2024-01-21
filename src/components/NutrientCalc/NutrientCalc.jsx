@@ -468,7 +468,10 @@ function NutrientCalc({
           </div>
           <div className="flex items-baseline justify-center my-2">
             <h2>Preferred Schedule</h2>
-            <Tooltip body={toolTipBody.preferredSchedule} />
+            <Tooltip
+              body={toolTipBody.preferredSchedule}
+              link={"https://meadmaking.wiki/en/ingredients/nutrients"}
+            />
           </div>
           <div className="flex items-baseline justify-center my-2">
             <h2>Target YAN</h2>
