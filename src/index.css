@@ -118,3 +118,31 @@ p {
   left: 50%;
   transform: translate(-50%);
 }
+
+.extra_calc { 
+  position: relative;
+  /* width: 100%; */
+  /* @apply relative flex flex-col; */
+}
+
+.extra_links {
+  position: absolute;
+  min-width: max-content;
+  left: 50%;
+  top: 65%;
+  transform: translate(-50%, 0);
+  display: none;
+  flex-direction: column;
+  padding-inline: 1em;
+  height: fit-content;
+  border-radius: .75em;
+  font-size: 10px;
+  margin-block: 1em;
+  background-color: hsl(var(--color-sidebar));
+  @apply md:text-[1em]; 
+
+}
+.extra_calc:hover .extra_links {
+  display: flex;
+  flex-direction: column;
+}
