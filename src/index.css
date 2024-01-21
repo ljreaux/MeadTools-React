@@ -24,11 +24,23 @@ html {
   width: 100vw;
 }
 
+div::-webkit-scrollbar {
+  width: .5em;   /* width of the entire scrollbar */
+}
 
+div::-webkit-scrollbar-track {
+  background: var(--color-textColor);        /* color of the tracking area */
+}
+
+div::-webkit-scrollbar-thumb {
+  background-color: var(--color-textColor);    /* color of the scroll thumb */
+  border-radius: 20px;       /* roundness of the scroll thumb */
+  border: 1px solid ;  /* creates padding around scroll thumb */
+}
 /* sets up page */
 .main-div-style {
   max-height: 100%;
-  @apply h-screen w-screen flex items-center justify-center font-serif text-textColor md:text-2xl lg:text-3xl text-xs;
+  @apply h-screen w-screen flex items-center justify-center font-serif text-textColor md:text-xl lg:text-2xl text-xs;
 }
 
 /* sets up box for individual components */
@@ -79,9 +91,12 @@ nav a.active {
 
 
 h2 {
-  @apply px-2;
+  @apply px-[.125em] w-fit sm:text-[1em] md:text-[.9em] text-[.75em] ;
 }
 
+p {
+  @apply sm:text-[1em] text-[.75rem]
+}
 
 .form-input {
   @apply bg-background text-[.5rem] md:text-sm rounded-xl border-2 border-solid border-textColor px-2 hover:bg-sidebar hover:border-background;
@@ -91,3 +106,15 @@ h2 {
    @apply w-screen fixed bottom-0 left-0 text-textColor 
 } 
 
+.info_button {
+  width: 100%;
+  display: grid;
+  place-items: center;
+}
+
+.info_div {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%);
+}

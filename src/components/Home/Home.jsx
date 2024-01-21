@@ -11,6 +11,8 @@ import NutrientCalc from "../NutrientCalc/NutrientCalc";
 import Stabilizers from "./Stabilizers";
 import PDF from "../PDF";
 import Additives from "../Additives";
+import Tooltip from "../Tooltip";
+import { toolTipBody } from "../tooltipsBody";
 
 function Home() {
   const [preferredSchedule, setPreferredSchedule] = useState(
@@ -345,7 +347,10 @@ function Home() {
           className="grid grid-cols-4 place-items-center text-center"
           id="recipeBuilder"
         >
-          <h2>Ingredients</h2>
+          <div className="flex items-baseline justify-center">
+            <h2>Ingredients</h2>
+            <Tooltip body={toolTipBody.volumeLines} />
+          </div>
           <span>
             <h2>Weight</h2>
             <select
@@ -359,7 +364,9 @@ function Home() {
               <option value="kg">kg</option>
             </select>
           </span>
-          <h2>Sugar Percentage (Brix)</h2>
+          <div className="flex items-baseline justify-center">
+            <h2>Sugar Percentage (Brix)</h2> <Tooltip body={toolTipBody.brix} />
+          </div>
           <span>
             <h2>Volume</h2>
             <select
@@ -383,7 +390,7 @@ function Home() {
             setStoredInput={setStoredInput}
             inputNum="input11"
             initialIngredient={"Water"}
-          />
+          />{" "}
           <IngredientLine
             volUnits={volUnits}
             units={units}
@@ -468,9 +475,15 @@ function Home() {
         {displayMainResults ? (
           <div className="grid grid-cols-4 place-items-center text-center py-4">
             <h2>Estimated OG:</h2>
-            <h2>Estimated FG:</h2>
+            <div className="flex items-baseline justify-center">
+              <h2>Estimated FG:</h2>
+              <Tooltip body={toolTipBody.estimatedFg} />
+            </div>
             <h2>ABV:</h2>
-            <h2>Delle Units:</h2>
+            <div className="flex items-baseline justify-center">
+              <h2>Delle Units:</h2>
+              <Tooltip body={toolTipBody.delleUnits} />
+            </div>
 
             <p>
               {isNaN(OG) || OG > 1.22 ? "Enter a valid input" : OG.toFixed(3)}
@@ -486,7 +499,10 @@ function Home() {
             <p>{`${Number(abv).toFixed(2)}% ABV`}</p>
             <p>{`${Number(delle).toFixed(0)} Delle Units`} </p>
             <span>
-              <h1>Total Volume</h1>
+              <div className="flex items-baseline justify-center">
+                <h2>Total Volume</h2>
+                <Tooltip body={toolTipBody.totalVolume} />
+              </div>
               <p>{`${totalVolume.toFixed(3)} ${volUnits}`}</p>
             </span>
           </div>
@@ -535,6 +551,8 @@ function Home() {
         <Additives
           extraIngredients={extraIngredients}
           setExtraIngredients={setExtraIngredients}
+          toolTipBody={toolTipBody}
+          Tooltip={Tooltip}
         ></Additives>
         <div className="flex flex-col justify-center">
           <ReactToPrint

@@ -3,7 +3,12 @@ import { useState, useEffect } from "react";
 import NewAddLines from "./NewAddLines";
 import { FaPlusSquare } from "react-icons/fa";
 
-export default function Additives({ setExtraIngredients, inputNum }) {
+export default function Additives({
+  setExtraIngredients,
+  inputNum,
+  toolTipBody,
+  Tooltip,
+}) {
   const [addRowCount, setAddRowCount] = useState(
     JSON.parse(sessionStorage.getItem("addRowCount")) || 0
   );
@@ -13,10 +18,11 @@ export default function Additives({ setExtraIngredients, inputNum }) {
   return (
     <div className="component-div">
       <form className="w-full grid grid-cols-3 gap-x-4 items-center justify-center text-center">
-        <h1 className="col-span-3 py-4">
-          Additives and Additional Ingredients
-        </h1>
-        <h3>Additional </h3>
+        <div className="flex items-baseline justify-center col-span-3 py-4">
+          <h2>Additives and Additional Ingredients</h2>
+          <Tooltip body={toolTipBody.additives} />
+        </div>
+        <h3>Ingredient </h3>
         <h3>Amount</h3>
         <h3>Units</h3>
         <AdditiveLine

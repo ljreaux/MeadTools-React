@@ -1,7 +1,7 @@
 export const toolTipBody = {
   brix: "Brix measures the amount of dissolved solids in solution. 1g of sucrose in 100mg of water is 1 Brix, so it is roughly the same as percent sugar. You can measure brix with a refractometer, calculate it by nutrition facts, or convert your SG to brix over on ExtraCalc to use custom sugar percentages in this calculator. ",
   volumeLines:
-    "These two lines only contain liquid ingredients, all lines on this calculator can be added by either volume or weight. The liquid lines, are the only ones that will show up on your recipe pdf as a volumetric measurements.",
+    "The first two lines only contain liquid ingredients, all lines on this calculator can be added by either volume or weight. The liquid lines are the only ones that will show up on your recipe pdf as a volumetric measurements.",
   totalVolume:
     "This total volume is an estimate of only the fermentables in solution, your actual volume WILL be higher if using high fruit loads.",
   estimatedFg:
