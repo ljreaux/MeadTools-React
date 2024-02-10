@@ -45,7 +45,7 @@ div::-webkit-scrollbar-thumb {
 
 /* sets up box for individual components */
 .component-div {
-  @apply w-11/12 sm:w-9/12 flex flex-col items-center justify-center rounded-xl bg-sidebar aspect-video px-8;
+  @apply w-11/12 sm:w-9/12 flex flex-col items-center justify-center rounded-xl bg-sidebar px-8;
 }
 
 

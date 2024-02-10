@@ -5,7 +5,7 @@ export default function FilteredIngredients({
 }) {
   return (
     <select
-      className="input w-11/12 my-4 "
+      className="input w-11/12 my-2 "
       onChange={ingredientChange}
       value={optionValue}
     >

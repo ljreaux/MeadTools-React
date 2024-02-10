@@ -160,7 +160,9 @@ function IngredientLine({
 
   return (
     <div
-      className={`col-start-1 col-span-4 grid grid-cols-4 place-items-center text-center ${hidden} w-full`}
+      className={`col-start-1 col-span-4 grid grid-cols-4 place-items-center text-center ${
+        hidden || ""
+      } w-full`}
     >
       {optionValue == "liquid" ? (
         <FilteredIngredients
@@ -181,7 +183,7 @@ function IngredientLine({
         step="0.1"
         type="number"
         onFocus={(e) => e.target.select()}
-        className="input w-2/4 my-4"
+        className="input w-2/4 my-2"
         value={weight.weight}
         onChange={(e) => {
           setWeight({
@@ -194,7 +196,7 @@ function IngredientLine({
       <input
         type="number"
         onFocus={(e) => e.target.select()}
-        className="input w-2/4 my-4"
+        className="input w-2/4 my-2"
         value={brix}
         onChange={(e) => {
           setBrix(e.target.value);
@@ -204,7 +206,7 @@ function IngredientLine({
         step="0.1"
         type="number"
         onFocus={(e) => e.target.select()}
-        className="input w-2/4 my-4"
+        className="input w-2/4 my-2"
         value={volume.vol}
         onChange={(e) => {
           setVolume({

@@ -71,7 +71,7 @@ function Stabilizers({
   return (
     <div className="component-div my-4 mb-12">
       <div className="grid grid-cols-4 place-items-center text-center">
-        <span className="col-start-1 col-span-2">
+        <span className="col-start-1 col-span-2 pb-4">
           <div className="flex items-baseline justify-center py-6 mx-2">
             <h2>Are you adding stabilizers? </h2>
             <Tooltip
@@ -89,7 +89,7 @@ function Stabilizers({
             <option value="no">No</option> <option value="yes">Yes</option>
           </select>
         </span>
-        <span className="col-start-3 col-span-2">
+        <span className="col-start-3 col-span-2 pb-4">
           <h2 className="py-6 mx-2">Are you taking a pH Reading?</h2>
           <select
             className="input w-11/12"
