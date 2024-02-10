@@ -40,7 +40,7 @@ const ContactUs = () => {
 
   return (
     <div className="main-div-style">
-      <div className="component-div">
+      <div className="component-div aspect-video">
         <Title header="Contact Form"></Title>
         <form
           className="grid place-items-center"
