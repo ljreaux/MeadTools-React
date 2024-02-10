@@ -20,7 +20,7 @@ function TempCorrection({ toBrix, tempObj, handleTempSg, setTemp }) {
     return currentTemp * (9 / 5) + 32;
   }
   return (
-    <div className="component-div">
+    <div className="component-div aspect-video">
       <Title header="Hydrometer Temperature Correction" />
       <GravityInput
         gravity="sg"

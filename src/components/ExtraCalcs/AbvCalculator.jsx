@@ -11,7 +11,7 @@ function AbvCalculator({
   delle,
 }) {
   return (
-    <div className="component-div">
+    <div className="component-div aspect-video">
       <Title header="ABV Calculator" />
       <div>
         <GravityInput

@@ -331,7 +331,7 @@ function Home() {
     mainCalcYeastInfo,
     mainCalcYeastBrand,
     preferredSchedule,
-    mainCalcNuteInfo,
+    // mainCalcNuteInfo,
     extraIngredients,
   ]);
 
@@ -438,7 +438,7 @@ function Home() {
               Cannot add any more rows.
             </h2>
           )}
-          <div className="btn bg-background rounded-2xl px-2 py-[.25rem] col-span-4 items-center flex justify-center sm:gap-8 gap-4 my-8 w-1/4 group text-lg">
+          <div className="btn bg-background rounded-2xl px-2 col-span-4 items-center flex justify-center sm:gap-8 gap-4 my-4 w-1/4 group text-lg">
             <button
               type="button"
               onClick={() => {
@@ -473,7 +473,7 @@ function Home() {
           </button>
         </form>
         {displayMainResults ? (
-          <div className="grid grid-cols-4 place-items-center text-center py-4">
+          <div className="grid grid-cols-4 place-items-center text-center pb-4">
             <h2>Estimated OG:</h2>
             <div className="flex items-baseline justify-center">
               <h2>Estimated FG:</h2>
@@ -513,7 +513,7 @@ function Home() {
           </div>
         ) : null}
       </div>
-      <div className="w-full h-full mb-[5%]">
+      <div className="w-full h-full ">
         <NutrientCalc
           mainCalcVol={mainCalcVol}
           setMainCalcVol={setMainCalcVol}
@@ -543,7 +543,7 @@ function Home() {
           setPreferredSchedule={setPreferredSchedule}
         ></NutrientCalc>
       </div>
-      <div className="w-full h-full flex flex-col items-center">
+      <div className="w-full flex flex-col items-center">
         <Stabilizers
           volUnits={volUnits}
           abv={abv}
@@ -562,7 +562,7 @@ function Home() {
         <div className="flex flex-col justify-center">
           <ReactToPrint
             trigger={() => (
-              <button className="btn my-[6rem] hover:border-textColor flex flex-col text-center justify-center items-center">
+              <button className="btn my-[4rem] hover:border-textColor flex flex-col text-center justify-center items-center">
                 Get Recipe <MdPictureAsPdf />
               </button>
             )}
