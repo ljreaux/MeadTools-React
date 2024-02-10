@@ -29,17 +29,18 @@ function NutrientDisplay({
   function goFerm() {
     let multiplier = 0;
     let waterMultiplier = 20;
-    if (gfType != "none" || gfType != "go-ferm-sterol") {
-      multiplier = 1.25;
-    } else if (gfType == "go-ferm-sterol") {
-      multiplier = 1.2;
-    } else {
+    if (gfType == "none") {
       waterMultiplier *= 0;
     }
+    if (gfType == "go-ferm" || gfType == "go-ferm-protect") {
+      multiplier = 1.25;
+    }
     if (gfType == "go-ferm-sterol") {
+      multiplier = 1.2;
       waterMultiplier /= 2;
     }
     const goFerm = yeastAmount * multiplier;
+    console.log(gfType, yeastAmount, multiplier);
     setGoFermGrams(goFerm);
     setGoFermWater(goFerm * waterMultiplier);
   }

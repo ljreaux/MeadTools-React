@@ -236,7 +236,6 @@ function NutrientCalc({
         offset: e.target.value,
       },
     ]);
-    setMainCalcOffset(e.target.value);
   };
 
   const [yeastAmount, setYeastAmount] = useState(0);
@@ -458,7 +457,10 @@ function NutrientCalc({
             type="number"
             id="offsetPPM"
             className="input w-2/4 my-2"
-            onChange={setOffset}
+            onChange={(e) => {
+              setOffset(e);
+              setMainCalcOffset(e.target.value);
+            }}
             value={mainCalcOffset}
           />
 

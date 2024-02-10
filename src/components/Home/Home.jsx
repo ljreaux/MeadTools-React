@@ -331,7 +331,7 @@ function Home() {
     mainCalcYeastInfo,
     mainCalcYeastBrand,
     preferredSchedule,
-    mainCalcNuteInfo,
+    // mainCalcNuteInfo,
     extraIngredients,
   ]);
 
