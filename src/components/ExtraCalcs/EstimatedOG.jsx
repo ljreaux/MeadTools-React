@@ -19,7 +19,7 @@ function EstimatedOG({
   }
 
   return (
-    <div className="component-div">
+    <div className="component-div aspect-video">
       <Title header="Estimated OG Without Reading" />
       <GravityInput
         gravity="hydroFG"

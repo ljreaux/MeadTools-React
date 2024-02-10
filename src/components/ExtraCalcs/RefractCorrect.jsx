@@ -37,7 +37,7 @@ function RefractCorrect({ toBrix, toSg, abvCalc }) {
   }
 
   return (
-    <div className="component-div">
+    <div className="component-div aspect-video">
       <Title header="Refractometer Correction Calculator" />
       <div className="text-center">
         <label>Correction Factor: </label>

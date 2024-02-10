@@ -43,7 +43,7 @@ function ChangeToBrix({ toBrix }) {
   }
 
   return (
-    <div className="component-div">
+    <div className="component-div aspect-video">
       <Title header="Brix Conversion Calculator" />
       <div className="items-center justify-center text-center py-2">
         <label>Enter Gravity: </label>

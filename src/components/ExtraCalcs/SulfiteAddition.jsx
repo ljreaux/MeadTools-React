@@ -12,7 +12,7 @@ function SulfiteAddition() {
   const sulfiteObj = sulfite[0];
 
   return (
-    <div className="component-div">
+    <div className="component-div aspect-video">
       <Title header="Sulfite Addition Calculator" />
       <div className="text-center">
         <label>Batch Size: </label>

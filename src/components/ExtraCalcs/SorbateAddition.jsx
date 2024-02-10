@@ -12,7 +12,7 @@ function SorbateAddition() {
   const sorbateObj = sorbate[0];
 
   return (
-    <div className="component-div">
+    <div className="component-div aspect-video">
       <Title header="Sorbate Addition Calculator" />
       <div className="justify-center items-center text-center py-2">
         <label>Batch Size: </label>
