@@ -603,6 +603,15 @@
       "HighTemp": 81
     }
   ],
+  "Fermentis": [
+    {
+      "name": "SafAle US-05",
+      "Nitrogen Requirement": "Medium",
+      "ABV Tolerance": 12,
+      "LowTemp": 59,
+      "HighTemp": 75
+    }
+  ],
   "Mangrove Jack": [
     {
       "name": "AW4",
