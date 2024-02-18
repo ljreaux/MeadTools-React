@@ -3,9 +3,9 @@ import Title from "../Title";
 import NutrientDisplay from "./NutrientDisplay";
 import RevealButton from "./RevealButton";
 import { useState, useEffect } from "react";
-import yeasts from "/src/yeast.json";
-import Tooltip from "../Tooltip";
-import { toolTipBody } from "../tooltipsBody";
+import yeasts from "/src/JSON/yeast.json";
+import Tooltip from "../Tooltips/Tooltip";
+import { toolTipBody } from "../Tooltips/tooltipsBody";
 
 function NutrientCalc({
   mainCalcVol,
@@ -18,7 +18,6 @@ function NutrientCalc({
   setMainCalcUnits,
   mainCalcYeastInfo,
   setMainCalcYeastInfo,
-  mainCalcYeastBrand,
   setMainCalcYeastBrand,
   setMainCalcSugarBreak,
   displayMainResults,
@@ -131,7 +130,7 @@ function NutrientCalc({
   const [selectedBrand, setSelectedBrand] = useState(
     JSON.parse(sessionStorage.getItem("yeastBrand")) || "Lalvin"
   );
-  const selectedBrandObj = selectedBrand[0];
+
   const [selectedYeast, setSelectedYeast] = useState(
     JSON.parse(sessionStorage.getItem("yeastInfo")) || [
       {

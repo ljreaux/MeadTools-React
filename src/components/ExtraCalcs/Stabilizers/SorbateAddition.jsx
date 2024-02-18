@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Title from "../Title";
+import Title from "../../Title";
 
 function SorbateAddition() {
   const [sorbate, setsorbate] = useState([

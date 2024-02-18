@@ -1,5 +1,5 @@
-import Title from "../Title";
-import GravityInput from "./GravityInput";
+import Title from "../../Title";
+import GravityInput from "../GravityInput";
 
 // actual calculations run in parent component
 function TempCorrection({ toBrix, tempObj, handleTempSg, setTemp }) {

@@ -9,10 +9,10 @@ import { FaMinusSquare } from "react-icons/fa";
 import { MdPictureAsPdf } from "react-icons/md";
 import NutrientCalc from "../NutrientCalc/NutrientCalc";
 import Stabilizers from "./Stabilizers";
-import PDF from "../PDF";
-import Additives from "../Additives";
-import Tooltip from "../Tooltip";
-import { toolTipBody } from "../tooltipsBody";
+import PDF from "../PDF/PDF.jsx";
+import Additives from "../Additives/Additives.jsx";
+import Tooltip from "../Tooltips/Tooltip.jsx";
+import { toolTipBody } from "../Tooltips/tooltipsBody.js";
 
 function Home() {
   const [preferredSchedule, setPreferredSchedule] = useState(
@@ -389,7 +389,6 @@ function Home() {
             storedInput={storedInput}
             setStoredInput={setStoredInput}
             inputNum="input11"
-            initialIngredient={"Water"}
           />{" "}
           <IngredientLine
             volUnits={volUnits}
@@ -399,7 +398,6 @@ function Home() {
             storedInput={storedInput}
             setStoredInput={setStoredInput}
             inputNum="input12"
-            initialIngredient={"Water"}
           />
           <div className="col-span-5 w-11/12 h-fit border-dotted border-b-[1px] border-textColor my-2"></div>
           <IngredientLine
@@ -409,7 +407,6 @@ function Home() {
             storedInput={storedInput}
             setStoredInput={setStoredInput}
             inputNum="input1"
-            initialIngredient={"Honey"}
           />
           <IngredientLine
             volUnits={volUnits}
@@ -418,7 +415,6 @@ function Home() {
             storedInput={storedInput}
             setStoredInput={setStoredInput}
             inputNum="input2"
-            initialIngredient={"Honey"}
           />
           {/* new lines added when button is pushed */}
           <NewLines
@@ -525,7 +521,6 @@ function Home() {
           setMainCalcUnits={setMainCalcUnits}
           mainCalcYeastInfo={mainCalcYeastInfo}
           setMainCalcYeastInfo={setMainCalcYeastInfo}
-          mainCalcYeastBrand={mainCalcYeastBrand}
           setMainCalcYeastBrand={setMainCalcYeastBrand}
           setMainCalcSugarBreak={setMainCalcSugarBreak}
           displayMainResults={displayMainResults}

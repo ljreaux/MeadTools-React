@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 
 import Sorbate from "./Sorbate";
 import Sulfite from "./Sulfite";
-import Tooltip from "../Tooltip";
-import { toolTipBody } from "../tooltipsBody";
+import Tooltip from "../Tooltips/Tooltip";
+import { toolTipBody } from "../Tooltips/tooltipsBody";
 
 function Stabilizers({
   volUnits,

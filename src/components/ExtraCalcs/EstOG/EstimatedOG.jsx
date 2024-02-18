@@ -1,6 +1,6 @@
-import GravityInput from "./GravityInput";
+import GravityInput from "../GravityInput";
 import EstOGRunButton from "./EstOGRunButton";
-import Title from "../Title";
+import Title from "../../Title";
 
 function EstimatedOG({
   handleGravity,

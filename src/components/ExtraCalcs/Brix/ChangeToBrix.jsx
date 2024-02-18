@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Title from "../Title";
+import Title from "../../Title";
 
 function ChangeToBrix({ toBrix }) {
   const [gravity, setGravity] = useState([

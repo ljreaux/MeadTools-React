@@ -1,4 +1,4 @@
-import logo from "../assets/full-logo.png";
+import logo from "../../assets/full-logo.png";
 import "./pdfStyles.css";
 import { forwardRef, useState, useEffect } from "react";
 

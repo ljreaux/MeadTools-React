@@ -1,4 +1,4 @@
-import Title from "../Title";
+import Title from "../../Title";
 import { useState } from "react";
 
 function RefractCorrect({ toBrix, toSg, abvCalc }) {

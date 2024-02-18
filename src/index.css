@@ -25,17 +25,17 @@ html {
 }
 
 div::-webkit-scrollbar {
-  width: .5em;   /* width of the entire scrollbar */
+  width: 0.5em; /* width of the entire scrollbar */
 }
 
 div::-webkit-scrollbar-track {
-  background: var(--color-textColor);        /* color of the tracking area */
+  background: var(--color-textColor); /* color of the tracking area */
 }
 
 div::-webkit-scrollbar-thumb {
-  background-color: var(--color-textColor);    /* color of the scroll thumb */
-  border-radius: 20px;       /* roundness of the scroll thumb */
-  border: 1px solid ;  /* creates padding around scroll thumb */
+  background-color: var(--color-textColor); /* color of the scroll thumb */
+  border-radius: 20px; /* roundness of the scroll thumb */
+  border: 1px solid; /* creates padding around scroll thumb */
 }
 /* sets up page */
 .main-div-style {
@@ -48,7 +48,6 @@ div::-webkit-scrollbar-thumb {
   @apply w-11/12 sm:w-9/12 flex flex-col items-center justify-center rounded-xl bg-sidebar px-8;
 }
 
-
 .input {
   @apply h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-textColor hover:bg-sidebar hover:border-background;
 }
@@ -57,12 +56,10 @@ div::-webkit-scrollbar-thumb {
   @apply bg-background rounded-2xl border-2 border-solid border-textColor  hover:bg-sidebar hover:border-background md:text-lg text-base px-2 py-1 disabled:bg-sidebar disabled:hover:border-textColor disabled:hover:text-sidebar disabled:cursor-not-allowed;
 }
 
-
 /* Extra calcs dropdown */
 .screen-transition {
   @apply inline-block  whitespace-nowrap min-w-fit mx-2 px-4 py-2 text-sm bg-sidebar border-s-textColor border-2  opacity-0  rounded-lg group-hover:opacity-100 transition-opacity;
 }
-
 
 .logo-styles {
   @apply inline-block mx-1;
@@ -72,14 +69,9 @@ div::-webkit-scrollbar-thumb {
   @apply inline-block;
 }
 
-
 nav a.active {
   @apply bg-background rounded-xl p-2 hover:text-sidebar;
 }
-/* 
-.navlogo .active {
-  @apply text-4xl;
-} */
 
 .active {
   @apply text-sidebar;
@@ -89,13 +81,12 @@ nav a.active {
   @apply text-background underline hover:text-textColor hover:font-bold transition-all;
 }
 
-
 h2 {
-  @apply px-[.125em] w-fit sm:text-[1em] md:text-[.9em] text-[.75em] ;
+  @apply px-[.125em] w-fit sm:text-[1em] md:text-[.9em] text-[.75em];
 }
 
 p {
-  @apply sm:text-[1em] text-[.75rem]
+  @apply sm:text-[1em] text-[.75rem];
 }
 
 .form-input {
@@ -103,8 +94,8 @@ p {
 }
 
 .bottom-bar {
-   @apply w-screen fixed bottom-0 left-0 text-textColor 
-} 
+  @apply w-screen fixed bottom-0 left-0 text-textColor;
+}
 
 .info_button {
   width: 100%;
@@ -119,10 +110,8 @@ p {
   transform: translate(-50%);
 }
 
-.extra_calc { 
+.extra_calc {
   position: relative;
-  /* width: 100%; */
-  /* @apply relative flex flex-col; */
 }
 
 .extra_links {
@@ -135,12 +124,11 @@ p {
   flex-direction: column;
   padding-inline: 1em;
   height: fit-content;
-  border-radius: .75em;
+  border-radius: 0.75em;
   font-size: 10px;
   margin-block: 1em;
   background-color: hsl(var(--color-sidebar));
-  @apply md:text-[1em]; 
-
+  @apply md:text-[1em];
 }
 .extra_calc:hover .extra_links {
   display: flex;

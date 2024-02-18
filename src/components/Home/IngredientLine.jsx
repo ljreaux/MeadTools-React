@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 
 // wil likely refactor and add both json files into API
-import fermentables from "/src/fermentables.json";
+import fermentables from "/src/JSON/fermentables.json";
 import IngredientOptions from "./IngredientOptions";
 import FilteredIngredients from "./FilteredIngredients";
 
@@ -14,7 +14,6 @@ function IngredientLine({
   storedInput,
   setStoredInput,
   inputNum,
-  initialIngredient,
 }) {
   // sets ingredient select
   const [ingredients, setIngredients] = useState();

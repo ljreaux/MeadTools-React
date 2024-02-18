@@ -1,5 +1,5 @@
-import Title from "../Title";
-import GravityInput from "./GravityInput";
+import Title from "../../Title";
+import GravityInput from "../GravityInput";
 import ABVRunButton from "./ABVRunButton";
 
 function AbvCalculator({

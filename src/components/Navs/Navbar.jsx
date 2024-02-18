@@ -1,6 +1,6 @@
 import { NavLink, Link } from "react-router-dom";
-import logo from "../assets/full-logo.png";
-import logoOnly from "../assets/logoOnly.png";
+import logo from "../../assets/full-logo.png";
+import logoOnly from "../../assets/logoOnly.png";
 function Navbar() {
   return (
     <div className="h-20 sticky top-0 z-[51]">
