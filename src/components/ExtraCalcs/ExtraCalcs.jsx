@@ -2,15 +2,15 @@
 import { useState } from "react";
 import { Route, Routes } from "react-router-dom";
 
-import ExtraCalcsSideBar from "./ExtraCalcsSideBar.jsx";
-import AbvCalculator from "./AbvCalculator.jsx";
-import ChangeToBrix from "./ChangeToBrix.jsx";
-import EstimatedOG from "./EstimatedOG.jsx";
-import SulfiteAddition from "./SulfiteAddition.jsx";
-import SorbateAddition from "./SorbateAddition.jsx";
-import RefractCorrect from "./RefractCorrect.jsx";
-import TempCorrection from "./TempCorrection.jsx";
-import BlendingCalc from "./BlendingCalc.jsx";
+import ExtraCalcsSideBar from "./Nav/ExtraCalcsSideBar.jsx";
+import AbvCalculator from "./Abv/AbvCalculator.jsx";
+import ChangeToBrix from "./Brix/ChangeToBrix.jsx";
+import EstimatedOG from "./EstOG/EstimatedOG.jsx";
+import SulfiteAddition from "./Stabilizers/SulfiteAddition.jsx";
+import SorbateAddition from "./Stabilizers/SorbateAddition.jsx";
+import RefractCorrect from "./Refractometer/RefractCorrect.jsx";
+import TempCorrection from "./Temperature/TempCorrection.jsx";
+import BlendingCalc from "./Blending/BlendingCalc.jsx";
 
 function ExtraCalcs() {
   // refractometer calc

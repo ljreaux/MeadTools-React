@@ -42,7 +42,6 @@ export default function NuteContainer() {
       mainCalcYeastInfo={dummyYeast}
       setMainCalcYeastInfo={setDummyYeastInfo}
       setMainCalcYeastBrand={setDummyYeastBrand}
-      mainCalcYeastBrand={dummyYeastBrand}
       setMainCalcSugarBreak={setDummySugar}
       displayMainResults={displayMainResults}
       setMainCalcNuteInfo={setDummyNuteInfo}

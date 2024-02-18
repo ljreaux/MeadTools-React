@@ -18,7 +18,6 @@ export default function NewLines({
         storedInput={storedInput}
         setStoredInput={setStoredInput}
         inputNum="input3"
-        initialIngredient={"Honey"}
       />
       <IngredientLine
         volUnits={volUnits}
@@ -28,7 +27,6 @@ export default function NewLines({
         storedInput={storedInput}
         setStoredInput={setStoredInput}
         inputNum="input4"
-        initialIngredient={"Honey"}
       />
       <IngredientLine
         volUnits={volUnits}
@@ -38,7 +36,6 @@ export default function NewLines({
         storedInput={storedInput}
         setStoredInput={setStoredInput}
         inputNum="input5"
-        initialIngredient={"Honey"}
       />
       <IngredientLine
         volUnits={volUnits}
@@ -48,7 +45,6 @@ export default function NewLines({
         storedInput={storedInput}
         setStoredInput={setStoredInput}
         inputNum="input6"
-        initialIngredient={"Honey"}
       />
       <IngredientLine
         volUnits={volUnits}
@@ -58,7 +54,6 @@ export default function NewLines({
         storedInput={storedInput}
         setStoredInput={setStoredInput}
         inputNum="input7"
-        initialIngredient={"Honey"}
       />
       <IngredientLine
         volUnits={volUnits}
@@ -68,7 +63,6 @@ export default function NewLines({
         storedInput={storedInput}
         setStoredInput={setStoredInput}
         inputNum="input8"
-        initialIngredient={"Honey"}
       />
       <IngredientLine
         volUnits={volUnits}
@@ -78,7 +72,6 @@ export default function NewLines({
         storedInput={storedInput}
         setStoredInput={setStoredInput}
         inputNum="input9"
-        initialIngredient={"Honey"}
       />
       <IngredientLine
         volUnits={volUnits}
@@ -87,7 +80,6 @@ export default function NewLines({
         hidden={rowCount >= 8 ? null : "hidden"}
         storedInput={storedInput}
         setStoredInput={setStoredInput}
-        initialIngredient={"Honey"}
         inputNum="input10"
       />
     </>
