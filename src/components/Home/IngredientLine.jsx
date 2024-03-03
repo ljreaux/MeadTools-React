@@ -157,6 +157,15 @@ function IngredientLine({
     });
   }, [weight, brix, volume, ingredientCat]);
 
+  useEffect(() => {
+    setVolume((prev) => {
+      return { ...prev, vol: 0 };
+    });
+    setWeight((prev) => {
+      return { ...prev, weight: 0 };
+    });
+  }, [hidden]);
+
   return (
     <div
       className={`col-start-1 col-span-4 grid grid-cols-4 place-items-center text-center ${
