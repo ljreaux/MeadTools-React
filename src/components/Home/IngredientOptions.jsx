@@ -10,7 +10,7 @@ export default function IngredientOptions({
       value={optionValue}
     >
       {ingredients
-        ? ingredients.ingredients.map((ingredient) => {
+        ? ingredients.map((ingredient) => {
             return (
               <option key={ingredient.name} value={ingredient.name}>
                 {ingredient.name}

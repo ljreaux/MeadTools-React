@@ -134,3 +134,24 @@ p {
   display: flex;
   flex-direction: column;
 }
+
+.loadingContainer {
+  width: 100vw;
+  height: 100%;
+  display: grid;
+  place-items: center;
+}
+
+.loading {
+  animation: fade 2s ease-in-out infinite;
+}
+
+@keyframes fade {
+  0%,
+  100% {
+    opacity: 0.25;
+  }
+  50% {
+    opacity: 1;
+  }
+}

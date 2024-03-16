@@ -10,7 +10,7 @@ export default function FilteredIngredients({
       value={optionValue}
     >
       {ingredients
-        ? ingredients.ingredients.map((ingredient) => {
+        ? ingredients.map((ingredient) => {
             return ingredient.category == "juice" ||
               ingredient.category == "water" ? (
               <option key={ingredient.name} value={ingredient.name}>

@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import fermentables from "/src/JSON/fermentables.json";
 import IngredientOptions from "./IngredientOptions";
 import FilteredIngredients from "./FilteredIngredients";
-
+import { getAllIngredients } from "../Utils/API";
 function IngredientLine({
   optionValue,
   defaultSugar,
@@ -17,10 +17,9 @@ function IngredientLine({
 }) {
   // sets ingredient select
   const [ingredients, setIngredients] = useState();
-  function getIngredients() {
-    const response = JSON.parse(JSON.stringify(fermentables));
-    const json = response;
-    setIngredients(json);
+  async function getIngredients() {
+    const ingredients = await getAllIngredients();
+    setIngredients(ingredients);
   }
   useEffect(() => {
     getIngredients();
@@ -37,19 +36,19 @@ function IngredientLine({
 
   // handles ingredient changes
   function ingredientChange(e) {
-    const found = ingredients.ingredients.filter(
+    const found = ingredients.filter(
       (ingredient) => ingredient.name == e.target.value
     );
     setIngredientDetails(found);
   }
   const [brix, setBrix] = useState(
-    storedInput[inputNum].brix || defaultSugar || 79.6
+    storedInput[inputNum].sugar_content || defaultSugar || 79.6
   );
 
   // sets details when they change
   useEffect(() => {
     ingredientDetails && ingredientDetails[0]
-      ? setBrix(ingredientDetails[0].sugarContent)
+      ? setBrix(ingredientDetails[0].sugar_content)
       : "";
     ingredientDetails && ingredientDetails[0]
       ? setIngredientCat(ingredientDetails[0].category)
@@ -165,6 +164,8 @@ function IngredientLine({
       return { ...prev, weight: 0 };
     });
   }, [hidden]);
+
+  // useEffect(() => console.log(storedInput), [storedInput]);
 
   return (
     <div
