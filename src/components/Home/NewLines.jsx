@@ -7,6 +7,7 @@ export default function NewLines({
   rowCount,
   storedInput,
   setStoredInput,
+  setLoading,
 }) {
   return (
     <>
@@ -17,6 +18,7 @@ export default function NewLines({
         hidden={rowCount >= 1 ? null : "hidden"}
         storedInput={storedInput}
         setStoredInput={setStoredInput}
+        setLoading={setLoading}
         inputNum="input3"
       />
       <IngredientLine
@@ -26,6 +28,7 @@ export default function NewLines({
         hidden={rowCount >= 2 ? null : "hidden"}
         storedInput={storedInput}
         setStoredInput={setStoredInput}
+        setLoading={setLoading}
         inputNum="input4"
       />
       <IngredientLine
@@ -35,6 +38,7 @@ export default function NewLines({
         hidden={rowCount >= 3 ? null : "hidden"}
         storedInput={storedInput}
         setStoredInput={setStoredInput}
+        setLoading={setLoading}
         inputNum="input5"
       />
       <IngredientLine
@@ -44,6 +48,7 @@ export default function NewLines({
         hidden={rowCount >= 4 ? null : "hidden"}
         storedInput={storedInput}
         setStoredInput={setStoredInput}
+        setLoading={setLoading}
         inputNum="input6"
       />
       <IngredientLine
@@ -53,6 +58,7 @@ export default function NewLines({
         hidden={rowCount >= 5 ? null : "hidden"}
         storedInput={storedInput}
         setStoredInput={setStoredInput}
+        setLoading={setLoading}
         inputNum="input7"
       />
       <IngredientLine
@@ -62,6 +68,7 @@ export default function NewLines({
         hidden={rowCount >= 6 ? null : "hidden"}
         storedInput={storedInput}
         setStoredInput={setStoredInput}
+        setLoading={setLoading}
         inputNum="input8"
       />
       <IngredientLine
@@ -71,6 +78,7 @@ export default function NewLines({
         hidden={rowCount >= 7 ? null : "hidden"}
         storedInput={storedInput}
         setStoredInput={setStoredInput}
+        setLoading={setLoading}
         inputNum="input9"
       />
       <IngredientLine
@@ -80,6 +88,7 @@ export default function NewLines({
         hidden={rowCount >= 8 ? null : "hidden"}
         storedInput={storedInput}
         setStoredInput={setStoredInput}
+        setLoading={setLoading}
         inputNum="input10"
       />
     </>

@@ -3,9 +3,9 @@ import Title from "../Title";
 import NutrientDisplay from "./NutrientDisplay";
 import RevealButton from "./RevealButton";
 import { useState, useEffect } from "react";
-import yeasts from "/src/JSON/yeast.json";
 import Tooltip from "../Tooltips/Tooltip";
 import { toolTipBody } from "../Tooltips/tooltipsBody";
+import { getYeastsByBrand, getAllYeasts } from "../Utils/API";
 
 function NutrientCalc({
   mainCalcVol,
@@ -46,6 +46,14 @@ function NutrientCalc({
     oAndDap: [1, 0, 0.96],
     kAndDap: [0, 1, 0.96],
   };
+
+  const yeastBrands = [
+    "Lalvin",
+    "Fermentis",
+    "Mangrove Jack",
+    "Red Star",
+    "Other",
+  ];
 
   // state objects for all needed inputs
   const [gplInput, setGplInput] = useState([...maxGpl.tbe]);
@@ -148,10 +156,27 @@ function NutrientCalc({
 
   // gets yeasts from json data
   useEffect(() => {
-    function getYeasts() {
+    async function getYeasts() {
       try {
-        const response = JSON.parse(JSON.stringify(yeasts));
-        const data = response;
+        const allYeasts = await getAllYeasts();
+        const Lalvin = await allYeasts.filter(
+          (yeast) => yeast.brand == "Lalvin"
+        );
+        const Fermentis = await allYeasts.filter(
+          (yeast) => yeast.brand == "Fermentis"
+        );
+        const MangroveJack = await allYeasts.filter(
+          (yeast) => yeast.brand == "Mangrove Jack"
+        );
+        const RedStar = allYeasts.filter((yeast) => yeast.brand == "Red Star");
+        const Other = await allYeasts.filter((yeast) => yeast.brand == "Other");
+        const data = {
+          Lalvin: Lalvin,
+          Fermentis: Fermentis,
+          "Mangrove Jack": MangroveJack,
+          "Red Star": RedStar,
+          Other: Other,
+        };
         setYeastNames(data);
       } catch (error) {
         console.error(error);
@@ -257,7 +282,7 @@ function NutrientCalc({
 
   function calcPPM() {
     let multiplier = 1;
-    const nitroRequirement = selectedYeastObj["Nitrogen Requirement"];
+    const nitroRequirement = selectedYeastObj["nitrogen_requirement"];
 
     // determines yeast nitrogen requirement and sets multiplier
     nitroRequirement == "Low"
@@ -396,7 +421,7 @@ function NutrientCalc({
               setSelectedYeast([yeastObj[e.target.value][0]]);
             }}
           >
-            {Object.keys(yeastObj).map((item) => {
+            {yeastBrands.map((item) => {
               return (
                 <option key={item} value={item}>
                   {item}
@@ -488,7 +513,7 @@ function NutrientCalc({
           </div>
 
           <p className="lg:text-base md:text-sm text-xs my-2">
-            {selectedYeastObj["Nitrogen Requirement"]}
+            {selectedYeastObj["nitrogen_requirement"]}
           </p>
           <select
             className="input w-11/12 my-2 "

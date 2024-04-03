@@ -17,6 +17,10 @@
       --color-sidebar: 38deg, 54%, 56%;
     }
   }
+  /* ul,
+  ol {
+    list-style: revert;
+  } */
 }
 
 html {
@@ -69,12 +73,8 @@ div::-webkit-scrollbar-thumb {
   @apply inline-block;
 }
 
-nav a.active {
-  @apply bg-background rounded-xl p-2 hover:text-sidebar;
-}
-
 .active {
-  @apply text-sidebar;
+  @apply text-background;
 }
 
 .link {

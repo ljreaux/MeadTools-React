@@ -1,7 +1,5 @@
 import { useState, useEffect } from "react";
 
-// wil likely refactor and add both json files into API
-import fermentables from "/src/JSON/fermentables.json";
 import IngredientOptions from "./IngredientOptions";
 import FilteredIngredients from "./FilteredIngredients";
 import { getAllIngredients } from "../Utils/API";
@@ -14,12 +12,14 @@ function IngredientLine({
   storedInput,
   setStoredInput,
   inputNum,
+  setLoading,
 }) {
   // sets ingredient select
   const [ingredients, setIngredients] = useState();
   async function getIngredients() {
     const ingredients = await getAllIngredients();
     setIngredients(ingredients);
+    setLoading(false);
   }
   useEffect(() => {
     getIngredients();
@@ -157,12 +157,11 @@ function IngredientLine({
   }, [weight, brix, volume, ingredientCat]);
 
   useEffect(() => {
-    setVolume((prev) => {
-      return { ...prev, vol: 0 };
-    });
-    setWeight((prev) => {
-      return { ...prev, weight: 0 };
-    });
+    if (hidden) {
+      setVolume((prev) => {
+        return { ...prev, vol: 0 };
+      });
+    }
   }, [hidden]);
 
   // useEffect(() => console.log(storedInput), [storedInput]);
