@@ -22,3 +22,10 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+src/assets/signin-assets/Android
+src/assets/signin-assets/IOS
+src/assets/signin-assets/Web (mobile + desktop)/png@1x
+src/assets/signin-assets/Web (mobile + desktop)/png@2x
+src/assets/signin-assets/Web (mobile + desktop)/png@3x
+src/assets/signin-assets/Web (mobile + desktop)/png@4x
