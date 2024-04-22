@@ -196,7 +196,7 @@ export default function Home({
     );
   }, [recipeData, ingredientsList, data, yeasts, nuteInfo]);
 
-  const { next, back, step, currentStepIndex, steps, goTo } = useMultiStepForm([
+  const { next, back, step, currentStepIndex, steps } = useMultiStepForm([
     <RecipeBuilder
       {...recipeData}
       setRecipeData={setRecipeData}

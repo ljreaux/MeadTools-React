@@ -262,7 +262,7 @@ export default function Recipes({
   useEffect(() => {
     notCurrentUser && alert(t("alerts.notCurrentUser"));
   }, [recipeUser]);
-  const { next, back, step, currentStepIndex, steps, goTo } = useMultiStepForm([
+  const { next, back, step, currentStepIndex, steps } = useMultiStepForm([
     <RecipeBuilder
       {...recipeData}
       setRecipeData={setRecipeData}

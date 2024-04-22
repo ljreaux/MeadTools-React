@@ -16,7 +16,6 @@ import useAbv from "../../hooks/useAbv.ts";
 import { FormData } from "../Nutrients/NutrientCalc";
 import calcSb from "../../helpers/calcSb";
 import i18n from "../../localization/i18n.ts";
-import { Dispatch, SetStateAction } from "react";
 
 // Create styles
 const styles = StyleSheet.create({

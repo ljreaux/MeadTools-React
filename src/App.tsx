@@ -9,11 +9,9 @@ import NutrientCalc from "./components/Nutrients/NutrientCalc";
 import Home from "./components/Home/Home";
 import { initialIngredients } from "./components/Home/initialIngredients";
 import { IngredientListItem } from "./components/Home/Ingredient";
-import { useTranslation } from "react-i18next";
 import Login from "./components/Account/Login";
 import Account from "./components/Account/Account";
 import useLocalStorage from "./hooks/useLocalStorage";
-import useChangeLogger from "./hooks/useChangeLogger";
 import useAbv from "./hooks/useAbv";
 import Recipes from "./components/Recipes/Recipes";
 
@@ -59,8 +57,6 @@ export type Opened = {
 };
 
 function App() {
-  const { i18n } = useTranslation();
-  const language = i18n.language;
   const [isMetric, setIsMetric] = useLocalStorage("metric", false);
   const [theme, setTheme] = useLocalStorage("theme", true);
 
@@ -81,7 +77,7 @@ function App() {
       additives: [{ name: "", amount: 0, unit: "g" }],
     }
   );
-  useChangeLogger(language);
+
   const [token, setToken] = useState(localStorage.getItem("token") || null);
 
   const [user, setUser] = useLocalStorage<{
@@ -118,16 +114,7 @@ function App() {
       },
     }));
   }, [isMetric]);
-  useChangeLogger(opened);
-  const toggleSettings = () => {
-    setOpened((prev: Opened) => {
-      console.log(!prev.settings);
-      return {
-        ...prev,
-        settings: !prev.settings,
-      };
-    });
-  };
+
   return (
     <div className="grid">
       <Navbar
