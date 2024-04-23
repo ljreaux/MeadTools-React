@@ -93,16 +93,21 @@ export default function Account({
             >
               <IoLogOutSharp />
             </button>
-            <button className="relative" onClick={() => setOpened(!isOpened)}>
+            <button
+              className="relative"
+              onClick={() => setOpened((prev) => !prev)}
+            >
               <IoSettingsSharp />
             </button>
             <div
               className={`${
                 isOpened || "hidden"
-              } absolute right-0 top-0 translate-y-1/4 translate-x-2/4 bg-sidebar border-solid border-2 border-textColor rounded-xl flex justify-center items-center w-[15rem]`}
-              onClick={() => setOpened(true)}
+              } absolute right-0 top-0 translate-y-1/4 translate-x-8 bg-sidebar border-solid border-2 border-textColor rounded-xl flex justify-center items-center w-[15rem]`}
             >
-              <ul className="text-sm w-full flex flex-col justify-center items-center mx-4 my-2 py-2">
+              <ul
+                className="text-sm w-full flex flex-col justify-center items-center mx-4 my-2 py-2"
+                onClick={() => setOpened(true)}
+              >
                 <li className="flex justify-between w-full py-2">
                   <p>{t("accountPage.theme.title")}</p>
                   <select

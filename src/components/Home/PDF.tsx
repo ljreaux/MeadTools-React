@@ -703,7 +703,7 @@ const MyDocument = ({
                     { width: "75%", textAlign: "left", paddingLeft: 10 },
                   ]}
                 >
-                  {i + 1}. {t(`list.${lodash.camelCase(item.name)}`)}
+                  {i + 1}. {item.name}
                 </Text>
                 <Text style={[styles.tableAlign, { width: "25%" }]}>
                   {`${item.amount}${item.unit}`}
