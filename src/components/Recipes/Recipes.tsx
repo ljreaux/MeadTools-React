@@ -219,7 +219,7 @@ export default function Recipes({
       const notFoundError = "RecipeNotFoundError";
       try {
         if (!token) throw new Error(loginError);
-        const res = await fetch(`${API_URL}recipes/${recipeId}`, {
+        const res = await fetch(`${API_URL}/recipes/${recipeId}`, {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,

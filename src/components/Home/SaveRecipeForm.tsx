@@ -39,7 +39,7 @@ export default function SaveRecipeForm(props: PropsType) {
         console.log(JSON.stringify(props.yanContribution));
 
         function createRecipe(recipe: PropsType & { name: string }) {
-          fetch(`${API_URL}recipes`, {
+          fetch(`${API_URL}/recipes`, {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
