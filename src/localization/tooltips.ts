@@ -1,6 +1,7 @@
 const toolTip = {
   en: {
     tipText: {
+      linkText: "here.",
       brix: "Brix measures the amount of dissolved solids in solution. 1g of sucrose in 100mg of water is 1 Brix, so it is roughly the same as percent sugar. You can measure brix with a refractometer, calculate it by nutrition facts, or convert your SG to brix over on ExtraCalc to use custom sugar percentages in this calculator. ",
       volumeLines:
         "The first two lines only contain liquid ingredients, all lines on this calculator can be added by either volume or weight.",

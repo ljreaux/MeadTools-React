@@ -1,6 +1,7 @@
 import { FaCircleInfo } from "react-icons/fa6";
 import { FaWindowClose } from "react-icons/fa";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 export default function Tooltip({
   body,
@@ -13,7 +14,7 @@ export default function Tooltip({
   function toggleTooltip() {
     setHide((prev) => !prev);
   }
-
+  const { t } = useTranslation();
   return (
     <div className="sm:text-xs text-[.5rem] relative">
       {/* <div className={"info_button"}> */}
@@ -35,7 +36,7 @@ export default function Tooltip({
           {body}
           {link && (
             <a href={link} className="underline">
-              here.
+              {t("tipText.linkText")}
             </a>
           )}
         </p>
