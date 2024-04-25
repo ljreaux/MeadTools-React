@@ -56,7 +56,7 @@ export default function Stabilizers({
         : (batchVolume * ppm) / 570;
     const campden =
       volumeUnits !== "gal"
-        ? (ppm / 50) * (batchVolume * 3.785 * ppm)
+        ? (ppm / 50) * (batchVolume / 3.785)
         : (ppm / 50) * batchVolume;
 
     console.log(batchVolume, ppm / 50, campden);
