@@ -10,6 +10,7 @@ import { Ingredient as IngredientType } from "../../App";
 import { useTranslation } from "react-i18next";
 import Loading from "../Loading";
 import { List } from "../../App";
+import Tooltip from "../Tooltips";
 
 export default function RecipeBuilder({
   ingredients,
@@ -183,8 +184,12 @@ export default function RecipeBuilder({
       >
         <Title header={t("recipeBuilder.homeHeading")} />
         <div className="grid grid-cols-5 gap-4 w-[97%]">
-          <label htmlFor="ingredients">
+          <label
+            htmlFor="ingredients"
+            className="flex justify-center items-center gap-1"
+          >
             {t("recipeBuilder.labels.ingredients")}
+            <Tooltip body={t("tipText.volumeLines")} />
           </label>
           <label htmlFor="weight">
             {t("recipeBuilder.labels.weight")}
@@ -211,7 +216,13 @@ export default function RecipeBuilder({
               <option value="kg">{t("KG")}</option>
             </select>
           </label>
-          <label htmlFor="brix">{t("recipeBuilder.labels.brix")}</label>
+          <label
+            htmlFor="brix"
+            className="flex items-center justify-center gap-1"
+          >
+            {t("recipeBuilder.labels.brix")}{" "}
+            <Tooltip body={t("tipText.brix")} />
+          </label>
           <label htmlFor="volume">
             {t("recipeBuilder.labels.volume")}
             <select
@@ -293,12 +304,20 @@ export default function RecipeBuilder({
             <label htmlFor="estActualOG">
               {t("recipeBuilder.resultsLabels.estActualOG")}
             </label>
-            <label htmlFor="estFG">
+            <label
+              htmlFor="estFG"
+              className="flex flex-col items-center justify-center"
+            >
               {t("recipeBuilder.resultsLabels.estFG")}
+              <Tooltip body={t("tipText.estimatedFg")} />
             </label>
             <label htmlFor="abv">{t("recipeBuilder.resultsLabels.abv")}</label>
-            <label htmlFor="delle">
+            <label htmlFor="delle" className="flex items-center justify-center">
               {t("recipeBuilder.resultsLabels.delle")}
+              <Tooltip
+                body={t("tipText.delleUnits")}
+                link="https://meadmaking.wiki/en/process/stabilization#via-yeast-alcohol-tolerance"
+              />
             </label>
             <p id="estOG">
               {Math.round(noSecondaryBlend.blendedValue * 1000) / 1000}
@@ -326,15 +345,23 @@ export default function RecipeBuilder({
             <p>
               {Math.round(delle)} {t("DU")}
             </p>
-            <label htmlFor="totalVolume">
+            <label
+              htmlFor="totalVolume"
+              className=" flex justify-center item-center"
+            >
               {t("recipeBuilder.resultsLabels.totalPrimary")}
+              <Tooltip body={t("tipText.totalVolume")} />
             </label>
             <p id="totalVolume">
               {Math.round(noSecondaryBlend.totalVolume * 1000) / 1000}{" "}
               {units.volume}
             </p>
-            <label htmlFor="totalSecondaryVolume" className="col-start-3">
+            <label
+              htmlFor="totalSecondaryVolume"
+              className="col-start-3 flex justify-center item-center"
+            >
               {t("recipeBuilder.resultsLabels.totalSecondary")}
+              <Tooltip body={t("tipText.totalSecondary")} />
             </label>
             <p id="totalVolume">
               {Math.round(blend.totalVolume * 1000) / 1000} {units.volume}

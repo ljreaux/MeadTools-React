@@ -13,6 +13,7 @@ import calcSb from "../../helpers/calcSb";
 import { toBrix } from "../../helpers/unitConverters";
 import useGoFerm from "../../hooks/useGoFerm";
 import { useTranslation } from "react-i18next";
+import Tooltip from "../Tooltips";
 
 export default function NutrientCalcResults({
   gplArr,
@@ -85,8 +86,9 @@ export default function NutrientCalcResults({
         <h2>{t("nutrients.fermK")}</h2>
         <h2>{t("nutrients.dap")}</h2>
 
-        <label className="mt-[2.5em]">
-          Go Ferm (g)
+        <label className="mt-[2.5em] flex flex-col gap-1 items-center justify-center">
+          {t("nutrients.goFerm")} ({t("G")})
+          <Tooltip body={t("tipText.goFerm")} />
           <select
             name="go-ferm"
             id="go-ferm"
@@ -104,8 +106,12 @@ export default function NutrientCalcResults({
           </select>
         </label>
 
-        <label className="my-[.25rem] col-start-1" htmlFor="maxGpl">
+        <label
+          className="my-[.25rem] col-start-1 flex items-center justify-center"
+          htmlFor="maxGpl"
+        >
           {t("nuteResults.sideLabels.maxGpl")}
+          <Tooltip body={t("tipText.maxGpl")} />
         </label>
         <div className="col-span-3 grid grid-cols-3" id="maxGpl">
           <input
@@ -237,8 +243,12 @@ export default function NutrientCalcResults({
             />
           ))}
         </div>
-        <label className="my-[.25rem]" htmlFor="oneThird">
+        <label
+          className="my-[.25rem] flex items-center justify-center"
+          htmlFor="oneThird"
+        >
           {t("nuteResults.sb")}
+          <Tooltip body={t("tipText.oneThird")} />
         </label>
         <p className="col-start-5">
           {calcSb(inputs.sg)},{" "}
@@ -250,7 +260,11 @@ export default function NutrientCalcResults({
           <p>{`${Math.round(nutrients.totalYan)}${t("PPM")}`}</p>
         </label>
         <label htmlFor="remainingYan" className="col-span-2 my-[.25rem]">
-          {t("nuteResults.sideLabels.remainingYan")}
+          <span className="flex items-center justify-center gap-1">
+            {" "}
+            {t("nuteResults.sideLabels.remainingYan")}
+            <Tooltip body={t("tipText.remainingYan")} />
+          </span>
           <p>{`${Math.round(nutrients.remainingYan)}${t("PPM")}`}</p>
         </label>
       </form>

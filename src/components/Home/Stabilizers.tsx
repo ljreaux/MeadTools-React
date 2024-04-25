@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Title from "../Title";
 import { useTranslation } from "react-i18next";
+import Tooltip from "../Tooltips";
 
 export default function Stabilizers({
   abv,
@@ -58,9 +59,13 @@ export default function Stabilizers({
 
   return (
     <div className="grid grid-cols-2 w-11/12 sm:w-9/12 items-center justify-center rounded-xl bg-sidebar p-8 my-24">
-      <div className="col-span-2 flex justify-center items-center">
+      <div className="col-span-2 flex gap-1 justify-center items-center">
         {" "}
         <Title header={t("stabilizersHeading")} />
+        <Tooltip
+          body={t("tipText.stabilizers")}
+          link="https://meadmaking.wiki/en/process/stabilization"
+        />
       </div>
       <div>
         <label htmlFor="adding">{t("adding")}</label>

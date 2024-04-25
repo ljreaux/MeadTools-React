@@ -3,6 +3,7 @@ import { Additive } from "../../App";
 import lodash from "lodash";
 import { useTranslation } from "react-i18next";
 import { FaMinusSquare, FaPlusSquare } from "react-icons/fa";
+import Tooltip from "../Tooltips";
 
 export default function Additives({
   additives,
@@ -100,8 +101,9 @@ export default function Additives({
 
   return (
     <div className="grid grid-cols-4 w-11/12 sm:w-9/12 items-center justify-center rounded-xl bg-sidebar p-8 my-24">
-      <div className="col-span-4 flex justify-center items-center">
+      <div className="col-span-4 flex justify-center gap-1 items-center">
         <Title header={t("additivesHeading")} />
+        <Tooltip body={t("tipText.additives")} />
       </div>
       <datalist id="additives">
         <option

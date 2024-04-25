@@ -14,6 +14,7 @@ import useYeastAmount from "../../hooks/yeastAmount";
 import getAllYeasts from "../../helpers/getAllYeasts";
 import { useTranslation } from "react-i18next";
 import Loading from "../Loading";
+import Tooltip from "../Tooltips";
 export interface YeastType {
   Lalvin: Yeast[];
   Fermentis: Yeast[];
@@ -169,8 +170,19 @@ export default function MainInputs({
                 <option value="liter">{t("LIT")}</option>
               </select>
             </div>
-            <label htmlFor="specificGravity">{t("nuteSgLabel")}</label>
-            <label htmlFor="offsetPpm">{t("offset")}</label>
+            <label
+              htmlFor="specificGravity"
+              className="flex justify-center items-center gap-1"
+            >
+              {t("nuteSgLabel")} <Tooltip body={t("tipText.nutrientSg")} />
+            </label>
+            <label
+              htmlFor="offsetPpm"
+              className="flex items-center justify-center gap-1"
+            >
+              {t("offset")}
+              <Tooltip body={t("tipText.offsetPpm")} />
+            </label>
             <select
               onChange={(e) =>
                 setData((prev) => {
@@ -222,11 +234,44 @@ export default function MainInputs({
             </select>
             <FirstLineInputs inputs={inputs} handleChange={handleChange} />
 
-            <label htmlFor="n2Requirement">{t("n2Requirement.label")}</label>
-            <label htmlFor="schedule">{t("nuteSchedules.label")}</label>
-            <label htmlFor="targetYan">{t("targetYan")}</label>
-            <label htmlFor="numberOfAdditions">{t("numberOfAdditions")}</label>
-            <label htmlFor="yeastAmount">{t("yeastAmount")}</label>
+            <label
+              htmlFor="n2Requirement"
+              className="flex flex-col items-center justify-center gap-1"
+            >
+              {t("n2Requirement.label")}
+              <Tooltip body={t("tipText.nitrogenRequirements")} />
+            </label>
+            <label
+              htmlFor="schedule"
+              className="flex flex-col items-center justify-center gap-1"
+            >
+              {t("nuteSchedules.label")}
+              <Tooltip
+                body={t("tipText.preferredSchedule")}
+                link="https://meadmaking.wiki/en/process/nutrient_schedules"
+              />
+            </label>
+            <label
+              htmlFor="targetYan"
+              className="flex flex-col justify-center items-center"
+            >
+              {t("targetYan")}
+              <Tooltip body={t("tipText.yan")} />
+            </label>
+            <label
+              htmlFor="numberOfAdditions"
+              className="flex flex-col justify-center items-center"
+            >
+              {t("numberOfAdditions")}
+              <Tooltip body={t("tipText.numberOfAdditions")} />
+            </label>
+            <label
+              htmlFor="yeastAmount"
+              className="flex flex-col justify-center items-center"
+            >
+              {t("yeastAmount")}
+              <Tooltip body={t("tipText.yeastAmount")} />
+            </label>
 
             <select
               name="n2Requirement"

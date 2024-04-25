@@ -13,6 +13,7 @@ import { yeastTranslations } from "./otherYeasts";
 import { stabilizersTranslations } from "./stabilizersAndAdditives";
 import { PDFTranslations } from "./PDF";
 import { notesTranslations } from "./notes";
+import { toolTipTranslations } from "./tooltips";
 
 const [ingredientsEN, ingredientsDE] = ingredientTranslations;
 const [homeCalcEN, homeCalcDE] = homeCalcTranslations;
@@ -26,6 +27,7 @@ const [otherYeastsEN, otherYeastsDE] = yeastTranslations;
 const [stabilizersEN, stabilizersDE] = stabilizersTranslations;
 const [PDFEN, PDFDE] = PDFTranslations;
 const [notesEN, notesDE] = notesTranslations;
+const [toolTipEN] = toolTipTranslations;
 
 i18n
   .use(LanguageDetector)
@@ -48,6 +50,7 @@ i18n
           ...stabilizersEN,
           ...PDFEN,
           ...notesEN,
+          ...toolTipEN,
         },
       },
       de: {
@@ -64,7 +67,7 @@ i18n
           ...otherYeastsDE,
           ...stabilizersDE,
           ...PDFDE,
-          ...notesDE
+          ...notesDE,
         },
       },
     },
