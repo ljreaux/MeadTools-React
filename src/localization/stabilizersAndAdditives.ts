@@ -31,6 +31,7 @@ const stabilizers = {
       oakSpirals: "Oak Spirals",
       oakCubes: "Oak Cubes",
       potassiumCarbonate: "Potassium Carbonate",
+      campden: "Campden Tablets",
     },
   },
   de: {

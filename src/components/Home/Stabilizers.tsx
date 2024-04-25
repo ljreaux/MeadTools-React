@@ -12,7 +12,11 @@ export default function Stabilizers({
   abv: number;
   batchVolume: number;
   volumeUnits: string;
-  setSorbateSulfite: (sorbate?: number, sulfite?: number) => void;
+  setSorbateSulfite: (
+    sorbate?: number,
+    sulfite?: number,
+    campden?: number
+  ) => void;
 }) {
   const { t } = useTranslation();
   const [adding, setAdding] = useState({
@@ -23,6 +27,7 @@ export default function Stabilizers({
   const [amounts, setAmounts] = useState({
     sorbate: 0,
     sulfite: 0,
+    campden: 0,
   });
 
   useEffect(() => {
@@ -49,12 +54,18 @@ export default function Stabilizers({
       volumeUnits == "gal"
         ? (batchVolume * 3.785 * ppm) / 570
         : (batchVolume * ppm) / 570;
+    const campden =
+      volumeUnits !== "gal"
+        ? (ppm / 50) * (batchVolume * 3.785 * ppm)
+        : (ppm / 50) * batchVolume;
 
+    console.log(batchVolume, ppm / 50, campden);
     setAmounts({
       sulfite,
       sorbate,
+      campden,
     });
-    setSorbateSulfite(sorbate, sulfite);
+    setSorbateSulfite(sorbate, sulfite, campden);
   }, [abv, batchVolume, volumeUnits, adding.pHReading]);
 
   return (
@@ -128,7 +139,11 @@ export default function Stabilizers({
           />
           <div className="col-span-2 flex gap-4">
             <label htmlFor="k-meta">{t("kSulfite")}</label>
-            <p id="k-meta">{Math.round(amounts.sulfite * 10000) / 10000}g</p>
+            <p id="k-meta">
+              {Math.round(amounts.sulfite * 10000) / 10000}g{" "}
+              {t("accountPage.or")} {Math.round(amounts.campden * 10) / 10}{" "}
+              {t("list.campden")}
+            </p>
           </div>
         </>
       )}

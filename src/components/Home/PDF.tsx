@@ -65,6 +65,7 @@ const MyDocument = ({
   nuteInfo,
   sorbate,
   sulfite,
+  campden,
   additives,
   primaryNotes,
   secondaryNotes,
@@ -432,7 +433,7 @@ const MyDocument = ({
                   flexWrap: "wrap",
                 }}
               >
-                {sorbate && sulfite && (
+                {sorbate && sulfite && campden && (
                   <Text
                     style={{
                       width: "50%",
@@ -461,7 +462,12 @@ const MyDocument = ({
                     }}
                   >
                     {sulfite &&
-                      `${Math.round(sulfite * 1000) / 1000}g ${t("PDF.kmeta")}`}
+                      campden &&
+                      `${Math.round(sulfite * 1000) / 1000}g ${t(
+                        "PDF.kmeta"
+                      )} ${t("accountPage.or")} ${
+                        Math.round(campden * 10) / 10
+                      } ${t("list.campden")}`}
                   </Text>
                   <Text
                     style={{

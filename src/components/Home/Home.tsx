@@ -71,18 +71,24 @@ export default function Home({
     else setYanFromSource(null);
   }, [advanced]);
 
-  function setSorbateSulfite(sorbate?: number, sulfite?: number): void {
-    if (sorbate && sulfite)
+  function setSorbateSulfite(
+    sorbate?: number,
+    sulfite?: number,
+    campden?: number
+  ): void {
+    if (sorbate && sulfite && campden)
       setRecipeData((prev) => ({
         ...prev,
         sorbate,
         sulfite,
+        campden,
       }));
     else
       setRecipeData((prev) => {
         const prevCopy = { ...prev };
         delete prevCopy.sorbate;
         delete prevCopy.sulfite;
+        delete prevCopy.campden;
         return {
           ...prevCopy,
         };

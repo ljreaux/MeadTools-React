@@ -44,6 +44,7 @@ export interface RecipeData {
   };
   sorbate?: number;
   sulfite?: number;
+  campden?: number;
   additives: Additive[];
 }
 
