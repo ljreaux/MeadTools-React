@@ -59,7 +59,6 @@ export default function Stabilizers({
         ? (ppm / 50) * (batchVolume / 3.785)
         : (ppm / 50) * batchVolume;
 
-    console.log(batchVolume, ppm / 50, campden);
     setAmounts({
       sulfite,
       sorbate,

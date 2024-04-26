@@ -23,6 +23,11 @@ export default function Sulfite() {
       ? (sulfite.batchSize * 3.785 * sulfite.ppm) / 570
       : (sulfite.batchSize * sulfite.ppm) / 570;
 
+  const campden =
+    sulfite.units !== "gallons"
+      ? (sulfite.ppm / 50) * (sulfite.batchSize / 3.785)
+      : (sulfite.ppm / 50) * sulfite.batchSize;
+
   return (
     <div>
       <Title header={t("sulfiteHeading")} />
@@ -58,7 +63,9 @@ export default function Sulfite() {
         />
       </div>
       <p className="text-2xl my-4 text-center">
-        {Math.round(sulfiteAmount * 1000) / 1000}g {t("kMeta")}
+        {Math.round(sulfiteAmount * 10000) / 10000}g {t("kMeta")}{" "}
+        {t("accountPage.or")} {Math.round(campden * 10) / 10}{" "}
+        {t("list.campden")}
       </p>
     </div>
   );
