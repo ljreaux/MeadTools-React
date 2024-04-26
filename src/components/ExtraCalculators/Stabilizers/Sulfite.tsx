@@ -62,11 +62,15 @@ export default function Sulfite() {
           value={sulfite.ppm}
         />
       </div>
-      <p className="text-2xl my-4 text-center">
-        {Math.round(sulfiteAmount * 10000) / 10000}g {t("kMeta")}{" "}
-        {t("accountPage.or")} {Math.round(campden * 10) / 10}{" "}
-        {t("list.campden")}
-      </p>
+      <div className="text-2xl my-4 text-center grid">
+        <p>
+          {Math.round(sulfiteAmount * 10000) / 10000}g {t("kMeta")}
+        </p>{" "}
+        <p>{t("accountPage.or")}</p>{" "}
+        <p>
+          {Math.round(campden * 10) / 10} {t("list.campden")}
+        </p>
+      </div>
     </div>
   );
 }

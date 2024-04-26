@@ -137,7 +137,7 @@ export default function Stabilizers({
             onFocus={(e) => e.target.select()}
           />
           <div className="col-span-2 flex gap-4">
-            <label htmlFor="k-meta">{t("kSulfite")}</label>
+            <label htmlFor="k-meta">{t("kMeta")}</label>
             <p id="k-meta">
               {Math.round(amounts.sulfite * 10000) / 10000}g{" "}
               {t("accountPage.or")} {Math.round(amounts.campden * 10) / 10}{" "}
