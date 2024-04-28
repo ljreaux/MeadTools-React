@@ -83,6 +83,11 @@ export default function Additives({
       unit: "mg",
     },
     {
+      name: t(`list.${lodash.camelCase("Lallzyme EX")}`),
+      dosage: 100,
+      unit: "mg",
+    },
+    {
       name: t(`list.${lodash.camelCase("Oak Chips")}`),
       dosage: 0.25,
       unit: "oz",
@@ -128,6 +133,7 @@ export default function Additives({
         <option value={t(`list.${lodash.camelCase("Sparkolloid")}`)}></option>
         <option value={t(`list.${lodash.camelCase("Pectic Enzyme")}`)}></option>
         <option value={t(`list.${lodash.camelCase("Lallzyme EX-V")}`)}></option>
+        <option value={t(`list.${lodash.camelCase("Lallzyme EX")}`)}></option>
         <option value={t(`list.${lodash.camelCase("Oak Chips")}`)}></option>
         <option value={t(`list.${lodash.camelCase("Oak Spirals")}`)}></option>
         <option value={t(`list.${lodash.camelCase("Oak Cubes")}`)}></option>
