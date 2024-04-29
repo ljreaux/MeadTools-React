@@ -113,15 +113,15 @@ const nutes = {
         gfSterol: "Go-Ferm Sterol Flash",
         none: "Keine",
       },
-      gfWater: "Wasser for Go-Ferm",
+      gfWater: "Wasser für Go-Ferm",
       sb: "1/3 Zuckergrenze",
       sideLabels: {
         maxGpl: "Max g/L",
         ppmYan: "PPM YAN",
-        totalGrams: "Gesamt Gram",
+        totalGrams: "Gesamt Gramm",
         perAddition: "Menge pro Gabe",
         totalYan: "Gesamt YAN",
-        remainingYan: "Verbleibende YAN",
+        remainingYan: "Verbleibendes YAN",
       },
     },
   }

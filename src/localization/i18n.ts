@@ -27,7 +27,7 @@ const [otherYeastsEN, otherYeastsDE] = yeastTranslations;
 const [stabilizersEN, stabilizersDE] = stabilizersTranslations;
 const [PDFEN, PDFDE] = PDFTranslations;
 const [notesEN, notesDE] = notesTranslations;
-const [toolTipEN] = toolTipTranslations;
+const [toolTipEN, toolTipDE] = toolTipTranslations;
 
 i18n
   .use(LanguageDetector)
@@ -68,6 +68,7 @@ i18n
           ...stabilizersDE,
           ...PDFDE,
           ...notesDE,
+          ...toolTipDE,
         },
       },
     },

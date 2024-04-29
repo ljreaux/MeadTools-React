@@ -38,13 +38,13 @@ const homeCalc = {
         estOG: "Geschätzte OG-Messung:",
         estActualOG: "Geschätzte OG:",
         estFG: "Geschätzte FG nach Verdünnung:",
-        abv: "Alk.%:",
+        abv: "Alkoholgehalt:",
         delle: "Delle-Einheiten:",
         totalPrimary: "Gesamtes Gärvolumen:",
         totalSecondary: "Tatsächliches Gesamtvolumen:",
       },
-      submit: "Abschicken",
-      percent: "% Alk.vol.",
+      submit: "Anwenden",
+      percent: "%",
     },
   }
 };
