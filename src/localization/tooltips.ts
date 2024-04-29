@@ -2,7 +2,7 @@ const toolTip = {
   en: {
     tipText: {
       linkText: "here.",
-      brix: "Brix measures the amount of dissolved solids in solution. 1g of sucrose in 100mg of water is 1 Brix, so it is roughly the same as percent sugar. You can measure brix with a refractometer, calculate it by nutrition facts, or convert your SG to brix over on ExtraCalc to use custom sugar percentages in this calculator. ",
+      brix: "Brix measures the amount of dissolved solids in solution. 1g of sucrose in 100ml of water is 1 Brix, so it is roughly the same as percent sugar. You can measure brix with a refractometer, calculate it by nutrition facts, or convert your SG to brix over on ExtraCalc to use custom sugar percentages in this calculator. ",
       volumeLines:
         "The first two lines only contain liquid ingredients, all lines on this calculator can be added by either volume or weight.",
       totalVolume:
@@ -40,6 +40,47 @@ const toolTip = {
         "Any ingredient that doesn't provide fermentable sugars is best placed here. You can use one of the suggested ingredients or add your own.",
     },
   },
+  de: {
+    tipText: {
+      linkText: "hier.",
+      brix: "Brix misst die Menge an gelösten Feststoffen in einer Flüssigkeit. 1g Haushaltszucker in 100ml Wasser sind 1 Brix, es sind also ungefähr der prozentuale Zuckeranteil. Du kannst die Einheit Brix mit einem Refraktometer messen, sie durch die Nährstoffgehaltsangaben berechnen oder mit dem entsprechenden Rechner den SG-Wert zu Brix umrechnen, um sie dann hier als Zuckeranteil zu verwenden.",
+      volumeLines:
+        "Die ersten beiden Reihen enthalten nur flüssige Zutaten. Alle Zutatenangaben können entweder nach Volumen oder Gewicht gemacht werden.",
+      totalVolume:
+        "Dieses Gesamtvolumen ist eine Schätzung nur unter Berücksichtigung der vergärbaren Zutaten im Ansatz während der Primärgärung. Dein tatsächliches Volumen WIRD höher sein, wenn du einen hohen Anteil an ganzen Früchte verwendest.",
+      totalSecondary:
+        "Dies ist das geschätzte Volumen des gesamten Ansatzes inklusive der vergärbaren Zutaten aus der Sekundärgärung. Die Berechnung nimmt an, dass alle Zutaten, die oben als \"in Sekundärgärung\" markiert wurden, nicht vergoren werden.",
+      estimatedFg:
+        "Wenn du nicht vor hast, die Gärung vorzeitig zu beenden, ist es vermutlich am besten, dieses Feld bei 0.996 zu belassen. Diese Schätzung wird für die meisten Rezepte genau genug sein. Wenn du irgendwelche Zutaten für die sekundäre Gärung bestimmt hast, wird dieser Wert über 1.000 liegen. Diese Schätzung berücksichtigt, wie das endgültige nachgesüßte Rezept sein soll.",
+      delleUnits:
+        "Delle-Einheiten sind eine Maßeinheit für mikrobielle Stabilität. Je höher die Zahl, desto wahrscheinlicher ist der Met/Wein stabil, ohne weitere Zusätze oder Stabilisierungsmethoden zu benötigen. Delle-Einheiten werden Anhand von Restzucker und Alkoholgehalt berechnet. 73 Delle-Einheiten werden von den meisten als stabil angesehen, aber der Wert variiert. Alkoholtoleranz wird bei der Dell-Stabilität NICHT berücksichtigt. Mehr dazu: ",
+      nutrientSg:
+        "Dies ist die Differenz an SG (\"Specific Gravity\" = spezifische Dichte), die die FG (\"Final Gravity\" = finale Dichte) berücksichtigt. Wenn zum Beispiel deine OG (\"Original Gravity\" = ursprüngliche Dichte) als 1.100 angegebene ist und deine FG als 1.010, wird dieses Feld 1.090 anzeigen. Dieses Feld kann verändert werden.",
+      offsetPpm:
+        "Manche Ansätze beinhalten bereits einige YAN (\"Yeast Assimilable Nitrogen\" = Von der Hefe verwendbarer Stickstoff). Dieser Rechner geht automatisch von 25ppm pro Pfund Frucht je Gallone aus.Dieser Wert kann verändert werden.",
+      nitrogenRequirements:
+        "Hängt vom verwendeten Hefestamm ab. Wenn deine Hefe nicht in dieser Liste ist und du ihren Stickstoffbedarf nicht kennst, nimm am besten \"Andere: Andere Hefe mit mittlerem Stickstoffbedarf\". Dieser Wert kann verändert werden, wenn du eine Hefe benutzen willst, die einen besonderen Bedarf hat.",
+      preferredSchedule:
+        "Dieser Rechner ermöglichst es dir, eine Kombination von Fermaid O, Fermaid K und DAP anzugeben. Es steht dir frei, für welche Nährstoffsorten und -kombinationen du dich entscheidest, aber bestimmte Zusammensetzungen sind für bestimmte Situationen besser geeignet. Mehr zu Nährstoffen und Plänen findest du ",
+      yan: "YAN (\"Yeast Assimilable Nitrogen\" = Von der Hefe verwendbarer Stickstoff) ist die Menge an Stickstoff, die deine Hefe für eine gesunde Gärung benötigt. Die benötigten Werte hängen von der verwendeten Hefe und der OG (\"Original Gravity\" = ursprüngliche Dichte) ab.",
+      numberOfAdditions:
+        "Gestaffelte Nährstoffgaben sind nützlich, um während der Gärung Temperaturspitzen zu vermeiden, die deine Hefe unnötigt stressen. Vier Nährstoffgaben sind vermutlich die geläufigste Vorgehensweise, aber ich persönlich bevorzuge drei Gaben oder manchmal sogar nur eine einzige.",
+      yeastAmount:
+        "Die Hefemenge in diesem Rechner basiert auf der Dichtemessung und dem Gesamtvolumen. Der Wert ist veränderbar und ich schlage vor, dass du in den meisten Fällen auf die nächsthöhere Päckchengröße aufrundest.",
+      maxGpl:
+        "Diese Werte errechnet sich basierend auf dem Nährstoffplan, den du dir aussuchst. Sie sind veränderbar, aber das ist nicht empfohlen, wenn du nicht genau weisst, was du tust.",
+      goFerm:
+        "Die GoFerm-Sorte verändert die Menge an Wasser, die für die Rehydration benötigt wird und beeinträchtigt die Effektivität von Fermaid O.",
+      oneThird:
+        "Der 1/3 SB (\"Sugar Break\") ist, wenn ein Drittel des Zuckers im Ansatz vergoren wurden. Diese Grenze wird häufig benutzt, um die letzte Nährstoffgabe einzuplanen.",
+      remainingYan:
+        "Wenn die verbleibenden YAN (\"Yeast Assimilable Nitrogen\" = Von der Hefe verwendbarer Stickstoff) höer als 0 sind, solltest du erwägen, die Angabe im maximalen g/L-Feld anzupassen. Denke daran, dass du die Menge an Diammoniumphosphat (oft \"Hefenährsalz\") am besten unter 0.96g/L halten solltest, um Fehlnoten zu vermeiden. Also the TTB limit on Fermaid K is .5g/L due to the limit on thiamine. This is not a concern for homebrewers.",
+      stabilizers:
+        "Kaliumsorbat und Kaliumdisulfit werden BEIDE zusammen benötigt um eine weitere Gärung zu unterbinden. Sie können in den meisten Fällen NICHT dazu genutzt werden, um eine laufende Gärung verlässlich zu beenden. Die benötigte Menge an Sulfit wird anhand des pH-Wertes bestimmt. MeadTools geht von 50 ppm aus, wenn du keine pH-Messung durchführen kannst oder möchtest. Die Menge an Sorbat hängt vom Alkoholgehalt ab. Es hat über 16% keinen Effekt mehr. Mehr Infos dazu finden sich ",
+      additives:
+        "Zutaten, die keine vergärbaren Zucker beinhalten, werden am besten hier aufgeführt. Du kannst eine der vorgeschlagenen Zusätze nehmen oder deinen eigenen nutzen.",
+    },
+  }
 };
 
-export const toolTipTranslations = [toolTip.en];
+export const toolTipTranslations = [toolTip.en, toolTip.de];
