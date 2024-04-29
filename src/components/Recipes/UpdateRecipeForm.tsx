@@ -43,7 +43,7 @@ export default function UpdateRecipeForm(props: PropsType) {
           recipe: Omit<PropsType, "updateName">,
           id: string
         ) {
-          fetch(`${API_URL}recipes/${id}`, {
+          fetch(`${API_URL}/recipes/${id}`, {
             method: "PATCH",
             headers: {
               "Content-Type": "application/json",
