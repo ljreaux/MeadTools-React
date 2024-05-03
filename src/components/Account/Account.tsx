@@ -36,6 +36,7 @@ export default function Account({
   isMetric: boolean;
   setIsMetric: React.Dispatch<SetStateAction<boolean>>;
 }) {
+  const [reload, setReload] = useState(false);
   const [isOpened, setOpened] = useState(false);
   const { t, i18n } = useTranslation();
   const [userInfo, setUserInfo] = useState<UserInfo | null>(null);
@@ -59,7 +60,7 @@ export default function Account({
           navigate("/login");
         }
       })();
-  }, [token]);
+  }, [token, reload]);
   useEffect(() => {
     if (user) {
       localStorage.setItem("user", JSON.stringify(user));
@@ -173,7 +174,11 @@ export default function Account({
                 {t("accountPage.myRecipes")}
               </h2>
               {userInfo.recipes.map((recipe) => (
-                <RecipeCard recipe={recipe} token={token} />
+                <RecipeCard
+                  recipe={recipe}
+                  token={token}
+                  setReload={setReload}
+                />
               ))}
             </div>
           </div>

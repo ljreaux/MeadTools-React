@@ -41,6 +41,7 @@ const notesAndExtras = {
       },
       myRecipes: "My Recipes",
       viewRecipe: "View Recipe",
+      deleteRecipe: "Delete Recipe",
       buttonMessage: {
         register: "Don't have any account? Register now.",
         login: "Already have an account? Login here.",
