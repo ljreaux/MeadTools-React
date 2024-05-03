@@ -28,7 +28,7 @@ export default function RecipeCard({
           if (
             deleted.message === `${recipe.name} has been successfully deleted.`
           )
-            setReload(true);
+            setReload((prev) => !prev);
           else alert(deleted.message);
         }}
         className="border-2 border-solid border-textColor  hover:bg-sidebar hover:border-background md:text-lg py-1 disabled:bg-sidebar disabled:hover:border-textColor disabled:hover:text-sidebar disabled:cursor-not-allowed bg-background rounded-2xl px-2"
