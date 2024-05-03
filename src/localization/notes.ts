@@ -95,6 +95,7 @@ const notesAndExtras = {
       },
       myRecipes: "Meine Rezepte",
       viewRecipe: "Rezept Ansehen",
+      deleteRecipe: "Rezept Löschen",
       buttonMessage: {
         register: "Noch kein Benutzerkonto? Jetzt registrieren!",
         login: "Hast du schon ein Benutzerkonto? Hier anmelden!",
