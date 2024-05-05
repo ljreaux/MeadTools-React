@@ -54,7 +54,6 @@ export default function Account({
         if (user) {
           setUserInfo(user);
           setUser((prev) => ({ ...prev, id: user.id, role: user.role }));
-          console.log(user);
         } else {
           alert("Login failed");
           navigate("/login");

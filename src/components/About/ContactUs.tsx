@@ -27,7 +27,6 @@ const ContactUs = () => {
         .then(
           (result) => {
             const target = e.target as HTMLFormElement;
-            console.log(result.text);
             target.reset();
             setMessageColor("green");
             setStatus(t("success"));
