@@ -54,7 +54,6 @@ export default function Login({
                 method: "post",
               });
               const data = await response.json();
-              console.log(data);
               window.location.href = data.url;
             })();
           }}

@@ -36,7 +36,6 @@ export default function SaveRecipeForm(props: PropsType) {
       className="w-11/12 flex flex-col items-center justify-center rounded-xl bg-sidebar p-8 mb-8 mt-24 aspect-video gap-4"
       onSubmit={(e) => {
         e.preventDefault();
-        console.log(JSON.stringify(props.yanContribution));
 
         function createRecipe(recipe: PropsType & { name: string }) {
           fetch(`${API_URL}/recipes`, {
@@ -49,7 +48,6 @@ export default function SaveRecipeForm(props: PropsType) {
           })
             .then((res) => res.json())
             .then((res) => {
-              console.log(res);
               navigate(`/account`);
             })
             .catch((err) => {

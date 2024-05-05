@@ -53,7 +53,6 @@ export default function UpdateRecipeForm(props: PropsType) {
           })
             .then((res) => res.json())
             .then((res) => {
-              console.log(res);
               navigate(`/account`);
             })
             .catch((err) => {

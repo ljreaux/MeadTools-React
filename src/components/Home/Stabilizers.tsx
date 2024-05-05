@@ -36,7 +36,6 @@ export default function Stabilizers({
     const vol =
       volumeUnits == "gal" ? batchVolume * 0.003785411784 : batchVolume / 1000;
     const sorbate = ((-abv * 25 + 400) / 0.75) * vol;
-    console.log(abv, volumeUnits, batchVolume, vol, sorbate);
     let ppm = 50;
     if (ph <= 2.9) ppm = 11;
     if (ph == 3) ppm = 13;

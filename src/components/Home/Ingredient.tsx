@@ -33,8 +33,9 @@ function IngredientOptions({
     if (b.name === "Honey" || (b.name === "Water" && a.name !== "Honey"))
       return 1;
 
-    const nameA = t(`${a.name}`).toLowerCase(); // ignore upper and lowercase
-    const nameB = t(`${b.name}`).toLowerCase(); // ignore upper and lowercase
+    const nameA = t(`${lodash.camelCase(a.name)}`).toLowerCase(); // ignore upper and lowercase
+    const nameB = t(`${lodash.camelCase(b.name)}`).toLowerCase(); // ignore upper and lowercase
+
     if (nameA < nameB) {
       return -1;
     }
@@ -60,7 +61,6 @@ function IngredientOptions({
     const sorted = [...ingredients].sort(
       (a: IngredientListItem, b: IngredientListItem) => sortingFn(a, b)
     );
-    console.log(sorted);
     setIngredients(sorted);
   }, [i18n.language]);
 
