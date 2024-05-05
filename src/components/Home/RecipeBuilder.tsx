@@ -24,7 +24,7 @@ export default function RecipeBuilder({
   ingredientsList: List;
   setIngredientsList: Dispatch<SetStateAction<List>>;
 }) {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [firstMount, setFirstMount] = useState(true);
   useEffect(() => setFirstMount(false), []);
   const totalBlended = ingredients.map((ingredient) => {

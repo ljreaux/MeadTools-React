@@ -24,14 +24,45 @@ function IngredientOptions({
   setIngredients: (obj: List) => void;
   setLoading: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+
+  const sortingFn = (a: IngredientListItem, b: IngredientListItem) => {
+    // putting Honey and Water at top of list
+    if (a.name === "Honey" || (a.name === "Water" && b.name !== "Honey"))
+      return -1;
+    if (b.name === "Honey" || (b.name === "Water" && a.name !== "Honey"))
+      return 1;
+
+    const nameA = t(`${a.name}`).toLowerCase(); // ignore upper and lowercase
+    const nameB = t(`${b.name}`).toLowerCase(); // ignore upper and lowercase
+    if (nameA < nameB) {
+      return -1;
+    }
+    if (nameA > nameB) {
+      return 1;
+    }
+
+    // names must be equal
+    return 0;
+  };
   useEffect(() => {
     (async () => {
       const ingredients = await getAllIngredients();
-      setIngredients(ingredients);
+      setIngredients(
+        ingredients.sort((a: IngredientListItem, b: IngredientListItem) =>
+          sortingFn(a, b)
+        )
+      );
       setLoading(false);
     })();
   }, []);
+  useEffect(() => {
+    const sorted = ingredients.toSorted(
+      (a: IngredientListItem, b: IngredientListItem) => sortingFn(a, b)
+    );
+    console.log(sorted);
+    setIngredients(sorted);
+  }, [i18n.language]);
 
   return (
     <>
