@@ -57,7 +57,7 @@ function IngredientOptions({
     })();
   }, []);
   useEffect(() => {
-    const sorted = ingredients.toSorted(
+    const sorted = [...ingredients].sort(
       (a: IngredientListItem, b: IngredientListItem) => sortingFn(a, b)
     );
     console.log(sorted);
