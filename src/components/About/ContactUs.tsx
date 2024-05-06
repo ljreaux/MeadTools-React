@@ -25,7 +25,7 @@ const ContactUs = () => {
           "2G-OLW9VI5seyvCUK"
         )
         .then(
-          (result) => {
+          () => {
             const target = e.target as HTMLFormElement;
             target.reset();
             setMessageColor("green");

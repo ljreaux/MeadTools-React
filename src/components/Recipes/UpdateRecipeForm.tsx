@@ -52,7 +52,7 @@ export default function UpdateRecipeForm(props: PropsType) {
             body: JSON.stringify(recipe),
           })
             .then((res) => res.json())
-            .then((res) => {
+            .then(() => {
               navigate(`/account`);
             })
             .catch((err) => {
