@@ -48,6 +48,9 @@ const homeCalc = {
       },
       submit: "Anwenden",
       percent: "%",
+      reset: "Reset Recipe",
+      resetConfirmation:
+        "Are you sure you want to reset your recipe? This action cannot be undone.",
     },
   },
 };
