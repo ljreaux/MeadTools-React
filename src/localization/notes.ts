@@ -18,6 +18,7 @@ const notesAndExtras = {
       login: "Save Changes to Recipe?",
       subtitle: "Recipe Name",
       submit: "Save Changes",
+      saveAs: "Save as New Recipe",
     },
     alerts: {
       loginError: "You must be logged in to view user recipes",
@@ -72,6 +73,7 @@ const notesAndExtras = {
       login: "Änderungen am Rezept speichern?",
       subtitle: "Rezeptname",
       submit: "Änderungen Speichern",
+      saveAs: "Als neues Rezept speichern",
     },
     alerts: {
       loginError: "Du musst angemeldet sein, um Benutzerrezepte einzusehen",
