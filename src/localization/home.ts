@@ -21,6 +21,9 @@ const homeCalc = {
       },
       submit: "Submit",
       percent: "% ABV",
+      reset: "Reset Recipe",
+      resetConfirmation:
+        "Are you sure you want to reset your recipe? This action cannot be undone.",
     },
   },
   de: {
@@ -46,7 +49,7 @@ const homeCalc = {
       submit: "Anwenden",
       percent: "%",
     },
-  }
+  },
 };
 
 export const homeCalcTranslations = [homeCalc.en, homeCalc.de];

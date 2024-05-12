@@ -28,6 +28,7 @@ import Title from "../Title";
 import { Link } from "react-router-dom";
 import Notes from "./Notes";
 import SaveRecipeForm from "./SaveRecipeForm";
+import ResetButton from "./ResetButton";
 
 export default function Home({
   recipeData,
@@ -200,7 +201,15 @@ export default function Home({
         secondaryNotes={secondaryNotes}
       />
     );
-  }, [recipeData, ingredientsList, data, yeasts, nuteInfo]);
+  }, [
+    recipeData,
+    ingredientsList,
+    data,
+    yeasts,
+    nuteInfo,
+    primaryNotes,
+    secondaryNotes,
+  ]);
 
   const { next, back, step, currentStepIndex, steps } = useMultiStepForm([
     <RecipeBuilder
@@ -315,7 +324,7 @@ export default function Home({
       )}
       {currentStepIndex < steps.length - 1 && (
         <button
-          className="hover:bg-background rounded-2xl border-2 border-solid hover:border-textColor  bg-sidebar border-background md:text-lg text-base px-2 py-1 disabled:bg-sidebar disabled:hover:border-textColor disabled:hover:text-sidebar disabled:cursor-not-allowed w-1/4 mb-[3rem]"
+          className="hover:bg-background rounded-2xl border-2 border-solid hover:border-textColor  bg-sidebar border-background md:text-lg text-base px-2 py-1 disabled:bg-sidebar disabled:hover:border-textColor disabled:hover:text-sidebar disabled:cursor-not-allowed w-1/4"
           onClick={() => {
             setData((prev) => ({
               ...prev,
@@ -327,6 +336,13 @@ export default function Home({
           {t("buttonLabels.next")}
         </button>
       )}
+      <ResetButton
+        setRecipeData={setRecipeData}
+        setData={setData}
+        recipeData={recipeData}
+        setPrimaryNotes={setPrimaryNotes}
+        setSecondaryNotes={setSecondaryNotes}
+      />
     </div>
   );
 }

@@ -31,6 +31,7 @@ import { API_URL } from "../../main";
 import Notes from "../Home/Notes";
 import SaveRecipeForm from "../Home/SaveRecipeForm";
 import UpdateRecipeForm from "./UpdateRecipeForm";
+import ResetButton from "../Home/ResetButton";
 
 export default function Recipes({
   ingredientsList,
@@ -393,6 +394,13 @@ export default function Recipes({
           {t("buttonLabels.next")}
         </button>
       )}
+      <ResetButton
+        setRecipeData={setRecipeData}
+        setData={setData}
+        recipeData={recipeData}
+        setPrimaryNotes={setPrimaryNotes}
+        setSecondaryNotes={setSecondaryNotes}
+      />
     </div>
   );
 }
