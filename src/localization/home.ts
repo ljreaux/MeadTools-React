@@ -48,9 +48,9 @@ const homeCalc = {
       },
       submit: "Anwenden",
       percent: "%",
-      reset: "Reset Recipe",
+      reset: "Rezept zurücksetzen",
       resetConfirmation:
-        "Are you sure you want to reset your recipe? This action cannot be undone.",
+        "Bist du sicher, dass du das Rezept zurücksetzen möchtest? Dies kann nicht rückgängig gemacht werden.",
     },
   },
 };
