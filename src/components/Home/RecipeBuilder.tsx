@@ -326,6 +326,7 @@ export default function RecipeBuilder({
             <input
               type="number"
               value={FG}
+              step={0.001}
               className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-textColor hover:bg-sidebar hover:border-background w-11/12 my-2"
               onChange={(e) => {
                 setRecipeData((prev) => {
