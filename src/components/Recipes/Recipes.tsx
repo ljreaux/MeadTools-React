@@ -31,6 +31,7 @@ import { API_URL } from "../../main";
 import Notes from "../Home/Notes";
 import SaveRecipeForm from "../Home/SaveRecipeForm";
 import UpdateRecipeForm from "./UpdateRecipeForm";
+import ResetButton from "../Home/ResetButton";
 
 export default function Recipes({
   ingredientsList,
@@ -43,6 +44,7 @@ export default function Recipes({
   token: string | null;
   userId: number | null;
 }) {
+  const [loading, setLoading] = useState(true);
   const { i18n, t } = useTranslation();
   const language = i18n.language;
   const isMetric = language !== "en" && language !== "en-US";
@@ -250,6 +252,7 @@ export default function Recipes({
         setNuteInfo(JSON.parse(nuteInfo));
         setPrimaryNotes(cocatNotes(primaryNotes));
         setSecondaryNotes(cocatNotes(secondaryNotes));
+        setLoading(false);
       } catch (err) {
         console.log(err);
         alert(err);
@@ -370,7 +373,7 @@ export default function Recipes({
   ]);
   return (
     <div className="w-full flex flex-col items-center justify-center mt-12 mb-12">
-      {step}
+      {loading ? <Loading /> : step}
       {currentStepIndex > 0 && (
         <button
           className="hover:bg-background rounded-2xl border-2 border-solid hover:border-textColor  bg-sidebar border-background md:text-lg text-base px-2 py-1 disabled:bg-sidebar disabled:hover:border-textColor disabled:hover:text-sidebar disabled:cursor-not-allowed w-1/4"
@@ -393,6 +396,13 @@ export default function Recipes({
           {t("buttonLabels.next")}
         </button>
       )}
+      <ResetButton
+        setRecipeData={setRecipeData}
+        setData={setData}
+        recipeData={recipeData}
+        setPrimaryNotes={setPrimaryNotes}
+        setSecondaryNotes={setSecondaryNotes}
+      />
     </div>
   );
 }
