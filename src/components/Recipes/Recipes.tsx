@@ -52,6 +52,7 @@ export default function Recipes({
   const [recipeUser, setRecipeUser] = useState(0);
   const notCurrentUser = recipeUser !== 0 && recipeUser !== userId;
   const [recipeName, setRecipeName] = useState("");
+  const [updateForm, setUpdateForm] = useState(true);
 
   const [primaryNotes, setPrimaryNotes] = useState<string[][]>([["", ""]]);
   const [secondaryNotes, setSecondaryNotes] = useState<string[][]>([["", ""]]);
@@ -356,18 +357,40 @@ export default function Recipes({
           advanced={advanced}
         />
       ) : (
-        <UpdateRecipeForm
-          name={recipeName}
-          updateName={setRecipeName}
-          recipeData={recipeData}
-          nutrientData={data}
-          nuteInfo={nuteInfo}
-          primaryNotes={primaryNotes}
-          secondaryNotes={secondaryNotes}
-          yanContribution={yanContribution}
-          yanFromSource={yanFromSource}
-          advanced={advanced}
-        />
+        <>
+          {updateForm ? (
+            <UpdateRecipeForm
+              name={recipeName}
+              updateName={setRecipeName}
+              recipeData={recipeData}
+              nutrientData={data}
+              nuteInfo={nuteInfo}
+              primaryNotes={primaryNotes}
+              secondaryNotes={secondaryNotes}
+              yanContribution={yanContribution}
+              yanFromSource={yanFromSource}
+              advanced={advanced}
+            />
+          ) : (
+            <SaveRecipeForm
+              recipeData={recipeData}
+              nutrientData={data}
+              nuteInfo={nuteInfo}
+              primaryNotes={primaryNotes}
+              secondaryNotes={secondaryNotes}
+              yanContribution={yanContribution}
+              yanFromSource={yanFromSource}
+              advanced={advanced}
+            />
+          )}
+          <p>{t("accountPage.or")}</p>
+          <button
+            className="hover:bg-background rounded-2xl border-2 border-solid hover:border-textColor  bg-sidebar border-background md:text-lg text-base px-2 py-1 disabled:bg-sidebar disabled:hover:border-textColor disabled:hover:text-sidebar disabled:cursor-not-allowed w-1/4 mt-4 mb-8"
+            onClick={() => setUpdateForm((prev) => !prev)}
+          >
+            {updateForm ? t("changesForm.saveAs") : t("changesForm.login")}
+          </button>
+        </>
       )}
     </>,
   ]);
