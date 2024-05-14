@@ -31,7 +31,7 @@ export default function BlendingCalc() {
       }}
     >
       <Title header={t("blendingHeading")} />
-      <div>
+      <div className="grid grid-cols-2 sm:grid-cols-4 items-center">
         <label className="text-center mx-2 my-2" htmlFor="valueOne">
           {t("valOne")}
         </label>
@@ -58,7 +58,7 @@ export default function BlendingCalc() {
           className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-textColor hover:bg-sidebar hover:border-background"
         />
       </div>
-      <div>
+      <div className="grid grid-cols-2 sm:grid-cols-4 items-center">
         <label className="text-center mx-2 my-2" htmlFor="valueTwo">
           {t("valTwo")}
         </label>
@@ -84,7 +84,7 @@ export default function BlendingCalc() {
           className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-textColor hover:bg-sidebar hover:border-background"
         />
       </div>
-      <div>
+      <div className="grid grid-cols-2 sm:grid-cols-4 items-center">
         <label className="text-center mx-2 my-2" htmlFor="totalVol">
           {t("totalVol")}
         </label>
