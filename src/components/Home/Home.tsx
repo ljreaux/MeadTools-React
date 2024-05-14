@@ -17,6 +17,7 @@ import { List } from "../../App";
 import { usePDF } from "@react-pdf/renderer";
 import { Viewer, Worker } from "@react-pdf-viewer/core";
 import { pdfjs } from "react-pdf";
+import { MdPictureAsPdf } from "react-icons/md";
 // Plugins
 import { defaultLayoutPlugin } from "@react-pdf-viewer/default-layout";
 
@@ -211,7 +212,7 @@ export default function Home({
     secondaryNotes,
   ]);
 
-  const { next, back, step, currentStepIndex, steps } = useMultiStepForm([
+  const { next, back, goTo, step, currentStepIndex, steps } = useMultiStepForm([
     <RecipeBuilder
       {...recipeData}
       setRecipeData={setRecipeData}
@@ -314,35 +315,49 @@ export default function Home({
   return (
     <div className="w-full flex flex-col items-center justify-center mt-12 mb-12">
       {step}
-      {currentStepIndex > 0 && (
-        <button
-          className="hover:bg-background rounded-2xl border-2 border-solid hover:border-textColor  bg-sidebar border-background md:text-lg text-base px-2 py-1 disabled:bg-sidebar disabled:hover:border-textColor disabled:hover:text-sidebar disabled:cursor-not-allowed w-1/4"
-          onClick={back}
-        >
-          {t("buttonLabels.back")}
-        </button>
-      )}
-      {currentStepIndex < steps.length - 1 && (
-        <button
-          className="hover:bg-background rounded-2xl border-2 border-solid hover:border-textColor  bg-sidebar border-background md:text-lg text-base px-2 py-1 disabled:bg-sidebar disabled:hover:border-textColor disabled:hover:text-sidebar disabled:cursor-not-allowed w-1/4"
-          onClick={() => {
-            setData((prev) => ({
-              ...prev,
-              yanContribution,
-            }));
-            next();
-          }}
-        >
-          {t("buttonLabels.next")}
-        </button>
-      )}
-      <ResetButton
-        setRecipeData={setRecipeData}
-        setData={setData}
-        recipeData={recipeData}
-        setPrimaryNotes={setPrimaryNotes}
-        setSecondaryNotes={setSecondaryNotes}
-      />
+      <div className="w-1/4 flex items-center justify-center">
+        {currentStepIndex > 0 && (
+          <button
+            className="hover:bg-background rounded-2xl border-2 border-solid hover:border-textColor  bg-sidebar border-background md:text-lg text-base px-2 py-1 disabled:bg-sidebar disabled:hover:border-textColor disabled:hover:text-sidebar disabled:cursor-not-allowed grow"
+            onClick={back}
+          >
+            {t("buttonLabels.back")}
+          </button>
+        )}
+        {currentStepIndex < steps.length - 1 && (
+          <button
+            className="hover:bg-background rounded-2xl border-2 border-solid hover:border-textColor  bg-sidebar border-background md:text-lg text-base px-2 py-1 disabled:bg-sidebar disabled:hover:border-textColor disabled:hover:text-sidebar disabled:cursor-not-allowed grow"
+            onClick={() => {
+              setData((prev) => ({
+                ...prev,
+                yanContribution,
+              }));
+              next();
+            }}
+          >
+            {t("buttonLabels.next")}
+          </button>
+        )}
+      </div>
+      <div className="w-1/4 flex items-center justify-center  mb-[3rem]">
+        <ResetButton
+          setRecipeData={setRecipeData}
+          setData={setData}
+          recipeData={recipeData}
+          setPrimaryNotes={setPrimaryNotes}
+          setSecondaryNotes={setSecondaryNotes}
+        />{" "}
+        {currentStepIndex !== steps.length - 2 && (
+          <button
+            className=" hover:bg-background rounded-2xl border-2 border-solid hover:border-textColor bg-sidebar border-background md:text-lg px-2 py-1 disabled:bg-sidebar disabled:hover:border-textColor disabled:hover:text-sidebar disabled:cursor-not-allowed grow"
+            onClick={() => goTo(steps.length - 2)}
+          >
+            <div className="w-full h-full flex items-center justify-center text-2xl">
+              <MdPictureAsPdf />
+            </div>
+          </button>
+        )}
+      </div>
     </div>
   );
 }
