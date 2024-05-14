@@ -51,6 +51,9 @@ export default function useYanCalc(
     } else {
       const totalYanInput = yanFromSource.reduce((prev, cur) => prev + cur);
       const yanCopy = [...yanContribution];
+      let multiplier = 4;
+      if (gfType === "none") multiplier = 3;
+      yanCopy[0] *= multiplier;
       const totalGrams = yanFromSource.map((yan, i) =>
         batchUnits === "liter"
           ? (yan / yanCopy[i]) * batchSize
