@@ -27,6 +27,7 @@ export default function RecipeBuilder({
   const { t } = useTranslation();
   const [firstMount, setFirstMount] = useState(true);
   useEffect(() => setFirstMount(false), []);
+
   const totalBlended = ingredients.map((ingredient) => {
     return [toSG(ingredient.brix), ingredient.details[1]];
   });
@@ -45,6 +46,10 @@ export default function RecipeBuilder({
     blend: noSecondaryBlend,
     runBlendingFunction: secondaryBlendFunction,
   } = useBlend(withOutSecondary);
+  function runBlends() {
+    runBlendingFunction();
+    secondaryBlendFunction();
+  }
 
   function setIngredients(ingredientList: List) {
     setIngredientsList(ingredientList);
@@ -78,6 +83,7 @@ export default function RecipeBuilder({
         ],
       };
     });
+    runBlends();
   }
 
   function removeLine(index: number) {
@@ -87,6 +93,7 @@ export default function RecipeBuilder({
         ingredients: prev.ingredients.filter((_, i) => i !== index),
       };
     });
+    runBlends();
   }
 
   function setChecked(index: number) {
@@ -105,8 +112,7 @@ export default function RecipeBuilder({
         }),
       };
     });
-    runBlendingFunction();
-    secondaryBlendFunction();
+    runBlends();
   }
 
   const { ABV, delle } = useAbv({ OG: blend.blendedValue, FG });
@@ -143,8 +149,7 @@ export default function RecipeBuilder({
           })),
         };
       });
-    runBlendingFunction();
-    secondaryBlendFunction();
+    runBlends();
   }, [units.volume]);
 
   useEffect(() => {
