@@ -28,6 +28,7 @@ const stabilizers = {
       pecticEnzyme: "Pectic Enzyme",
       lallzymeExV: "Lallzyme EX-V",
       lallzymeEx: "Lallzyme EX",
+      lallzymeCMax: "Lallzyme C-Max",
       oakChips: "Oak Chips",
       oakSpirals: "Oak Spirals",
       oakCubes: "Oak Cubes",
