@@ -230,6 +230,7 @@ export default function Recipes({
           },
         });
         const { recipe } = await res.json();
+        console.log(recipe);
 
         if (recipe.name === notFoundError) throw new Error(recipe.message);
         const {
@@ -244,6 +245,7 @@ export default function Recipes({
           primaryNotes,
           secondaryNotes,
         } = recipe;
+        console.log(JSON.parse(yanFromSource))
         setRecipeName(name);
         setRecipeUser(user_id);
         setRecipeData(JSON.parse(recipeData));

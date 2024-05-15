@@ -3,7 +3,6 @@ import Title from "../Title";
 import { useTranslation } from "react-i18next";
 
 export default function AdvancedInputForm({
-  advanced,
   yanFromSource,
   setYanFromSource,
   yanContribution,
@@ -87,7 +86,7 @@ export default function AdvancedInputForm({
             <input
               type="number"
               className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-textColor hover:bg-sidebar hover:border-background w-11/12 my-2"
-              value={advanced && yanFromSource ? yanFromSource[0] : 0}
+              value={yanFromSource ? yanFromSource[0] : 0}
               onFocus={(e) => e.target.select()}
               onChange={(e) => {
                 setYanFromSource((prev: null | number[]) => {
@@ -105,7 +104,7 @@ export default function AdvancedInputForm({
             <input
               type="number"
               className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-textColor hover:bg-sidebar hover:border-background w-11/12 my-2"
-              value={advanced && yanFromSource ? yanFromSource[1] : 0}
+              value={yanFromSource ? yanFromSource[1] : 0}
               onFocus={(e) => e.target.select()}
               onChange={(e) => {
                 setYanFromSource((prev: null | number[]) => {
@@ -123,7 +122,7 @@ export default function AdvancedInputForm({
             <input
               type="number"
               className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-textColor hover:bg-sidebar hover:border-background w-11/12 my-2"
-              value={advanced && yanFromSource ? yanFromSource[2] : 0}
+              value={yanFromSource ? yanFromSource[2] : 0}
               onFocus={(e) => e.target.select()}
               onChange={(e) => {
                 setYanFromSource((prev: null | number[]) => {

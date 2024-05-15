@@ -24,7 +24,7 @@ interface PropsType {
     };
   };
   yanContribution: number[] | string;
-  yanFromSource: number[] | null;
+  yanFromSource: number[] | null | string;
   advanced: boolean;
 }
 
@@ -68,6 +68,7 @@ export default function UpdateRecipeForm(props: PropsType) {
             {
               ...rest,
               yanContribution: JSON.stringify(props.yanContribution),
+              yanFromSource: JSON.stringify(props.yanFromSource),
               primaryNotes: props.primaryNotes.flat(),
               secondaryNotes: props.secondaryNotes.flat(),
             },
