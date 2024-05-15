@@ -3,7 +3,6 @@ import Title from "../Title";
 import { useTranslation } from "react-i18next";
 
 export default function AdvancedInputForm({
-  advanced,
   yanFromSource,
   setYanFromSource,
   yanContribution,
