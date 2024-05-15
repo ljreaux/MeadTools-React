@@ -432,7 +432,7 @@ export default function Recipes({
         />{" "}
         {currentStepIndex !== steps.length - 2 && (
           <button
-            className=" hover:bg-background rounded-2xl border-2 border-solid hover:border-textColor bg-sidebar border-background md:text-lg px-2 py-1 disabled:bg-sidebar disabled:hover:border-textColor disabled:hover:text-sidebar disabled:cursor-not-allowed grow"
+            className=" hover:bg-background rounded-2xl border-2 border-solid hover:border-textColor bg-sidebar border-background md:text-lg px-2 py-1 disabled:bg-sidebar disabled:hover:border-textColor disabled:hover:text-sidebar disabled:cursor-not-allowed grow h-full"
             onClick={() => goTo(steps.length - 2)}
           >
             <div className="w-full h-full flex items-center justify-center text-2xl">
