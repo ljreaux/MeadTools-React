@@ -40,10 +40,6 @@ export default function Account({
   const [isOpened, setOpened] = useState(false);
   const { t, i18n } = useTranslation();
   const [userInfo, setUserInfo] = useState<UserInfo | null>(null);
-  const columns =
-    userInfo?.recipes && userInfo?.recipes.length < 5
-      ? userInfo?.recipes.length
-      : 5;
 
   const navigate = useNavigate();
   useEffect(() => {
