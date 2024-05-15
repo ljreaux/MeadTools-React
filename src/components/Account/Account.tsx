@@ -166,9 +166,7 @@ export default function Account({
               } justify-center items-center gap-4 text-center`}
             >
               <h2
-                className={`text-2xl text-center sm:col-span-${columns} col-span-${
-                  userInfo.recipes.length >= 2 ? 2 : 1
-                }`}
+                className={`text-2xl text-center sm:col-span-${columns} col-span-full`}
               >
                 {t("accountPage.myRecipes")}
               </h2>
