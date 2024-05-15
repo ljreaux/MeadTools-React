@@ -33,6 +33,7 @@ import SaveRecipeForm from "../Home/SaveRecipeForm";
 import UpdateRecipeForm from "./UpdateRecipeForm";
 import ResetButton from "../Home/ResetButton";
 import { MdPictureAsPdf } from "react-icons/md";
+import useChangeLogger from "../../hooks/useChangeLogger";
 
 export default function Recipes({
   ingredientsList,
@@ -86,7 +87,7 @@ export default function Recipes({
   }>(null);
 
   useEffect(() => {
-    if (advanced) setYanFromSource([0, 0, 0]);
+    if (advanced && !yanFromSource) setYanFromSource([0, 0, 0]);
     else setYanFromSource(null);
   }, [advanced]);
 
@@ -230,7 +231,6 @@ export default function Recipes({
           },
         });
         const { recipe } = await res.json();
-        console.log(recipe);
 
         if (recipe.name === notFoundError) throw new Error(recipe.message);
         const {
@@ -245,7 +245,6 @@ export default function Recipes({
           primaryNotes,
           secondaryNotes,
         } = recipe;
-        console.log(JSON.parse(yanFromSource))
         setRecipeName(name);
         setRecipeUser(user_id);
         setRecipeData(JSON.parse(recipeData));
