@@ -159,17 +159,12 @@ export default function Account({
             <h2>
               {t("greeting")} {userInfo.email}
             </h2>
-
+            <h2 className={`text-2xl text-center col-span-full`}>
+              {t("accountPage.myRecipes")}
+            </h2>
             <div
-              className={`grid sm:grid-cols-${columns} grid-cols-${
-                userInfo.recipes.length >= 2 ? 2 : 1
-              } justify-center items-center gap-4 text-center`}
+              className={`flex flex-wrap justify-center items-center gap-4 text-center mt-4`}
             >
-              <h2
-                className={`text-2xl text-center sm:col-span-${columns} col-span-full`}
-              >
-                {t("accountPage.myRecipes")}
-              </h2>
               {userInfo.recipes.map((recipe) => (
                 <RecipeCard
                   recipe={recipe}
