@@ -33,7 +33,6 @@ import SaveRecipeForm from "../Home/SaveRecipeForm";
 import UpdateRecipeForm from "./UpdateRecipeForm";
 import ResetButton from "../Home/ResetButton";
 import { MdPictureAsPdf } from "react-icons/md";
-import useChangeLogger from "../../hooks/useChangeLogger";
 
 export default function Recipes({
   ingredientsList,
