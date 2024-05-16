@@ -79,18 +79,18 @@ export default function Additives({
     },
     {
       name: t(`list.${lodash.camelCase("Lallzyme EX-V")}`),
-      dosage: 75,
-      unit: "mg",
+      dosage: 0.075,
+      unit: "g",
     },
     {
       name: t(`list.${lodash.camelCase("Lallzyme EX")}`),
-      dosage: 100,
-      unit: "mg",
+      dosage: 0.1,
+      unit: "g",
     },
     {
       name: t(`list.${lodash.camelCase("Lallzyme C-Max")}`),
-      dosage: 60,
-      unit: "mg",
+      dosage: 0.06,
+      unit: "g",
     },
     {
       name: t(`list.${lodash.camelCase("Oak Chips")}`),
