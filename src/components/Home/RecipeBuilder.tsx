@@ -3,7 +3,7 @@ import { RecipeData } from "../../App";
 import Title from "../Title";
 import { FaMinusSquare, FaPlusSquare } from "react-icons/fa";
 import Ingredient from "./Ingredient";
-import { toSG } from "../../helpers/unitConverters";
+import { toBrix, toSG } from "../../helpers/unitConverters";
 import useBlend from "../../hooks/useBlend";
 import useAbv from "../../hooks/useAbv";
 import { Ingredient as IngredientType } from "../../App";
@@ -122,7 +122,27 @@ export default function RecipeBuilder({
     runBlends();
   }
 
-  const { ABV, delle } = useAbv({ OG: blend.blendedValue, FG: blendFG });
+  function calculateABV({ ABV, delle }: { ABV: number; delle: number }) {
+    if (blend.blendedValue > noSecondaryBlend.blendedValue) {
+      const numerator = ABV * noSecondaryBlend.totalVolume;
+      const denominator = blend.totalVolume;
+      ABV = numerator / denominator;
+      delle = toBrix(FG) + 4.5 * ABV;
+    }
+    setRecipeData((prev) => ({
+      ...prev,
+      ABV,
+    }));
+    return { ABV, delle };
+  }
+
+  const ABVOBJ = useAbv({ OG: blend.blendedValue, FG: blendFG });
+
+  const [{ ABV, delle }, setABVDelle] = useState({ ABV: 0, delle: 0 });
+
+  useEffect(() => {
+    setABVDelle(calculateABV(ABVOBJ));
+  }, [ABVOBJ.ABV]);
 
   useEffect(() => {
     const multiplier = units.weight === "kg" ? 0.453592 : 2.20462;
@@ -323,7 +343,7 @@ export default function RecipeBuilder({
               <Tooltip body={t("tipText.estimatedFg")} />
             </label>
             <label htmlFor="backFG" className="flex justify-center item-center">
-              Backsweetened FG:
+              {t("recipeBuilder.resultsLabels.backFG")}
             </label>
             <label htmlFor="abv">{t("recipeBuilder.resultsLabels.abv")}</label>
             <label htmlFor="delle" className="flex items-center justify-center">

@@ -232,7 +232,6 @@ export default function Recipes({
           },
         });
         const { recipe } = await res.json();
-        console.log(recipe);
         if (recipe.name === notFoundError) throw new Error(recipe.message);
         const {
           name,

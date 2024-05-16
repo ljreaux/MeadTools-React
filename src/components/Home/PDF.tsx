@@ -100,7 +100,6 @@ const MyDocument = ({
 
   useEffect(() => {
     if (ingredients) {
-      console.log(secondary.length);
       setPrimary(
         ingredients.filter((item) => !item.secondary && item.details[0] > 0)
       );
