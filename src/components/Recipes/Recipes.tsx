@@ -54,6 +54,7 @@ export default function Recipes({
   const notCurrentUser = recipeUser !== 0 && recipeUser !== userId;
   const [recipeName, setRecipeName] = useState("");
   const [updateForm, setUpdateForm] = useState(true);
+  const [, setBlendSG] = useState([0.996, 0.996]);
 
   const [primaryNotes, setPrimaryNotes] = useState<string[][]>([["", ""]]);
   const [secondaryNotes, setSecondaryNotes] = useState<string[][]>([["", ""]]);
@@ -72,6 +73,7 @@ export default function Recipes({
     additives: [{ name: "", amount: 0, unit: "g" }],
   });
   const defaultLayoutPluginInstance = defaultLayoutPlugin();
+  const [secondaryVolume, setSecondaryVolume] = useState(0);
   const [advanced, setAdvanced] = useState(false);
   const [nuteInfo, setNuteInfo] = useState<null | {
     ppmYan: number[];
@@ -230,7 +232,7 @@ export default function Recipes({
           },
         });
         const { recipe } = await res.json();
-
+        console.log(recipe);
         if (recipe.name === notFoundError) throw new Error(recipe.message);
         const {
           name,
@@ -273,6 +275,8 @@ export default function Recipes({
       setRecipeData={setRecipeData}
       ingredientsList={ingredientsList}
       setIngredientsList={setIngredientsList}
+      setBlendFG={setBlendSG}
+      setSecondaryVolume={setSecondaryVolume}
     />,
     <>
       <MainInputs
@@ -306,7 +310,7 @@ export default function Recipes({
     />,
     <Stabilizers
       abv={recipeData.ABV}
-      batchVolume={recipeData.volume}
+      batchVolume={secondaryVolume}
       volumeUnits={recipeData.units.volume}
       setSorbateSulfite={setSorbateSulfite}
     />,

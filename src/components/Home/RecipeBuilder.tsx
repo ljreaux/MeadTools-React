@@ -19,10 +19,14 @@ export default function RecipeBuilder({
   units,
   setRecipeData,
   setIngredientsList,
+  setBlendFG,
+  setSecondaryVolume,
 }: RecipeData & {
   setRecipeData: Dispatch<SetStateAction<RecipeData>>;
   ingredientsList: List;
   setIngredientsList: Dispatch<SetStateAction<List>>;
+  setBlendFG: Dispatch<SetStateAction<number[]>>;
+  setSecondaryVolume: Dispatch<SetStateAction<number>>;
 }) {
   const { t } = useTranslation();
   const [firstMount, setFirstMount] = useState(true);
@@ -50,7 +54,10 @@ export default function RecipeBuilder({
     runBlendingFunction();
     secondaryBlendFunction();
   }
-
+  const blendFG =
+    Math.round(
+      (Math.abs(blend.blendedValue - noSecondaryBlend.blendedValue) + FG) * 1000
+    ) / 1000;
   function setIngredients(ingredientList: List) {
     setIngredientsList(ingredientList);
   }
@@ -115,7 +122,7 @@ export default function RecipeBuilder({
     runBlends();
   }
 
-  const { ABV, delle } = useAbv({ OG: blend.blendedValue, FG });
+  const { ABV, delle } = useAbv({ OG: blend.blendedValue, FG: blendFG });
 
   useEffect(() => {
     const multiplier = units.weight === "kg" ? 0.453592 : 2.20462;
@@ -153,24 +160,25 @@ export default function RecipeBuilder({
   }, [units.volume]);
 
   useEffect(() => {
-    if (!firstMount)
+    if (!firstMount) {
       setRecipeData((prev) => {
         return {
           ...prev,
           OG: noSecondaryBlend.blendedValue,
-          FG:
-            Math.round(
-              (Math.abs(blend.blendedValue - noSecondaryBlend.blendedValue) +
-                0.996) *
-                1000
-            ) / 1000,
+          FG: 0.996,
           offset: offsetArr.reduce((prev, curr) => {
             return curr / noSecondaryBlend.totalVolume + prev;
           }, 0),
           volume: noSecondaryBlend.totalVolume,
         };
       });
+      setSecondaryVolume(blend.totalVolume);
+    }
   }, [blend.blendedValue, noSecondaryBlend.blendedValue]);
+
+  useEffect(() => {
+    setBlendFG([blend.blendedValue, blendFG]);
+  }, [FG, blend.blendedValue, noSecondaryBlend.blendedValue]);
 
   const [loading, setLoading] = useState(true);
 
@@ -306,15 +314,16 @@ export default function RecipeBuilder({
             <label htmlFor="estOG">
               {t("recipeBuilder.resultsLabels.estOG")}
             </label>
-            <label htmlFor="estActualOG">
-              {t("recipeBuilder.resultsLabels.estActualOG")}
-            </label>
+
             <label
               htmlFor="estFG"
               className="flex flex-col items-center justify-center"
             >
               {t("recipeBuilder.resultsLabels.estFG")}
               <Tooltip body={t("tipText.estimatedFg")} />
+            </label>
+            <label htmlFor="backFG" className="flex justify-center item-center">
+              Backsweetened FG:
             </label>
             <label htmlFor="abv">{t("recipeBuilder.resultsLabels.abv")}</label>
             <label htmlFor="delle" className="flex items-center justify-center">
@@ -327,7 +336,7 @@ export default function RecipeBuilder({
             <p id="estOG">
               {Math.round(noSecondaryBlend.blendedValue * 1000) / 1000}
             </p>
-            <p>{Math.round(blend.blendedValue * 1000) / 1000}</p>
+
             <input
               type="number"
               value={FG}
@@ -343,7 +352,7 @@ export default function RecipeBuilder({
               }}
               onFocus={(e) => e.target.select()}
             />
-
+            <p id="backFG">{blendFG}</p>
             <p>
               {Math.round(ABV * 100) / 100}
               {t("recipeBuilder.percent")}
@@ -362,9 +371,10 @@ export default function RecipeBuilder({
               {Math.round(noSecondaryBlend.totalVolume * 1000) / 1000}{" "}
               {units.volume}
             </p>
+
             <label
               htmlFor="totalSecondaryVolume"
-              className="col-start-3 flex justify-center item-center"
+              className=" col-start-4 flex justify-center item-center"
             >
               {t("recipeBuilder.resultsLabels.totalSecondary")}
               <Tooltip body={t("tipText.totalSecondary")} />

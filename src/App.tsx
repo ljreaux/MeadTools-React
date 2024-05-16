@@ -95,7 +95,9 @@ function App() {
     settings: false,
   });
 
-  const { ABV } = useAbv({ OG: recipeData.OG, FG: recipeData.FG });
+  const [blendSG, setBlendSG] = useState([0.996, 0.996]);
+
+  const { ABV } = useAbv({ OG: blendSG[0], FG: blendSG[1] });
 
   useEffect(() => {
     setRecipeData((prev) => ({ ...prev, ABV }));
@@ -147,6 +149,7 @@ function App() {
                 ingredientsList={ingredientsList}
                 setIngredientsList={setIngredientsList}
                 token={token}
+                setBlendFG={setBlendSG}
               />
             }
           />

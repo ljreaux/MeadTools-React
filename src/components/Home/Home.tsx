@@ -37,12 +37,14 @@ export default function Home({
   ingredientsList,
   setIngredientsList,
   token,
+  setBlendFG,
 }: {
   recipeData: RecipeData;
   setRecipeData: Dispatch<SetStateAction<RecipeData>>;
   ingredientsList: List;
   setIngredientsList: Dispatch<SetStateAction<List>>;
   token: string | null;
+  setBlendFG: Dispatch<SetStateAction<number[]>>;
 }) {
   const [primaryNotes, setPrimaryNotes] = useLocalStorage<string[][]>(
     "primaryNotes",
@@ -52,7 +54,7 @@ export default function Home({
     "secondaryNotes",
     [["", ""]]
   );
-
+  const [secondaryVolume, setSecondaryVolume] = useState(0);
   const defaultLayoutPluginInstance = defaultLayoutPlugin();
   const { t } = useTranslation();
   const [advanced, setAdvanced] = useLocalStorage("advanced", false);
@@ -218,6 +220,8 @@ export default function Home({
       setRecipeData={setRecipeData}
       ingredientsList={ingredientsList}
       setIngredientsList={setIngredientsList}
+      setBlendFG={setBlendFG}
+      setSecondaryVolume={setSecondaryVolume}
     />,
     <>
       <MainInputs
@@ -251,7 +255,7 @@ export default function Home({
     />,
     <Stabilizers
       abv={recipeData.ABV}
-      batchVolume={recipeData.volume}
+      batchVolume={secondaryVolume}
       volumeUnits={recipeData.units.volume}
       setSorbateSulfite={setSorbateSulfite}
     />,

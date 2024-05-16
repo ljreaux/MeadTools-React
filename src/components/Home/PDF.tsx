@@ -8,7 +8,7 @@ import {
 } from "@react-pdf/renderer";
 
 import logo from "../../assets/full-logo.png";
-import { RecipeData } from "../../App";
+import { Ingredient, RecipeData } from "../../App";
 import { useTranslation } from "react-i18next";
 import lodash from "lodash";
 import { toBrix } from "../../helpers/unitConverters";
@@ -16,6 +16,7 @@ import useAbv from "../../hooks/useAbv.ts";
 import { FormData } from "../Nutrients/NutrientCalc";
 import calcSb from "../../helpers/calcSb";
 import i18n from "../../localization/i18n.ts";
+import { useEffect, useState } from "react";
 
 // Create styles
 const styles = StyleSheet.create({
@@ -89,12 +90,25 @@ const MyDocument = ({
   const { t } = useTranslation();
   const ABVOBJ = OG && FG ? { OG, FG } : { OG: 1, FG: 1 };
   const { delle } = useAbv(ABVOBJ);
-  const primary = ingredients?.filter(
-    (item) => !item.secondary && item.details[0] > 0
+
+  const [primary, setPrimary] = useState<Ingredient[]>([]);
+  const [secondary, setSecondary] = useState<Ingredient[]>(
+    ingredients
+      ? ingredients.filter((item) => item.secondary && item.details[0] > 0)
+      : []
   );
-  const secondary = ingredients?.filter(
-    (item) => item.secondary && item.details[0] > 0
-  );
+
+  useEffect(() => {
+    if (ingredients) {
+      console.log(secondary.length);
+      setPrimary(
+        ingredients.filter((item) => !item.secondary && item.details[0] > 0)
+      );
+      setSecondary(
+        ingredients.filter((item) => item.secondary && item.details[0] > 0)
+      );
+    }
+  }, [ingredients]);
 
   const filteredAdditives = additives?.filter((item) => {
     return item.amount > 0 && item.name.length > 0;
@@ -536,7 +550,7 @@ const MyDocument = ({
           </View>
           {primary &&
             primary.map((item, i) => (
-              <View style={styles.sectionTwo}>
+              <View style={styles.sectionTwo} key={item.name + i}>
                 <Text
                   style={[
                     styles.tableAlign,
@@ -593,6 +607,7 @@ const MyDocument = ({
               return (
                 <>
                   <Text
+                    key={"note #" + i}
                     style={[
                       styles.tableAlign,
                       { width: "75%", textAlign: "left", paddingLeft: 10 },
@@ -609,7 +624,7 @@ const MyDocument = ({
           </View>
         )}
         <View style={[styles.section]} break>
-          {secondary && secondary.length && (
+          {
             <View style={styles.sectionTwo}>
               <Text
                 style={[
@@ -650,26 +665,26 @@ const MyDocument = ({
                 {t("PDF.volume")} {units && units.volume}
               </Text>
             </View>
-          )}
-          {secondary &&
-            secondary.map((item, i) => (
-              <View style={styles.sectionTwo}>
-                <Text
-                  style={[
-                    styles.tableAlign,
-                    { width: "50%", textAlign: "left", paddingLeft: 10 },
-                  ]}
-                >
-                  {i + 1}. {t(`${lodash.camelCase(item.name)}`)}
-                </Text>
-                <Text style={[styles.tableAlign, { width: "25%" }]}>
-                  {item.details[0]}
-                </Text>
-                <Text style={[styles.tableAlign, { width: "25%" }]}>
-                  {item.details[1]}
-                </Text>
-              </View>
-            ))}
+          }
+
+          {secondary.map((item, i) => (
+            <View style={styles.sectionTwo} key={"secondary " + i}>
+              <Text
+                style={[
+                  styles.tableAlign,
+                  { width: "50%", textAlign: "left", paddingLeft: 10 },
+                ]}
+              >
+                {i + 1}. {t(`${lodash.camelCase(item.name)}`)}
+              </Text>
+              <Text style={[styles.tableAlign, { width: "25%" }]}>
+                {item.details[0]}
+              </Text>
+              <Text style={[styles.tableAlign, { width: "25%" }]}>
+                {item.details[1]}
+              </Text>
+            </View>
+          ))}
           {filteredAdditives && filteredAdditives.length && (
             <View style={[styles.sectionTwo, { marginTop: 12 }]}>
               <Text
@@ -702,7 +717,7 @@ const MyDocument = ({
           )}
           {filteredAdditives &&
             filteredAdditives.map((item, i) => (
-              <View style={styles.sectionTwo}>
+              <View style={styles.sectionTwo} key={"additive " + i}>
                 <Text
                   style={[
                     styles.tableAlign,
@@ -756,6 +771,7 @@ const MyDocument = ({
               return (
                 <>
                   <Text
+                    key={"secondaryNotes " + i}
                     style={[
                       styles.tableAlign,
                       { width: "75%", textAlign: "left", paddingLeft: 10 },
