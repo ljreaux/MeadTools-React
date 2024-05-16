@@ -140,7 +140,6 @@ export default function Ingredient({
           (ingredient.details[0] / converter / toSG(Number(brix))) * 10000
         ) / 10000,
       ],
-      secondary: false,
       category,
     });
   }
