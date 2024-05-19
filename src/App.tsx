@@ -12,7 +12,7 @@ import { IngredientListItem } from "./components/Home/Ingredient";
 import Login from "./components/Account/Login";
 import Account from "./components/Account/Account";
 import useLocalStorage from "./hooks/useLocalStorage";
-import useAbv from "./hooks/useAbv";
+// import useAbv from "./hooks/useAbv";
 import Recipes from "./components/Recipes/Recipes";
 
 export interface Additive {
@@ -95,11 +95,7 @@ function App() {
     settings: false,
   });
 
-  const { ABV } = useAbv({ OG: recipeData.OG, FG: recipeData.FG });
-
-  useEffect(() => {
-    setRecipeData((prev) => ({ ...prev, ABV }));
-  }, [ABV]);
+  const [, setBlendSG] = useState([0.996, 0.996]);
 
   useEffect(() => {
     const body = document.querySelector("body");
@@ -147,6 +143,7 @@ function App() {
                 ingredientsList={ingredientsList}
                 setIngredientsList={setIngredientsList}
                 token={token}
+                setBlendFG={setBlendSG}
               />
             }
           />
