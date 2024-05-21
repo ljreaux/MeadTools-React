@@ -44,6 +44,7 @@ export default function NutrientCalcResults({
       gf: {
         gf: number;
         gfWater: number;
+        gfType?: string;
       };
     }>
   >;
@@ -70,9 +71,15 @@ export default function NutrientCalcResults({
   );
 
   const { gf, gfWater } = useGoFerm(gfType, outputs.yeastAmount);
+  const parsedGF =
+    gfType === "protect"
+      ? "Go-Ferm Protect"
+      : gfType === "sterol-flash"
+      ? "Go-Ferm Sterol Flash"
+      : "Go-Ferm";
 
   useEffect(() => {
-    setNuteInfo({ ...nutrients, gf: { gf, gfWater } });
+    setNuteInfo({ ...nutrients, gf: { gf, gfWater, gfType: parsedGF } });
   }, [nutrients, gf, gfWater]);
 
   return (

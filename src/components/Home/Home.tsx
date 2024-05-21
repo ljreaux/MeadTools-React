@@ -67,6 +67,7 @@ export default function Home({
     gf: {
       gf: number;
       gfWater: number;
+      gfType?: string;
     };
   }>("nuteInfo", null);
 

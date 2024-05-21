@@ -84,6 +84,7 @@ export default function Recipes({
     gf: {
       gf: number;
       gfWater: number;
+      gfType?: string;
     };
   }>(null);
 

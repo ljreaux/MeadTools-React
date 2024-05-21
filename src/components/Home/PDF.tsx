@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     justifyContent: "flex-start",
     alignItems: "center",
-    backgroundColor: "#E4E4E4",
+    // backgroundColor: "#E4E4E4",
     fontFamily: "Times-Roman",
     fontSize: 12,
     boxSizing: "border-box",
@@ -81,6 +81,7 @@ const MyDocument = ({
       gf: {
         gf: number;
         gfWater: number;
+        gfType?: string;
       };
     };
   } & {
@@ -164,15 +165,23 @@ const MyDocument = ({
               >
                 {t("PDF.yeast")}
               </Text>
-              <Text
+              <View
                 style={{
                   width: "50%",
                   border: "1px solid black",
-                  paddingTop: 6,
                 }}
               >
-                {volume} {units && units.volume}
-              </Text>
+                <Text>
+                  {volume} {units && units.volume}
+                </Text>
+                <Text>
+                  {nuteInfo &&
+                    nuteInfo.gf.gf > 0 &&
+                    `${nuteInfo.gf.gf}g ${
+                      nuteInfo.gf.gfType || "Go-Ferm"
+                    } with ${nuteInfo.gf.gfWater}ml water`}
+                </Text>
+              </View>
               <View
                 style={{
                   width: "50%",
