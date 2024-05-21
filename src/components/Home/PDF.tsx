@@ -177,9 +177,9 @@ const MyDocument = ({
                 <Text>
                   {nuteInfo &&
                     nuteInfo.gf.gf > 0 &&
-                    `${nuteInfo.gf.gf}g ${
-                      nuteInfo.gf.gfType || "Go-Ferm"
-                    } with ${nuteInfo.gf.gfWater}ml water`}
+                    `${nuteInfo.gf.gf}g ${nuteInfo.gf.gfType || "Go-Ferm"} ${t(
+                      "PDF.with"
+                    )} ${nuteInfo.gf.gfWater}ml ${t("water")}`}
                 </Text>
               </View>
               <View
