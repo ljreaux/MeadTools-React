@@ -55,8 +55,8 @@ export default function Stabilizers({
         : (batchVolume * ppm) / 570;
     const campden =
       volumeUnits !== "gal"
-        ? (ppm / 50) * (batchVolume / 3.785)
-        : (ppm / 50) * batchVolume;
+        ? (ppm / 75) * (batchVolume / 3.785)
+        : (ppm / 75) * batchVolume;
 
     setAmounts({
       sulfite,
