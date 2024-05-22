@@ -27,7 +27,7 @@ export default function BottomBar() {
             </a>
             <a
               className=" hover:text-background md:hover:scale-105 transition-all py-2 "
-              href="https://discord.gg/8sycKxYF"
+              href="https://discord.gg/Wbx9DWWqFC"
               target="to_blank"
             >
               <FaDiscord />
