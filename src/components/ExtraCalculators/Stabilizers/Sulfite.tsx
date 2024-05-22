@@ -25,8 +25,8 @@ export default function Sulfite() {
 
   const campden =
     sulfite.units !== "gallons"
-      ? (sulfite.ppm / 50) * (sulfite.batchSize / 3.785)
-      : (sulfite.ppm / 50) * sulfite.batchSize;
+      ? (sulfite.ppm / 75) * (sulfite.batchSize / 3.785)
+      : (sulfite.ppm / 75) * sulfite.batchSize;
 
   return (
     <div>
