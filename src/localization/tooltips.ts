@@ -38,6 +38,8 @@ const toolTip = {
         "Potassium sorbate (k-sorb) AND potassium metabisulfite (k-meta) are both needed to prevent refermentation. They cannot be reliably used to STOP fermentation in most cases. Amounts of k-meta needed for stabilizing are based on your pH. MeadTools assumes 50ppm if you choose not to take a pH reading. K-sorb amount is based on your ABV. It is not effective above around 16%. More info can be found ",
       additives:
         "Any ingredient that doesn't provide fermentable sugars is best placed here. You can use one of the suggested ingredients or add your own.",
+      campden:
+        "Campden tablets vary quite a bit in the amount of free SO2 that they provide MeadTools assumes that one campden tablet provides 75PPM of free SO2.",
     },
   },
   de: {
@@ -79,6 +81,8 @@ const toolTip = {
         "Kaliumsorbat und Kaliumdisulfit werden BEIDE zusammen benötigt um eine weitere Gärung zu unterbinden. Sie können in den meisten Fällen NICHT dazu genutzt werden, um eine laufende Gärung verlässlich zu beenden. Die benötigte Menge an Sulfit wird anhand des pH-Wertes bestimmt. MeadTools geht von 50 ppm aus, wenn du keine pH-Messung durchführen kannst oder möchtest. Die Menge an Sorbat hängt vom Alkoholgehalt ab. Es hat über 16% keinen Effekt mehr. Mehr Infos dazu finden sich ",
       additives:
         "Zutaten, die keine vergärbaren Zucker beinhalten, werden am besten hier aufgeführt. Du kannst eine der vorgeschlagenen Zusätze nehmen oder deinen eigenen nutzen.",
+      campden:
+        "Hinweis: Capden-Tabletten werden größtenteils nur noch in den USA als Alternative zu Kaliumdisulfitpulver verwendet. Campden-Tabletten vaiieren etwas in der Menge an freiem SO2, die sie enthalten. MeadTools geht bei der Berechnung davon aus, dass eine Campden-Tablett 75PPM freies SO2 enthält.",
     },
   },
 };

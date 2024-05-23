@@ -137,10 +137,11 @@ export default function Stabilizers({
           />
           <div className="col-span-2 flex gap-4">
             <label htmlFor="k-meta">{t("kMeta")}</label>
-            <p id="k-meta">
+            <p id="k-meta" className="flex gap-2">
               {Math.round(amounts.sulfite * 10000) / 10000}g{" "}
-              {t("accountPage.or")} {Math.round(amounts.campden * 10) / 10}{" "}
+              {t("accountPage.or")} <div className="flex items-center justify-center gap-2">{Math.round(amounts.campden * 10) / 10}{" "}
               {t("list.campden")}
+              <Tooltip body={t("tipText.campden")}/></div>
             </p>
           </div>
         </>
