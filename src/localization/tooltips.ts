@@ -82,7 +82,7 @@ const toolTip = {
       additives:
         "Zutaten, die keine vergärbaren Zucker beinhalten, werden am besten hier aufgeführt. Du kannst eine der vorgeschlagenen Zusätze nehmen oder deinen eigenen nutzen.",
       campden:
-        "Hinweis: Capden-Tabletten werden größtenteils nur noch in den USA als Alternative zu Kaliumdisulfitpulver verwendet. Campden-Tabletten vaiieren etwas in der Menge an freiem SO2, die sie enthalten. MeadTools geht bei der Berechnung davon aus, dass eine Campden-Tablett 75PPM freies SO2 enthält.",
+        "Hinweis: Campden-Tabletten werden größtenteils nur noch in den USA als Alternative zu Kaliumdisulfitpulver verwendet. Campden-Tabletten variieren etwas in der Menge an freiem SO2, die sie enthalten. MeadTools geht bei der Berechnung davon aus, dass eine Campden-Tablette 75PPM freies SO2 enthält.",
     },
   },
 };
