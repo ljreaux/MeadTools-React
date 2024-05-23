@@ -1,6 +1,7 @@
 import { FormEvent, useState } from "react";
 import Title from "../../Title";
 import { useTranslation } from "react-i18next";
+import Tooltip from "../../Tooltips";
 
 export default function Sulfite() {
   const { t } = useTranslation();
@@ -67,8 +68,9 @@ export default function Sulfite() {
           {Math.round(sulfiteAmount * 10000) / 10000}g {t("kMeta")}
         </p>{" "}
         <p>{t("accountPage.or")}</p>{" "}
-        <p>
+        <p className="flex items-center justify-center gap-2">
           {Math.round(campden * 10) / 10} {t("list.campden")}
+          <Tooltip body={t("tipText.campden")} />
         </p>
       </div>
     </div>
