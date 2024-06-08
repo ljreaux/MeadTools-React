@@ -64,6 +64,7 @@ export default function Trials({ batchDetails }: Props) {
                   value={solution}
                   onChange={(e) => handleStockVolume(e, i)}
                   onFocus={(e) => e.target.select()}
+                  step={0.01}
                 />
               </label>
 

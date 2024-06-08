@@ -40,6 +40,10 @@ const toolTip = {
         "Any ingredient that doesn't provide fermentable sugars is best placed here. You can use one of the suggested ingredients or add your own.",
       campden:
         "Campden tablets vary quite a bit in the amount of free SO2 that they provide MeadTools assumes that one campden tablet provides 75PPM of free SO2.",
+      benchTrials: {
+        body: "Bench Trials are a complicated topic that require further research than I can easily provide here. Follow these links for additional information ",
+        linkTexts: ["DtM Video, ", "Scott Labs Article, ", "Chef's Article."],
+      },
     },
   },
   de: {
@@ -83,6 +87,14 @@ const toolTip = {
         "Zutaten, die keine vergärbaren Zucker beinhalten, werden am besten hier aufgeführt. Du kannst eine der vorgeschlagenen Zusätze nehmen oder deinen eigenen nutzen.",
       campden:
         "Hinweis: Campden-Tabletten werden größtenteils nur noch in den USA als Alternative zu Kaliumdisulfitpulver verwendet. Campden-Tabletten variieren etwas in der Menge an freiem SO2, die sie enthalten. MeadTools geht bei der Berechnung davon aus, dass eine Campden-Tablette 75PPM freies SO2 enthält.",
+      benchTrials: {
+        body: "'Bench Trials' sind ein kompliziertes Thema, mit dem man sich vorher gründlich beschäftigen sollte. Hierzu finden sich hier einige nützliche Quellen: ",
+        linkTexts: [
+          "DtM-Video, ",
+          "Artikel von Scott Labs, ",
+          "Chefs Artikel.",
+        ],
+      },
     },
   },
 };

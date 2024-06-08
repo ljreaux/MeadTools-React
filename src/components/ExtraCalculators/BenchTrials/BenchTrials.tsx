@@ -3,6 +3,7 @@ import Trials from "./Trials.tsx";
 import useUnitChange from "../../../hooks/useUnitChange.ts";
 import Title from "../../Title.tsx";
 import { useTranslation } from "react-i18next";
+import Tooltip from "../../Tooltips.tsx";
 
 export interface BatchDetails {
   batchSize: number;
@@ -39,6 +40,23 @@ export default function BenchTrials() {
   return (
     <form className="w-11/12 sm:w-9/12 flex flex-col items-center justify-center rounded-xl bg-sidebar sm:p-8 p-2 my-24 aspect-video">
       <Title header={t("benchTrialsHeading")} />
+      <Tooltip
+        body={t("tipText.benchTrials.body")}
+        links={[
+          [
+            "https://www.youtube.com/watch?v=AaibXsslBlE&ab_channel=Doin%27theMostBrewing",
+            t("tipText.benchTrials.linkTexts.0"),
+          ],
+          [
+            "https://scottlab.com/bench-trial-protocol",
+            t("tipText.benchTrials.linkTexts.1"),
+          ],
+          [
+            "https://www.reddit.com/r/mead/wiki/process/bench_trials/",
+            t("tipText.benchTrials.linkTexts.2"),
+          ],
+        ]}
+      />
       <div className="grid grid-cols-2 items-center justify-center my-4 w-full">
         <label htmlFor="batchSize">{t("batchSize")}</label>
         <input
@@ -48,6 +66,7 @@ export default function BenchTrials() {
           onChange={(e) => handleBatchDetails(e, "batchSize")}
           onFocus={(e) => e.target.select()}
           className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-textColor hover:bg-sidebar hover:border-background "
+          step={0.01}
         />
         <label htmlFor="trialBatchUnits">{t("UNITS")}:</label>
         <select
