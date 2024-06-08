@@ -6,9 +6,11 @@ import { useTranslation } from "react-i18next";
 export default function Tooltip({
   body,
   link,
+  links,
 }: {
   body: string;
   link?: string;
+  links?: string[][];
 }) {
   const [hide, setHide] = useState(true);
   function toggleTooltip() {
@@ -39,6 +41,12 @@ export default function Tooltip({
               {t("tipText.linkText")}
             </a>
           )}
+          {links &&
+            links.map((linkArr) => (
+              <a href={linkArr[0]} className="underline">
+                {linkArr[1]}
+              </a>
+            ))}
         </p>
       </div>
     </div>
