@@ -151,7 +151,7 @@ export default function Additives({
       </datalist>
       {additives.map((additive, i) => {
         return (
-          <div key={i + additive.name} className="col-span-4 flex">
+          <div key={`additive ${i}`} className="col-span-4 flex">
             <input
               type="text"
               list="additives"
