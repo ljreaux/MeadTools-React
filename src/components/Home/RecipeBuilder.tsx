@@ -36,12 +36,15 @@ export default function RecipeBuilder({
     return [toSG(ingredient.brix), ingredient.details[1]];
   });
   const withOutSecondary: number[][] = [];
+  const justSecondary: number[][] = [];
   const offsetArr: number[] = [];
   ingredients.forEach((ingredient) => {
     if (!ingredient.secondary) {
       withOutSecondary.push([toSG(ingredient.brix), ingredient.details[1]]);
       if (ingredient.category === "fruit")
         offsetArr.push(ingredient.details[0] * 50);
+    } else {
+      justSecondary.push([toSG(ingredient.brix), ingredient.details[1]]);
     }
   });
 
@@ -50,14 +53,20 @@ export default function RecipeBuilder({
     blend: noSecondaryBlend,
     runBlendingFunction: secondaryBlendFunction,
   } = useBlend(withOutSecondary);
+  const secondaryBlend = useBlend(justSecondary);
+
   function runBlends() {
     runBlendingFunction();
     secondaryBlendFunction();
+    secondaryBlend.runBlendingFunction();
   }
   const blendFG =
     Math.round(
-      (Math.abs(blend.blendedValue - noSecondaryBlend.blendedValue) + FG) * 1000
-    ) / 1000;
+      ((noSecondaryBlend.totalVolume * FG +
+        secondaryBlend.blend.totalVolume * secondaryBlend.blend.blendedValue) /
+        blend.totalVolume) *
+        1000
+    ) / 1000 || FG;
   function setIngredients(ingredientList: List) {
     setIngredientsList(ingredientList);
   }
@@ -219,7 +228,7 @@ export default function RecipeBuilder({
         <div className="grid grid-cols-5 gap-4 w-[97%]">
           <label
             htmlFor="ingredients"
-            className="flex justify-center items-center gap-1"
+            className="flex items-center justify-center gap-1"
           >
             {t("recipeBuilder.labels.ingredients")}
             <Tooltip body={t("tipText.volumeLines")} />
@@ -305,7 +314,7 @@ export default function RecipeBuilder({
             {t("recipeBuilder.addNew")}
           </button>
         )}
-        <div className="border-2 border-solid border-textColor  hover:bg-sidebar hover:border-background md:text-lg py-1 disabled:bg-sidebar disabled:hover:border-textColor disabled:hover:text-sidebar disabled:cursor-not-allowed bg-background rounded-2xl px-2 col-span-5 items-center flex justify-center sm:gap-8 gap-4 my-4 group text-lg">
+        <div className="flex items-center justify-center col-span-5 gap-4 px-2 py-1 my-4 text-lg border-2 border-solid border-textColor hover:bg-sidebar hover:border-background md:text-lg disabled:bg-sidebar disabled:hover:border-textColor disabled:hover:text-sidebar disabled:cursor-not-allowed bg-background rounded-2xl sm:gap-8 group">
           <button
             type="button"
             className={`group w-fit text-sidebar hover:text-textColor transition-colors disabled:cursor-not-allowed`}
@@ -324,13 +333,13 @@ export default function RecipeBuilder({
           </button>
         </div>
         <button
-          className="border-2 border-solid border-textColor  hover:bg-sidebar hover:border-background md:text-lg py-1 disabled:bg-sidebar disabled:hover:border-textColor disabled:hover:text-sidebar disabled:cursor-not-allowed bg-background rounded-2xl px-2"
+          className="px-2 py-1 border-2 border-solid border-textColor hover:bg-sidebar hover:border-background md:text-lg disabled:bg-sidebar disabled:hover:border-textColor disabled:hover:text-sidebar disabled:cursor-not-allowed bg-background rounded-2xl"
           type="submit"
         >
           {t("recipeBuilder.submit")}
         </button>{" "}
         {blend.blendedValue > 0 && (
-          <div className="w-full grid grid-cols-5 items-center justify-center text-center mt-4">
+          <div className="grid items-center justify-center w-full grid-cols-5 mt-4 text-center">
             <label htmlFor="estOG">
               {t("recipeBuilder.resultsLabels.estOG")}
             </label>
@@ -382,7 +391,7 @@ export default function RecipeBuilder({
             </p>
             <label
               htmlFor="totalVolume"
-              className=" flex justify-center item-center"
+              className="flex justify-center item-center"
             >
               {t("recipeBuilder.resultsLabels.totalPrimary")}
               <Tooltip body={t("tipText.totalVolume")} />
@@ -394,7 +403,7 @@ export default function RecipeBuilder({
 
             <label
               htmlFor="totalSecondaryVolume"
-              className=" col-start-4 flex justify-center item-center"
+              className="flex justify-center col-start-4 item-center"
             >
               {t("recipeBuilder.resultsLabels.totalSecondary")}
               <Tooltip body={t("tipText.totalSecondary")} />
