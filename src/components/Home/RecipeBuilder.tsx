@@ -43,6 +43,8 @@ export default function RecipeBuilder({
       withOutSecondary.push([toSG(ingredient.brix), ingredient.details[1]]);
       if (ingredient.category === "fruit")
         offsetArr.push(ingredient.details[0] * 25);
+    } else {
+      justSecondary.push([toSG(ingredient.brix), ingredient.details[1]]);
     }
   });
 
@@ -58,6 +60,7 @@ export default function RecipeBuilder({
     secondaryBlendFunction();
     secondaryBlend.runBlendingFunction();
   }
+
   const blendFG =
     Math.round(
       ((noSecondaryBlend.totalVolume * FG +
