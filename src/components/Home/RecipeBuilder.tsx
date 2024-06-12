@@ -42,9 +42,7 @@ export default function RecipeBuilder({
     if (!ingredient.secondary) {
       withOutSecondary.push([toSG(ingredient.brix), ingredient.details[1]]);
       if (ingredient.category === "fruit")
-        offsetArr.push(ingredient.details[0] * 50);
-    } else {
-      justSecondary.push([toSG(ingredient.brix), ingredient.details[1]]);
+        offsetArr.push(ingredient.details[0] * 25);
     }
   });
 
