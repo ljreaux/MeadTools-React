@@ -102,6 +102,7 @@ const yeasts = {
         premierClassique: "Premier Classique",
         premierCuvee: "Premier Cuvee",
         premierRougePasteurRed: "Premier Rouge (Pasteur Red)",
+        premierBlanc: "Premier Blanc",
       },
     },
     mangroveJack: {
@@ -260,7 +261,7 @@ const yeasts = {
         kveikYeast: "Kveik-Hefe",
       },
     },
-  }
+  },
 };
 
 export const yeastTranslations = [yeasts.en, yeasts.de];
