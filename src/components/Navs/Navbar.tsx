@@ -31,7 +31,7 @@ export default function Navbar({
   token: string | null;
   setToken: Dispatch<SetStateAction<string | null>>;
   setUser: Dispatch<
-    SetStateAction<{ id: number; role: "user" | "admin" } | null>
+    SetStateAction<{ id: number; role: "user" | "admin"; email: string } | null>
   >;
   opened: Opened;
   setOpened: Dispatch<SetStateAction<Opened>>;
@@ -179,6 +179,7 @@ export default function Navbar({
                   onClick={() => {
                     localStorage.removeItem("token");
                     setToken(null);
+                    localStorage.removeItem("refreshToken");
                     localStorage.removeItem("user");
                     setUser(null);
                     navigate("/login");

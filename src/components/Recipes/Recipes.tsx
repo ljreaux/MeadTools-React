@@ -33,6 +33,7 @@ import SaveRecipeForm from "../Home/SaveRecipeForm";
 import UpdateRecipeForm from "./UpdateRecipeForm";
 import ResetButton from "../Home/ResetButton";
 import { MdPictureAsPdf } from "react-icons/md";
+import { useToast } from "../ui/use-toast";
 
 export default function Recipes({
   ingredientsList,
@@ -154,6 +155,7 @@ export default function Recipes({
     data.selected.schedule,
     data.inputs?.sg
   );
+  const { toast } = useToast();
 
   useEffect(() => {
     setData((prev: FormData) => ({
@@ -224,6 +226,7 @@ export default function Recipes({
     const getRecipe = async () => {
       const loginError = t("alerts.loginError");
       const notFoundError = "RecipeNotFoundError";
+
       try {
         if (!token) throw new Error(loginError);
         const res = await fetch(`${API_URL}/recipes/${recipeId}`, {
@@ -233,6 +236,7 @@ export default function Recipes({
           },
         });
         const { recipe } = await res.json();
+        if (!recipe) throw new Error(loginError);
         if (recipe.name === notFoundError) throw new Error(recipe.message);
         const {
           name,
@@ -259,15 +263,21 @@ export default function Recipes({
         setLoading(false);
       } catch (err) {
         console.log(err);
-        alert(err);
+        toast({
+          description: err?.toString(),
+          variant: "destructive",
+        });
         navigate("/");
       }
     };
     getRecipe();
   }, []);
-
+  const noUserError = t("alerts.notCurrentUser");
   useEffect(() => {
-    notCurrentUser && alert(t("alerts.notCurrentUser"));
+    notCurrentUser &&
+      toast({
+        description: noUserError,
+      });
   }, [recipeUser]);
   const { next, back, goTo, step, currentStepIndex, steps } = useMultiStepForm([
     <RecipeBuilder

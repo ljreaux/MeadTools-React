@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Title from "../Title";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { useToast } from "../ui/use-toast";
 
 export default function Form({
   titleText,
@@ -15,7 +16,9 @@ export default function Form({
   }: {
     email: string;
     password: string;
-  }) => Promise<Partial<{ token: string; message: string }>>;
+  }) => Promise<
+    Partial<{ token: string; message: string; refreshToken: string }>
+  >;
   setToken: React.Dispatch<React.SetStateAction<string | null>>;
 }) {
   const { t } = useTranslation();
@@ -26,6 +29,9 @@ export default function Form({
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const token = searchParams.get("token");
+
+  const { toast } = useToast();
+
   useEffect(() => {
     setToken(token);
     if (token) {
@@ -39,11 +45,15 @@ export default function Form({
         e.preventDefault();
         const { email, password } = data;
         fetchFunction({ email, password }).then((res) => {
-          if (res.token) {
+          console.log(res);
+          if (res.token && res.refreshToken) {
             setToken(res.token);
             localStorage.setItem("token", res.token);
-            alert(res.message);
+            localStorage.setItem("refreshToken", res.refreshToken);
+            toast({ description: res.message });
             navigate("/account");
+          } else {
+            toast({ description: res.message, variant: "destructive" });
           }
         });
       }}
