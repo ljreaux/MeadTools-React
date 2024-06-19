@@ -4,6 +4,7 @@ import { FormData } from "../Nutrients/NutrientCalc";
 import { API_URL } from "../../main";
 import { useNavigate, useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { useToast } from "../ui/use-toast";
 
 interface PropsType {
   name: string;
@@ -33,6 +34,7 @@ export default function UpdateRecipeForm(props: PropsType) {
   const { recipeId } = useParams();
   const { t } = useTranslation();
   const { name, updateName } = props;
+  const { toast } = useToast();
   return (
     <form
       className="w-11/12 flex flex-col items-center justify-center rounded-xl bg-sidebar p-8 mb-8 mt-24 aspect-video gap-4"
@@ -57,7 +59,11 @@ export default function UpdateRecipeForm(props: PropsType) {
             })
             .catch((err) => {
               console.log(err);
-              alert("There was an error updating your recipe");
+              toast({
+                title: "Error",
+                description: "There was an error updating your recipe",
+                variant: "destructive",
+              });
             });
         }
 

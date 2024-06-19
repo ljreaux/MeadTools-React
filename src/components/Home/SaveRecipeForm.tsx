@@ -5,6 +5,7 @@ import { FormData } from "../Nutrients/NutrientCalc";
 import { API_URL } from "../../main";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { useToast } from "../ui/use-toast";
 
 interface PropsType {
   primaryNotes: string[][] | string[];
@@ -31,6 +32,7 @@ export default function SaveRecipeForm(props: PropsType) {
   const navigate = useNavigate();
   const [recipeName, setRecipeName] = useState("");
   const { t } = useTranslation();
+  const { toast } = useToast();
   return (
     <form
       className="w-11/12 flex flex-col items-center justify-center rounded-xl bg-sidebar p-8 mb-8 mt-24 aspect-video gap-4"
@@ -52,7 +54,11 @@ export default function SaveRecipeForm(props: PropsType) {
             })
             .catch((err) => {
               console.log(err);
-              alert("There was an error creating your recipe");
+              toast({
+                title: "Error",
+                description: "There was an error creating your recipe",
+                variant: "destructive",
+              });
             });
         }
 

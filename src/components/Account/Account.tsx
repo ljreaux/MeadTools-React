@@ -6,6 +6,7 @@ import RecipeCard from "./RecipeCard";
 import Title from "../Title";
 import { IoSettingsSharp, IoLogOutSharp } from "react-icons/io5";
 import { useTranslation } from "react-i18next";
+import { useToast } from "../ui/use-toast";
 
 interface UserInfo {
   id: number;
@@ -29,7 +30,11 @@ export default function Account({
   user: { id: number; role: "user" | "admin" } | null;
   setToken: React.Dispatch<React.SetStateAction<string | null>>;
   setUser: React.Dispatch<
-    React.SetStateAction<{ id: number; role: "user" | "admin" } | null>
+    React.SetStateAction<{
+      id: number;
+      role: "user" | "admin";
+      email: string;
+    } | null>
   >;
   isDarkTheme: boolean;
   setTheme: React.Dispatch<SetStateAction<boolean>>;
@@ -40,6 +45,7 @@ export default function Account({
   const [isOpened, setOpened] = useState(false);
   const { t, i18n } = useTranslation();
   const [userInfo, setUserInfo] = useState<UserInfo | null>(null);
+  const { toast } = useToast();
 
   const navigate = useNavigate();
   useEffect(() => {
@@ -49,9 +55,18 @@ export default function Account({
         const user = await getUserInfo(token);
         if (user) {
           setUserInfo(user);
-          setUser((prev) => ({ ...prev, id: user.id, role: user.role }));
+          setUser((prev) => ({
+            ...prev,
+            id: user.id,
+            role: user.role,
+            email: user.email,
+          }));
         } else {
-          alert("Login failed");
+          toast({
+            title: "Account Error",
+            description: "Please Login Again",
+            variant: "destructive",
+          });
           navigate("/login");
         }
       })();

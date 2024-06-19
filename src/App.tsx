@@ -84,6 +84,7 @@ function App() {
   const [user, setUser] = useLocalStorage<{
     id: number;
     role: "user" | "admin";
+    email: string;
   } | null>("user", null);
 
   const [opened, setOpened] = useState({
