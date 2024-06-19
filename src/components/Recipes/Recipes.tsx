@@ -34,6 +34,7 @@ import UpdateRecipeForm from "./UpdateRecipeForm";
 import ResetButton from "../Home/ResetButton";
 import { MdPictureAsPdf } from "react-icons/md";
 import { useToast } from "../ui/use-toast";
+import { ToastAction } from "@radix-ui/react-toast";
 
 export default function Recipes({
   ingredientsList,
@@ -277,6 +278,15 @@ export default function Recipes({
     notCurrentUser &&
       toast({
         description: noUserError,
+        action: (
+          <ToastAction
+            altText="Save Copy"
+            onClick={() => goTo(steps.length - 1)}
+            className="hover:bg-background rounded-2xl border-2 border-solid hover:border-textColor  bg-sidebar border-background md:text-sm text-xs px-2 py-1 disabled:bg-sidebar disabled:hover:border-textColor disabled:hover:text-sidebar disabled:cursor-not-allowed w-1/4"
+          >
+            Save Copy
+          </ToastAction>
+        ),
       });
   }, [recipeUser]);
   const { next, back, goTo, step, currentStepIndex, steps } = useMultiStepForm([
