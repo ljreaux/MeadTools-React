@@ -56,9 +56,12 @@ export default function RecipeBuilder({
   const secondaryBlend = useBlend(justSecondary);
 
   function runBlends() {
-    runBlendingFunction();
-    secondaryBlendFunction();
-    secondaryBlend.runBlendingFunction();
+    (async () => {
+      runBlendingFunction();
+      secondaryBlendFunction();
+    })().then(() => {
+      secondaryBlend.runBlendingFunction();
+    });
   }
 
   const blendFG =
@@ -68,6 +71,7 @@ export default function RecipeBuilder({
         blend.totalVolume) *
         1000
     ) / 1000 || FG;
+
   function setIngredients(ingredientList: List) {
     setIngredientsList(ingredientList);
   }
@@ -221,8 +225,7 @@ export default function RecipeBuilder({
         }`}
         onSubmit={(e) => {
           e.preventDefault();
-          runBlendingFunction();
-          secondaryBlendFunction();
+          runBlends();
         }}
       >
         <Title header={t("recipeBuilder.homeHeading")} />
