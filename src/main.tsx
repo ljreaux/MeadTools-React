@@ -6,7 +6,7 @@ import { BrowserRouter } from "react-router-dom";
 import "./localization/i18n";
 import { Toaster } from "@/components/ui/toaster";
 
-export const API_URL = "https://mead-tools-api.vercel.app/api/";
+export const API_URL = "https://mead-tools-api.vercel.app/api";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
