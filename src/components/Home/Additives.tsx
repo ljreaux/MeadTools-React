@@ -59,7 +59,7 @@ export default function Additives({
     },
     {
       name: t(`list.${lodash.camelCase("Chitosan")}`),
-      dosage: 1.5,
+      dosage: 6,
       unit: "ml",
     },
     {
