@@ -131,6 +131,7 @@ export default function Home({
     "yanFromSource",
     null
   );
+  const [recalc, setRecalc] = useState(true);
   const [data, setData] = useLocalStorage<FormData>("nutrientData", {
     ...initialData,
     inputs: {
@@ -230,10 +231,12 @@ export default function Home({
         setData={setData}
         yeasts={yeasts}
         setYeasts={setYeasts}
+        recalc={recalc}
+        setRecalc={setRecalc}
       />
       <button
         onClick={() => setAdvanced((prev: boolean) => !prev)}
-        className="hover:bg-background rounded-2xl border-2 border-solid hover:border-textColor  bg-sidebar border-background md:text-lg text-base px-2 py-1 disabled:bg-sidebar disabled:hover:border-textColor disabled:hover:text-sidebar disabled:cursor-not-allowed w-1/4"
+        className="w-1/4 px-2 py-1 text-base border-2 border-solid hover:bg-background rounded-2xl hover:border-textColor bg-sidebar border-background md:text-lg disabled:bg-sidebar disabled:hover:border-textColor disabled:hover:text-sidebar disabled:cursor-not-allowed"
       >
         {t("buttonLabels.advanced")}
       </button>
@@ -277,7 +280,7 @@ export default function Home({
     <>
       {instance.loading && <Loading />}
       {!instance.loading && instance.url && (
-        <div className="w-11/12 flex flex-col items-center justify-center rounded-xl bg-sidebar p-8 mb-8 mt-24 aspect-video">
+        <div className="flex flex-col items-center justify-center w-11/12 p-8 mt-24 mb-8 rounded-xl bg-sidebar aspect-video">
           <Title header={t("PDF.title")} />
           <div className="w-[80%] h-[50vh]">
             <Worker
@@ -299,7 +302,7 @@ export default function Home({
       {!token ? (
         <Link
           to={"/login"}
-          className=" text-textColor font-bold underline hover:text-sidebar transition-all my-4"
+          className="my-4 font-bold underline transition-all text-textColor hover:text-sidebar"
         >
           {t("recipeForm.login")}
         </Link>
@@ -318,12 +321,12 @@ export default function Home({
     </>,
   ]);
   return (
-    <div className="w-full flex flex-col items-center justify-center mt-12 mb-12">
+    <div className="flex flex-col items-center justify-center w-full mt-12 mb-12">
       {step}
-      <div className="w-1/4 flex items-center justify-center">
+      <div className="flex items-center justify-center w-1/4">
         {currentStepIndex > 0 && (
           <button
-            className="hover:bg-background rounded-2xl border-2 border-solid hover:border-textColor  bg-sidebar border-background md:text-lg text-base px-2 py-1 disabled:bg-sidebar disabled:hover:border-textColor disabled:hover:text-sidebar disabled:cursor-not-allowed grow"
+            className="px-2 py-1 text-base border-2 border-solid hover:bg-background rounded-2xl hover:border-textColor bg-sidebar border-background md:text-lg disabled:bg-sidebar disabled:hover:border-textColor disabled:hover:text-sidebar disabled:cursor-not-allowed grow"
             onClick={back}
           >
             {t("buttonLabels.back")}
@@ -331,7 +334,7 @@ export default function Home({
         )}
         {currentStepIndex < steps.length - 1 && (
           <button
-            className="hover:bg-background rounded-2xl border-2 border-solid hover:border-textColor  bg-sidebar border-background md:text-lg text-base px-2 py-1 disabled:bg-sidebar disabled:hover:border-textColor disabled:hover:text-sidebar disabled:cursor-not-allowed grow"
+            className="px-2 py-1 text-base border-2 border-solid hover:bg-background rounded-2xl hover:border-textColor bg-sidebar border-background md:text-lg disabled:bg-sidebar disabled:hover:border-textColor disabled:hover:text-sidebar disabled:cursor-not-allowed grow"
             onClick={() => {
               setData((prev) => ({
                 ...prev,
@@ -354,10 +357,10 @@ export default function Home({
         />{" "}
         {currentStepIndex !== steps.length - 2 && (
           <button
-            className=" hover:bg-background rounded-2xl border-2 border-solid hover:border-textColor bg-sidebar border-background md:text-lg px-2 py-1 disabled:bg-sidebar disabled:hover:border-textColor disabled:hover:text-sidebar disabled:cursor-not-allowed grow h-full"
+            className="h-full px-2 py-1 border-2 border-solid hover:bg-background rounded-2xl hover:border-textColor bg-sidebar border-background md:text-lg disabled:bg-sidebar disabled:hover:border-textColor disabled:hover:text-sidebar disabled:cursor-not-allowed grow"
             onClick={() => goTo(steps.length - 2)}
           >
-            <div className="w-full h-full flex items-center justify-center text-2xl">
+            <div className="flex items-center justify-center w-full h-full text-2xl">
               <MdPictureAsPdf />
             </div>
           </button>

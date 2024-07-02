@@ -91,6 +91,7 @@ export default function NutrientCalc() {
     RedStar: [],
     Other: [],
   });
+  const [recalc, setRecalc] = useState(true);
 
   const { currentStepIndex, step, next, back, steps } = useMultiStepForm([
     <>
@@ -99,10 +100,12 @@ export default function NutrientCalc() {
         setData={setData}
         yeasts={yeasts}
         setYeasts={setYeasts}
+        recalc={recalc}
+        setRecalc={setRecalc}
       />
       <button
         onClick={() => setAdvanced((prev) => !prev)}
-        className="hover:bg-background rounded-2xl border-2 border-solid hover:border-textColor  bg-sidebar border-background md:text-lg text-base px-2 py-1 disabled:bg-sidebar disabled:hover:border-textColor disabled:hover:text-sidebar disabled:cursor-not-allowed w-1/4"
+        className="w-1/4 px-2 py-1 text-base border-2 border-solid hover:bg-background rounded-2xl hover:border-textColor bg-sidebar border-background md:text-lg disabled:bg-sidebar disabled:hover:border-textColor disabled:hover:text-sidebar disabled:cursor-not-allowed"
       >
         {t("buttonLabels.advanced")}
       </button>
@@ -126,11 +129,11 @@ export default function NutrientCalc() {
   ]);
 
   return (
-    <div className="w-full flex flex-col items-center justify-center text-sm sm:text-base mb-8">
+    <div className="flex flex-col items-center justify-center w-full mb-8 text-sm sm:text-base">
       {step}
       {currentStepIndex > 0 && (
         <button
-          className="hover:bg-background rounded-2xl border-2 border-solid hover:border-textColor  bg-sidebar border-background md:text-lg text-base px-2 py-1 disabled:bg-sidebar disabled:hover:border-textColor disabled:hover:text-sidebar disabled:cursor-not-allowed w-1/4"
+          className="w-1/4 px-2 py-1 text-base border-2 border-solid hover:bg-background rounded-2xl hover:border-textColor bg-sidebar border-background md:text-lg disabled:bg-sidebar disabled:hover:border-textColor disabled:hover:text-sidebar disabled:cursor-not-allowed"
           onClick={back}
         >
           {t("buttonLabels.back")}
