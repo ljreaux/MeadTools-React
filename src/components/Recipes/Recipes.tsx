@@ -304,7 +304,7 @@ export default function Recipes({
         setData={setData}
         yeasts={yeasts}
         setYeasts={setYeasts}
-        recalc
+        recalc={recalc}
         setRecalc={setRecalc}
       />
       <button
@@ -458,7 +458,7 @@ export default function Recipes({
         />{" "}
         {currentStepIndex !== steps.length - 2 && (
           <button
-            className="h-full px-2 py-1 border-2 border-solid  hover:bg-background rounded-2xl hover:border-textColor bg-sidebar border-background md:text-lg disabled:bg-sidebar disabled:hover:border-textColor disabled:hover:text-sidebar disabled:cursor-not-allowed grow"
+            className="h-full px-2 py-1 border-2 border-solid hover:bg-background rounded-2xl hover:border-textColor bg-sidebar border-background md:text-lg disabled:bg-sidebar disabled:hover:border-textColor disabled:hover:text-sidebar disabled:cursor-not-allowed grow"
             onClick={() => goTo(steps.length - 2)}
           >
             <div className="flex items-center justify-center w-full h-full text-2xl">
