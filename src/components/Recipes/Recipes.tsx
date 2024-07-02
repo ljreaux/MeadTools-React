@@ -135,7 +135,7 @@ export default function Recipes({
       additives: prev.additives.filter((_, i) => i !== index),
     }));
   }
-
+  const [recalc, setRecalc] = useState(true);
   const [yanContribution, setYanContribution] = useState([40, 100, 210]);
   const [yanFromSource, setYanFromSource] = useState<number[] | null>(null);
   const [data, setData] = useState<FormData>({
@@ -282,7 +282,7 @@ export default function Recipes({
           <ToastAction
             altText="Save Copy"
             onClick={() => goTo(steps.length - 1)}
-            className="hover:bg-background rounded-2xl border-2 border-solid hover:border-textColor  bg-sidebar border-background md:text-sm text-xs px-2 py-1 disabled:bg-sidebar disabled:hover:border-textColor disabled:hover:text-sidebar disabled:cursor-not-allowed w-1/4"
+            className="w-1/4 px-2 py-1 text-xs border-2 border-solid hover:bg-background rounded-2xl hover:border-textColor bg-sidebar border-background md:text-sm disabled:bg-sidebar disabled:hover:border-textColor disabled:hover:text-sidebar disabled:cursor-not-allowed"
           >
             Save Copy
           </ToastAction>
@@ -304,10 +304,12 @@ export default function Recipes({
         setData={setData}
         yeasts={yeasts}
         setYeasts={setYeasts}
+        recalc
+        setRecalc={setRecalc}
       />
       <button
         onClick={() => setAdvanced((prev: boolean) => !prev)}
-        className="hover:bg-background rounded-2xl border-2 border-solid hover:border-textColor  bg-sidebar border-background md:text-lg text-base px-2 py-1 disabled:bg-sidebar disabled:hover:border-textColor disabled:hover:text-sidebar disabled:cursor-not-allowed w-1/4"
+        className="w-1/4 px-2 py-1 text-base border-2 border-solid hover:bg-background rounded-2xl hover:border-textColor bg-sidebar border-background md:text-lg disabled:bg-sidebar disabled:hover:border-textColor disabled:hover:text-sidebar disabled:cursor-not-allowed"
       >
         {t("buttonLabels.advanced")}
       </button>
@@ -351,7 +353,7 @@ export default function Recipes({
     <>
       {instance.loading && <Loading />}
       {!instance.loading && instance.url && (
-        <div className="w-11/12 flex flex-col items-center justify-center rounded-xl bg-sidebar p-8 mb-8 mt-24 aspect-video">
+        <div className="flex flex-col items-center justify-center w-11/12 p-8 mt-24 mb-8 rounded-xl bg-sidebar aspect-video">
           <Title header={t("PDF.title")} />
           <div className="w-[80%] h-[50vh]">
             <Worker
@@ -410,7 +412,7 @@ export default function Recipes({
           )}
           <p>{t("accountPage.or")}</p>
           <button
-            className="hover:bg-background rounded-2xl border-2 border-solid hover:border-textColor  bg-sidebar border-background md:text-lg text-base px-2 py-1 disabled:bg-sidebar disabled:hover:border-textColor disabled:hover:text-sidebar disabled:cursor-not-allowed w-1/4 mt-4 mb-8"
+            className="w-1/4 px-2 py-1 mt-4 mb-8 text-base border-2 border-solid hover:bg-background rounded-2xl hover:border-textColor bg-sidebar border-background md:text-lg disabled:bg-sidebar disabled:hover:border-textColor disabled:hover:text-sidebar disabled:cursor-not-allowed"
             onClick={() => setUpdateForm((prev) => !prev)}
           >
             {updateForm ? t("changesForm.saveAs") : t("changesForm.login")}
@@ -420,12 +422,12 @@ export default function Recipes({
     </>,
   ]);
   return (
-    <div className="w-full flex flex-col items-center justify-center mt-12 mb-12">
+    <div className="flex flex-col items-center justify-center w-full mt-12 mb-12">
       {loading ? <Loading /> : step}
-      <div className="w-1/4 flex items-center justify-center">
+      <div className="flex items-center justify-center w-1/4">
         {currentStepIndex > 0 && (
           <button
-            className="hover:bg-background rounded-2xl border-2 border-solid hover:border-textColor  bg-sidebar border-background md:text-lg text-base px-2 py-1 disabled:bg-sidebar disabled:hover:border-textColor disabled:hover:text-sidebar disabled:cursor-not-allowed grow"
+            className="px-2 py-1 text-base border-2 border-solid hover:bg-background rounded-2xl hover:border-textColor bg-sidebar border-background md:text-lg disabled:bg-sidebar disabled:hover:border-textColor disabled:hover:text-sidebar disabled:cursor-not-allowed grow"
             onClick={back}
           >
             {t("buttonLabels.back")}
@@ -433,7 +435,7 @@ export default function Recipes({
         )}
         {currentStepIndex < steps.length - 1 && (
           <button
-            className="hover:bg-background rounded-2xl border-2 border-solid hover:border-textColor  bg-sidebar border-background md:text-lg text-base px-2 py-1 disabled:bg-sidebar disabled:hover:border-textColor disabled:hover:text-sidebar disabled:cursor-not-allowed grow"
+            className="px-2 py-1 text-base border-2 border-solid hover:bg-background rounded-2xl hover:border-textColor bg-sidebar border-background md:text-lg disabled:bg-sidebar disabled:hover:border-textColor disabled:hover:text-sidebar disabled:cursor-not-allowed grow"
             onClick={() => {
               setData((prev) => ({
                 ...prev,
@@ -456,10 +458,10 @@ export default function Recipes({
         />{" "}
         {currentStepIndex !== steps.length - 2 && (
           <button
-            className=" hover:bg-background rounded-2xl border-2 border-solid hover:border-textColor bg-sidebar border-background md:text-lg px-2 py-1 disabled:bg-sidebar disabled:hover:border-textColor disabled:hover:text-sidebar disabled:cursor-not-allowed grow h-full"
+            className="h-full px-2 py-1 border-2 border-solid  hover:bg-background rounded-2xl hover:border-textColor bg-sidebar border-background md:text-lg disabled:bg-sidebar disabled:hover:border-textColor disabled:hover:text-sidebar disabled:cursor-not-allowed grow"
             onClick={() => goTo(steps.length - 2)}
           >
-            <div className="w-full h-full flex items-center justify-center text-2xl">
+            <div className="flex items-center justify-center w-full h-full text-2xl">
               <MdPictureAsPdf />
             </div>
           </button>
