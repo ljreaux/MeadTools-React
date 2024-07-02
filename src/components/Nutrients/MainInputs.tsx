@@ -35,6 +35,7 @@ export type Yeast = {
 interface MainInputs {
   selected: FormData["selected"];
   inputs: FormData["inputs"];
+  outputs: FormData["outputs"];
   maxGpl: FormData["maxGpl"];
 }
 
@@ -42,13 +43,18 @@ export default function MainInputs({
   yeasts,
   selected,
   inputs,
+  outputs,
   maxGpl,
   setData,
   setYeasts,
+  recalc,
+  setRecalc,
 }: MainInputs & {
   setData: Dispatch<SetStateAction<FormData>>;
   yeasts: YeastType;
   setYeasts: Dispatch<SetStateAction<YeastType>>;
+  recalc: boolean;
+  setRecalc: Dispatch<SetStateAction<boolean>>;
 }) {
   const [loading, setLoading] = useState(true);
   useEffect(() => {
@@ -133,7 +139,9 @@ export default function MainInputs({
   const { yeastAmount, setYeastAmount } = useYeastAmount(
     inputs?.volume,
     inputs?.sg,
-    selected?.volumeUnits
+    selected?.volumeUnits,
+    outputs.yeastAmount,
+    recalc
   );
 
   useEffect(() => {
@@ -146,14 +154,18 @@ export default function MainInputs({
     }));
   }, [target, yeastAmount]);
 
+  useEffect(() => {
+    setRecalc(true);
+  }, [target]);
+
   return (
     <>
       {!loading ? (
-        <div className="w-11/12 sm:w-9/12 flex flex-col items-center justify-center rounded-xl bg-sidebar p-2 sm:p-8 mt-24 mb-8 aspect-video text-xs sm:text-base text-wrap">
+        <div className="flex flex-col items-center justify-center w-11/12 p-2 mt-24 mb-8 text-xs sm:w-9/12 rounded-xl bg-sidebar sm:p-8 aspect-video sm:text-base text-wrap">
           <Title header={t("nutesHeading")} />
           <form
             action=""
-            className="grid grid-cols-5 justify-center text-center"
+            className="grid justify-center grid-cols-5 text-center"
           >
             <label htmlFor="yeastBrand">{t("yeastBrand")}</label>
             <label htmlFor="yeastStrain">{t("yeastStrain")}</label>
@@ -172,7 +184,7 @@ export default function MainInputs({
             </div>
             <label
               htmlFor="specificGravity"
-              className="flex justify-center items-center gap-1"
+              className="flex items-center justify-center gap-1"
             >
               {t("nuteSgLabel")} <Tooltip body={t("tipText.nutrientSg")} />
             </label>
@@ -253,21 +265,21 @@ export default function MainInputs({
             </label>
             <label
               htmlFor="targetYan"
-              className="flex flex-col justify-center items-center"
+              className="flex flex-col items-center justify-center"
             >
               {t("targetYan")}
               <Tooltip body={t("tipText.yan")} />
             </label>
             <label
               htmlFor="numberOfAdditions"
-              className="flex flex-col justify-center items-center"
+              className="flex flex-col items-center justify-center"
             >
               {t("numberOfAdditions")}
               <Tooltip body={t("tipText.numberOfAdditions")} />
             </label>
             <label
               htmlFor="yeastAmount"
-              className="flex flex-col justify-center items-center"
+              className="flex flex-col items-center justify-center"
             >
               {t("yeastAmount")}
               <Tooltip body={t("tipText.yeastAmount")} />
@@ -318,7 +330,10 @@ export default function MainInputs({
             <input
               type="number"
               value={yeastAmount}
-              onChange={(e) => setYeastAmount(Number(e.target.value))}
+              onChange={(e) => {
+                setRecalc(false);
+                setYeastAmount(Number(e.target.value));
+              }}
               className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-textColor hover:bg-sidebar hover:border-background w-11/12 my-2"
               onFocus={(e) => e.target.select()}
             />
