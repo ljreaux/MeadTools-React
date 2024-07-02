@@ -199,7 +199,7 @@ export default function RecipeBuilder({
         return {
           ...prev,
           OG: noSecondaryBlend.blendedValue,
-          FG: 0.996,
+          FG,
           offset: offsetArr.reduce((prev, curr) => {
             return curr / noSecondaryBlend.totalVolume + prev;
           }, 0),
