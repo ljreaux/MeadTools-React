@@ -26,7 +26,7 @@ import "@react-pdf-viewer/core/lib/styles/index.css";
 import "@react-pdf-viewer/default-layout/lib/styles/index.css";
 
 import Title from "../Title";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import { API_URL } from "../../main";
 import Notes from "../Home/Notes";
 import SaveRecipeForm from "../Home/SaveRecipeForm";
@@ -329,6 +329,7 @@ export default function Recipes({
       yanFromSource={yanFromSource}
       advanced={advanced}
       setNuteInfo={setNuteInfo}
+      nuteInfo={nuteInfo}
     />,
     <Stabilizers
       abv={recipeData.ABV}
@@ -421,6 +422,13 @@ export default function Recipes({
       )}
     </>,
   ]);
+
+  const [searchParams] = useSearchParams();
+  const pdf = searchParams.get("pdf");
+  useEffect(() => {
+    pdf && goTo(steps.length - 2);
+  }, []);
+
   return (
     <div className="flex flex-col items-center justify-center w-full mt-12 mb-12">
       {loading ? <Loading /> : step}

@@ -24,6 +24,7 @@ export default function NutrientCalcResults({
   yanFromSource,
   advanced,
   setGplArr,
+  nuteInfo,
   setNuteInfo,
 }: {
   gplArr: number[];
@@ -34,6 +35,18 @@ export default function NutrientCalcResults({
   yanFromSource: number[] | null;
   advanced: boolean;
   setGplArr: Dispatch<SetStateAction<number[]>>;
+  nuteInfo: null | {
+    ppmYan: number[];
+    totalGrams: number[];
+    perAddition: number[];
+    totalYan: number;
+    remainingYan: number;
+    gf: {
+      gf: number;
+      gfWater: number;
+      gfType?: string;
+    };
+  };
   setNuteInfo: Dispatch<
     SetStateAction<null | {
       ppmYan: number[];
@@ -50,7 +63,7 @@ export default function NutrientCalcResults({
   >;
 }) {
   const { t } = useTranslation();
-  const [gfType, setGfType] = useState("Go-Ferm");
+  const [gfType, setGfType] = useState(nuteInfo?.gf.gfType || "Go-Ferm");
   const handleChange = (e: FormEvent, index: number) =>
     setGplArr((prev) => {
       const target = e.target as HTMLInputElement;
@@ -83,11 +96,11 @@ export default function NutrientCalcResults({
   }, [nutrients, gf, gfWater]);
 
   return (
-    <div className="w-11/12 sm:w-9/12 flex flex-col items-center justify-center rounded-xl bg-sidebar p-8 mb-8 mt-24 aspect-video">
+    <div className="flex flex-col items-center justify-center w-11/12 p-8 mt-24 mb-8 sm:w-9/12 rounded-xl bg-sidebar aspect-video">
       <Title header={t("nuteResults.label")} />
       <form
         action=""
-        className="grid grid-cols-5 justify-center items-center text-center"
+        className="grid items-center justify-center grid-cols-5 text-center"
       >
         <h2 className="col-start-2">{t("nutrients.fermO")}</h2>
         <h2>{t("nutrients.fermK")}</h2>
@@ -100,7 +113,17 @@ export default function NutrientCalcResults({
             name="go-ferm"
             id="go-ferm"
             className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-textColor hover:bg-sidebar hover:border-background w-11/12 my-2"
-            onChange={(e) => setGfType(e.target.value)}
+            onChange={(e) => {
+              setNuteInfo((prev) => {
+                if (prev)
+                  return {
+                    ...prev,
+                    gf: { ...prev.gf, gfType: e.target.value },
+                  };
+                else return null;
+              });
+              setGfType(e.target.value);
+            }}
           >
             <option value="Go-Ferm">{t("nuteResults.gfTypes.gf")}</option>
             <option value="protect">
@@ -120,7 +143,7 @@ export default function NutrientCalcResults({
           {t("nuteResults.sideLabels.maxGpl")}
           <Tooltip body={t("tipText.maxGpl")} />
         </label>
-        <div className="col-span-3 grid grid-cols-3" id="maxGpl">
+        <div className="grid grid-cols-3 col-span-3" id="maxGpl">
           <input
             type="number"
             name="fermOgpl"
@@ -160,7 +183,7 @@ export default function NutrientCalcResults({
         <label className="my-[.25rem]" htmlFor="ppmYan">
           {t("nuteResults.sideLabels.ppmYan")}
         </label>
-        <div className="col-span-3 grid grid-cols-3" id="ppmYan">
+        <div className="grid grid-cols-3 col-span-3" id="ppmYan">
           <input
             type="number"
             className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-textColor hover:bg-sidebar hover:border-background w-11/12 my-2 disabled:bg-sidebar
@@ -222,7 +245,7 @@ export default function NutrientCalcResults({
         <label className="my-[.25rem]" htmlFor="totalGrams">
           {t("nuteResults.sideLabels.totalGrams")}
         </label>
-        <div className="col-span-3 grid grid-cols-3" id="totalGrams">
+        <div className="grid grid-cols-3 col-span-3" id="totalGrams">
           {nutrients.totalGrams.map((grams, index) => (
             <input
               key={index}
@@ -239,7 +262,7 @@ export default function NutrientCalcResults({
         <label className="my-[.25rem]" htmlFor="perAddition">
           {t("nuteResults.sideLabels.perAddition")}
         </label>
-        <div className="col-span-3 grid grid-cols-3" id="perAddition">
+        <div className="grid grid-cols-3 col-span-3" id="perAddition">
           {nutrients.perAddition.map((grams, index) => (
             <input
               key={index}
