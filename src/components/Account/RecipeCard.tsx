@@ -20,9 +20,15 @@ export default function RecipeCard({
       <p>{recipe.name}</p>
       <button
         onClick={() => token && navigate(`/recipes/${recipe.id}`)}
-        className="border-2 border-solid border-textColor  hover:bg-sidebar hover:border-background md:text-lg py-1 disabled:bg-sidebar disabled:hover:border-textColor disabled:hover:text-sidebar disabled:cursor-not-allowed bg-background rounded-2xl px-2 mt-4"
+        className="px-2 py-1 mt-4 border-2 border-solid border-textColor hover:bg-sidebar hover:border-background md:text-lg disabled:bg-sidebar disabled:hover:border-textColor disabled:hover:text-sidebar disabled:cursor-not-allowed bg-background rounded-2xl"
       >
         {t("accountPage.viewRecipe")}
+      </button>
+      <button
+        onClick={() => token && navigate(`/recipes/${recipe.id}?pdf=true`)}
+        className="px-2 py-1 border-2 border-solid border-textColor hover:bg-sidebar hover:border-background md:text-lg disabled:bg-sidebar disabled:hover:border-textColor disabled:hover:text-sidebar disabled:cursor-not-allowed bg-background rounded-2xl"
+      >
+        {t("PDF.title")}
       </button>
       <button
         onClick={async () => {
@@ -35,7 +41,7 @@ export default function RecipeCard({
           } else
             toast({ description: deleted.message, variant: "destructive" });
         }}
-        className="border-2 border-solid border-textColor  hover:bg-sidebar hover:border-background md:text-lg py-1 disabled:bg-sidebar disabled:hover:border-textColor disabled:hover:text-sidebar disabled:cursor-not-allowed bg-background rounded-2xl px-2"
+        className="px-2 py-1 border-2 border-solid border-textColor hover:bg-sidebar hover:border-background md:text-lg disabled:bg-sidebar disabled:hover:border-textColor disabled:hover:text-sidebar disabled:cursor-not-allowed bg-background rounded-2xl"
       >
         {t("accountPage.deleteRecipe")}
       </button>

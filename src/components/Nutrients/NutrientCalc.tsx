@@ -59,7 +59,7 @@ export interface FormData {
 export default function NutrientCalc() {
   const { t } = useTranslation();
   const [advanced, setAdvanced] = useState(false);
-  const [, setNuteInfo] = useState<null | {
+  const [nuteInfo, setNuteInfo] = useState<null | {
     ppmYan: number[];
     totalGrams: number[];
     perAddition: number[];
@@ -125,6 +125,7 @@ export default function NutrientCalc() {
       yanFromSource={yanFromSource}
       advanced={advanced}
       setNuteInfo={setNuteInfo}
+      nuteInfo={nuteInfo}
     />,
   ]);
 

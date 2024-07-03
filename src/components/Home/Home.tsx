@@ -255,6 +255,7 @@ export default function Home({
       {...maxGPL}
       yanFromSource={yanFromSource}
       advanced={advanced}
+      nuteInfo={nuteInfo}
       setNuteInfo={setNuteInfo}
     />,
     <Stabilizers
