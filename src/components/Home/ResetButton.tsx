@@ -4,6 +4,21 @@ import { FormData } from "../Nutrients/NutrientCalc";
 import { initialIngredients } from "./initialIngredients";
 import { initialData } from "../Nutrients/initialData";
 import { useTranslation } from "react-i18next";
+import {
+  AlertDialog,
+  AlertDialogContent,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTrigger,
+} from "../ui/alert-dialog";
+import { Button, buttonVariants } from "../ui/button";
+import {
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogDescription,
+  AlertDialogTitle,
+} from "@radix-ui/react-alert-dialog";
+import { useToast } from "../ui/use-toast";
 export default function ResetButton({
   setRecipeData,
   setData,
@@ -18,6 +33,7 @@ export default function ResetButton({
   setSecondaryNotes: React.Dispatch<React.SetStateAction<string[][]>>;
 }) {
   const { t } = useTranslation();
+  const { toast } = useToast();
   const [isMetric] = useLocalStorage("metric", false);
   const resetRecipe = () => {
     setRecipeData({
@@ -49,16 +65,39 @@ export default function ResetButton({
     setPrimaryNotes([["", ""]]);
     setSecondaryNotes([["", ""]]);
   };
-  const handleClick = () => {
-    const confirm = window.confirm(t("recipeBuilder.resetConfirmation"));
-    confirm && resetRecipe();
-  };
+
   return (
-    <button
-      className="hover:bg-background rounded-2xl border-2 border-solid hover:border-textColor  bg-sidebar border-background md:text-lg text-base px-4 py-1 disabled:bg-sidebar disabled:hover:border-textColor disabled:hover:text-sidebar disabled:cursor-not-allowed grow"
-      onClick={handleClick}
-    >
-      {t("recipeBuilder.reset")}
-    </button>
+    <>
+      <AlertDialog>
+        <AlertDialogTrigger>
+          <Button className="px-4 py-1 text-base border-2 border-solid hover:bg-background rounded-2xl hover:border-textColor bg-sidebar border-background md:text-lg disabled:bg-sidebar disabled:hover:border-textColor disabled:hover:text-sidebar disabled:cursor-not-allowed grow">
+            {t("recipeBuilder.reset")}
+          </Button>
+        </AlertDialogTrigger>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+            <AlertDialogDescription>
+              This action cannot be undone.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogAction
+              className={buttonVariants({ variant: "destructive" })}
+              onClick={() => {
+                resetRecipe();
+                toast({
+                  title: "Recipe Reset",
+                  description: `Recipe has been reset.`,
+                });
+              }}
+            >
+              Reset
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+    </>
   );
 }
