@@ -61,6 +61,7 @@ const ingredients = {
     tomato: "Tomato",
     tomatoJuice: "Tomato Juice",
     watermelon: "Watermelon",
+    jalapeno: "Jalapeño",
   },
   de: {
     honey: "Honig",
@@ -124,7 +125,8 @@ const ingredients = {
     tomato: "Tomate",
     tomatoJuice: "Tomatensaft",
     watermelon: "Wassermelone",
-  }
+    jalapeno: "Jalapeno",
+  },
 };
 
 export const ingredientTranslations = [ingredients.en, ingredients.de];
