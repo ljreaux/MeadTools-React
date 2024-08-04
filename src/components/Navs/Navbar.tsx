@@ -10,6 +10,75 @@ import { MdDarkMode } from "react-icons/md";
 import { MdLightMode } from "react-icons/md";
 import { useTranslation } from "react-i18next";
 
+const calculatorLinks = [
+  {
+    path: "/",
+    label: "calculators.recipes",
+  },
+  {
+    path: "/NuteCalc/",
+    label: "calculators.nutes",
+  },
+  {
+    path: "/ExtraCalcs/",
+    label: "calculators.extraCalcs.abv",
+  },
+  {
+    path: "/ExtraCalcs/brixCalc",
+    label: "calculators.extraCalcs.brix",
+  },
+  {
+    path: "/ExtraCalcs/estOG",
+    label: "calculators.extraCalcs.estOG",
+  },
+  {
+    path: "/ExtraCalcs/benchTrials",
+    label: "calculators.extraCalcs.benchTrials",
+  },
+  {
+    path: "/ExtraCalcs/stabilizers",
+    label: "calculators.extraCalcs.stabilizers",
+  },
+  {
+    path: "/ExtraCalcs/RefractometerCorrection",
+    label: "calculators.extraCalcs.refractometer",
+  },
+  {
+    path: "/ExtraCalcs/tempCorrection",
+    label: "calculators.extraCalcs.tempCorrection",
+  },
+  {
+    path: "/ExtraCalcs/blending",
+    label: "calculators.extraCalcs.blending",
+  },
+];
+
+const extraLinks = [
+  {
+    path: "/about",
+    label: "additionalLinks.about",
+  },
+  {
+    path: "/contact",
+    label: "additionalLinks.contact",
+  },
+];
+
+const NavLinks = ({ links }: { links: { path: string; label: string }[] }) => {
+  const { t } = useTranslation();
+  return links.map((link, index) => {
+    return (
+      <NavLink
+        key={index}
+        className="hover:text-background transition-colors sm:mx-4 mx-[.125rem] "
+        to={link.path}
+      >
+        {t(link.label)}
+      </NavLink>
+    );
+  });
+};
+
 interface Opened {
   menu: boolean;
   calcs: boolean;
@@ -43,7 +112,7 @@ export default function Navbar({
   const navigate = useNavigate();
   return (
     <nav className="h-20 fixed top-0 z-[51] flex items-center justify-between mb-[1rem]">
-      <div className="w-screen h-full bg-sidebar flex justify-between items-center text-textColor text-xl text-center relative">
+      <div className="relative flex items-center justify-between w-screen h-full text-xl text-center bg-sidebar text-textColor">
         <nav className="flex items-center justify-between sm:text-[1rem] text-[.6rem] my-0">
           <button
             className="relative ml-4"
@@ -60,7 +129,7 @@ export default function Navbar({
               opened.menu ? "grid" : "hidden"
             } w-[40vw] bg-sidebar text-start left-0 rounded-xl translate-y-2/4 mt-8 -mx-8`}
           >
-            <div className="flex items-center justify-center w-fit mx-2 hover:text-background transition-colors">
+            <div className="flex items-center justify-center mx-2 transition-colors w-fit hover:text-background">
               <NavLink to="/">{t("calculators.label")}</NavLink>
               <button
                 className="mx-2"
@@ -78,85 +147,9 @@ export default function Navbar({
               </button>
             </div>
             <div className={`${opened.calcs ? "grid" : "hidden"} mx-2`}>
-              <NavLink
-                className="hover:text-background transition-colors sm:mx-4 mx-[.125rem] "
-                to="/"
-              >
-                {t("calculators.recipes")}
-              </NavLink>
-              <NavLink
-                className="hover:text-background transition-colors sm:mx-4 mx-[.125rem] "
-                to="/NuteCalc/"
-              >
-                {t("calculators.nutes")}
-              </NavLink>
-              <div className="flex items-center">
-                <NavLink
-                  className="hover:text-background transition-colors sm:mx-4 mx-[.125rem] "
-                  to="/ExtraCalcs"
-                >
-                  {t("calculators.extraCalcs.label")}
-                </NavLink>
-                <button
-                  onClick={() =>
-                    setOpened((prev) => {
-                      return { ...prev, extraCalcs: !prev.extraCalcs };
-                    })
-                  }
-                >
-                  {opened.extraCalcs ? (
-                    <IoIosArrowDropupCircle />
-                  ) : (
-                    <MdExpandCircleDown />
-                  )}
-                </button>
-              </div>
-              <div className={`${opened.extraCalcs ? "grid" : "hidden"} mx-8`}>
-                <Link to="/ExtraCalcs/" className="hover:text-background ">
-                  {t("calculators.extraCalcs.abv")}
-                </Link>
-                <Link
-                  to="/ExtraCalcs/brixCalc"
-                  className="hover:text-background "
-                >
-                  {t("calculators.extraCalcs.brix")}
-                </Link>
-                <Link to="/ExtraCalcs/estOG" className="hover:text-background ">
-                  {t("calculators.extraCalcs.estOG")}
-                </Link>
-                <Link
-                  to="/ExtraCalcs/benchTrials"
-                  className="hover:text-background "
-                >
-                  {t("calculators.extraCalcs.benchTrials")}
-                </Link>
-                <Link
-                  to="/ExtraCalcs/stabilizers"
-                  className="hover:text-background "
-                >
-                  {t("calculators.extraCalcs.stabilizers")}
-                </Link>
-                <Link
-                  to="/ExtraCalcs/RefractometerCorrection"
-                  className="hover:text-background "
-                >
-                  {t("calculators.extraCalcs.refractometer")}
-                </Link>
-                <Link
-                  to="/ExtraCalcs/tempCorrection"
-                  className="hover:text-background "
-                >
-                  {t("calculators.extraCalcs.tempCorrection")}
-                </Link>
-                <Link
-                  to="/ExtraCalcs/blending"
-                  className="hover:text-background pb-2"
-                >
-                  {t("calculators.extraCalcs.blending")}
-                </Link>
-              </div>
+              <NavLinks links={calculatorLinks} />
             </div>
-            <div className="flex items-center w-fit mx-2 hover:text-background transition-colors ">
+            <div className="flex items-center mx-2 transition-colors w-fit hover:text-background ">
               <NavLink to={"/account"}>{t("account.label")}</NavLink>
               <button
                 className="mx-2"
@@ -184,20 +177,20 @@ export default function Navbar({
                     setUser(null);
                     navigate("/login");
                   }}
-                  className="hover:text-background transition-colors sm:mx-4 mx-2 "
+                  className="mx-2 transition-colors hover:text-background sm:mx-4 "
                 >
                   {t("account.logout")}
                 </button>
               ) : (
                 <NavLink
-                  className="hover:text-background transition-colors sm:mx-4 mx-2 "
+                  className="mx-2 transition-colors hover:text-background sm:mx-4 "
                   to="/login"
                 >
                   {t("account.login")}
                 </NavLink>
               )}
             </div>
-            <div className="flex items-center w-fit mx-2 hover:text-background transition-colors">
+            <div className="flex items-center mx-2 transition-colors w-fit hover:text-background">
               <NavLink to="/about">{t("additionalLinks.label")}</NavLink>
               <button
                 className="mx-2"
@@ -215,22 +208,11 @@ export default function Navbar({
               </button>
             </div>
             <div className={`${opened.links ? "grid" : "hidden"} mx-2`}>
-              <NavLink
-                className="hover:text-background transition-colors sm:mx-4 mx-[.125rem] "
-                to="/about"
-              >
-                {t("additionalLinks.about")}
-              </NavLink>
-              <NavLink
-                className="hover:text-background transition-colors sm:mx-4 mx-[.125rem] "
-                to="/contact"
-              >
-                {t("additionalLinks.contact")}
-              </NavLink>
+              <NavLinks links={extraLinks} />
             </div>
           </div>
         </nav>
-        <div className="flex h-full justify-center items-center">
+        <div className="flex items-center justify-center h-full">
           <button onClick={() => toggle(!isDarkTheme)} className="mr-[2rem]">
             {isDarkTheme ? <MdDarkMode /> : <MdLightMode />}
           </button>
@@ -250,7 +232,7 @@ export default function Navbar({
             className="bg-background w-[3rem] md:flex md:w-24 lg:w-52 h-full left-0 border-[1px] border-sidebar hover:opacity-80 transition-all"
             to="/"
           >
-            <span className="w-full h-full flex flex-col justify-center items-center">
+            <span className="flex flex-col items-center justify-center w-full h-full">
               <img src={logo} alt="MeadTools logo" className="hidden lg:flex" />
               <img
                 src={logoOnly}
