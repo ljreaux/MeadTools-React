@@ -37,7 +37,7 @@ export default function UpdateRecipeForm(props: PropsType) {
   const { toast } = useToast();
   return (
     <form
-      className="w-11/12 flex flex-col items-center justify-center rounded-xl bg-sidebar p-8 mb-8 mt-24 aspect-video gap-4"
+      className="flex flex-col items-center justify-center w-11/12 gap-4 p-8 mt-24 mb-8 rounded-xl bg-sidebar aspect-video"
       onSubmit={(e) => {
         e.preventDefault();
 
@@ -85,7 +85,7 @@ export default function UpdateRecipeForm(props: PropsType) {
       <Title header={t("changesForm.login")} />
       <label
         htmlFor="recipeName"
-        className="w-full flex justify-center items-center text-center gap-4"
+        className="flex items-center justify-center w-full gap-4 text-center"
       >
         <p>{t("changesForm.subtitle")}</p>
         <input
@@ -96,7 +96,7 @@ export default function UpdateRecipeForm(props: PropsType) {
           onChange={(e) => updateName(e.target.value)}
         />
       </label>
-      <button className="border-2 border-solid border-textColor  hover:bg-sidebar hover:border-background md:text-lg py-1 disabled:bg-sidebar disabled:hover:border-textColor disabled:hover:text-sidebar disabled:cursor-not-allowed bg-background rounded-2xl px-2">
+      <button className="px-2 py-1 border-2 border-solid border-textColor hover:bg-sidebar hover:border-background md:text-lg disabled:bg-sidebar disabled:hover:border-textColor disabled:hover:text-sidebar disabled:cursor-not-allowed bg-background rounded-2xl">
         {t("changesForm.submit")}
       </button>
     </form>
