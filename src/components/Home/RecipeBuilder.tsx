@@ -21,12 +21,14 @@ export default function RecipeBuilder({
   setIngredientsList,
   setBlendFG,
   setSecondaryVolume,
+  recipeName,
 }: RecipeData & {
   setRecipeData: Dispatch<SetStateAction<RecipeData>>;
   ingredientsList: List;
   setIngredientsList: Dispatch<SetStateAction<List>>;
   setBlendFG: Dispatch<SetStateAction<number[]>>;
   setSecondaryVolume: Dispatch<SetStateAction<number>>;
+  recipeName?: string;
 }) {
   const { t } = useTranslation();
   const [firstMount, setFirstMount] = useState(true);
@@ -229,6 +231,7 @@ export default function RecipeBuilder({
         }}
       >
         <Title header={t("recipeBuilder.homeHeading")} />
+        {recipeName && <p className="text-3xl py-2.5">{recipeName}</p>}
         <div className="grid grid-cols-5 gap-4 w-[97%]">
           <label
             htmlFor="ingredients"

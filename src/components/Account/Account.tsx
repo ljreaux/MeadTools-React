@@ -13,7 +13,7 @@ interface UserInfo {
   email: string;
   google_id: string | null;
   role: "user" | "admin";
-  recipes: { id: number; user_id: number; name: string }[];
+  recipes: { id: number; user_id: number; name: string; private: boolean }[];
 }
 
 export default function Account({

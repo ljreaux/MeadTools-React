@@ -6,6 +6,7 @@ import getAllIngredients from "../../helpers/getAllIngredients";
 import { toSG } from "../../helpers/unitConverters";
 import lodash from "lodash";
 import { useTranslation } from "react-i18next";
+import { Switch } from "../ui/switch";
 
 export interface IngredientListItem {
   id: number;
@@ -224,12 +225,12 @@ export default function Ingredient({
           onChange={(e) => handleChange(e, index, 1)}
           onFocus={(e) => e.target.select()}
         />
-        <input
-          type="checkbox"
-          className="h-5"
-          checked={ingredient.secondary}
-          onChange={() => setChecked(index)}
-        />
+        <span className="w-full flex items-center justify-center">
+          <Switch
+            checked={ingredient.secondary}
+            onCheckedChange={() => setChecked(index)}
+          />
+        </span>
       </div>
       {index > 3 && (
         <button className="w-[3%]" onClick={() => removeLine(index)}>
