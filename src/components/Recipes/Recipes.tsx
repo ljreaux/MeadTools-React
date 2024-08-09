@@ -297,6 +297,7 @@ export default function Recipes({
       setIngredientsList={setIngredientsList}
       setBlendFG={setBlendSG}
       setSecondaryVolume={setSecondaryVolume}
+      recipeName={recipeName}
     />,
     <>
       <MainInputs

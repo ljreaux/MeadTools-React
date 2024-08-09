@@ -21,10 +21,12 @@ const notesAndExtras = {
       saveAs: "Save as New Recipe",
     },
     alerts: {
-      loginError: "You must be logged in to view user recipes",
+      loginError:
+        "You are not authorized to view this recipe, login or contact the recipe owner to make sure this is a public recipe.",
       notCurrentUser:
         "This is another user's recipe, you will need to make a copy to your account to save changes.",
     },
+    private: "Private Recipe?",
     accountPage: {
       title: "Account",
       theme: {
@@ -76,10 +78,12 @@ const notesAndExtras = {
       saveAs: "Als neues Rezept speichern",
     },
     alerts: {
-      loginError: "Du musst angemeldet sein, um Benutzerrezepte einzusehen",
+      loginError:
+        "Du hast nicht die nötigen Berechtigungen, um dieses Rezept anzuzeigen. Bitte melde Dich an oder kontaktiere den Ersteller des Rezepts um sicherzugehen, dass das Rezept öffentlich zugänglich ist.",
       notCurrentUser:
         "Dies ist das Rezept eines anderen Benutzers. Du musst eine Kopie davon machen, um Änderungen vorzunehmen.",
     },
+    private: "Privates Rezept?",
     accountPage: {
       title: "Benutzerkonto",
       theme: {

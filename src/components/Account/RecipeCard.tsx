@@ -2,22 +2,26 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { deleteRecipe } from "../../helpers/getAllYeasts";
 import { useToast } from "../ui/use-toast";
+import RecipeTogglePrivate from "../ui/RecipeTogglePrivate";
 
 export default function RecipeCard({
   recipe,
   token,
   setReload,
 }: {
-  recipe: { id: number; user_id: number; name: string };
+  recipe: { id: number; user_id: number; name: string; private: boolean };
   token: string | null;
   setReload: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
   const navigate = useNavigate();
   const { t } = useTranslation();
   const { toast } = useToast();
+
   return (
     <div className="grid items-center justify-center gap-2">
       <p>{recipe.name}</p>
+      <RecipeTogglePrivate recipe={recipe} />
+
       <button
         onClick={() => token && navigate(`/recipes/${recipe.id}`)}
         className="px-2 py-1 mt-4 border-2 border-solid border-textColor hover:bg-sidebar hover:border-background md:text-lg disabled:bg-sidebar disabled:hover:border-textColor disabled:hover:text-sidebar disabled:cursor-not-allowed bg-background rounded-2xl"
