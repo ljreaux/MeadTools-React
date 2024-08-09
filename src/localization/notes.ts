@@ -79,7 +79,7 @@ const notesAndExtras = {
     },
     alerts: {
       loginError:
-        "Sie sind nicht berechtigt, dieses Rezept anzuzeigen, sich anzumelden oder den Besitzer des Rezepts zu kontaktieren, um sicherzustellen, dass es sich um ein öffentliches Rezept handelt.",
+        "Du hast nicht die nötigen Berechtigungen, um dieses Rezept anzuzeigen. Bitte melde Dich an oder kontaktiere den Ersteller des Rezepts um sicherzugehen, dass das Rezept öffentlich zugänglich ist.",
       notCurrentUser:
         "Dies ist das Rezept eines anderen Benutzers. Du musst eine Kopie davon machen, um Änderungen vorzunehmen.",
     },
