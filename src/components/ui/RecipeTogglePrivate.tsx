@@ -27,7 +27,7 @@ function RecipeTogglePrivate({
   }
 
   return (
-    <div className="grid items-center justify-center gap-2 text-center">
+    <div className="flex items-center justify-center gap-2 text-center">
       <p>{t("private")}</p>
       <Switch
         checked={isPrivate}
