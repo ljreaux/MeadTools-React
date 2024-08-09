@@ -92,9 +92,9 @@ export default function Account({
   }, []);
 
   return (
-    <div className="w-screen flex items-center justify-center h-screen">
+    <div className="w-screen flex items-center justify-center min-h-screen mt-24 md:mt-0">
       {userInfo ? (
-        <div className="w-11/12 sm:w-9/12 flex flex-col items-center rounded-xl bg-sidebar p-8 my-8 relative">
+        <div className="w-11/12 sm:w-9/12 flex flex-col items-center rounded-xl bg-sidebar p-8 relative">
           <div className="absolute right-12 top-4 flex w-12 gap-2 text-3xl">
             <button
               onClick={() => {
