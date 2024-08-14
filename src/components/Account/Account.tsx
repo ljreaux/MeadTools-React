@@ -13,7 +13,7 @@ interface UserInfo {
   email: string;
   google_id: string | null;
   role: "user" | "admin";
-  recipes: { id: number; user_id: number; name: string }[];
+  recipes: { id: number; user_id: number; name: string; private: boolean }[];
 }
 
 export default function Account({
@@ -92,10 +92,10 @@ export default function Account({
   }, []);
 
   return (
-    <div className="w-screen flex items-center justify-center h-screen">
+    <div className="flex items-center justify-center w-screen h-screen">
       {userInfo ? (
-        <div className="w-11/12 sm:w-9/12 flex flex-col items-center rounded-xl bg-sidebar p-8 my-8 relative">
-          <div className="absolute right-12 top-4 flex w-12 gap-2 text-3xl">
+        <div className="relative flex flex-col items-center w-11/12 p-8 my-8 sm:w-9/12 rounded-xl bg-sidebar">
+          <div className="absolute flex w-12 gap-2 text-3xl right-12 top-4">
             <button
               onClick={() => {
                 localStorage.removeItem("token");
@@ -116,7 +116,7 @@ export default function Account({
               } absolute right-0 top-0 translate-y-1/4 translate-x-8 bg-sidebar border-solid border-2 border-textColor rounded-xl flex justify-center items-center w-[15rem]`}
             >
               <ul
-                className="text-sm w-full flex flex-col justify-center items-center mx-4 my-2 py-2"
+                className="flex flex-col items-center justify-center w-full py-2 mx-4 my-2 text-sm"
                 onClick={() => setOpened(true)}
               >
                 <li className="flex justify-between w-full py-2">
