@@ -116,7 +116,7 @@ export default function Account({
               } absolute right-0 top-0 translate-y-1/4 translate-x-8 bg-sidebar border-solid border-2 border-textColor rounded-xl flex justify-center items-center w-[15rem]`}
             >
               <ul
-                className="text-sm w-full flex flex-col justify-center items-center mx-4 my-2 py-2"
+                className="flex flex-col items-center justify-center w-full py-2 mx-4 my-2 text-sm"
                 onClick={() => setOpened(true)}
               >
                 <li className="flex justify-between w-full py-2">

@@ -283,7 +283,7 @@ export default function Home({
       {!instance.loading && instance.url && (
         <div className="flex flex-col items-center justify-center w-11/12 p-8 mt-24 mb-8 rounded-xl bg-sidebar aspect-video">
           <Title header={t("PDF.title")} />
-          <div className="w-[80%] h-[50vh]">
+          <div className="md:w-[80%] h-[50vh] w-full">
             <Worker
               workerUrl={`https://unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.js`}
             >
