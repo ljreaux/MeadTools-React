@@ -62,15 +62,35 @@ const extraLinks = [
     path: "/contact",
     label: "additionalLinks.contact",
   },
+  {
+    path: "https://yeasts.meadtools.com",
+    label: "yeasts",
+    external: true,
+  },
 ];
 
-const NavLinks = ({ links }: { links: { path: string; label: string }[] }) => {
+const NavLinks = ({
+  links,
+}: {
+  links: { path: string; label: string; external?: boolean }[];
+}) => {
   const { t } = useTranslation();
   return links.map((link, index) => {
+    if (link.external)
+      return (
+        <a
+          href={link.path}
+          key={index}
+          className="hover:text-background transition-colors sm:mx-4 mx-[.125rem]"
+        >
+          {t(link.label)}
+        </a>
+      );
+
     return (
       <NavLink
         key={index}
-        className="hover:text-background transition-colors sm:mx-4 mx-[.125rem] "
+        className="hover:text-background transition-colors sm:mx-4 mx-[.125rem]"
         to={link.path}
       >
         {t(link.label)}
@@ -108,7 +128,6 @@ export default function Navbar({
   setTheme: Dispatch<SetStateAction<boolean>>;
 }) {
   const { t, i18n } = useTranslation();
-  // const { theme, toggle } = useThemeButton();
   const navigate = useNavigate();
   return (
     <nav className="h-20 fixed top-0 z-[51] flex items-center justify-between mb-[1rem]">

@@ -51,6 +51,7 @@ i18n
           ...PDFEN,
           ...notesEN,
           ...toolTipEN,
+          yeasts: 'Yeast Table'
         },
       },
       de: {
@@ -69,6 +70,7 @@ i18n
           ...PDFDE,
           ...notesDE,
           ...toolTipDE,
+          yeasts: 'Yeast Table'
         },
       },
     },
