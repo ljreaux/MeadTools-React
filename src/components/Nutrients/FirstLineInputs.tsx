@@ -20,7 +20,7 @@ export default function FirstLineInputs({
         id="volume"
         name="volume"
         value={inputs.volume}
-        className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-textColor hover:bg-sidebar hover:border-background w-11/12 my-2"
+        className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-foreground hover:bg-background hover:border-background w-11/12 my-2"
         onChange={handleChange}
         onFocus={(e) => e.target.select()}
       />
@@ -30,10 +30,10 @@ export default function FirstLineInputs({
           id="specificGravity"
           name="sg"
           value={inputs.sg}
-          className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-textColor hover:bg-sidebar hover:border-background w-11/12 my-2"
+          className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-foreground hover:bg-background hover:border-background w-11/12 my-2"
           onChange={handleChange}
           onFocus={(e) => e.target.select()}
-          step={.001}
+          step={0.001}
         />{" "}
         <p>{Math.round(toBrix(inputs.sg) * 100) / 100} Brix</p>
       </div>
@@ -42,7 +42,7 @@ export default function FirstLineInputs({
         id="offsetPpm"
         name="offset"
         value={inputs.offset}
-        className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-textColor hover:bg-sidebar hover:border-background w-11/12 my-2"
+        className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-foreground hover:bg-background hover:border-background w-11/12 my-2"
         onChange={handleChange}
         onFocus={(e) => e.target.select()}
       />

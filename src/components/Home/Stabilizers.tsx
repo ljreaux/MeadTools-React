@@ -67,7 +67,7 @@ export default function Stabilizers({
   }, [abv, batchVolume, volumeUnits, adding.pHReading]);
 
   return (
-    <div className="grid grid-cols-2 w-11/12 sm:w-9/12 items-center justify-center rounded-xl bg-sidebar p-8 my-24">
+    <div className="grid grid-cols-2 w-11/12 sm:w-9/12 items-center justify-center rounded-xl bg-background p-8 my-24">
       <div className="col-span-2 flex gap-1 justify-center items-center">
         {" "}
         <Title header={t("stabilizersHeading")} />
@@ -81,7 +81,7 @@ export default function Stabilizers({
         <select
           name="adding"
           id="adding"
-          className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-textColor hover:bg-sidebar hover:border-background w-11/12 my-2 disabled:bg-sidebar
+          className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-foreground hover:bg-background hover:border-background w-11/12 my-2 disabled:bg-background
             disabled:cursor-not-allowed"
           value={adding.adding ? "yes" : "no"}
           onChange={(e) => {
@@ -99,7 +99,7 @@ export default function Stabilizers({
         <select
           name="phReading"
           id="phReading"
-          className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-textColor hover:bg-sidebar hover:border-background w-11/12 my-2 disabled:bg-sidebar
+          className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-foreground hover:bg-background hover:border-background w-11/12 my-2 disabled:bg-background
             disabled:cursor-not-allowed"
           value={adding.pH ? "yes" : "no"}
           onChange={(e) =>
@@ -127,7 +127,7 @@ export default function Stabilizers({
           <input
             type="number"
             disabled={!adding.pH}
-            className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-textColor hover:bg-sidebar hover:border-background w-11/12 my-2 disabled:bg-sidebar
+            className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-foreground hover:bg-background hover:border-background w-11/12 my-2 disabled:bg-background
             disabled:cursor-not-allowed"
             value={adding.pHReading}
             onChange={(e) =>
@@ -139,9 +139,11 @@ export default function Stabilizers({
             <label htmlFor="k-meta">{t("kMeta")}</label>
             <p id="k-meta" className="flex gap-2">
               {Math.round(amounts.sulfite * 10000) / 10000}g{" "}
-              {t("accountPage.or")} <div className="flex items-center justify-center gap-2">{Math.round(amounts.campden * 10) / 10}{" "}
-              {t("list.campden")}
-              <Tooltip body={t("tipText.campden")}/></div>
+              {t("accountPage.or")}{" "}
+              <div className="flex items-center justify-center gap-2">
+                {Math.round(amounts.campden * 10) / 10} {t("list.campden")}
+                <Tooltip body={t("tipText.campden")} />
+              </div>
             </p>
           </div>
         </>

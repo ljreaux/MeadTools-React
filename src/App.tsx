@@ -87,15 +87,6 @@ function App() {
     email: string;
   } | null>("user", null);
 
-  const [opened, setOpened] = useState({
-    menu: false,
-    calcs: false,
-    extraCalcs: false,
-    account: false,
-    links: false,
-    settings: false,
-  });
-
   const [, setBlendSG] = useState([0.996, 0.996]);
 
   useEffect(() => {
@@ -114,26 +105,9 @@ function App() {
   }, [isMetric]);
 
   return (
-    <div className="grid">
-      <Navbar
-        token={token}
-        setToken={setToken}
-        setUser={setUser}
-        opened={opened}
-        setOpened={setOpened}
-        theme={theme}
-        setTheme={setTheme}
-      />
-      <main
-        className="flex items-center justify-center w-full min-h-[100vh]"
-        onClick={() =>
-          setOpened((prev: Opened) => ({
-            ...prev,
-            menu: false,
-            settings: false,
-          }))
-        }
-      >
+    <>
+      <Navbar token={token} setToken={setToken} setUser={setUser} />
+      <main className="flex items-center justify-center w-full min-h-[100vh] bg-secondary">
         <Routes>
           <Route
             path="/"
@@ -185,7 +159,7 @@ function App() {
         </Routes>
         <BottomBar />
       </main>
-    </div>
+    </>
   );
 }
 

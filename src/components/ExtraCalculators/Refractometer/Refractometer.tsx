@@ -49,11 +49,11 @@ export default function Refractometer() {
   }, [refrac.cf, refrac.og, refrac.fgInBrix, refrac.units]);
 
   return (
-    <form className="w-11/12 sm:w-9/12 flex flex-col items-center justify-center rounded-xl bg-sidebar p-8 my-8 aspect-video">
+    <form className="w-11/12 sm:w-9/12 flex flex-col items-center justify-center rounded-xl bg-background p-8 my-8 aspect-video">
       <Title header={t("refractometerHeading")} />
       <label htmlFor="cf">{t("correctionFactor")} </label>
       <input
-        className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-textColor hover:bg-sidebar hover:border-background w-1/4"
+        className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-foreground hover:bg-background hover:border-background w-1/4"
         type="number"
         name="cf"
         id="cf"
@@ -63,7 +63,7 @@ export default function Refractometer() {
       />
       <label htmlFor="og">{t("ogLabel")} </label>
       <select
-        className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-textColor hover:bg-sidebar hover:border-background w-1/4"
+        className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-foreground hover:bg-background hover:border-background w-1/4"
         name="units"
         id="units"
         onChange={handleUnitChange}
@@ -72,7 +72,7 @@ export default function Refractometer() {
         <option value="Brix">{t("BRIX")}</option>
       </select>
       <input
-        className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-textColor hover:bg-sidebar hover:border-background w-1/4"
+        className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-foreground hover:bg-background hover:border-background w-1/4"
         type="number"
         name="og"
         id="og"
@@ -82,7 +82,7 @@ export default function Refractometer() {
       />
       <label htmlFor="fg">{t("fgInBrix")} </label>
       <input
-        className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-textColor hover:bg-sidebar hover:border-background w-1/4"
+        className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-foreground hover:bg-background hover:border-background w-1/4"
         type="number"
         name="fgInBrix"
         id="fg"

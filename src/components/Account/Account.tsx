@@ -94,7 +94,7 @@ export default function Account({
   return (
     <div className="w-screen flex items-center justify-center min-h-screen mt-24 md:mt-0">
       {userInfo ? (
-        <div className="w-11/12 sm:w-9/12 flex flex-col items-center rounded-xl bg-sidebar p-8 relative">
+        <div className="w-11/12 sm:w-9/12 flex flex-col items-center rounded-xl bg-background p-8 relative">
           <div className="absolute right-12 top-4 flex w-12 gap-2 text-3xl">
             <button
               onClick={() => {
@@ -113,7 +113,7 @@ export default function Account({
             <div
               className={`${
                 isOpened || "hidden"
-              } absolute right-0 top-0 translate-y-1/4 translate-x-8 bg-sidebar border-solid border-2 border-textColor rounded-xl flex justify-center items-center w-[15rem]`}
+              } absolute right-0 top-0 translate-y-1/4 translate-x-8 bg-background border-solid border-2 border-foreground rounded-xl flex justify-center items-center w-[15rem]`}
             >
               <ul
                 className="flex flex-col items-center justify-center w-full py-2 mx-4 my-2 text-sm"
@@ -122,7 +122,7 @@ export default function Account({
                 <li className="flex justify-between w-full py-2">
                   <p>{t("accountPage.theme.title")}</p>
                   <select
-                    className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-textColor hover:bg-sidebar hover:border-background"
+                    className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-foreground hover:bg-background hover:border-background"
                     name="theme"
                     id="theme"
                     value={isDarkTheme ? "dark" : "light"}
@@ -137,7 +137,7 @@ export default function Account({
                 <li className="flex justify-between w-full py-2">
                   <p>{t("accountPage.language.title")}</p>
                   <select
-                    className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-textColor hover:bg-sidebar hover:border-background"
+                    className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-foreground hover:bg-background hover:border-background"
                     name="lang"
                     id="lang"
                     value={i18n.language}
@@ -150,7 +150,7 @@ export default function Account({
                 <li className="flex justify-between w-full py-2">
                   <p>{t("accountPage.units.title")}</p>
                   <select
-                    className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-textColor hover:bg-sidebar hover:border-background"
+                    className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-foreground hover:bg-background hover:border-background"
                     name="units"
                     id="units"
                     value={isMetric ? "metric" : "us"}

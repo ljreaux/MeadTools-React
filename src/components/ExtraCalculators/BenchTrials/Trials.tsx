@@ -58,7 +58,7 @@ export default function Trials({ batchDetails }: Props) {
               >
                 {i === 0 && t("solutionVolume")}
                 <input
-                  className=" bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-textColor hover:bg-sidebar hover:border-background w-[80%]  disabled:bg-sidebar disabled:hover:border-textColor disabled:hover:text-sidebar disabled:cursor-not-allowed"
+                  className=" bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-foreground hover:bg-background hover:border-background w-[80%]  disabled:bg-background disabled:hover:border-foreground disabled:hover:text-sidebar disabled:cursor-not-allowed"
                   id={`stockVolume ${i + 1}`}
                   type="number"
                   value={solution}
@@ -74,7 +74,7 @@ export default function Trials({ batchDetails }: Props) {
               >
                 {i === 0 && t("adjunctAmount")}
                 <input
-                  className=" bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-textColor hover:bg-sidebar hover:border-background w-[80%]  disabled:bg-sidebar disabled:hover:border-textColor disabled:hover:text-sidebar disabled:cursor-not-allowed"
+                  className=" bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-foreground hover:bg-background hover:border-background w-[80%]  disabled:bg-background disabled:hover:border-foreground disabled:hover:text-sidebar disabled:cursor-not-allowed"
                   id={`adjunctAmount ${i + 1}`}
                   type="number"
                   value={sample}
@@ -88,7 +88,7 @@ export default function Trials({ batchDetails }: Props) {
               >
                 {i === 0 && t("adjunctConcentration")}
                 <input
-                  className=" bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-textColor hover:bg-sidebar hover:border-background w-[80%]  disabled:bg-sidebar disabled:hover:border-textColor disabled:hover:text-sidebar disabled:cursor-not-allowed"
+                  className=" bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-foreground hover:bg-background hover:border-background w-[80%]  disabled:bg-background disabled:hover:border-foreground disabled:hover:text-sidebar disabled:cursor-not-allowed"
                   id={`adjunctInSample ${i + 1}`}
                   type="number"
                   value={scaler * 1000000}
@@ -102,7 +102,7 @@ export default function Trials({ batchDetails }: Props) {
               >
                 {i === 0 && t(`${batchDetails.units}ScaledAdjunct`)}
                 <input
-                  className=" bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-textColor hover:bg-sidebar hover:border-background w-[80%]  disabled:bg-sidebar disabled:hover:border-textColor disabled:hover:text-sidebar disabled:cursor-not-allowed"
+                  className=" bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-foreground hover:bg-background hover:border-background w-[80%]  disabled:bg-background disabled:hover:border-foreground disabled:hover:text-sidebar disabled:cursor-not-allowed"
                   id={`scaledAdjunct ${i + 1}`}
                   type="number"
                   value={scaledAdjunct}
@@ -116,7 +116,7 @@ export default function Trials({ batchDetails }: Props) {
               >
                 {i === 0 && t("scaledBatch")}
                 <input
-                  className=" bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-textColor hover:bg-sidebar hover:border-background w-[80%]  disabled:bg-sidebar disabled:hover:border-textColor disabled:hover:text-sidebar disabled:cursor-not-allowed"
+                  className=" bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-foreground hover:bg-background hover:border-background w-[80%]  disabled:bg-background disabled:hover:border-foreground disabled:hover:text-sidebar disabled:cursor-not-allowed"
                   id={`batchAmount ${i + 1}`}
                   type="number"
                   value={scaledBatch}

@@ -282,7 +282,7 @@ export default function Recipes({
           <ToastAction
             altText="Save Copy"
             onClick={() => goTo(steps.length - 1)}
-            className="w-1/4 px-2 py-1 text-xs border-2 border-solid hover:bg-background rounded-2xl hover:border-textColor bg-sidebar border-background md:text-sm disabled:bg-sidebar disabled:hover:border-textColor disabled:hover:text-sidebar disabled:cursor-not-allowed"
+            className="w-1/4 px-2 py-1 text-xs border-2 border-solid hover:bg-background rounded-2xl hover:border-foreground bg-background border-background md:text-sm disabled:bg-background disabled:hover:border-foreground disabled:hover:text-sidebar disabled:cursor-not-allowed"
           >
             Save Copy
           </ToastAction>
@@ -310,7 +310,7 @@ export default function Recipes({
       />
       <button
         onClick={() => setAdvanced((prev: boolean) => !prev)}
-        className="w-1/4 px-2 py-1 text-base border-2 border-solid hover:bg-background rounded-2xl hover:border-textColor bg-sidebar border-background md:text-lg disabled:bg-sidebar disabled:hover:border-textColor disabled:hover:text-sidebar disabled:cursor-not-allowed"
+        className="w-1/4 px-2 py-1 text-base border-2 border-solid hover:bg-background rounded-2xl hover:border-foreground bg-background border-background md:text-lg disabled:bg-background disabled:hover:border-foreground disabled:hover:text-sidebar disabled:cursor-not-allowed"
       >
         {t("buttonLabels.advanced")}
       </button>
@@ -355,7 +355,7 @@ export default function Recipes({
     <>
       {instance.loading && <Loading />}
       {!instance.loading && instance.url && (
-        <div className="flex flex-col items-center justify-center w-11/12 p-8 mt-24 mb-8 rounded-xl bg-sidebar aspect-video">
+        <div className="flex flex-col items-center justify-center w-11/12 p-8 mt-24 mb-8 rounded-xl bg-background aspect-video">
           <Title header={t("PDF.title")} />
           <div className="w-[80%] h-[50vh]">
             <Worker
@@ -414,7 +414,7 @@ export default function Recipes({
           )}
           <p>{t("accountPage.or")}</p>
           <button
-            className="w-1/4 px-2 py-1 mt-4 mb-8 text-base border-2 border-solid hover:bg-background rounded-2xl hover:border-textColor bg-sidebar border-background md:text-lg disabled:bg-sidebar disabled:hover:border-textColor disabled:hover:text-sidebar disabled:cursor-not-allowed"
+            className="w-1/4 px-2 py-1 mt-4 mb-8 text-base border-2 border-solid hover:bg-background rounded-2xl hover:border-foreground bg-background border-background md:text-lg disabled:bg-background disabled:hover:border-foreground disabled:hover:text-sidebar disabled:cursor-not-allowed"
             onClick={() => setUpdateForm((prev) => !prev)}
           >
             {updateForm ? t("changesForm.saveAs") : t("changesForm.login")}
@@ -436,7 +436,7 @@ export default function Recipes({
       <div className="flex items-center justify-center w-1/4">
         {currentStepIndex > 0 && (
           <button
-            className="px-2 py-1 text-base border-2 border-solid hover:bg-background rounded-2xl hover:border-textColor bg-sidebar border-background md:text-lg disabled:bg-sidebar disabled:hover:border-textColor disabled:hover:text-sidebar disabled:cursor-not-allowed grow"
+            className="px-2 py-1 text-base border-2 border-solid hover:bg-background rounded-2xl hover:border-foreground bg-background border-background md:text-lg disabled:bg-background disabled:hover:border-foreground disabled:hover:text-sidebar disabled:cursor-not-allowed grow"
             onClick={back}
           >
             {t("buttonLabels.back")}
@@ -444,7 +444,7 @@ export default function Recipes({
         )}
         {currentStepIndex < steps.length - 1 && (
           <button
-            className="px-2 py-1 text-base border-2 border-solid hover:bg-background rounded-2xl hover:border-textColor bg-sidebar border-background md:text-lg disabled:bg-sidebar disabled:hover:border-textColor disabled:hover:text-sidebar disabled:cursor-not-allowed grow"
+            className="px-2 py-1 text-base border-2 border-solid hover:bg-background rounded-2xl hover:border-foreground bg-background border-background md:text-lg disabled:bg-background disabled:hover:border-foreground disabled:hover:text-sidebar disabled:cursor-not-allowed grow"
             onClick={() => {
               setData((prev) => ({
                 ...prev,
@@ -467,7 +467,7 @@ export default function Recipes({
         />{" "}
         {currentStepIndex !== steps.length - 2 && (
           <button
-            className="h-full px-2 py-1 border-2 border-solid hover:bg-background rounded-2xl hover:border-textColor bg-sidebar border-background md:text-lg disabled:bg-sidebar disabled:hover:border-textColor disabled:hover:text-sidebar disabled:cursor-not-allowed grow"
+            className="h-full px-2 py-1 border-2 border-solid hover:bg-background rounded-2xl hover:border-foreground bg-background border-background md:text-lg disabled:bg-background disabled:hover:border-foreground disabled:hover:text-sidebar disabled:cursor-not-allowed grow"
             onClick={() => goTo(steps.length - 2)}
           >
             <div className="flex items-center justify-center w-full h-full text-2xl">

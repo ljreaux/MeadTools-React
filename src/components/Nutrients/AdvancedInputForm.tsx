@@ -16,7 +16,7 @@ export default function AdvancedInputForm({
 }) {
   const { t } = useTranslation();
   return (
-    <div className="w-11/12 sm:w-9/12 flex flex-col items-center justify-center rounded-xl bg-sidebar p-8 my-8 aspect-video">
+    <div className="w-11/12 sm:w-9/12 flex flex-col items-center justify-center rounded-xl bg-background p-8 my-8 aspect-video">
       <div className="text-center">
         <Title header={t("advancedNutrition.label")} />
         <label htmlFor="yanContribution" className="w-full">
@@ -30,7 +30,7 @@ export default function AdvancedInputForm({
             {t("nutrients.fermO")}
             <input
               type="number"
-              className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-textColor hover:bg-sidebar hover:border-background w-11/12 my-2"
+              className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-foreground hover:bg-background hover:border-background w-11/12 my-2"
               value={yanContribution[0]}
               onFocus={(e) => e.target.select()}
               onChange={(e) =>
@@ -46,7 +46,7 @@ export default function AdvancedInputForm({
             {t("nutrients.fermK")}
             <input
               type="number"
-              className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-textColor hover:bg-sidebar hover:border-background w-11/12 my-2"
+              className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-foreground hover:bg-background hover:border-background w-11/12 my-2"
               value={yanContribution[1]}
               onFocus={(e) => e.target.select()}
               onChange={(e) =>
@@ -62,7 +62,7 @@ export default function AdvancedInputForm({
             {t("nutrients.dap")}
             <input
               type="number"
-              className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-textColor hover:bg-sidebar hover:border-background w-11/12 my-2"
+              className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-foreground hover:bg-background hover:border-background w-11/12 my-2"
               value={yanContribution[2]}
               onFocus={(e) => e.target.select()}
               onChange={(e) =>
@@ -85,7 +85,7 @@ export default function AdvancedInputForm({
             {t("nutrients.fermO")}
             <input
               type="number"
-              className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-textColor hover:bg-sidebar hover:border-background w-11/12 my-2"
+              className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-foreground hover:bg-background hover:border-background w-11/12 my-2"
               value={yanFromSource ? yanFromSource[0] : 0}
               onFocus={(e) => e.target.select()}
               onChange={(e) => {
@@ -103,7 +103,7 @@ export default function AdvancedInputForm({
             {t("nutrients.fermK")}
             <input
               type="number"
-              className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-textColor hover:bg-sidebar hover:border-background w-11/12 my-2"
+              className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-foreground hover:bg-background hover:border-background w-11/12 my-2"
               value={yanFromSource ? yanFromSource[1] : 0}
               onFocus={(e) => e.target.select()}
               onChange={(e) => {
@@ -121,7 +121,7 @@ export default function AdvancedInputForm({
             {t("nutrients.dap")}
             <input
               type="number"
-              className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-textColor hover:bg-sidebar hover:border-background w-11/12 my-2"
+              className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-foreground hover:bg-background hover:border-background w-11/12 my-2"
               value={yanFromSource ? yanFromSource[2] : 0}
               onFocus={(e) => e.target.select()}
               onChange={(e) => {

@@ -57,7 +57,7 @@ export default function Form({
           }
         });
       }}
-      className="aspect-video sm:w-2/4 w-11/12 flex flex-col items-center justify-center rounded-xl bg-sidebar p-8 my-8"
+      className="aspect-video sm:w-2/4 w-11/12 flex flex-col items-center justify-center rounded-xl bg-background p-8 my-8"
     >
       <Title header={titleText} />
       <label htmlFor="email" className="flex justify-between w-7/12">
@@ -70,7 +70,7 @@ export default function Form({
           onChange={(e) => {
             setData({ ...data, email: e.target.value });
           }}
-          className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-textColor hover:bg-sidebar hover:border-background w-8/12"
+          className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-foreground hover:bg-background hover:border-background w-8/12"
         />
       </label>
       <label htmlFor="password" className="flex justify-between w-7/12">
@@ -83,12 +83,12 @@ export default function Form({
           onChange={(e) => {
             setData({ ...data, password: e.target.value });
           }}
-          className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-textColor hover:bg-sidebar hover:border-background w-8/12"
+          className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-foreground hover:bg-background hover:border-background w-8/12"
         />
       </label>
       <button
         type="submit"
-        className="border-2 border-solid border-textColor  hover:bg-sidebar hover:border-background md:text-lg py-1 disabled:bg-sidebar disabled:hover:border-textColor disabled:hover:text-sidebar disabled:cursor-not-allowed bg-background rounded-2xl px-2 mt-6"
+        className="border-2 border-solid border-foreground  hover:bg-background hover:border-background md:text-lg py-1 disabled:bg-background disabled:hover:border-foreground disabled:hover:text-sidebar disabled:cursor-not-allowed bg-background rounded-2xl px-2 mt-6"
       >
         {titleText}
       </button>

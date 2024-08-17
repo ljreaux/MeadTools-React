@@ -161,7 +161,7 @@ export default function MainInputs({
   return (
     <>
       {!loading ? (
-        <div className="flex flex-col items-center justify-center w-11/12 p-2 mt-24 mb-8 text-xs sm:w-9/12 rounded-xl bg-sidebar sm:p-8 aspect-video sm:text-base text-wrap">
+        <div className="flex flex-col items-center justify-center w-11/12 p-2 mt-24 mb-8 text-xs sm:w-9/12 rounded-xl bg-background sm:p-8 aspect-video sm:text-base text-wrap">
           <Title header={t("nutesHeading")} />
           <form
             action=""
@@ -176,7 +176,7 @@ export default function MainInputs({
                 value={selected.volumeUnits}
                 name="volumeUnits"
                 id="volumeUnits"
-                className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-textColor hover:bg-sidebar hover:border-background w-11/12 my-2"
+                className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-foreground hover:bg-background hover:border-background w-11/12 my-2"
               >
                 <option value="gal">{t("GAL")}</option>
                 <option value="liter">{t("LIT")}</option>
@@ -217,7 +217,7 @@ export default function MainInputs({
               }
               name="yeastBrand"
               id="yeastBrand"
-              className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-textColor hover:bg-sidebar hover:border-background w-11/12 my-2"
+              className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-foreground hover:bg-background hover:border-background w-11/12 my-2"
             >
               {Object.keys(yeasts).map((yeast) => {
                 return (
@@ -232,7 +232,7 @@ export default function MainInputs({
               onChange={handleSelected}
               name="yeastStrain"
               id="yeastStrain"
-              className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-textColor hover:bg-sidebar hover:border-background w-11/12 my-2"
+              className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-foreground hover:bg-background hover:border-background w-11/12 my-2"
             >
               {yeasts[selected.yeastBrand].map((yeast) => (
                 <option key={yeast.name} value={yeast.name}>
@@ -289,7 +289,7 @@ export default function MainInputs({
               name="n2Requirement"
               id="n2Requirement"
               value={selected.n2Requirement}
-              className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-textColor hover:bg-sidebar hover:border-background w-11/12 my-2"
+              className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-foreground hover:bg-background hover:border-background w-11/12 my-2"
               onChange={handleSelected}
             >
               <option value="Low">{t("n2Requirement.low")}</option>
@@ -301,7 +301,7 @@ export default function MainInputs({
             <select
               name="schedule"
               id="schedule"
-              className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-textColor hover:bg-sidebar hover:border-background w-11/12 my-2"
+              className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-foreground hover:bg-background hover:border-background w-11/12 my-2"
               value={selected.schedule}
               onChange={handleSelected}
             >
@@ -320,7 +320,7 @@ export default function MainInputs({
               onChange={handleChange}
               name="numberOfAdditions"
               id="numberOfAdditions"
-              className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-textColor hover:bg-sidebar hover:border-background w-11/12 my-2"
+              className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-foreground hover:bg-background hover:border-background w-11/12 my-2"
             >
               <option value={1}>1</option>
               <option value={2}>2</option>
@@ -334,7 +334,7 @@ export default function MainInputs({
                 setRecalc(false);
                 setYeastAmount(Number(e.target.value));
               }}
-              className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-textColor hover:bg-sidebar hover:border-background w-11/12 my-2"
+              className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-foreground hover:bg-background hover:border-background w-11/12 my-2"
               onFocus={(e) => e.target.select()}
             />
           </form>

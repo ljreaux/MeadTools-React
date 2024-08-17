@@ -29,7 +29,7 @@ export default function Notes({
   const { t } = useTranslation();
 
   return (
-    <form className="w-11/12 flex flex-col items-center justify-center rounded-xl bg-sidebar p-8 mb-8 mt-24 aspect-video gap-4 sm:text-base text-sm">
+    <form className="w-11/12 flex flex-col items-center justify-center rounded-xl bg-background p-8 mb-8 mt-24 aspect-video gap-4 sm:text-base text-sm">
       <Title header={t("notes.title")} />
       <label htmlFor="primaryNotes">{t("notes.subtitleOne")}</label>
       <div className="grid grid-cols-notes gap-4 w-full">
@@ -50,7 +50,7 @@ export default function Notes({
             <textarea
               value={note[0]}
               placeholder={t("notes.placeholder")}
-              className="h-20 bg-background text-left text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-textColor hover:bg-sidebar hover:border-background my-2 disabled:bg-sidebar
+              className="h-20 bg-background text-left text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-foreground hover:bg-background hover:border-background my-2 disabled:bg-background
         disabled:cursor-not-allowed"
               onChange={(e) => {
                 setPrimaryNotes((prev) => {
@@ -63,7 +63,7 @@ export default function Notes({
             <textarea
               value={note[1]}
               placeholder={t("notes.placeholder")}
-              className="h-20 bg-background text-left text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-textColor hover:bg-sidebar hover:border-background my-2 disabled:bg-sidebar
+              className="h-20 bg-background text-left text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-foreground hover:bg-background hover:border-background my-2 disabled:bg-background
         disabled:cursor-not-allowed"
               onChange={(e) => {
                 setPrimaryNotes((prev) => {
@@ -75,7 +75,7 @@ export default function Notes({
             />
             {index > 0 && (
               <button
-                className="border-2 border-solid border-textColor  hover:bg-sidebar hover:border-background md:text-lg py-1 disabled:bg-sidebar disabled:hover:border-textColor disabled:hover:text-sidebar disabled:cursor-not-allowed bg-background rounded-2xl px-2 h-fit"
+                className="border-2 border-solid border-foreground  hover:bg-background hover:border-background md:text-lg py-1 disabled:bg-background disabled:hover:border-foreground disabled:hover:text-sidebar disabled:cursor-not-allowed bg-background rounded-2xl px-2 h-fit"
                 type="button"
                 onClick={() => removeNote("primary", index)}
               >
@@ -87,7 +87,7 @@ export default function Notes({
       })}
       {primaryNotes.length < 10 && (
         <button
-          className="border-2 border-solid border-textColor  hover:bg-sidebar hover:border-background md:text-lg py-1 disabled:bg-sidebar disabled:hover:border-textColor disabled:hover:text-sidebar disabled:cursor-not-allowed bg-background rounded-2xl px-2"
+          className="border-2 border-solid border-foreground  hover:bg-background hover:border-background md:text-lg py-1 disabled:bg-background disabled:hover:border-foreground disabled:hover:text-sidebar disabled:cursor-not-allowed bg-background rounded-2xl px-2"
           type="button"
           onClick={() => addNewNote("primary")}
         >
@@ -113,7 +113,7 @@ export default function Notes({
             <textarea
               value={note[0]}
               placeholder={t("notes.placeholder")}
-              className="h-20 bg-background text-left text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-textColor hover:bg-sidebar hover:border-background my-2 disabled:bg-sidebar
+              className="h-20 bg-background text-left text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-foreground hover:bg-background hover:border-background my-2 disabled:bg-background
         disabled:cursor-not-allowed"
               onChange={(e) => {
                 setSecondaryNotes((prev) => {
@@ -126,7 +126,7 @@ export default function Notes({
             <textarea
               value={note[1]}
               placeholder={t("notes.placeholder")}
-              className="h-20 bg-background text-left text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-textColor hover:bg-sidebar hover:border-background my-2 disabled:bg-sidebar
+              className="h-20 bg-background text-left text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-foreground hover:bg-background hover:border-background my-2 disabled:bg-background
         disabled:cursor-not-allowed"
               onChange={(e) => {
                 setSecondaryNotes((prev) => {
@@ -138,7 +138,7 @@ export default function Notes({
             />
             {index > 0 && (
               <button
-                className="border-2 border-solid border-textColor  hover:bg-sidebar hover:border-background md:text-lg py-1 disabled:bg-sidebar disabled:hover:border-textColor disabled:hover:text-sidebar disabled:cursor-not-allowed bg-background rounded-2xl px-2 h-fit"
+                className="border-2 border-solid border-foreground  hover:bg-background hover:border-background md:text-lg py-1 disabled:bg-background disabled:hover:border-foreground disabled:hover:text-sidebar disabled:cursor-not-allowed bg-background rounded-2xl px-2 h-fit"
                 type="button"
                 onClick={() => removeNote("secondary", index)}
               >
@@ -150,7 +150,7 @@ export default function Notes({
       })}
       {secondaryNotes.length < 10 && (
         <button
-          className="border-2 border-solid border-textColor  hover:bg-sidebar hover:border-background md:text-lg py-1 disabled:bg-sidebar disabled:hover:border-textColor disabled:hover:text-sidebar disabled:cursor-not-allowed bg-background rounded-2xl px-2"
+          className="border-2 border-solid border-foreground  hover:bg-background hover:border-background md:text-lg py-1 disabled:bg-background disabled:hover:border-foreground disabled:hover:text-sidebar disabled:cursor-not-allowed bg-background rounded-2xl px-2"
           type="button"
           onClick={() => addNewNote("secondary")}
         >

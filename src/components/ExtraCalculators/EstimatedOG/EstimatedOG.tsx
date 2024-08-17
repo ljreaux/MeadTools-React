@@ -22,7 +22,7 @@ export default function EstimatedOG() {
     1000;
   const abv = useAbv({ OG: estOG, FG: gravity.fgh });
   return (
-    <div className="w-11/12 sm:w-9/12 flex flex-col items-center justify-center rounded-xl bg-sidebar p-8 my-8 aspect-video">
+    <div className="w-11/12 sm:w-9/12 flex flex-col items-center justify-center rounded-xl bg-background p-8 my-8 aspect-video">
       <Title header={t("ogHeading")} />
       <label className="text-center mx-2 my-2" htmlFor="hydrometerFG">
         {t("hydrometerFG")}{" "}
@@ -34,7 +34,7 @@ export default function EstimatedOG() {
         }
         type="number"
         id="hydrometerFG"
-        className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-textColor hover:bg-sidebar hover:border-background w-1/4"
+        className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-foreground hover:bg-background hover:border-background w-1/4"
         onFocus={(e) => e.target.select()}
       />
       <label className="text-center mx-2 my-2" htmlFor="refractometerFG">
@@ -47,7 +47,7 @@ export default function EstimatedOG() {
         }
         type="number"
         id="refractometerFG"
-        className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-textColor hover:bg-sidebar hover:border-background w-1/4"
+        className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-foreground hover:bg-background hover:border-background w-1/4"
         onFocus={(e) => e.target.select()}
       />
       <div className="text-2xl flex gap-2 mt-8">

@@ -96,7 +96,7 @@ export default function NutrientCalcResults({
   }, [nutrients, gf, gfWater]);
 
   return (
-    <div className="flex flex-col items-center justify-center w-11/12 p-8 mt-24 mb-8 sm:w-9/12 rounded-xl bg-sidebar aspect-video">
+    <div className="flex flex-col items-center justify-center w-11/12 p-8 mt-24 mb-8 sm:w-9/12 rounded-xl bg-background aspect-video">
       <Title header={t("nuteResults.label")} />
       <form
         action=""
@@ -112,7 +112,7 @@ export default function NutrientCalcResults({
           <select
             name="go-ferm"
             id="go-ferm"
-            className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-textColor hover:bg-sidebar hover:border-background w-11/12 my-2"
+            className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-foreground hover:bg-background hover:border-background w-11/12 my-2"
             onChange={(e) => {
               setNuteInfo((prev) => {
                 if (prev)
@@ -148,7 +148,7 @@ export default function NutrientCalcResults({
             type="number"
             name="fermOgpl"
             id="fermOgpl"
-            className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-textColor hover:bg-sidebar hover:border-background w-11/12 my-2 disabled:bg-sidebar
+            className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-foreground hover:bg-background hover:border-background w-11/12 my-2 disabled:bg-background
             disabled:cursor-not-allowed"
             disabled={advanced}
             value={gplArr[0]}
@@ -159,7 +159,7 @@ export default function NutrientCalcResults({
             type="number"
             name="fermKgpl"
             id="fermKgpl"
-            className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-textColor hover:bg-sidebar hover:border-background w-11/12 my-2 disabled:bg-sidebar
+            className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-foreground hover:bg-background hover:border-background w-11/12 my-2 disabled:bg-background
             disabled:cursor-not-allowed"
             disabled={advanced}
             value={gplArr[1]}
@@ -170,7 +170,7 @@ export default function NutrientCalcResults({
             type="number"
             name="DapGpl"
             id="DapGpl"
-            className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-textColor hover:bg-sidebar hover:border-background w-11/12 my-2 disabled:bg-sidebar
+            className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-foreground hover:bg-background hover:border-background w-11/12 my-2 disabled:bg-background
             disabled:cursor-not-allowed"
             disabled={advanced}
             value={gplArr[2]}
@@ -186,7 +186,7 @@ export default function NutrientCalcResults({
         <div className="grid grid-cols-3 col-span-3" id="ppmYan">
           <input
             type="number"
-            className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-textColor hover:bg-sidebar hover:border-background w-11/12 my-2 disabled:bg-sidebar
+            className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-foreground hover:bg-background hover:border-background w-11/12 my-2 disabled:bg-background
             disabled:cursor-not-allowed"
             value={nutrients.ppmYan[0]}
             onChange={(e) =>
@@ -204,7 +204,7 @@ export default function NutrientCalcResults({
           />
           <input
             type="number"
-            className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-textColor hover:bg-sidebar hover:border-background w-11/12 my-2 disabled:bg-sidebar
+            className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-foreground hover:bg-background hover:border-background w-11/12 my-2 disabled:bg-background
             disabled:cursor-not-allowed"
             value={nutrients.ppmYan[1]}
             onFocus={(e) => e.target.select()}
@@ -222,7 +222,7 @@ export default function NutrientCalcResults({
           />
           <input
             type="number"
-            className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-textColor hover:bg-sidebar hover:border-background w-11/12 my-2 disabled:bg-sidebar
+            className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-foreground hover:bg-background hover:border-background w-11/12 my-2 disabled:bg-background
             disabled:cursor-not-allowed"
             value={nutrients.ppmYan[2]}
             onFocus={(e) => e.target.select()}
@@ -250,7 +250,7 @@ export default function NutrientCalcResults({
             <input
               key={index}
               value={`${Math.round(grams * 100) / 100}g`}
-              className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-textColor hover:bg-sidebar hover:border-background w-11/12 my-2 disabled:bg-sidebar
+              className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-foreground hover:bg-background hover:border-background w-11/12 my-2 disabled:bg-background
             disabled:cursor-not-allowed"
               disabled
               onFocus={(e) => e.target.select()}
@@ -267,7 +267,7 @@ export default function NutrientCalcResults({
             <input
               key={index}
               value={`${Math.round(grams * 100) / 100}g`}
-              className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-textColor hover:bg-sidebar hover:border-background w-11/12 my-2 disabled:bg-sidebar
+              className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-foreground hover:bg-background hover:border-background w-11/12 my-2 disabled:bg-background
             disabled:cursor-not-allowed"
               disabled
             />

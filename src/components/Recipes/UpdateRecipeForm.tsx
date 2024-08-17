@@ -37,7 +37,7 @@ export default function UpdateRecipeForm(props: PropsType) {
   const { toast } = useToast();
   return (
     <form
-      className="flex flex-col items-center justify-center w-11/12 gap-4 p-8 mt-24 mb-8 rounded-xl bg-sidebar aspect-video"
+      className="flex flex-col items-center justify-center w-11/12 gap-4 p-8 mt-24 mb-8 rounded-xl bg-background aspect-video"
       onSubmit={(e) => {
         e.preventDefault();
 
@@ -90,13 +90,13 @@ export default function UpdateRecipeForm(props: PropsType) {
         <p>{t("changesForm.subtitle")}</p>
         <input
           type="text"
-          className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-textColor hover:bg-sidebar hover:border-background w-1/4 my-2 disabled:bg-sidebar
+          className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-foreground hover:bg-background hover:border-background w-1/4 my-2 disabled:bg-background
       disabled:cursor-not-allowed"
           value={name}
           onChange={(e) => updateName(e.target.value)}
         />
       </label>
-      <button className="px-2 py-1 border-2 border-solid border-textColor hover:bg-sidebar hover:border-background md:text-lg disabled:bg-sidebar disabled:hover:border-textColor disabled:hover:text-sidebar disabled:cursor-not-allowed bg-background rounded-2xl">
+      <button className="px-2 py-1 border-2 border-solid border-foreground hover:bg-background hover:border-background md:text-lg disabled:bg-background disabled:hover:border-foreground disabled:hover:text-sidebar disabled:cursor-not-allowed bg-background rounded-2xl">
         {t("changesForm.submit")}
       </button>
     </form>

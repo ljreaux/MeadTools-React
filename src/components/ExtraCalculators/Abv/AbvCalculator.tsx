@@ -13,7 +13,7 @@ export default function AbvCalculator() {
   const inputArr = [t("OG"), t("FG")];
 
   return (
-    <div className="w-11/12 sm:w-9/12 flex flex-col items-center justify-center rounded-xl bg-sidebar p-8 my-8 aspect-video">
+    <div className="w-11/12 sm:w-9/12 flex flex-col items-center justify-center rounded-xl bg-background p-8 my-8 aspect-video">
       <Title header={t("abvHeading")} />
       {inputArr.map((item, index) => {
         const brix = toBrix(inputValues[index]);
@@ -38,7 +38,7 @@ export default function AbvCalculator() {
                 );
               }}
               onFocus={(e) => e.target.select()}
-              className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-textColor hover:bg-sidebar hover:border-background w-1/4"
+              className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-foreground hover:bg-background hover:border-background w-1/4"
             />
             <p>
               {Math.round(brix * 100) / 100} {t("BRIX")}

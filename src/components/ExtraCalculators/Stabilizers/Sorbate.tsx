@@ -32,14 +32,14 @@ export default function Sorbate() {
           id="batchSize"
           onFocus={(e) => e.target.select()}
           onChange={handleChange}
-          className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-textColor hover:bg-sidebar hover:border-background w-1/4"
+          className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-foreground hover:bg-background hover:border-background w-1/4"
           value={sorbate.batchSize}
         />
         <select
           name="units"
           id="units"
           onChange={handleChange}
-          className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-textColor hover:bg-sidebar hover:border-background w-1/4"
+          className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-foreground hover:bg-background hover:border-background w-1/4"
         >
           <option value="gallons">{t("GAL")}</option>
           <option value="liters">{t("LIT")}</option>
@@ -52,7 +52,7 @@ export default function Sorbate() {
           type="number"
           onFocus={(e) => e.target.select()}
           onChange={handleChange}
-          className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-textColor hover:bg-sidebar hover:border-background w-1/4"
+          className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-foreground hover:bg-background hover:border-background w-1/4"
           value={sorbate.abv}
         />
       </div>

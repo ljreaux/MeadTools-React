@@ -105,7 +105,7 @@ export default function NutrientCalc() {
       />
       <button
         onClick={() => setAdvanced((prev) => !prev)}
-        className="w-1/4 px-2 py-1 text-base border-2 border-solid hover:bg-background rounded-2xl hover:border-textColor bg-sidebar border-background md:text-lg disabled:bg-sidebar disabled:hover:border-textColor disabled:hover:text-sidebar disabled:cursor-not-allowed"
+        className="w-1/4 px-2 py-1 text-base border-2 border-solid hover:bg-background rounded-2xl hover:border-foreground bg-background border-background md:text-lg disabled:bg-background disabled:hover:border-foreground disabled:hover:text-sidebar disabled:cursor-not-allowed"
       >
         {t("buttonLabels.advanced")}
       </button>
@@ -134,7 +134,7 @@ export default function NutrientCalc() {
       {step}
       {currentStepIndex > 0 && (
         <button
-          className="w-1/4 px-2 py-1 text-base border-2 border-solid hover:bg-background rounded-2xl hover:border-textColor bg-sidebar border-background md:text-lg disabled:bg-sidebar disabled:hover:border-textColor disabled:hover:text-sidebar disabled:cursor-not-allowed"
+          className="w-1/4 px-2 py-1 text-base border-2 border-solid hover:bg-background rounded-2xl hover:border-foreground bg-background border-background md:text-lg disabled:bg-background disabled:hover:border-foreground disabled:hover:text-sidebar disabled:cursor-not-allowed"
           onClick={back}
         >
           {t("buttonLabels.back")}
@@ -142,7 +142,7 @@ export default function NutrientCalc() {
       )}
       {currentStepIndex < steps.length - 1 && (
         <button
-          className="hover:bg-background rounded-2xl border-2 border-solid hover:border-textColor  bg-sidebar border-background md:text-lg text-base px-2 py-1 disabled:bg-sidebar disabled:hover:border-textColor disabled:hover:text-sidebar disabled:cursor-not-allowed w-1/4 mb-[3rem]"
+          className="hover:bg-background rounded-2xl border-2 border-solid hover:border-foreground  bg-background border-background md:text-lg text-base px-2 py-1 disabled:bg-background disabled:hover:border-foreground disabled:hover:text-sidebar disabled:cursor-not-allowed w-1/4 mb-[3rem]"
           onClick={() => {
             setData((prev) => ({
               ...prev,

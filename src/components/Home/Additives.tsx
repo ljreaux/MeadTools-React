@@ -110,7 +110,7 @@ export default function Additives({
   ];
 
   return (
-    <div className="grid grid-cols-4 w-11/12 sm:w-9/12 items-center justify-center rounded-xl bg-sidebar p-8 my-24">
+    <div className="grid grid-cols-4 w-11/12 sm:w-9/12 items-center justify-center rounded-xl bg-background p-8 my-24">
       <div className="col-span-4 flex justify-center gap-1 items-center">
         <Title header={t("additivesHeading")} />
         <Tooltip body={t("tipText.additives")} />
@@ -178,7 +178,7 @@ export default function Additives({
                   editAdditives({ ...additive, name: e.target.value }, i);
                 }
               }}
-              className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-textColor hover:bg-sidebar hover:border-background w-11/12 my-2 disabled:bg-sidebar
+              className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-foreground hover:bg-background hover:border-background w-11/12 my-2 disabled:bg-background
             disabled:cursor-not-allowed"
               onFocus={(e) => e.target.select()}
             />
@@ -191,14 +191,14 @@ export default function Additives({
                   i
                 );
               }}
-              className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-textColor hover:bg-sidebar hover:border-background w-11/12 my-2 disabled:bg-sidebar
+              className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-foreground hover:bg-background hover:border-background w-11/12 my-2 disabled:bg-background
             disabled:cursor-not-allowed"
               onFocus={(e) => e.target.select()}
             />
             <select
               name="additiveUnits"
               id="additiveUnits"
-              className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-textColor hover:bg-sidebar hover:border-background w-11/12 my-2 disabled:bg-sidebar
+              className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-foreground hover:bg-background hover:border-background w-11/12 my-2 disabled:bg-background
             disabled:cursor-not-allowed"
               value={additive.unit}
               onChange={(e) => {
@@ -230,7 +230,7 @@ export default function Additives({
 
       <div className="col-span-4 flex justify-center">
         <button
-          className="bg-background rounded-2xl border-2 border-solid border-textColor  hover:bg-sidebar hover:border-background md:text-lg text-base px-2 py-1 disabled:bg-sidebar disabled:hover:border-textColor disabled:hover:text-sidebar disabled:cursor-not-allowed w-1/4 flex justify-center items-center"
+          className="bg-background rounded-2xl border-2 border-solid border-foreground  hover:bg-background hover:border-background md:text-lg text-base px-2 py-1 disabled:bg-background disabled:hover:border-foreground disabled:hover:text-sidebar disabled:cursor-not-allowed w-1/4 flex justify-center items-center"
           type="button"
           onClick={addAdditive}
           disabled={additives.length >= 10}

@@ -24,13 +24,13 @@ export default function RecipeCard({
       <div className="flex gap-1">
         <button
           onClick={() => token && navigate(`/recipes/${recipe.id}`)}
-          className="px-2 py-1 border-2 border-solid border-textColor hover:bg-sidebar hover:border-background md:text-lg disabled:bg-sidebar disabled:hover:border-textColor disabled:hover:text-sidebar disabled:cursor-not-allowed bg-background rounded-2xl"
+          className="px-2 py-1 border-2 border-solid border-foreground hover:bg-background hover:border-background md:text-lg disabled:bg-background disabled:hover:border-foreground disabled:hover:text-sidebar disabled:cursor-not-allowed bg-background rounded-2xl"
         >
           {t("accountPage.viewRecipe")}
         </button>
         <button
           onClick={() => token && navigate(`/recipes/${recipe.id}?pdf=true`)}
-          className="px-2 py-1 border-2 border-solid border-textColor hover:bg-sidebar hover:border-background md:text-lg disabled:bg-sidebar disabled:hover:border-textColor disabled:hover:text-sidebar disabled:cursor-not-allowed bg-background rounded-2xl"
+          className="px-2 py-1 border-2 border-solid border-foreground hover:bg-background hover:border-background md:text-lg disabled:bg-background disabled:hover:border-foreground disabled:hover:text-sidebar disabled:cursor-not-allowed bg-background rounded-2xl"
         >
           {t("PDF.title")}
         </button>
@@ -46,7 +46,7 @@ export default function RecipeCard({
           } else
             toast({ description: deleted.message, variant: "destructive" });
         }}
-        className="bg-red-500 px-2 py-1 border-2 border-solid border-textColor hover:bg-sidebar hover:border-background md:text-lg disabled:bg-sidebar disabled:hover:border-textColor disabled:hover:text-sidebar disabled:cursor-not-allowed bg-background rounded-2xl"
+        className="bg-red-500 px-2 py-1 border-2 border-solid border-foreground hover:bg-background hover:border-background md:text-lg disabled:bg-background disabled:hover:border-foreground disabled:hover:text-sidebar disabled:cursor-not-allowed bg-background rounded-2xl"
       >
         {t("accountPage.deleteRecipe")}
       </button>

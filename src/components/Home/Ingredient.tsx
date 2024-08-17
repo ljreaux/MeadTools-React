@@ -7,6 +7,15 @@ import { toSG } from "../../helpers/unitConverters";
 import lodash from "lodash";
 import { useTranslation } from "react-i18next";
 import { Switch } from "../ui/switch";
+import { Input } from "../ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { TableCell, TableRow } from "../ui/table";
 
 export interface IngredientListItem {
   id: number;
@@ -70,9 +79,9 @@ function IngredientOptions({
       {ingredients.map((ingredient) => {
         const ingredientDisplay = lodash.camelCase(ingredient.name);
         return (
-          <option key={ingredientDisplay} value={ingredient.name}>
+          <SelectItem key={ingredientDisplay} value={ingredient.name}>
             {t(`${ingredientDisplay}`)}
-          </option>
+          </SelectItem>
         );
       })}
     </>
@@ -120,29 +129,24 @@ export default function Ingredient({
           ingredient.category === filterTerm[1]
       )
     : ingredients;
-  function changeIngredient(e: FormEvent<EventTarget>, index: number) {
-    const target = e.target as HTMLSelectElement;
-    const {
-      sugar_content: brix,
-      name,
-      category,
-    } = ingredients.find((ingredient) => ingredient.name === target.value) || {
-      sugar_content: 0,
-      name: "error",
-      category: "error",
-    };
+  function changeIngredient(ingName: string, index: number) {
+    const found = ingredients.find((ingredient) => ingredient.name === ingName);
 
-    setIndividual(index, {
-      brix: Number(brix),
-      name,
-      details: [
-        ingredient.details[0],
-        Math.round(
-          (ingredient.details[0] / converter / toSG(Number(brix))) * 10000
-        ) / 10000,
-      ],
-      category,
-    });
+    if (found)
+      setIndividual(index, {
+        brix: Number(found.sugar_content),
+        name: found.name,
+        details: [
+          ingredient.details[0],
+          Math.round(
+            (ingredient.details[0] /
+              converter /
+              toSG(Number(found.sugar_content))) *
+              10000
+          ) / 10000,
+        ],
+        category: found.category,
+      });
   }
 
   function handleChange(
@@ -178,65 +182,68 @@ export default function Ingredient({
       });
     }
   }
+
   return (
-    <div
-      className={`flex w-full py-[.25rem] ${
-        index == 1 ? "border-dotted border-b-[1px] border-textColor" : null
-      }`}
-    >
-      <div
-        key={index}
-        className="grid grid-cols-5 w-[97%] items-center justify-center gap-4"
-      >
-        <select
-          name="ingredientList"
-          id="ingredientList"
+    <TableRow>
+      <TableCell>
+        <Select
           value={ingredient.name}
-          className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-textColor hover:bg-sidebar hover:border-background w-11/12 my-2"
-          onChange={(e) => changeIngredient(e, index)}
+          onValueChange={(val) => changeIngredient(val, index)}
         >
-          <IngredientOptions
-            ingredients={filtered}
-            setIngredients={setIngredients}
-            setLoading={setLoading}
-          />
-        </select>
-        <input
+          <SelectTrigger className="h-8">
+            <SelectValue placeholder="Select an ingredient." />
+          </SelectTrigger>
+          <SelectContent>
+            <IngredientOptions
+              ingredients={filtered}
+              setIngredients={setIngredients}
+              setLoading={setLoading}
+            />
+          </SelectContent>
+        </Select>
+      </TableCell>
+      <TableCell>
+        <Input
           type="number"
           name="ingredientWeight"
           value={ingredient.details[0]}
-          className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-textColor hover:bg-sidebar hover:border-background w-11/12 my-2"
+          className="h-8"
           onChange={(e) => handleChange(e, index, 0)}
           onFocus={(e) => e.target.select()}
         />
-        <input
+      </TableCell>
+      <TableCell>
+        <Input
           type="number"
           name="ingredientBrix"
           value={ingredient.brix}
-          className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-textColor hover:bg-sidebar hover:border-background w-11/12 my-2"
+          className="h-8"
           onChange={(e) => handleChange(e, index, null)}
           onFocus={(e) => e.target.select()}
         />
-        <input
+      </TableCell>
+      <TableCell>
+        <Input
           type="number"
           name="ingredientVolume"
           value={ingredient.details[1]}
-          className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-textColor hover:bg-sidebar hover:border-background w-11/12 my-2"
+          className="h-8"
           onChange={(e) => handleChange(e, index, 1)}
           onFocus={(e) => e.target.select()}
         />
-        <span className="w-full flex items-center justify-center">
-          <Switch
-            checked={ingredient.secondary}
-            onCheckedChange={() => setChecked(index)}
-          />
-        </span>
-      </div>
-      {index > 3 && (
-        <button className="w-[3%]" onClick={() => removeLine(index)}>
-          <FaMinusSquare />
-        </button>
-      )}
-    </div>
+      </TableCell>
+      <TableCell className="flex items-center justify-between px-6">
+        <Switch
+          checked={ingredient.secondary}
+          onCheckedChange={() => setChecked(index)}
+        />
+
+        {index > 3 && (
+          <button className="w-8 text-xl" onClick={() => removeLine(index)}>
+            <FaMinusSquare />
+          </button>
+        )}
+      </TableCell>
+    </TableRow>
   );
 }

@@ -39,14 +39,14 @@ export default function Sulfite() {
           id="batchSize"
           onFocus={(e) => e.target.select()}
           onChange={handleChange}
-          className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-textColor hover:bg-sidebar hover:border-background w-1/4"
+          className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-foreground hover:bg-background hover:border-background w-1/4"
           value={sulfite.batchSize}
         />
         <select
           name="units"
           id="units"
           onChange={handleChange}
-          className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-textColor hover:bg-sidebar hover:border-background w-1/4"
+          className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-foreground hover:bg-background hover:border-background w-1/4"
         >
           <option value="gallons">Gallons</option>
           <option value="liters">Liters</option>
@@ -59,7 +59,7 @@ export default function Sulfite() {
           name="ppm"
           id="ppm"
           onChange={handleChange}
-          className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-textColor hover:bg-sidebar hover:border-background w-1/4"
+          className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-foreground hover:bg-background hover:border-background w-1/4"
           value={sulfite.ppm}
         />
       </div>

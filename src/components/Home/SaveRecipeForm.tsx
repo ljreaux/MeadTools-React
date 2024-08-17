@@ -35,7 +35,7 @@ export default function SaveRecipeForm(props: PropsType) {
   const { toast } = useToast();
   return (
     <form
-      className="w-11/12 flex flex-col items-center justify-center rounded-xl bg-sidebar p-8 mb-8 mt-24 aspect-video gap-4"
+      className="w-11/12 flex flex-col items-center justify-center rounded-xl bg-background p-8 mb-8 mt-24 aspect-video gap-4"
       onSubmit={(e) => {
         e.preventDefault();
 
@@ -81,13 +81,13 @@ export default function SaveRecipeForm(props: PropsType) {
         <p>{t("recipeForm.subtitle")}</p>
         <input
           type="text"
-          className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-textColor hover:bg-sidebar hover:border-background w-1/4 my-2 disabled:bg-sidebar
+          className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-foreground hover:bg-background hover:border-background w-1/4 my-2 disabled:bg-background
       disabled:cursor-not-allowed"
           value={recipeName}
           onChange={(e) => setRecipeName(e.target.value)}
         />
       </label>
-      <button className="border-2 border-solid border-textColor  hover:bg-sidebar hover:border-background md:text-lg py-1 disabled:bg-sidebar disabled:hover:border-textColor disabled:hover:text-sidebar disabled:cursor-not-allowed bg-background rounded-2xl px-2">
+      <button className="border-2 border-solid border-foreground  hover:bg-background hover:border-background md:text-lg py-1 disabled:bg-background disabled:hover:border-foreground disabled:hover:text-sidebar disabled:cursor-not-allowed bg-background rounded-2xl px-2">
         {t("recipeForm.submit")}
       </button>
     </form>

@@ -38,7 +38,7 @@ export default function BenchTrials() {
   };
   useUnitChange({ ...unitChangeParams, propertyToChange: "batchSize" });
   return (
-    <form className="w-11/12 sm:w-9/12 flex flex-col items-center justify-center rounded-xl bg-sidebar sm:p-8 p-2 my-24 aspect-video">
+    <form className="w-11/12 sm:w-9/12 flex flex-col items-center justify-center rounded-xl bg-background sm:p-8 p-2 my-24 aspect-video">
       <Title header={t("benchTrialsHeading")} />
       <Tooltip
         body={t("tipText.benchTrials.body")}
@@ -65,7 +65,7 @@ export default function BenchTrials() {
           value={batchDetails.batchSize}
           onChange={(e) => handleBatchDetails(e, "batchSize")}
           onFocus={(e) => e.target.select()}
-          className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-textColor hover:bg-sidebar hover:border-background "
+          className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-foreground hover:bg-background hover:border-background "
           step={0.01}
         />
         <label htmlFor="trialBatchUnits">{t("UNITS")}:</label>
@@ -74,7 +74,7 @@ export default function BenchTrials() {
           id="trialBatchUnits"
           value={batchDetails.units}
           onChange={(e) => handleBatchDetails(e, "units")}
-          className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-textColor hover:bg-sidebar hover:border-background "
+          className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-foreground hover:bg-background hover:border-background "
         >
           <option value="gallon">{t("GAL")}</option>
           <option value="liter">{t("LIT")}</option>
@@ -86,7 +86,7 @@ export default function BenchTrials() {
           value={batchDetails.sampleSize}
           onChange={(e) => handleBatchDetails(e, "sampleSize")}
           onFocus={(e) => e.target.select()}
-          className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-textColor hover:bg-sidebar hover:border-background "
+          className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-foreground hover:bg-background hover:border-background "
         />
         <label htmlFor="concentration">{t("stockSolutionConcentration")}</label>
         <input
@@ -95,7 +95,7 @@ export default function BenchTrials() {
           value={batchDetails.stockSolutionConcentration}
           onChange={(e) => handleBatchDetails(e, "stockSolutionConcentration")}
           onFocus={(e) => e.target.select()}
-          className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-textColor hover:bg-sidebar hover:border-background "
+          className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-foreground hover:bg-background hover:border-background "
         />
         <Trials batchDetails={batchDetails} />
       </div>

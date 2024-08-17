@@ -39,7 +39,7 @@ export default function TempCorrection() {
   const resultBrix = toBrix(result);
 
   return (
-    <form className="w-11/12 sm:w-9/12 flex flex-col items-center justify-center rounded-xl bg-sidebar p-8 my-8 aspect-video">
+    <form className="w-11/12 sm:w-9/12 flex flex-col items-center justify-center rounded-xl bg-background p-8 my-8 aspect-video">
       <Title header={t("tempCorrectionHeading")} />
       <div className="flex gap-2 justify-center items-center">
         <label htmlFor="measured">{t("measuredSG")} </label>
@@ -48,7 +48,7 @@ export default function TempCorrection() {
           id="measured"
           value={tempObj.measured}
           onChange={handleChange}
-          className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-textColor hover:bg-sidebar hover:border-background w-1/4"
+          className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-foreground hover:bg-background hover:border-background w-1/4"
         />
         <p>
           {Math.round(toBrix(tempObj.measured) * 100) / 100} {t("Brix")}
@@ -61,13 +61,13 @@ export default function TempCorrection() {
           id="curTemp"
           value={tempObj.curTemp}
           onChange={handleChange}
-          className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-textColor hover:bg-sidebar hover:border-background w-1/4"
+          className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-foreground hover:bg-background hover:border-background w-1/4"
         />
         <select
           name="deg"
           id="tempUnits"
           onChange={handleChange}
-          className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-textColor hover:bg-sidebar hover:border-background w-1/4"
+          className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-foreground hover:bg-background hover:border-background w-1/4"
         >
           <option value="F">{t("FAR")}</option>
           <option value="C">{t("CEL")}</option>
@@ -80,7 +80,7 @@ export default function TempCorrection() {
           id="calTemp"
           value={tempObj.calTemp}
           onChange={handleChange}
-          className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-textColor hover:bg-sidebar hover:border-background w-1/4"
+          className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-foreground hover:bg-background hover:border-background w-1/4"
         />
       </div>
       <p className="text-2xl my-4 text-center">
