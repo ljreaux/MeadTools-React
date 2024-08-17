@@ -47,6 +47,7 @@ export default function Home({
   token: string | null;
   setBlendFG: Dispatch<SetStateAction<number[]>>;
 }) {
+  console.log(pdfjs.version);
   const [primaryNotes, setPrimaryNotes] = useLocalStorage<string[][]>(
     "primaryNotes",
     [["", ""]]
@@ -305,7 +306,7 @@ export default function Home({
       {!token ? (
         <Link
           to={"/login"}
-          className="my-4 font-bold underline transition-all text-foreground hover:text-sidebar"
+          className="flex items-center justify-center gap-4 px-8 py-2 my-4 text-lg border border-solid rounded-lg bg-background text-foreground hover:bg-foreground hover:border-background hover:text-background sm:gap-8 group"
         >
           {t("recipeForm.login")}
         </Link>
@@ -328,7 +329,7 @@ export default function Home({
       {step}
       <div className="flex items-center justify-center w-1/4 max-w-56 ">
         {currentStepIndex > 0 && (
-          <Button variant={"secondary"} onClick={back}>
+          <Button variant={"secondary"} onClick={back} className="w-full">
             {t("buttonLabels.back")}
           </Button>
         )}

@@ -254,13 +254,13 @@ export default function RecipeBuilder({
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead className="pb-4">
-                <div className="flex items-center gap-1">
+              <TableHead className="pb-4 text-center">
+                <div className="flex items-center justify-center gap-1">
                   {t("recipeBuilder.labels.ingredients")}
                   <Tooltip body={t("tipText.volumeLines")} />
                 </div>
               </TableHead>
-              <TableHead className="pb-4">
+              <TableHead className="pb-4 text-center">
                 {t("recipeBuilder.labels.weight")}
                 <Select
                   name="weightUnits"
@@ -288,13 +288,13 @@ export default function RecipeBuilder({
                   </SelectContent>
                 </Select>
               </TableHead>
-              <TableHead className="pb-4">
-                <div className="flex items-center gap-1">
+              <TableHead className="pb-4 text-center">
+                <div className="flex items-center justify-center gap-1">
                   {t("recipeBuilder.labels.brix")}{" "}
                   <Tooltip body={t("tipText.brix")} />
                 </div>
               </TableHead>
-              <TableHead className="pb-4">
+              <TableHead className="pb-4 text-center">
                 {t("recipeBuilder.labels.volume")}
                 <Select
                   name="volumeUnits"
@@ -322,7 +322,7 @@ export default function RecipeBuilder({
                   </SelectContent>
                 </Select>
               </TableHead>
-              <TableHead className="pb-4">
+              <TableHead className="pb-4 text-center">
                 {t("recipeBuilder.labels.secondary")}
               </TableHead>
             </TableRow>
@@ -377,18 +377,24 @@ export default function RecipeBuilder({
           <Table className="mt-6">
             <TableHeader>
               <TableRow>
-                <TableHead>{t("recipeBuilder.resultsLabels.estOG")}</TableHead>
+                <TableHead className="pb-4 text-center">
+                  {t("recipeBuilder.resultsLabels.estOG")}
+                </TableHead>
 
-                <TableHead className="pb-4">
-                  <div className="flex items-center gap-1">
+                <TableHead className="pb-4 text-center">
+                  <div className="flex items-center justify-center gap-1">
                     {t("recipeBuilder.resultsLabels.estFG")}
                     <Tooltip body={t("tipText.estimatedFg")} />
                   </div>
                 </TableHead>
-                <TableHead>{t("recipeBuilder.resultsLabels.backFG")}</TableHead>
-                <TableHead>{t("recipeBuilder.resultsLabels.abv")}</TableHead>
-                <TableHead className="pb-4">
-                  <div className="flex items-center gap-1">
+                <TableHead className="pb-4 text-center">
+                  {t("recipeBuilder.resultsLabels.backFG")}
+                </TableHead>
+                <TableHead className="pb-4 text-center">
+                  {t("recipeBuilder.resultsLabels.abv")}
+                </TableHead>
+                <TableHead className="pb-4 text-center">
+                  <div className="flex items-center justify-center gap-1">
                     {t("recipeBuilder.resultsLabels.delle")}
                     <Tooltip
                       body={t("tipText.delleUnits")}
@@ -401,8 +407,10 @@ export default function RecipeBuilder({
 
             <TableFooter>
               <TableRow>
-                <TableCell id="estOG" className="text-left">
-                  {Math.round(noSecondaryBlend.blendedValue * 1000) / 1000}
+                <TableCell id="estOG">
+                  <p className="flex items-center justify-center text-center">
+                    {Math.round(noSecondaryBlend.blendedValue * 1000) / 1000}
+                  </p>
                 </TableCell>
                 <TableCell>
                   <Input
@@ -421,28 +429,28 @@ export default function RecipeBuilder({
                     onFocus={(e) => e.target.select()}
                   />
                 </TableCell>
-                <TableCell id="backFG" className="text-left">
+                <TableCell id="backFG" className="text-center">
                   {blendFG}
                 </TableCell>
-                <TableCell className="text-left">
+                <TableCell className="text-center">
                   {Math.round(ABV * 100) / 100}
                   {t("recipeBuilder.percent")}
                 </TableCell>
-                <TableCell className="text-left">
+                <TableCell className="text-center">
                   {Math.round(delle)} {t("DU")}
                 </TableCell>
               </TableRow>
 
               <TableRow>
                 <TableCell className="pb-4 bg-background" colSpan={2}>
-                  <div className="flex items-center gap-1">
+                  <div className="flex items-center justify-center gap-1">
                     {t("recipeBuilder.resultsLabels.totalPrimary")}
                     <Tooltip body={t("tipText.totalVolume")} />
                   </div>
                 </TableCell>
 
-                <TableCell className="pb-4 bg-background" colSpan={2}>
-                  <div className="flex items-center gap-1">
+                <TableCell className="pb-4 bg-background" colSpan={3}>
+                  <div className="flex items-center justify-center gap-1">
                     {t("recipeBuilder.resultsLabels.totalSecondary")}
                     <Tooltip body={t("tipText.totalSecondary")} />
                   </div>
@@ -450,11 +458,11 @@ export default function RecipeBuilder({
               </TableRow>
 
               <TableRow>
-                <TableCell id="totalVolume" className="text-left" colSpan={2}>
+                <TableCell id="totalVolume" className="text-center" colSpan={2}>
                   {Math.round(noSecondaryBlend.totalVolume * 1000) / 1000}
                   {units.volume}
                 </TableCell>
-                <TableCell className="text-left" colSpan={3}>
+                <TableCell className="text-center" colSpan={3}>
                   {Math.round(blend.totalVolume * 1000) / 1000} {units.volume}
                 </TableCell>
               </TableRow>

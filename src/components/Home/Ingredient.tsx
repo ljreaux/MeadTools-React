@@ -232,14 +232,17 @@ export default function Ingredient({
           onFocus={(e) => e.target.select()}
         />
       </TableCell>
-      <TableCell className="flex items-center justify-between px-6">
+      <TableCell className="relative flex items-center justify-center gap-4">
         <Switch
           checked={ingredient.secondary}
           onCheckedChange={() => setChecked(index)}
         />
 
         {index > 3 && (
-          <button className="w-8 text-xl" onClick={() => removeLine(index)}>
+          <button
+            className="absolute right-0 w-8 text-xl"
+            onClick={() => removeLine(index)}
+          >
             <FaMinusSquare />
           </button>
         )}

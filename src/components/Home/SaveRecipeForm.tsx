@@ -6,6 +6,8 @@ import { API_URL } from "../../main";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useToast } from "../ui/use-toast";
+import { Input } from "../ui/input";
+import { Button } from "../ui/button";
 
 interface PropsType {
   primaryNotes: string[][] | string[];
@@ -35,7 +37,7 @@ export default function SaveRecipeForm(props: PropsType) {
   const { toast } = useToast();
   return (
     <form
-      className="w-11/12 flex flex-col items-center justify-center rounded-xl bg-background p-8 mb-8 mt-24 aspect-video gap-4"
+      className="flex flex-col items-center justify-center w-11/12 gap-4 p-8 mt-24 mb-8 rounded-xl bg-background aspect-video max-w-[750px]"
       onSubmit={(e) => {
         e.preventDefault();
 
@@ -76,20 +78,17 @@ export default function SaveRecipeForm(props: PropsType) {
       <Title header={t("recipeForm.title")} />
       <label
         htmlFor="recipeName"
-        className="w-full flex justify-center items-center text-center gap-4"
+        className="flex items-center justify-center w-full gap-4 text-center"
       >
         <p>{t("recipeForm.subtitle")}</p>
-        <input
+        <Input
           type="text"
-          className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-foreground hover:bg-background hover:border-background w-1/4 my-2 disabled:bg-background
-      disabled:cursor-not-allowed"
           value={recipeName}
           onChange={(e) => setRecipeName(e.target.value)}
+          className="max-w-56"
         />
       </label>
-      <button className="border-2 border-solid border-foreground  hover:bg-background hover:border-background md:text-lg py-1 disabled:bg-background disabled:hover:border-foreground disabled:hover:text-sidebar disabled:cursor-not-allowed bg-background rounded-2xl px-2">
-        {t("recipeForm.submit")}
-      </button>
+      <Button variant={"secondary"}>{t("recipeForm.submit")}</Button>
     </form>
   );
 }

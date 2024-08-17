@@ -2,6 +2,23 @@ import { useEffect, useState } from "react";
 import Title from "../Title";
 import { useTranslation } from "react-i18next";
 import Tooltip from "../Tooltips";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableFooter,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "../ui/table";
+import { Input } from "../ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "../ui/select";
 
 export default function Stabilizers({
   abv,
@@ -67,8 +84,8 @@ export default function Stabilizers({
   }, [abv, batchVolume, volumeUnits, adding.pHReading]);
 
   return (
-    <div className="grid grid-cols-2 w-11/12 sm:w-9/12 items-center justify-center rounded-xl bg-background p-8 my-24">
-      <div className="col-span-2 flex gap-1 justify-center items-center">
+    <div className="w-11/12 p-8 my-24 sm:w-9/12 rounded-xl bg-background">
+      <div className="flex items-center justify-center col-span-2 gap-1">
         {" "}
         <Title header={t("stabilizersHeading")} />
         <Tooltip
@@ -76,78 +93,103 @@ export default function Stabilizers({
           link="https://meadmaking.wiki/en/process/stabilization"
         />
       </div>
-      <div>
-        <label htmlFor="adding">{t("adding")}</label>
-        <select
-          name="adding"
-          id="adding"
-          className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-foreground hover:bg-background hover:border-background w-11/12 my-2 disabled:bg-background
-            disabled:cursor-not-allowed"
-          value={adding.adding ? "yes" : "no"}
-          onChange={(e) => {
-            if (e.target.value === "no") setSorbateSulfite();
+      <Table>
+        <TableHeader>
+          <TableHead>
+            <span className="grid gap-2">
+              {t("adding")}
+              <Select
+                name="adding"
+                value={adding.adding ? "yes" : "no"}
+                onValueChange={(val) => {
+                  if (val === "no") setSorbateSulfite();
 
-            setAdding({ ...adding, adding: e.target.value === "yes" });
-          }}
-        >
-          <option value="no">{t("no")}</option>
-          <option value="yes">{t("yes")}</option>
-        </select>
-      </div>
-      <div>
-        <label htmlFor="phReading">{t("pH")}</label>
-        <select
-          name="phReading"
-          id="phReading"
-          className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-foreground hover:bg-background hover:border-background w-11/12 my-2 disabled:bg-background
-            disabled:cursor-not-allowed"
-          value={adding.pH ? "yes" : "no"}
-          onChange={(e) =>
-            setAdding({
-              ...adding,
-              pH: e.target.value === "yes",
-              pHReading: 3.6,
-            })
-          }
-        >
-          <option value="no">{t("no")}</option>
-          <option value="yes">{t("yes")}</option>
-        </select>
-      </div>
-      {adding.adding && (
-        <>
-          <div className="flex gap-4">
-            <label htmlFor="k-sorb">{t("kSorbate")}</label>
-            <p id="k-sorb">{`${
-              amounts.sorbate > 0
-                ? `${Math.round(amounts.sorbate * 10000) / 10000}g`
-                : t("noSorb")
-            }`}</p>
-          </div>
-          <input
-            type="number"
-            disabled={!adding.pH}
-            className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-foreground hover:bg-background hover:border-background w-11/12 my-2 disabled:bg-background
-            disabled:cursor-not-allowed"
-            value={adding.pHReading}
-            onChange={(e) =>
-              setAdding({ ...adding, pHReading: e.target.valueAsNumber })
-            }
-            onFocus={(e) => e.target.select()}
-          />
-          <div className="col-span-2 flex gap-4">
-            <label htmlFor="k-meta">{t("kMeta")}</label>
-            <p id="k-meta" className="flex gap-2">
-              {Math.round(amounts.sulfite * 10000) / 10000}g{" "}
-              {t("accountPage.or")}{" "}
-              <div className="flex items-center justify-center gap-2">
-                {Math.round(amounts.campden * 10) / 10} {t("list.campden")}
-                <Tooltip body={t("tipText.campden")} />
-              </div>
-            </p>
-          </div>
-        </>
-      )}
+                  setAdding({ ...adding, adding: val === "yes" });
+                }}
+              >
+                <SelectTrigger>
+                  <SelectValue placeholder={t("no")} />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="no">{t("no")}</SelectItem>
+                  <SelectItem value="yes">{t("yes")}</SelectItem>
+                </SelectContent>
+              </Select>
+            </span>
+          </TableHead>
+
+          <TableHead>
+            <span className="grid gap-2">
+              {t("pH")}
+              <Select
+                name="phReading"
+                value={adding.pH ? "yes" : "no"}
+                onValueChange={(val) =>
+                  setAdding({
+                    ...adding,
+                    pH: val === "yes",
+                    pHReading: 3.6,
+                  })
+                }
+              >
+                <SelectTrigger>
+                  <SelectValue placeholder={t("no")} />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="no">{t("no")}</SelectItem>
+                  <SelectItem value="yes">{t("yes")}</SelectItem>
+                </SelectContent>
+              </Select>
+            </span>
+          </TableHead>
+        </TableHeader>
+
+        {adding.adding && (
+          <>
+            <TableBody>
+              <TableRow>
+                <TableCell></TableCell>
+                <TableCell>
+                  <Input
+                    type="number"
+                    disabled={!adding.pH}
+                    value={adding.pHReading}
+                    onChange={(e) =>
+                      setAdding({
+                        ...adding,
+                        pHReading: e.target.valueAsNumber,
+                      })
+                    }
+                    onFocus={(e) => e.target.select()}
+                  />
+                </TableCell>
+              </TableRow>
+            </TableBody>
+            <TableFooter>
+              <TableRow>
+                <TableCell>{t("kSorbate")}</TableCell>
+                <TableCell id="k-sorb">{`${
+                  amounts.sorbate > 0
+                    ? `${Math.round(amounts.sorbate * 10000) / 10000}g`
+                    : t("noSorb")
+                }`}</TableCell>
+              </TableRow>
+
+              <TableRow>
+                <TableCell>{t("kMeta")}</TableCell>
+                <TableCell>
+                  {Math.round(amounts.sulfite * 10000) / 10000}g{" "}
+                  {t("accountPage.or")}{" "}
+                  <span>
+                    {Math.round(amounts.campden * 10) / 10} {t("list.campden")}
+                    <Tooltip body={t("tipText.campden")} />
+                  </span>
+                </TableCell>
+              </TableRow>
+            </TableFooter>
+          </>
+        )}
+      </Table>
     </div>
   );
 }

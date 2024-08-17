@@ -6,6 +6,7 @@ import NutrientCalcResults from "./NutrientCalcResults";
 import useMaxGpl from "../../hooks/useMaxGpl";
 import AdvancedInputForm from "./AdvancedInputForm";
 import { useTranslation } from "react-i18next";
+import { Button } from "../ui/button";
 
 interface Selected {
   yeastBrand: keyof YeastType;
@@ -103,12 +104,13 @@ export default function NutrientCalc() {
         recalc={recalc}
         setRecalc={setRecalc}
       />
-      <button
+      <Button
+        variant={"secondary"}
         onClick={() => setAdvanced((prev) => !prev)}
-        className="w-1/4 px-2 py-1 text-base border-2 border-solid hover:bg-background rounded-2xl hover:border-foreground bg-background border-background md:text-lg disabled:bg-background disabled:hover:border-foreground disabled:hover:text-sidebar disabled:cursor-not-allowed"
+        className="w-1/4 max-w-56"
       >
         {t("buttonLabels.advanced")}
-      </button>
+      </Button>
       {advanced && (
         <AdvancedInputForm
           advanced={advanced}
@@ -133,16 +135,14 @@ export default function NutrientCalc() {
     <div className="flex flex-col items-center justify-center w-full mb-8 text-sm sm:text-base">
       {step}
       {currentStepIndex > 0 && (
-        <button
-          className="w-1/4 px-2 py-1 text-base border-2 border-solid hover:bg-background rounded-2xl hover:border-foreground bg-background border-background md:text-lg disabled:bg-background disabled:hover:border-foreground disabled:hover:text-sidebar disabled:cursor-not-allowed"
-          onClick={back}
-        >
+        <Button variant={"secondary"} onClick={back} className="w-1/4 max-w-56">
           {t("buttonLabels.back")}
-        </button>
+        </Button>
       )}
       {currentStepIndex < steps.length - 1 && (
-        <button
-          className="hover:bg-background rounded-2xl border-2 border-solid hover:border-foreground  bg-background border-background md:text-lg text-base px-2 py-1 disabled:bg-background disabled:hover:border-foreground disabled:hover:text-sidebar disabled:cursor-not-allowed w-1/4 mb-[3rem]"
+        <Button
+          className="w-1/4 max-w-56"
+          variant={"secondary"}
           onClick={() => {
             setData((prev) => ({
               ...prev,
@@ -152,7 +152,7 @@ export default function NutrientCalc() {
           }}
         >
           {t("buttonLabels.next")}
-        </button>
+        </Button>
       )}
     </div>
   );
