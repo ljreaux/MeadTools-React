@@ -107,7 +107,7 @@ export default function NutrientCalc() {
       <Button
         variant={"secondary"}
         onClick={() => setAdvanced((prev) => !prev)}
-        className="w-1/4 max-w-56"
+        className="w-2/4 md:w-1/4 md:max-w-56"
       >
         {t("buttonLabels.advanced")}
       </Button>
@@ -135,13 +135,17 @@ export default function NutrientCalc() {
     <div className="flex flex-col items-center justify-center w-full mb-8 text-sm sm:text-base">
       {step}
       {currentStepIndex > 0 && (
-        <Button variant={"secondary"} onClick={back} className="w-1/4 max-w-56">
+        <Button
+          variant={"secondary"}
+          onClick={back}
+          className="w-2/4 md:w-1/4 md:max-w-56"
+        >
           {t("buttonLabels.back")}
         </Button>
       )}
       {currentStepIndex < steps.length - 1 && (
         <Button
-          className="w-1/4 max-w-56"
+          className="w-2/4 md:w-1/4 md:max-w-56"
           variant={"secondary"}
           onClick={() => {
             setData((prev) => ({

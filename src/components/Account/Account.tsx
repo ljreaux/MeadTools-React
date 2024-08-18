@@ -7,6 +7,17 @@ import Title from "../Title";
 import { IoSettingsSharp, IoLogOutSharp } from "react-icons/io5";
 import { useTranslation } from "react-i18next";
 import { useToast } from "../ui/use-toast";
+import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
+import { Button } from "../ui/button";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "../ui/select";
+import { ModeToggle } from "../ui/mode-toggle";
+import LanguageSwitcher from "../ui/Language-switcher";
 
 interface UserInfo {
   id: number;
@@ -21,8 +32,6 @@ export default function Account({
   user,
   setToken,
   setUser,
-  isDarkTheme,
-  setTheme,
   isMetric,
   setIsMetric,
 }: {
@@ -42,8 +51,8 @@ export default function Account({
   setIsMetric: React.Dispatch<SetStateAction<boolean>>;
 }) {
   const [reload, setReload] = useState(false);
-  const [isOpened, setOpened] = useState(false);
-  const { t, i18n } = useTranslation();
+
+  const { t } = useTranslation();
   const [userInfo, setUserInfo] = useState<UserInfo | null>(null);
   const { toast } = useToast();
 
@@ -77,25 +86,12 @@ export default function Account({
       navigate("/account");
     }
   }, [user]);
-  useEffect(() => {
-    const main = document.querySelector("main");
-    if (main) {
-      main.addEventListener("click", () => {
-        setOpened(false);
-      });
-    }
-    return () => {
-      main?.removeEventListener("click", () => {
-        setOpened(false);
-      });
-    };
-  }, []);
 
   return (
-    <div className="w-screen flex items-center justify-center min-h-screen mt-24 md:mt-0">
+    <div className="flex items-center justify-center w-screen min-h-screen my-40 sm:my-24 md:mt-0">
       {userInfo ? (
-        <div className="w-11/12 sm:w-9/12 flex flex-col items-center rounded-xl bg-background p-8 relative">
-          <div className="absolute right-12 top-4 flex w-12 gap-2 text-3xl">
+        <div className="relative flex flex-col items-center w-11/12 p-8 sm:w-9/12 rounded-xl bg-background">
+          <div className="absolute flex w-12 gap-2 text-3xl right-12 top-4">
             <button
               onClick={() => {
                 localStorage.removeItem("token");
@@ -104,66 +100,49 @@ export default function Account({
             >
               <IoLogOutSharp />
             </button>
-            <button
-              className="relative"
-              onClick={() => setOpened((prev) => !prev)}
-            >
-              <IoSettingsSharp />
-            </button>
-            <div
-              className={`${
-                isOpened || "hidden"
-              } absolute right-0 top-0 translate-y-1/4 translate-x-8 bg-background border-solid border-2 border-foreground rounded-xl flex justify-center items-center w-[15rem]`}
-            >
-              <ul
-                className="flex flex-col items-center justify-center w-full py-2 mx-4 my-2 text-sm"
-                onClick={() => setOpened(true)}
-              >
-                <li className="flex justify-between w-full py-2">
-                  <p>{t("accountPage.theme.title")}</p>
-                  <select
-                    className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-foreground hover:bg-background hover:border-background"
-                    name="theme"
-                    id="theme"
-                    value={isDarkTheme ? "dark" : "light"}
-                    onChange={(e) => setTheme(e.target.value === "dark")}
-                  >
-                    <option value="dark">{t("accountPage.theme.dark")}</option>
-                    <option value="light">
-                      {t("accountPage.theme.light")}
-                    </option>
-                  </select>
-                </li>
-                <li className="flex justify-between w-full py-2">
-                  <p>{t("accountPage.language.title")}</p>
-                  <select
-                    className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-foreground hover:bg-background hover:border-background"
-                    name="lang"
-                    id="lang"
-                    value={i18n.language}
-                    onChange={(e) => i18n.changeLanguage(e.target.value)}
-                  >
-                    <option value="en">EN</option>
-                    <option value="de">DE</option>
-                  </select>
-                </li>
-                <li className="flex justify-between w-full py-2">
-                  <p>{t("accountPage.units.title")}</p>
-                  <select
-                    className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-foreground hover:bg-background hover:border-background"
-                    name="units"
-                    id="units"
-                    value={isMetric ? "metric" : "us"}
-                    onChange={(e) => setIsMetric(e.target.value === "metric")}
-                  >
-                    <option value="us">{t("accountPage.units.us")}</option>
-                    <option value="metric">
-                      {t("accountPage.units.metric")}
-                    </option>
-                  </select>
-                </li>
-              </ul>
-            </div>
+            <Popover>
+              <PopoverTrigger asChild>
+                <Button variant={"ghost"} className="text-3xl">
+                  <IoSettingsSharp />
+                </Button>
+              </PopoverTrigger>
+              <PopoverContent className="flex items-center sm:w-96 w-80">
+                <ul className="flex flex-col items-center justify-center w-full py-2 mx-4 my-2 text-sm">
+                  <li className="flex items-center justify-between w-full py-2">
+                    <p>{t("accountPage.theme.title")}</p>
+                    <ModeToggle />
+                  </li>
+                  <li className="flex items-center justify-between w-full gap-4 py-2">
+                    <p>{t("accountPage.language.title")}</p>
+                    <div className="w-1/2">
+                      <LanguageSwitcher />
+                    </div>
+                  </li>
+                  <li className="flex items-center justify-between w-full gap-4 py-2">
+                    <p>{t("accountPage.units.title")}</p>
+                    <div className="w-1/2">
+                      <Select
+                        name="units"
+                        value={isMetric ? "metric" : "us"}
+                        onValueChange={(val) => setIsMetric(val === "metric")}
+                      >
+                        <SelectTrigger className="full">
+                          <SelectValue />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="us">
+                            {t("accountPage.units.us")}
+                          </SelectItem>
+                          <SelectItem value="metric">
+                            {t("accountPage.units.metric")}
+                          </SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                  </li>
+                </ul>
+              </PopoverContent>
+            </Popover>
           </div>
           <Title header={t("accountPage.title")} />
           <div className="flex flex-col items-center justify-center w-full">

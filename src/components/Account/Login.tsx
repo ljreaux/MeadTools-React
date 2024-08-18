@@ -40,7 +40,7 @@ export default function Login({
         {step}
         <button
           onClick={() => goTo(index)}
-          className=" text-foreground font-bold underline hover:text-sidebar transition-all"
+          className="font-bold underline transition-all  text-foreground hover:text-sidebar"
         >
           {buttonMessage}
         </button>

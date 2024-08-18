@@ -3,6 +3,8 @@ import Title from "../Title";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useToast } from "../ui/use-toast";
+import { Input } from "../ui/input";
+import { Button } from "../ui/button";
 
 export default function Form({
   titleText,
@@ -57,12 +59,16 @@ export default function Form({
           }
         });
       }}
-      className="aspect-video sm:w-2/4 w-11/12 flex flex-col items-center justify-center rounded-xl bg-background p-8 my-8"
+      className="flex flex-col items-center justify-center w-11/12 gap-4 p-8 my-8 aspect-video sm:w-2/4 rounded-xl bg-background"
     >
       <Title header={titleText} />
-      <label htmlFor="email" className="flex justify-between w-7/12">
+      <label
+        htmlFor="email"
+        className="flex items-center justify-between w-full gap-4 sm:w-7/12"
+      >
         {t("accountPage.email")}
-        <input
+        <Input
+          className="sm:max-w-60 max-w-40"
           type="email"
           id="email"
           required
@@ -70,12 +76,15 @@ export default function Form({
           onChange={(e) => {
             setData({ ...data, email: e.target.value });
           }}
-          className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-foreground hover:bg-background hover:border-background w-8/12"
         />
       </label>
-      <label htmlFor="password" className="flex justify-between w-7/12">
+      <label
+        htmlFor="password"
+        className="flex items-center justify-between w-full gap-4 sm:w-7/12"
+      >
         {t("accountPage.password")}
-        <input
+        <Input
+          className="sm:max-w-60 max-w-40"
           type="password"
           id="password"
           required
@@ -83,15 +92,11 @@ export default function Form({
           onChange={(e) => {
             setData({ ...data, password: e.target.value });
           }}
-          className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-foreground hover:bg-background hover:border-background w-8/12"
         />
       </label>
-      <button
-        type="submit"
-        className="border-2 border-solid border-foreground  hover:bg-background hover:border-background md:text-lg py-1 disabled:bg-background disabled:hover:border-foreground disabled:hover:text-sidebar disabled:cursor-not-allowed bg-background rounded-2xl px-2 mt-6"
-      >
+      <Button type="submit" variant={"secondary"}>
         {titleText}
-      </button>
+      </Button>
     </form>
   );
 }

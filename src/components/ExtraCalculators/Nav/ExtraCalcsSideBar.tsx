@@ -17,9 +17,9 @@ function ExtraCalcsSideBar() {
   return (
     <div
       className="fixed max-h-max sm:w-12 w-fit sm:left-2 sm:right-0 sm:top-2/4 bottom-[2.5rem] sm:-translate-y-2/4 
-    text-4xl bg-background border-2 border-s-foreground rounded-full justify-center items-center py-[.125rem] sm:py-0"
+    text-4xl bg-background border-2 border-foreground rounded-2xl justify-center items-center py-[.125rem] sm:py-0 z-[100]"
     >
-      <nav className="flex  sm:flex-col justify-center text-center space-y-2 mx-1 sm:my-4">
+      <nav className="flex justify-center mx-1 space-y-2 text-center sm:flex-col sm:my-4">
         <Logos link="/ExtraCalcs/" logo={<TbBeer />} calc={t("sideNav.abv")} />
         <Logos
           link="/ExtraCalcs/brixCalc"

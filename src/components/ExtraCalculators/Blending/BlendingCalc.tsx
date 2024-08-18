@@ -34,7 +34,7 @@ export default function BlendingCalc() {
 
   return (
     <form
-      className="flex flex-col items-center justify-center w-11/12 gap-4 p-8 my-8 sm:w-1/2 rounded-xl bg-background"
+      className="flex flex-col items-center justify-center w-11/12 gap-4 p-8 my-40 md:my-8 sm:w-1/2 rounded-xl bg-background"
       onSubmit={(e) => {
         e.preventDefault();
         runBlendingFunction();
@@ -44,8 +44,8 @@ export default function BlendingCalc() {
       <Table>
         <TableBody>
           <TableRow>
-            <TableHead>{t("valOne")}</TableHead>
-            <TableCell>
+            <TableHead className="p-1 sm:p-4">{t("valOne")}</TableHead>
+            <TableCell className="p-1 sm:p-4">
               <Input
                 type="number"
                 id="valueOne"
@@ -55,8 +55,8 @@ export default function BlendingCalc() {
                 step={0.001}
               />
             </TableCell>
-            <TableHead>{t("volOne")}</TableHead>
-            <TableCell>
+            <TableHead className="p-1 sm:p-4">{t("volOne")}</TableHead>
+            <TableCell className="p-1 sm:p-4">
               <Input
                 type="number"
                 id="volumeOne"
@@ -68,8 +68,8 @@ export default function BlendingCalc() {
             </TableCell>
           </TableRow>
           <TableRow>
-            <TableHead>{t("valTwo")}</TableHead>
-            <TableCell>
+            <TableHead className="p-1 sm:p-4">{t("valTwo")}</TableHead>
+            <TableCell className="p-1 sm:p-4">
               <Input
                 type="number"
                 id="valueTwo"
@@ -79,8 +79,8 @@ export default function BlendingCalc() {
                 step={0.001}
               />
             </TableCell>
-            <TableCell>{t("volTwo")}</TableCell>
-            <TableCell>
+            <TableCell className="p-1 sm:p-4">{t("volTwo")}</TableCell>
+            <TableCell className="p-1 sm:p-4">
               <Input
                 type="number"
                 id="volumeTwo"
@@ -101,12 +101,12 @@ export default function BlendingCalc() {
           </TableCell>
         </TableBody>
         <TableFooter>
-          <TableCell>{t("totalVol")}</TableCell>
-          <TableCell>
+          <TableCell className="p-1 sm:p-4">{t("totalVol")}</TableCell>
+          <TableCell className="p-1 sm:p-4">
             <Input type="number" disabled value={blend.totalVolume} />
           </TableCell>
-          <TableCell>{t("blendedVal")}</TableCell>
-          <TableCell>
+          <TableCell className="p-1 sm:p-4">{t("blendedVal")}</TableCell>
+          <TableCell className="p-1 sm:p-4">
             <Input
               id="blendedVal"
               type="number"

@@ -59,7 +59,7 @@ export default function Notes({
                 <TableCell className="h-full text-start">
                   {index + 1}.
                 </TableCell>
-                <TableCell>
+                <TableCell className="min-w-40">
                   <Textarea
                     value={note[0]}
                     placeholder={t("notes.placeholder")}
@@ -72,7 +72,7 @@ export default function Notes({
                     }}
                   />
                 </TableCell>
-                <TableCell>
+                <TableCell className="min-w-40">
                   <span className="flex items-center justify-between gap-4">
                     <Textarea
                       className="w-10/12"
@@ -130,7 +130,7 @@ export default function Notes({
                 <TableCell className="h-full text-start">
                   {index + 1}.
                 </TableCell>
-                <TableCell>
+                <TableCell className="min-w-40">
                   <Textarea
                     value={note[0]}
                     placeholder={t("notes.placeholder")}
@@ -143,7 +143,7 @@ export default function Notes({
                     }}
                   />
                 </TableCell>
-                <TableCell>
+                <TableCell className="min-w-40">
                   <span className="flex items-center justify-between gap-4">
                     <Textarea
                       value={note[1]}

@@ -121,7 +121,7 @@ export default function Additives({
   return (
     <div className="w-11/12 p-8 my-24 sm:w-9/12 rounded-xl bg-background">
       <div className="flex items-center justify-center gap-1">
-        <Title header={t("additivesHeading")} />
+        <Title header={t("additivesHeading")} styles="text-lg md:text-4xl" />
         <Tooltip body={t("tipText.additives")} />
       </div>
       <datalist id="additives">
@@ -163,7 +163,7 @@ export default function Additives({
           {additives.map((additive, i) => {
             return (
               <TableRow key={`additive ${i}`}>
-                <TableCell>
+                <TableCell className="p-1 sm:p-4">
                   <Input
                     type="text"
                     list="additives"
@@ -193,7 +193,7 @@ export default function Additives({
                     onFocus={(e) => e.target.select()}
                   />
                 </TableCell>
-                <TableCell>
+                <TableCell className="p-1 sm:p-4">
                   <Input
                     type="number"
                     value={additive.amount}
@@ -206,7 +206,7 @@ export default function Additives({
                     onFocus={(e) => e.target.select()}
                   />
                 </TableCell>
-                <TableCell className="flex items-center justify-between">
+                <TableCell className="flex items-center justify-between p-1 sm:p-4 min-w-24">
                   <Select
                     name="additiveUnits"
                     value={additive.unit}

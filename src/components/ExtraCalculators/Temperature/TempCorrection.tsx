@@ -55,7 +55,7 @@ export default function TempCorrection() {
   const resultBrix = toBrix(result);
 
   return (
-    <form className="flex flex-col items-center justify-center w-11/12 p-8 my-8 sm:w-1/2 rounded-xl bg-background">
+    <form className="flex flex-col items-center justify-center w-11/12 p-8 my-40 md:my-8 sm:w-1/2 rounded-xl bg-background">
       <Title header={t("tempCorrectionHeading")} />
       <Table>
         <TableBody>

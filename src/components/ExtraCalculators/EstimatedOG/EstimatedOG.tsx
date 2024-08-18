@@ -23,7 +23,7 @@ export default function EstimatedOG() {
     1000;
   const abv = useAbv({ OG: estOG, FG: gravity.fgh });
   return (
-    <div className="flex flex-col items-center justify-center w-11/12 p-8 my-8 sm:w-1/2 rounded-xl bg-background">
+    <div className="flex flex-col items-center justify-center w-11/12 p-8 my-40 sm:my-8 sm:w-1/2 rounded-xl bg-background">
       <Title header={t("ogHeading")} />
       <label className="mx-2 my-2 text-center" htmlFor="hydrometerFG">
         {t("hydrometerFG")}{" "}
@@ -51,7 +51,7 @@ export default function EstimatedOG() {
         className="max-w-96"
         onFocus={(e) => e.target.select()}
       />
-      <div className="flex gap-2 mt-8 text-2xl">
+      <div className="flex gap-2 mt-8 text-lg text-center sm:text-2xl">
         <p>
           {t("estimatedOG")} {estOG}
         </p>
@@ -59,7 +59,7 @@ export default function EstimatedOG() {
           {Math.round(toBrix(estOG) * 100) / 100} {t("BRIX")}
         </p>
       </div>
-      <AbvLine {...abv} />
+      <AbvLine {...abv} textSize="text-lg" />
     </div>
   );
 }

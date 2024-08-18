@@ -54,7 +54,7 @@ export default function BenchTrials() {
   useUnitChange({ ...unitChangeParams, propertyToChange: "batchSize" });
 
   return (
-    <form className="flex flex-col items-center justify-center w-11/12 p-2 my-24 sm:w-9/12 rounded-xl bg-background sm:p-8">
+    <form className="flex flex-col items-center justify-center w-11/12 p-2 my-40 sm:my-24 sm:w-9/12 rounded-xl bg-background sm:p-8">
       <span className="flex items-center justify-center">
         <Title header={t("benchTrialsHeading")} />
         <Tooltip

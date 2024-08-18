@@ -238,7 +238,7 @@ export default function Home({
       <Button
         onClick={() => setAdvanced((prev: boolean) => !prev)}
         variant={"secondary"}
-        className="w-1/4 max-w-56 "
+        className="md:w-1/4 md:max-w-56 "
       >
         {t("buttonLabels.advanced")}
       </Button>
@@ -326,16 +326,20 @@ export default function Home({
   return (
     <div className="flex flex-col items-center justify-center w-full my-12">
       {step}
-      <div className="flex items-center justify-center w-1/4 max-w-56 ">
+      <div className="flex items-center justify-center md:w-1/4 md:max-w-56 ">
         {currentStepIndex > 0 && (
-          <Button variant={"secondary"} onClick={back} className="w-full">
+          <Button
+            variant={"secondary"}
+            onClick={back}
+            className="flex-1 w-full"
+          >
             {t("buttonLabels.back")}
           </Button>
         )}
         {currentStepIndex < steps.length - 1 && (
           <Button
             variant={"secondary"}
-            className="w-full"
+            className="flex-1 w-full"
             onClick={() => {
               setData((prev) => ({
                 ...prev,
@@ -348,7 +352,7 @@ export default function Home({
           </Button>
         )}
       </div>
-      <div className="w-1/4 max-w-56 flex items-center justify-between mb-[3rem]">
+      <div className="md:w-1/4 md:max-w-56 flex items-center justify-between mb-[3rem]">
         <ResetButton
           setRecipeData={setRecipeData}
           setData={setData}

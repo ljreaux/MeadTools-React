@@ -63,7 +63,7 @@ export default function Refractometer() {
   }, [refrac.cf, refrac.og, refrac.fgInBrix, refrac.units]);
 
   return (
-    <form className="flex flex-col items-center justify-center w-11/12 p-8 my-8 sm:w-1/2 rounded-xl bg-background">
+    <form className="flex flex-col items-center justify-center w-11/12 p-8 my-40 sm:my-8 sm:w-1/2 rounded-xl bg-background">
       <Title header={t("refractometerHeading")} />
       <Table>
         <TableBody>
@@ -82,7 +82,7 @@ export default function Refractometer() {
           </TableRow>
           <TableRow>
             <TableCell>{t("ogLabel")} </TableCell>
-            <TableCell>
+            <TableCell className="p-1 md:p-4">
               <Select
                 name="units"
                 value={refrac.units}
@@ -97,7 +97,7 @@ export default function Refractometer() {
                 </SelectContent>
               </Select>
             </TableCell>
-            <TableCell>
+            <TableCell className="p-1 md:p-4">
               <Input
                 type="number"
                 name="og"
@@ -111,7 +111,7 @@ export default function Refractometer() {
           <TableRow>
             <TableCell>{t("fgInBrix")} </TableCell>
             <TableCell colSpan={2}>
-              <span className="flex justify-between">
+              <span className="flex justify-between gap-1">
                 <Input
                   type="number"
                   name="fgInBrix"
@@ -135,7 +135,7 @@ export default function Refractometer() {
           <TableRow>
             <TableCell colSpan={3}>
               <span className="flex items-center justify-center text-center">
-                <AbvLine {...abv} />
+                <AbvLine {...abv} textSize="text-lg" />
               </span>
             </TableCell>
           </TableRow>

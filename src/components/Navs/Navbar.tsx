@@ -2,10 +2,6 @@ import React, { Dispatch, SetStateAction } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import logo from "../../assets/full-logo.png";
 import logoOnly from "../../assets/logoOnly.png";
-// import { GiHamburgerMenu } from "react-icons/gi";
-// import { AiOutlineClose } from "react-icons/ai";
-// import { MdExpandCircleDown } from "react-icons/md";
-// import { IoIosArrowDropupCircle } from "react-icons/io";
 
 import { useTranslation } from "react-i18next";
 import { ModeToggle } from "../ui/mode-toggle";
@@ -107,45 +103,6 @@ const ListItem = React.forwardRef<
 });
 ListItem.displayName = "ListItem";
 
-// const NavLinks = ({
-//   links,
-// }: {
-//   links: { path: string; label: string; external?: boolean }[];
-// }) => {
-//   const { t } = useTranslation();
-//   return links.map((link, index) => {
-//     if (link.external)
-//       return (
-//         <a
-//           href={link.path}
-//           key={index}
-//           className="hover:text-background transition-colors sm:mx-4 mx-[.125rem]"
-//         >
-//           {t(link.label)}
-//         </a>
-//       );
-
-//     return (
-//       <NavLink
-//         key={index}
-//         className="hover:text-background transition-colors sm:mx-4 mx-[.125rem]"
-//         to={link.path}
-//       >
-//         {t(link.label)}
-//       </NavLink>
-//     );
-//   });
-// };
-
-// interface Opened {
-//   menu: boolean;
-//   calcs: boolean;
-//   extraCalcs: boolean;
-//   account: boolean;
-//   links: boolean;
-//   settings: boolean;
-// }
-
 export default function Navbar({
   token,
   setToken,
@@ -165,9 +122,11 @@ export default function Navbar({
         <NavigationMenu>
           <NavigationMenuList>
             <NavigationMenuItem>
-              <NavigationMenuTrigger>Calculators</NavigationMenuTrigger>
+              <NavigationMenuTrigger className="px-2">
+                Calculators
+              </NavigationMenuTrigger>
               <NavigationMenuContent>
-                <ul className="grid sm:gap-3 gap-2 sm:p-4 p-2 sm:min-w-[400px] min-w-[300px] lg:grid-cols-[1fr_1fr] text-start">
+                <ul className="grid sm:gap-3 gap-2 sm:p-4 sm:min-w-[400px] min-w-[300px] lg:grid-cols-[1fr_1fr] text-start">
                   <li className="col-span-full">Main Calculators</li>
                   {mainCalcs.map((link) => {
                     return (
@@ -194,9 +153,11 @@ export default function Navbar({
               </NavigationMenuContent>
             </NavigationMenuItem>
             <NavigationMenuItem>
-              <NavigationMenuTrigger>Account</NavigationMenuTrigger>
+              <NavigationMenuTrigger className="px-2">
+                Account
+              </NavigationMenuTrigger>
               <NavigationMenuContent>
-                <ul className="flex sm:min-w-[400px] min-w-[300px] p-4">
+                <ul className="flex sm:min-w-[400px] min-w-[300px] p-4 items-center justify-center">
                   {token ? (
                     <li>
                       <button
@@ -227,7 +188,9 @@ export default function Navbar({
               </NavigationMenuContent>
             </NavigationMenuItem>
             <NavigationMenuItem>
-              <NavigationMenuTrigger>Additional Links</NavigationMenuTrigger>
+              <NavigationMenuTrigger className="px-2">
+                Additional Links
+              </NavigationMenuTrigger>
               <NavigationMenuContent>
                 <ul className="flex gap-3 p-4 sm:min-w-[400px] min-w-[300px] justify-center">
                   {extraLinks.map((link) => {
@@ -244,105 +207,7 @@ export default function Navbar({
             </NavigationMenuItem>
           </NavigationMenuList>
         </NavigationMenu>
-        {/* <nav className="flex items-center justify-between sm:text-[1rem] text-[.6rem] my-0">
-          <button
-            className="relative ml-4"
-            onClick={() =>
-              setOpened((prev) => {
-                return { ...prev, menu: !prev.menu };
-              })
-            }
-          >
-            {opened.menu ? <AiOutlineClose /> : <GiHamburgerMenu />}
-          </button>
-          <div
-            className={`${
-              opened.menu ? "grid" : "hidden"
-            } w-[40vw] bg-background text-start left-0 rounded-xl translate-y-2/4 mt-8 -mx-8`}
-          >
-            <div className="flex items-center justify-center mx-2 transition-colors w-fit hover:text-background">
-              <NavLink to="/">{t("calculators.label")}</NavLink>
-              <button
-                className="mx-2"
-                onClick={() =>
-                  setOpened((prev) => {
-                    return { ...prev, calcs: !prev.calcs };
-                  })
-                }
-              >
-                {opened.calcs ? (
-                  <IoIosArrowDropupCircle />
-                ) : (
-                  <MdExpandCircleDown />
-                )}
-              </button>
-            </div>
-            <div className={`${opened.calcs ? "grid" : "hidden"} mx-2`}>
-              <NavLinks links={calculatorLinks} />
-            </div>
-            <div className="flex items-center mx-2 transition-colors w-fit hover:text-background ">
-              <NavLink to={"/account"}>{t("account.label")}</NavLink>
-              <button
-                className="mx-2"
-                onClick={() =>
-                  setOpened((prev) => {
-                    return { ...prev, account: !prev.account };
-                  })
-                }
-              >
-                {opened.account ? (
-                  <IoIosArrowDropupCircle />
-                ) : (
-                  <MdExpandCircleDown />
-                )}
-              </button>
-            </div>
-            <div className={`${opened.account ? "block" : "hidden"} mx-2`}>
-              {token ? (
-                <button
-                  onClick={() => {
-                    localStorage.removeItem("token");
-                    setToken(null);
-                    localStorage.removeItem("refreshToken");
-                    localStorage.removeItem("user");
-                    setUser(null);
-                    navigate("/login");
-                  }}
-                  className="mx-2 transition-colors hover:text-background sm:mx-4 "
-                >
-                  {t("account.logout")}
-                </button>
-              ) : (
-                <NavLink
-                  className="mx-2 transition-colors hover:text-background sm:mx-4 "
-                  to="/login"
-                >
-                  {t("account.login")}
-                </NavLink>
-              )}
-            </div>
-            <div className="flex items-center mx-2 transition-colors w-fit hover:text-background">
-              <NavLink to="/about">{t("additionalLinks.label")}</NavLink>
-              <button
-                className="mx-2"
-                onClick={() =>
-                  setOpened((prev) => {
-                    return { ...prev, links: !prev.links };
-                  })
-                }
-              >
-                {opened.links ? (
-                  <IoIosArrowDropupCircle />
-                ) : (
-                  <MdExpandCircleDown />
-                )}
-              </button>
-            </div>
-            <div className={`${opened.links ? "grid" : "hidden"} mx-2`}>
-              <NavLinks links={extraLinks} />
-            </div>
-          </div>
-        </nav> */}
+
         <div className="flex items-center justify-center h-full">
           <div className="flex gap-4 ml-4 mr-auto sm:mr-4">
             <ModeToggle />

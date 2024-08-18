@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { deleteRecipe } from "../../helpers/getAllYeasts";
 import { useToast } from "../ui/use-toast";
 import RecipeTogglePrivate from "../ui/RecipeTogglePrivate";
+import { Button } from "../ui/button";
 
 export default function RecipeCard({
   recipe,
@@ -22,20 +23,20 @@ export default function RecipeCard({
       <p>{recipe.name}</p>
       <RecipeTogglePrivate recipe={recipe} />
       <div className="flex gap-1">
-        <button
+        <Button
           onClick={() => token && navigate(`/recipes/${recipe.id}`)}
-          className="px-2 py-1 border-2 border-solid border-foreground hover:bg-background hover:border-background md:text-lg disabled:bg-background disabled:hover:border-foreground disabled:hover:text-sidebar disabled:cursor-not-allowed bg-background rounded-2xl"
+          variant={"secondary"}
         >
           {t("accountPage.viewRecipe")}
-        </button>
-        <button
+        </Button>
+        <Button
           onClick={() => token && navigate(`/recipes/${recipe.id}?pdf=true`)}
-          className="px-2 py-1 border-2 border-solid border-foreground hover:bg-background hover:border-background md:text-lg disabled:bg-background disabled:hover:border-foreground disabled:hover:text-sidebar disabled:cursor-not-allowed bg-background rounded-2xl"
+          variant={"secondary"}
         >
           {t("PDF.title")}
-        </button>
+        </Button>
       </div>
-      <button
+      <Button
         onClick={async () => {
           const deleted = await deleteRecipe(recipe.id, token);
           if (
@@ -46,10 +47,10 @@ export default function RecipeCard({
           } else
             toast({ description: deleted.message, variant: "destructive" });
         }}
-        className="bg-red-500 px-2 py-1 border-2 border-solid border-foreground hover:bg-background hover:border-background md:text-lg disabled:bg-background disabled:hover:border-foreground disabled:hover:text-sidebar disabled:cursor-not-allowed bg-background rounded-2xl"
+        variant="destructive"
       >
         {t("accountPage.deleteRecipe")}
-      </button>
+      </Button>
     </div>
   );
 }
