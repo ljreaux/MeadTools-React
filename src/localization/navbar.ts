@@ -2,6 +2,7 @@ const navbar = {
   en: {
     calculators: {
       label: "Calculators",
+      main: 'Main Calculators',
       recipes: "Recipe Builder",
       nutes: "Nutrient Calculator",
       extraCalcs: {
@@ -30,6 +31,7 @@ const navbar = {
   de: {
     calculators: {
       label: "Umrechner",
+      main: 'Hauptrechner',
       recipes: "Rezepterstellung",
       nutes: "Nährstoffrechner",
       extraCalcs: {

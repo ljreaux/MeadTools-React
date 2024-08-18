@@ -331,7 +331,7 @@ export default function RecipeBuilder({
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value="gal">{t("GAL")}</SelectItem>
-                    <SelectItem value="lit">{t("LIT")}</SelectItem>
+                    <SelectItem value="liter">{t("LIT")}</SelectItem>
                   </SelectContent>
                 </Select>
               </TableHead>

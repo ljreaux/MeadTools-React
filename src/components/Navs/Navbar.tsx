@@ -123,11 +123,11 @@ export default function Navbar({
           <NavigationMenuList>
             <NavigationMenuItem>
               <NavigationMenuTrigger className="px-2">
-                Calculators
+                {t("calculators.label")}
               </NavigationMenuTrigger>
               <NavigationMenuContent>
                 <ul className="grid sm:gap-3 gap-2 sm:p-4 sm:min-w-[400px] min-w-[300px] lg:grid-cols-[1fr_1fr] text-start">
-                  <li className="col-span-full">Main Calculators</li>
+                  <li className="col-span-full">{t("calculators.main")}</li>
                   {mainCalcs.map((link) => {
                     return (
                       <ListItem
@@ -139,7 +139,9 @@ export default function Navbar({
                   })}
                 </ul>
                 <ul className="grid sm:gap-3 gap-2 sm:p-4 p-2 sm:min-w-[400px] min-w-[300px] lg:grid-cols-[1fr_1fr] text-start">
-                  <li className="col-span-full">Extra Calculators</li>
+                  <li className="col-span-full">
+                    {t("calculators.extraCalcs.label")}
+                  </li>
                   {extraCalculatorLinks.map((link) => {
                     return (
                       <ListItem
@@ -154,7 +156,7 @@ export default function Navbar({
             </NavigationMenuItem>
             <NavigationMenuItem>
               <NavigationMenuTrigger className="px-2">
-                Account
+                {t("account.label")}
               </NavigationMenuTrigger>
               <NavigationMenuContent>
                 <ul className="flex sm:min-w-[400px] min-w-[300px] p-4 items-center justify-center">
@@ -189,7 +191,7 @@ export default function Navbar({
             </NavigationMenuItem>
             <NavigationMenuItem>
               <NavigationMenuTrigger className="px-2">
-                Additional Links
+                {t("additionalLinks.label")}
               </NavigationMenuTrigger>
               <NavigationMenuContent>
                 <ul className="flex gap-3 p-4 sm:min-w-[400px] min-w-[300px] justify-center">
