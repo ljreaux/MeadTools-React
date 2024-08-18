@@ -19,6 +19,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../ui/select";
+import useLocalStorage from "@/hooks/useLocalStorage";
 
 export default function Stabilizers({
   abv,
@@ -36,7 +37,8 @@ export default function Stabilizers({
   ) => void;
 }) {
   const { t } = useTranslation();
-  const [adding, setAdding] = useState({
+
+  const [adding, setAdding] = useLocalStorage("addingStabilizers", {
     adding: false,
     pH: false,
     pHReading: 3.6,
