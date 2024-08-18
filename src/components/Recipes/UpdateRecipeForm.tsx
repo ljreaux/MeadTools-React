@@ -5,6 +5,8 @@ import { API_URL } from "../../main";
 import { useNavigate, useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { useToast } from "../ui/use-toast";
+import { Input } from "../ui/input";
+import { Button } from "../ui/button";
 
 interface PropsType {
   name: string;
@@ -37,7 +39,7 @@ export default function UpdateRecipeForm(props: PropsType) {
   const { toast } = useToast();
   return (
     <form
-      className="flex flex-col items-center justify-center w-11/12 gap-4 p-8 mt-24 mb-8 rounded-xl bg-background aspect-video"
+      className="flex flex-col items-center justify-center w-11/12 gap-4 p-8 mt-24 mb-8 rounded-xl bg-background aspect-video max-w-[750px]"
       onSubmit={(e) => {
         e.preventDefault();
 
@@ -88,17 +90,14 @@ export default function UpdateRecipeForm(props: PropsType) {
         className="flex items-center justify-center w-full gap-4 text-center"
       >
         <p>{t("changesForm.subtitle")}</p>
-        <input
+        <Input
           type="text"
-          className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-foreground hover:bg-background hover:border-background w-1/4 my-2 disabled:bg-background
-      disabled:cursor-not-allowed"
           value={name}
           onChange={(e) => updateName(e.target.value)}
+          className="max-w-56"
         />
       </label>
-      <button className="px-2 py-1 border-2 border-solid border-foreground hover:bg-background hover:border-background md:text-lg disabled:bg-background disabled:hover:border-foreground disabled:hover:text-sidebar disabled:cursor-not-allowed bg-background rounded-2xl">
-        {t("changesForm.submit")}
-      </button>
+      <Button variant={"secondary"}>{t("changesForm.submit")}</Button>
     </form>
   );
 }

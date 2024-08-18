@@ -79,7 +79,10 @@ function IngredientOptions({
       {ingredients.map((ingredient) => {
         const ingredientDisplay = lodash.camelCase(ingredient.name);
         return (
-          <SelectItem key={ingredientDisplay} value={ingredient.name}>
+          <SelectItem
+            key={ingredientDisplay}
+            value={ingredient.name.toLowerCase()}
+          >
             {t(`${ingredientDisplay}`)}
           </SelectItem>
         );
@@ -132,7 +135,9 @@ export default function Ingredient({
       )
     : ingredients;
   function changeIngredient(ingName: string, index: number) {
-    const found = ingredients.find((ingredient) => ingredient.name === ingName);
+    const found = ingredients.find(
+      (ingredient) => ingredient.name.toLowerCase() === ingName.toLowerCase()
+    );
 
     if (found)
       setIndividual(index, {
@@ -189,7 +194,7 @@ export default function Ingredient({
     <TableRow>
       <TableCell>
         <Select
-          value={ingredient.name}
+          value={ingredient.name.toLowerCase()}
           onValueChange={(val) => changeIngredient(val, index)}
         >
           <SelectTrigger className="h-8">

@@ -161,21 +161,29 @@ export default function Navbar({
               <NavigationMenuContent>
                 <ul className="flex sm:min-w-[400px] min-w-[300px] p-4 items-center justify-center">
                   {token ? (
-                    <li>
-                      <button
-                        onClick={() => {
-                          localStorage.removeItem("token");
-                          setToken(null);
-                          localStorage.removeItem("refreshToken");
-                          localStorage.removeItem("user");
-                          setUser(null);
-                          navigate("/login");
-                        }}
-                        className="block p-3 space-y-1 leading-none no-underline transition-colors rounded-md outline-none select-none hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground "
-                      >
-                        {t("account.logout")}
-                      </button>
-                    </li>
+                    <>
+                      <li>
+                        <Link
+                          className="p-3 space-y-1 leading-none no-underline transition-colors rounded-md outline-none select-none  hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                          to="/account"
+                        >
+                          {t("account.label")}
+                        </Link>
+                        <button
+                          onClick={() => {
+                            localStorage.removeItem("token");
+                            setToken(null);
+                            localStorage.removeItem("refreshToken");
+                            localStorage.removeItem("user");
+                            setUser(null);
+                            navigate("/login");
+                          }}
+                          className="p-3 space-y-1 leading-none no-underline transition-colors rounded-md outline-none select-none  hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                        >
+                          {t("account.logout")}
+                        </button>
+                      </li>
+                    </>
                   ) : (
                     <li>
                       <NavLink
