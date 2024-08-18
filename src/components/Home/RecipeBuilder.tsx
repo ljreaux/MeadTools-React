@@ -254,7 +254,7 @@ export default function RecipeBuilder({
       >
         <Title header={t("recipeBuilder.homeHeading")} />{" "}
         {recipeName && <p className="text-3xl py-2.5">{recipeName}</p>}
-        <span className="flex items-center justify-center gap-2 ml-auto">
+        <span className="flex items-center justify-center gap-2 py-4 ml-auto">
           {t("showBrix")}
           <Switch
             checked={showBrix}
