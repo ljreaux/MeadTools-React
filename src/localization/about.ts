@@ -48,7 +48,7 @@ const about = {
         },
         five: {
           label:
-            "Sorbate and Sulfite information as well as SO many other thing",
+            "Sorbate and Sulfite information as well as SO many other things",
           one: {
             linkText:
               'Modern Meadmaking wiki - "Stabilization and Back Sweetening"',

@@ -4,6 +4,21 @@ import useUnitChange from "../../../hooks/useUnitChange.ts";
 import Title from "../../Title.tsx";
 import { useTranslation } from "react-i18next";
 import Tooltip from "../../Tooltips.tsx";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableRow,
+} from "@/components/ui/table.tsx";
+import { Input } from "@/components/ui/input.tsx";
+import {
+  Select,
+  SelectContent,
+  SelectTrigger,
+  SelectItem,
+  SelectValue,
+} from "@/components/ui/select.tsx";
 
 export interface BatchDetails {
   batchSize: number;
@@ -37,68 +52,95 @@ export default function BenchTrials() {
     setterFunction: setBatchDetails,
   };
   useUnitChange({ ...unitChangeParams, propertyToChange: "batchSize" });
+
   return (
-    <form className="w-11/12 sm:w-9/12 flex flex-col items-center justify-center rounded-xl bg-background sm:p-8 p-2 my-24 aspect-video">
-      <Title header={t("benchTrialsHeading")} />
-      <Tooltip
-        body={t("tipText.benchTrials.body")}
-        links={[
-          [
-            "https://www.youtube.com/watch?v=AaibXsslBlE&ab_channel=Doin%27theMostBrewing",
-            t("tipText.benchTrials.linkTexts.0"),
-          ],
-          [
-            "https://scottlab.com/bench-trial-protocol",
-            t("tipText.benchTrials.linkTexts.1"),
-          ],
-          [
-            "https://www.reddit.com/r/mead/wiki/process/bench_trials/",
-            t("tipText.benchTrials.linkTexts.2"),
-          ],
-        ]}
-      />
-      <div className="grid grid-cols-2 items-center justify-center my-4 w-full">
-        <label htmlFor="batchSize">{t("batchSize")}</label>
-        <input
-          id="batchSize"
-          type="number"
-          value={batchDetails.batchSize}
-          onChange={(e) => handleBatchDetails(e, "batchSize")}
-          onFocus={(e) => e.target.select()}
-          className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-foreground hover:bg-background hover:border-background "
-          step={0.01}
+    <form className="flex flex-col items-center justify-center w-11/12 p-2 my-24 sm:w-9/12 rounded-xl bg-background sm:p-8">
+      <span className="flex items-center justify-center">
+        <Title header={t("benchTrialsHeading")} />
+        <Tooltip
+          body={t("tipText.benchTrials.body")}
+          links={[
+            [
+              "https://www.youtube.com/watch?v=AaibXsslBlE&ab_channel=Doin%27theMostBrewing",
+              t("tipText.benchTrials.linkTexts.0"),
+            ],
+            [
+              "https://scottlab.com/bench-trial-protocol",
+              t("tipText.benchTrials.linkTexts.1"),
+            ],
+            [
+              "https://www.reddit.com/r/mead/wiki/process/bench_trials/",
+              t("tipText.benchTrials.linkTexts.2"),
+            ],
+          ]}
         />
-        <label htmlFor="trialBatchUnits">{t("UNITS")}:</label>
-        <select
-          name="trialBatchUnits"
-          id="trialBatchUnits"
-          value={batchDetails.units}
-          onChange={(e) => handleBatchDetails(e, "units")}
-          className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-foreground hover:bg-background hover:border-background "
-        >
-          <option value="gallon">{t("GAL")}</option>
-          <option value="liter">{t("LIT")}</option>
-        </select>
-        <label htmlFor="sampleSize">{t("sampleSize")}</label>
-        <input
-          id="sampleSize"
-          type="number"
-          value={batchDetails.sampleSize}
-          onChange={(e) => handleBatchDetails(e, "sampleSize")}
-          onFocus={(e) => e.target.select()}
-          className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-foreground hover:bg-background hover:border-background "
-        />
-        <label htmlFor="concentration">{t("stockSolutionConcentration")}</label>
-        <input
-          id="concentration"
-          type="number"
-          value={batchDetails.stockSolutionConcentration}
-          onChange={(e) => handleBatchDetails(e, "stockSolutionConcentration")}
-          onFocus={(e) => e.target.select()}
-          className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-foreground hover:bg-background hover:border-background "
-        />
-        <Trials batchDetails={batchDetails} />
-      </div>
+      </span>
+      <Table>
+        <TableBody>
+          <TableRow>
+            <TableHead>{t("batchSize")}</TableHead>
+            <TableCell>
+              <Input
+                id="batchSize"
+                type="number"
+                value={batchDetails.batchSize}
+                onChange={(e) => handleBatchDetails(e, "batchSize")}
+                onFocus={(e) => e.target.select()}
+                step={0.01}
+              />
+            </TableCell>
+          </TableRow>
+          <TableRow>
+            <TableHead>{t("UNITS")}:</TableHead>
+            <TableCell>
+              <Select
+                name="trialBatchUnits"
+                value={batchDetails.units}
+                onValueChange={(val: "gallon" | "liter") => {
+                  setBatchDetails((prev) => {
+                    return { ...prev, units: val };
+                  });
+                }}
+              >
+                <SelectTrigger>
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="gallon">{t("GAL")}</SelectItem>
+                  <SelectItem value="liter">{t("LIT")}</SelectItem>
+                </SelectContent>
+              </Select>
+            </TableCell>
+          </TableRow>
+          <TableRow>
+            <TableHead>{t("sampleSize")}</TableHead>
+            <TableCell>
+              <Input
+                id="sampleSize"
+                type="number"
+                value={batchDetails.sampleSize}
+                onChange={(e) => handleBatchDetails(e, "sampleSize")}
+                onFocus={(e) => e.target.select()}
+              />
+            </TableCell>
+          </TableRow>
+          <TableRow>
+            <TableHead>{t("stockSolutionConcentration")}</TableHead>
+            <TableCell>
+              <Input
+                id="concentration"
+                type="number"
+                value={batchDetails.stockSolutionConcentration}
+                onChange={(e) =>
+                  handleBatchDetails(e, "stockSolutionConcentration")
+                }
+                onFocus={(e) => e.target.select()}
+              />
+            </TableCell>
+          </TableRow>
+        </TableBody>
+      </Table>
+      <Trials batchDetails={batchDetails} />
     </form>
   );
 }

@@ -2,6 +2,23 @@ import { FormEvent, useState } from "react";
 import Title from "../../Title";
 import { useTranslation } from "react-i18next";
 import Tooltip from "../../Tooltips";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableFooter,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 export default function Sulfite() {
   const { t } = useTranslation();
@@ -30,49 +47,71 @@ export default function Sulfite() {
       : (sulfite.ppm / 75) * sulfite.batchSize;
 
   return (
-    <div>
-      <Title header={t("sulfiteHeading")} />
-      <div className="flex w-full justify-center gap-4 my-4">
-        <label htmlFor="batchSize">{t("batchSize")} </label>
-        <input
-          type="number"
-          id="batchSize"
-          onFocus={(e) => e.target.select()}
-          onChange={handleChange}
-          className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-foreground hover:bg-background hover:border-background w-1/4"
-          value={sulfite.batchSize}
-        />
-        <select
-          name="units"
-          id="units"
-          onChange={handleChange}
-          className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-foreground hover:bg-background hover:border-background w-1/4"
-        >
-          <option value="gallons">Gallons</option>
-          <option value="liters">Liters</option>
-        </select>
-      </div>
-      <div className="flex w-full justify-center gap-4 my-4">
-        <label htmlFor="ppm">{t("desiredPpm")} </label>
-        <input
-          type="number"
-          name="ppm"
-          id="ppm"
-          onChange={handleChange}
-          className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-foreground hover:bg-background hover:border-background w-1/4"
-          value={sulfite.ppm}
-        />
-      </div>
-      <div className="text-2xl my-4 text-center grid">
-        <p>
-          {Math.round(sulfiteAmount * 10000) / 10000}g {t("kMeta")}
-        </p>{" "}
-        <p>{t("accountPage.or")}</p>{" "}
-        <p className="flex items-center justify-center gap-2">
-          {Math.round(campden * 10) / 10} {t("list.campden")}
-          <Tooltip body={t("tipText.campden")} />
-        </p>
-      </div>
-    </div>
+    <Table>
+      <TableHeader>
+        <TableHead colSpan={3}>
+          <Title header={t("sulfiteHeading")} />
+        </TableHead>
+      </TableHeader>
+      <TableBody>
+        <TableRow>
+          <TableHead>{t("batchSize")} </TableHead>
+          <TableCell>
+            <Input
+              type="number"
+              id="batchSize"
+              onFocus={(e) => e.target.select()}
+              onChange={handleChange}
+              value={sulfite.batchSize}
+            />
+          </TableCell>
+          <TableCell>
+            <Select
+              name="units"
+              onValueChange={(val) => {
+                setSulfite((prev) => ({ ...prev, units: val }));
+              }}
+              value={sulfite.units}
+            >
+              <SelectTrigger>
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="gallons">{t("GAL")}</SelectItem>
+                <SelectItem value="liter">{t("LIT")}</SelectItem>
+              </SelectContent>
+            </Select>
+          </TableCell>
+        </TableRow>
+        <TableRow>
+          <TableHead>{t("desiredPpm")} </TableHead>
+          <TableCell colSpan={2}>
+            <Input
+              type="number"
+              name="ppm"
+              id="ppm"
+              onChange={handleChange}
+              value={sulfite.ppm}
+            />
+          </TableCell>
+        </TableRow>
+      </TableBody>
+      <TableFooter>
+        <TableRow>
+          <TableCell colSpan={3}>
+            <span className="grid items-center justify-center gap-2 text-lg text-center">
+              <p>
+                {Math.round(sulfiteAmount * 10000) / 10000}g {t("kMeta")}
+              </p>{" "}
+              <p>{t("accountPage.or")}</p>{" "}
+              <p>
+                {Math.round(campden * 10) / 10} {t("list.campden")}
+                <Tooltip body={t("tipText.campden")} />
+              </p>
+            </span>
+          </TableCell>
+        </TableRow>
+      </TableFooter>
+    </Table>
   );
 }

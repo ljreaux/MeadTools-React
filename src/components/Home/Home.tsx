@@ -47,7 +47,6 @@ export default function Home({
   token: string | null;
   setBlendFG: Dispatch<SetStateAction<number[]>>;
 }) {
-  console.log(pdfjs.version);
   const [primaryNotes, setPrimaryNotes] = useLocalStorage<string[][]>(
     "primaryNotes",
     [["", ""]]
