@@ -98,6 +98,7 @@ export default function Ingredient({
   setChecked,
   setIndividual,
   setLoading,
+  showBrix,
 }: {
   ingredient: IngredientType;
   index: number;
@@ -112,6 +113,7 @@ export default function Ingredient({
   setChecked: (index: number) => void;
   setIndividual: (index: number, obj: Partial<IngredientType>) => void;
   setLoading: React.Dispatch<React.SetStateAction<boolean>>;
+  showBrix: boolean;
 }) {
   const converter =
     units.weight === "kg" && units.volume === "liter"
@@ -202,6 +204,18 @@ export default function Ingredient({
           </SelectContent>
         </Select>
       </TableCell>
+      {showBrix && (
+        <TableCell>
+          <Input
+            type="number"
+            name="ingredientBrix"
+            value={ingredient.brix}
+            className="h-8"
+            onChange={(e) => handleChange(e, index, null)}
+            onFocus={(e) => e.target.select()}
+          />
+        </TableCell>
+      )}
       <TableCell>
         <Input
           type="number"
@@ -212,16 +226,7 @@ export default function Ingredient({
           onFocus={(e) => e.target.select()}
         />
       </TableCell>
-      <TableCell>
-        <Input
-          type="number"
-          name="ingredientBrix"
-          value={ingredient.brix}
-          className="h-8"
-          onChange={(e) => handleChange(e, index, null)}
-          onFocus={(e) => e.target.select()}
-        />
-      </TableCell>
+
       <TableCell>
         <Input
           type="number"

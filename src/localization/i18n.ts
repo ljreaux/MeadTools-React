@@ -51,7 +51,8 @@ i18n
           ...PDFEN,
           ...notesEN,
           ...toolTipEN,
-          yeasts: 'Yeast Table'
+          yeasts: 'Yeast Table',
+          showBrix: "Show Brix?"
         },
       },
       de: {
@@ -70,7 +71,8 @@ i18n
           ...PDFDE,
           ...notesDE,
           ...toolTipDE,
-          yeasts: 'Yeast Table'
+          yeasts: 'Hefetabelle',
+          showBrix: "Brix anzeigen?"
         },
       },
     },

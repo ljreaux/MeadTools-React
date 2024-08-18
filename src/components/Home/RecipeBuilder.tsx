@@ -29,6 +29,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../ui/select";
+import { Switch } from "../ui/switch";
 
 export default function RecipeBuilder({
   ingredients,
@@ -51,6 +52,8 @@ export default function RecipeBuilder({
   const { t } = useTranslation();
   const [firstMount, setFirstMount] = useState(true);
   useEffect(() => setFirstMount(false), []);
+
+  const [showBrix, setShowBrix] = useState(false);
 
   const totalBlended = ingredients.map((ingredient) => {
     return [toSG(ingredient.brix), ingredient.details[1]];
@@ -249,8 +252,15 @@ export default function RecipeBuilder({
           runBlends();
         }}
       >
-        <Title header={t("recipeBuilder.homeHeading")} />
+        <Title header={t("recipeBuilder.homeHeading")} />{" "}
         {recipeName && <p className="text-3xl py-2.5">{recipeName}</p>}
+        <span className="flex items-center justify-center gap-2 ml-auto">
+          {t("showBrix")}
+          <Switch
+            checked={showBrix}
+            onCheckedChange={() => setShowBrix(!showBrix)}
+          />
+        </span>
         <Table>
           <TableHeader>
             <TableRow>
@@ -260,6 +270,14 @@ export default function RecipeBuilder({
                   <Tooltip body={t("tipText.volumeLines")} />
                 </div>
               </TableHead>
+              {showBrix && (
+                <TableHead className="pb-4 text-center">
+                  <div className="flex items-center justify-center gap-1">
+                    {t("recipeBuilder.labels.brix")}{" "}
+                    <Tooltip body={t("tipText.brix")} />
+                  </div>
+                </TableHead>
+              )}
               <TableHead className="pb-4 text-center">
                 {t("recipeBuilder.labels.weight")}
                 <Select
@@ -288,12 +306,7 @@ export default function RecipeBuilder({
                   </SelectContent>
                 </Select>
               </TableHead>
-              <TableHead className="pb-4 text-center">
-                <div className="flex items-center justify-center gap-1">
-                  {t("recipeBuilder.labels.brix")}{" "}
-                  <Tooltip body={t("tipText.brix")} />
-                </div>
-              </TableHead>
+
               <TableHead className="pb-4 text-center">
                 {t("recipeBuilder.labels.volume")}
                 <Select
@@ -342,6 +355,7 @@ export default function RecipeBuilder({
                   setChecked={setChecked}
                   key={i + ingredient.name}
                   setLoading={setLoading}
+                  showBrix={showBrix}
                 />
               );
             })}
