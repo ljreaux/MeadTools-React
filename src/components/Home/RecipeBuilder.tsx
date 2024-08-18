@@ -441,15 +441,15 @@ export default function RecipeBuilder({
                 </TableCell>
               </TableRow>
 
-              <TableRow>
-                <TableCell className="pb-4 bg-background" colSpan={2}>
+              <TableRow className="bg-background">
+                <TableCell colSpan={2}>
                   <div className="flex items-center justify-center gap-1">
                     {t("recipeBuilder.resultsLabels.totalPrimary")}
                     <Tooltip body={t("tipText.totalVolume")} />
                   </div>
                 </TableCell>
 
-                <TableCell className="pb-4 bg-background" colSpan={3}>
+                <TableCell colSpan={3}>
                   <div className="flex items-center justify-center gap-1">
                     {t("recipeBuilder.resultsLabels.totalSecondary")}
                     <Tooltip body={t("tipText.totalSecondary")} />
