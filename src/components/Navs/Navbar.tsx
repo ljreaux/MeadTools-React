@@ -117,7 +117,7 @@ export default function Navbar({
   const { t } = useTranslation();
   const navigate = useNavigate();
   return (
-    <nav className="sm:h-20 h-28 fixed top-0 z-[49] flex items-center justify-between mb-[1rem] border-b-2 border-background">
+    <nav className="sm:h-20 h-28 fixed top-0 z-[51] flex items-center justify-between mb-[1rem] border-b-2 border-background">
       <div className="relative grid items-center justify-center w-screen h-full gap-2 text-xl text-center sm:justify-between sm:flex bg-background text-foreground">
         <NavigationMenu>
           <NavigationMenuList>
@@ -164,7 +164,7 @@ export default function Navbar({
                     <>
                       <li>
                         <Link
-                          className="p-3 space-y-1 leading-none no-underline transition-colors rounded-md outline-none select-none  hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                          className="p-3 space-y-1 leading-none no-underline transition-colors rounded-md outline-none select-none hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
                           to="/account"
                         >
                           {t("account.label")}
@@ -178,7 +178,7 @@ export default function Navbar({
                             setUser(null);
                             navigate("/login");
                           }}
-                          className="p-3 space-y-1 leading-none no-underline transition-colors rounded-md outline-none select-none  hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                          className="p-3 space-y-1 leading-none no-underline transition-colors rounded-md outline-none select-none hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
                         >
                           {t("account.logout")}
                         </button>
