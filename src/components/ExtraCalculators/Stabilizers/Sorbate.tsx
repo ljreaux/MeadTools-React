@@ -42,9 +42,11 @@ export default function Sorbate() {
   return (
     <Table>
       <TableHeader>
-        <TableHead colSpan={3}>
-          <Title header={t("sorbateHeading")} />
-        </TableHead>
+        <TableRow className="border-none">
+          <TableHead colSpan={3}>
+            <Title header={t("sorbateHeading")} />
+          </TableHead>
+        </TableRow>
       </TableHeader>
       <TableBody>
         <TableRow>

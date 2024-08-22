@@ -42,9 +42,11 @@ export default function Notes({
       <Title header={t("notes.title")} />
       <Table>
         <TableHeader>
-          <TableHead colSpan={3} className="text-2xl text-center">
-            {t("notes.subtitleOne")}
-          </TableHead>
+          <TableRow className="border-none">
+            <TableHead colSpan={3} className="text-2xl text-center">
+              {t("notes.subtitleOne")}
+            </TableHead>
+          </TableRow>
           <TableRow>
             <TableHead></TableHead>
 
@@ -55,7 +57,7 @@ export default function Notes({
         <TableBody>
           {primaryNotes.map((note, index) => {
             return (
-              <TableRow id="primaryNotes">
+              <TableRow id="primaryNotes" key={`row ${index}`}>
                 <TableCell className="h-full text-start">
                   {index + 1}.
                 </TableCell>
@@ -113,9 +115,11 @@ export default function Notes({
       )}
       <Table>
         <TableHeader>
-          <TableHead colSpan={3} className="text-2xl text-center">
-            {t("notes.subtitleTwo")}
-          </TableHead>
+          <TableRow className="border-none">
+            <TableHead colSpan={3} className="text-2xl text-center">
+              {t("notes.subtitleTwo")}
+            </TableHead>
+          </TableRow>
           <TableRow>
             <TableHead></TableHead>
 
@@ -126,7 +130,7 @@ export default function Notes({
         <TableBody>
           {secondaryNotes.map((note, index) => {
             return (
-              <TableRow id="secondaryNotes">
+              <TableRow id="secondaryNotes" key={`secondary row ${index}`}>
                 <TableCell className="h-full text-start">
                   {index + 1}.
                 </TableCell>

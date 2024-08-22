@@ -157,6 +157,7 @@ export default function Account({
             >
               {userInfo.recipes.map((recipe) => (
                 <RecipeCard
+                  key={recipe.id}
                   recipe={recipe}
                   token={token}
                   setReload={setReload}

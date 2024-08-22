@@ -47,7 +47,6 @@ export default function Form({
         e.preventDefault();
         const { email, password } = data;
         fetchFunction({ email, password }).then((res) => {
-          console.log(res);
           if (res.token && res.refreshToken) {
             setToken(res.token);
             localStorage.setItem("token", res.token);

@@ -97,53 +97,55 @@ export default function Stabilizers({
       </div>
       <Table>
         <TableHeader>
-          <TableHead>
-            <span className="grid gap-2">
-              {t("adding")}
-              <Select
-                name="adding"
-                value={adding.adding ? "yes" : "no"}
-                onValueChange={(val) => {
-                  if (val === "no") setSorbateSulfite();
+          <TableRow className="border-none">
+            <TableHead>
+              <span className="grid gap-2">
+                {t("adding")}
+                <Select
+                  name="adding"
+                  value={adding.adding ? "yes" : "no"}
+                  onValueChange={(val) => {
+                    if (val === "no") setSorbateSulfite();
 
-                  setAdding({ ...adding, adding: val === "yes" });
-                }}
-              >
-                <SelectTrigger>
-                  <SelectValue placeholder={t("no")} />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="no">{t("no")}</SelectItem>
-                  <SelectItem value="yes">{t("yes")}</SelectItem>
-                </SelectContent>
-              </Select>
-            </span>
-          </TableHead>
+                    setAdding({ ...adding, adding: val === "yes" });
+                  }}
+                >
+                  <SelectTrigger>
+                    <SelectValue placeholder={t("no")} />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="no">{t("no")}</SelectItem>
+                    <SelectItem value="yes">{t("yes")}</SelectItem>
+                  </SelectContent>
+                </Select>
+              </span>
+            </TableHead>
 
-          <TableHead>
-            <span className="grid gap-2">
-              {t("pH")}
-              <Select
-                name="phReading"
-                value={adding.pH ? "yes" : "no"}
-                onValueChange={(val) =>
-                  setAdding({
-                    ...adding,
-                    pH: val === "yes",
-                    pHReading: 3.6,
-                  })
-                }
-              >
-                <SelectTrigger>
-                  <SelectValue placeholder={t("no")} />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="no">{t("no")}</SelectItem>
-                  <SelectItem value="yes">{t("yes")}</SelectItem>
-                </SelectContent>
-              </Select>
-            </span>
-          </TableHead>
+            <TableHead>
+              <span className="grid gap-2">
+                {t("pH")}
+                <Select
+                  name="phReading"
+                  value={adding.pH ? "yes" : "no"}
+                  onValueChange={(val) =>
+                    setAdding({
+                      ...adding,
+                      pH: val === "yes",
+                      pHReading: 3.6,
+                    })
+                  }
+                >
+                  <SelectTrigger>
+                    <SelectValue placeholder={t("no")} />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="no">{t("no")}</SelectItem>
+                    <SelectItem value="yes">{t("yes")}</SelectItem>
+                  </SelectContent>
+                </Select>
+              </span>
+            </TableHead>
+          </TableRow>
         </TableHeader>
 
         {adding.adding && (

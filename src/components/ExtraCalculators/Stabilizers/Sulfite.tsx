@@ -49,9 +49,11 @@ export default function Sulfite() {
   return (
     <Table>
       <TableHeader>
-        <TableHead colSpan={3}>
-          <Title header={t("sulfiteHeading")} />
-        </TableHead>
+        <TableRow className="border-none">
+          <TableHead colSpan={3}>
+            <Title header={t("sulfiteHeading")} />
+          </TableHead>
+        </TableRow>
       </TableHeader>
       <TableBody>
         <TableRow>

@@ -343,20 +343,22 @@ export default function NutrientCalcResults({
           </TableRow>
         </TableBody>
         <TableFooter>
-          <TableCell>{t("nuteResults.sideLabels.totalYan")}</TableCell>
-          <TableCell>
-            <p>{`${Math.round(nutrients.totalYan)}${t("PPM")}`}</p>
-          </TableCell>
-          <TableCell colSpan={2}>
-            <span className="flex items-center justify-center gap-1">
-              {" "}
-              {t("nuteResults.sideLabels.remainingYan")}
-              <Tooltip body={t("tipText.remainingYan")} />
-            </span>
-          </TableCell>
-          <TableCell>
-            <p>{`${Math.round(nutrients.remainingYan)}${t("PPM")}`}</p>
-          </TableCell>
+          <TableRow>
+            <TableCell>{t("nuteResults.sideLabels.totalYan")}</TableCell>
+            <TableCell>
+              <p>{`${Math.round(nutrients.totalYan)}${t("PPM")}`}</p>
+            </TableCell>
+            <TableCell colSpan={2}>
+              <span className="flex items-center justify-center gap-1">
+                {" "}
+                {t("nuteResults.sideLabels.remainingYan")}
+                <Tooltip body={t("tipText.remainingYan")} />
+              </span>
+            </TableCell>
+            <TableCell>
+              <p>{`${Math.round(nutrients.remainingYan)}${t("PPM")}`}</p>
+            </TableCell>
+          </TableRow>
         </TableFooter>
       </Table>
     </div>

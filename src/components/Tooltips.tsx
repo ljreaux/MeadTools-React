@@ -27,7 +27,7 @@ export default function Tooltip({
         )}
         {links &&
           links.map((linkArr) => (
-            <a href={linkArr[0]} className="underline">
+            <a href={linkArr[0]} className="underline" key={linkArr[0]}>
               {linkArr[1]}
             </a>
           ))}

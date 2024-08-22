@@ -4,6 +4,7 @@ import { FormEvent, useState } from "react";
 import { useTranslation } from "react-i18next";
 import {
   Table,
+  TableBody,
   TableCell,
   TableHead,
   TableHeader,
@@ -60,73 +61,74 @@ export default function Trials({ batchDetails }: Props) {
           })}
         </TableRow>
       </TableHeader>
+      <TableBody>
+        {stockVolume.map((solution, i) => {
+          const sample = adjunctInSample(i);
+          const scaler =
+            Math.round(
+              (sample / (batchDetails.sampleSize + stockVolume[i])) * 10 ** 6
+            ) /
+            10 ** 6;
+          const scaledAdjunct =
+            batchDetails.units == "gallon"
+              ? Math.round(scaler * 37850000) / 10 ** 4
+              : (scaler * 10 ** 4) / 10;
+          const scaledBatch =
+            Math.round(scaledAdjunct * batchDetails.batchSize * 10 ** 4) /
+            10 ** 4;
 
-      {stockVolume.map((solution, i) => {
-        const sample = adjunctInSample(i);
-        const scaler =
-          Math.round(
-            (sample / (batchDetails.sampleSize + stockVolume[i])) * 10 ** 6
-          ) /
-          10 ** 6;
-        const scaledAdjunct =
-          batchDetails.units == "gallon"
-            ? Math.round(scaler * 37850000) / 10 ** 4
-            : (scaler * 10 ** 4) / 10;
-        const scaledBatch =
-          Math.round(scaledAdjunct * batchDetails.batchSize * 10 ** 4) /
-          10 ** 4;
-
-        return (
-          <TableRow key={i}>
-            <TableCell>
-              <Input
-                id={`stockVolume ${i + 1}`}
-                type="number"
-                value={solution}
-                onChange={(e) => handleStockVolume(e, i)}
-                onFocus={(e) => e.target.select()}
-                step={0.01}
-              />
-            </TableCell>
-            <TableCell>
-              <Input
-                id={`adjunctAmount ${i + 1}`}
-                type="number"
-                value={sample}
-                readOnly
-                disabled
-              />
-            </TableCell>
-            <TableCell>
-              <Input
-                id={`adjunctInSample ${i + 1}`}
-                type="number"
-                value={scaler * 1000000}
-                readOnly
-                disabled
-              />
-            </TableCell>
-            <TableCell>
-              <Input
-                id={`scaledAdjunct ${i + 1}`}
-                type="number"
-                value={scaledAdjunct}
-                readOnly
-                disabled
-              />
-            </TableCell>
-            <TableCell>
-              <Input
-                id={`batchAmount ${i + 1}`}
-                type="number"
-                value={scaledBatch}
-                readOnly
-                disabled
-              />
-            </TableCell>
-          </TableRow>
-        );
-      })}
+          return (
+            <TableRow key={i}>
+              <TableCell>
+                <Input
+                  id={`stockVolume ${i + 1}`}
+                  type="number"
+                  value={solution}
+                  onChange={(e) => handleStockVolume(e, i)}
+                  onFocus={(e) => e.target.select()}
+                  step={0.01}
+                />
+              </TableCell>
+              <TableCell>
+                <Input
+                  id={`adjunctAmount ${i + 1}`}
+                  type="number"
+                  value={sample}
+                  readOnly
+                  disabled
+                />
+              </TableCell>
+              <TableCell>
+                <Input
+                  id={`adjunctInSample ${i + 1}`}
+                  type="number"
+                  value={scaler * 1000000}
+                  readOnly
+                  disabled
+                />
+              </TableCell>
+              <TableCell>
+                <Input
+                  id={`scaledAdjunct ${i + 1}`}
+                  type="number"
+                  value={scaledAdjunct}
+                  readOnly
+                  disabled
+                />
+              </TableCell>
+              <TableCell>
+                <Input
+                  id={`batchAmount ${i + 1}`}
+                  type="number"
+                  value={scaledBatch}
+                  readOnly
+                  disabled
+                />
+              </TableCell>
+            </TableRow>
+          );
+        })}
+      </TableBody>
     </Table>
   );
 }

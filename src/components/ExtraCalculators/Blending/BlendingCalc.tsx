@@ -91,29 +91,32 @@ export default function BlendingCalc() {
               />
             </TableCell>
           </TableRow>
-
-          <TableCell colSpan={4}>
-            <span className="flex items-center justify-center">
-              <Button type="submit" variant={"secondary"}>
-                Submit
-              </Button>
-            </span>
-          </TableCell>
+          <TableRow className="border-none">
+            <TableCell colSpan={4}>
+              <span className="flex items-center justify-center">
+                <Button type="submit" variant={"secondary"}>
+                  Submit
+                </Button>
+              </span>
+            </TableCell>
+          </TableRow>
         </TableBody>
         <TableFooter>
-          <TableCell className="p-1 sm:p-4">{t("totalVol")}</TableCell>
-          <TableCell className="p-1 sm:p-4">
-            <Input type="number" disabled value={blend.totalVolume} />
-          </TableCell>
-          <TableCell className="p-1 sm:p-4">{t("blendedVal")}</TableCell>
-          <TableCell className="p-1 sm:p-4">
-            <Input
-              id="blendedVal"
-              type="number"
-              disabled
-              value={Math.round(blend.blendedValue * 10 ** 4) / 10 ** 4}
-            />
-          </TableCell>
+          <TableRow>
+            <TableCell className="p-1 sm:p-4">{t("totalVol")}</TableCell>
+            <TableCell className="p-1 sm:p-4">
+              <Input type="number" disabled value={blend.totalVolume} />
+            </TableCell>
+            <TableCell className="p-1 sm:p-4">{t("blendedVal")}</TableCell>
+            <TableCell className="p-1 sm:p-4">
+              <Input
+                id="blendedVal"
+                type="number"
+                disabled
+                value={Math.round(blend.blendedValue * 10 ** 4) / 10 ** 4}
+              />
+            </TableCell>
+          </TableRow>
         </TableFooter>
       </Table>
     </form>

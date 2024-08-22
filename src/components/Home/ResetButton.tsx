@@ -69,7 +69,7 @@ export default function ResetButton({
   return (
     <>
       <AlertDialog>
-        <AlertDialogTrigger className="flex-1 w-full">
+        <AlertDialogTrigger className="flex-1 w-full" asChild>
           <Button variant={"secondary"} className="flex-1 w-full">
             {t("recipeBuilder.reset")}
           </Button>
