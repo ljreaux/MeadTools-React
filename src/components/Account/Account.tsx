@@ -88,7 +88,7 @@ export default function Account({
   }, [user]);
 
   return (
-    <div className="flex items-center justify-center w-screen min-h-screen my-40 sm:my-24 md:mt-0">
+    <div className="flex items-center justify-center w-screen min-h-screen my-40 sm:my-24">
       {userInfo ? (
         <div className="relative flex flex-col items-center w-11/12 p-8 sm:w-9/12 rounded-xl bg-background">
           <div className="absolute flex w-12 gap-2 text-3xl right-12 top-4">
