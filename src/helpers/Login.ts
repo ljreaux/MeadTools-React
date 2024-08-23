@@ -39,7 +39,7 @@ export async function getUserInfo(token: string) {
     },
   });
   let data = await response.json();
-  console.log(data);
+
 
   if (data.message === "jwt expired") {
     const reToken = localStorage.getItem("refreshToken");
@@ -63,7 +63,7 @@ export async function getUserInfo(token: string) {
       });
       data = await response.json();
     }
-    console.log(newToken);
+
   }
   if (data.message === "jwt malformed") return null;
 

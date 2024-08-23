@@ -15,6 +15,22 @@ import getAllYeasts from "../../helpers/getAllYeasts";
 import { useTranslation } from "react-i18next";
 import Loading from "../Loading";
 import Tooltip from "../Tooltips";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "../ui/table";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "../ui/select";
+import { Input } from "../ui/input";
 export interface YeastType {
   Lalvin: Yeast[];
   Fermentis: Yeast[];
@@ -96,13 +112,6 @@ export default function MainInputs({
   }, []);
   const { t } = useTranslation();
   const keyArr = Object.keys(maxGpl);
-  const handleSelected = (e: FormEvent<EventTarget>) => {
-    const target = e.target as HTMLFormElement;
-    setData((prev) => ({
-      ...prev,
-      selected: { ...prev.selected, [target.name]: target.value },
-    }));
-  };
 
   const handleChange = (e: FormEvent<EventTarget>) => {
     const target = e.target as HTMLFormElement;
@@ -161,183 +170,274 @@ export default function MainInputs({
   return (
     <>
       {!loading ? (
-        <div className="flex flex-col items-center justify-center w-11/12 p-2 mt-24 mb-8 text-xs sm:w-9/12 rounded-xl bg-sidebar sm:p-8 aspect-video sm:text-base text-wrap">
+        <div className="flex flex-col items-center justify-center w-11/12 p-2 mt-24 mb-8 text-xs sm:w-9/12 rounded-xl bg-background sm:p-8 aspect-video sm:text-base text-wrap">
           <Title header={t("nutesHeading")} />
-          <form
-            action=""
-            className="grid justify-center grid-cols-5 text-center"
-          >
-            <label htmlFor="yeastBrand">{t("yeastBrand")}</label>
-            <label htmlFor="yeastStrain">{t("yeastStrain")}</label>
-            <div>
-              <label htmlFor="volume">{t("nuteVolume")}</label>
-              <select
-                onChange={handleSelected}
-                value={selected.volumeUnits}
-                name="volumeUnits"
-                id="volumeUnits"
-                className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-textColor hover:bg-sidebar hover:border-background w-11/12 my-2"
-              >
-                <option value="gal">{t("GAL")}</option>
-                <option value="liter">{t("LIT")}</option>
-              </select>
-            </div>
-            <label
-              htmlFor="specificGravity"
-              className="flex items-center justify-center gap-1"
-            >
-              {t("nuteSgLabel")} <Tooltip body={t("tipText.nutrientSg")} />
-            </label>
-            <label
-              htmlFor="offsetPpm"
-              className="flex items-center justify-center gap-1"
-            >
-              {t("offset")}
-              <Tooltip body={t("tipText.offsetPpm")} />
-            </label>
-            <select
-              onChange={(e) =>
-                setData((prev) => {
-                  const target = e.target as HTMLSelectElement;
-                  return target.value === "Lalvin" ||
-                    target.value === "Fermentis" ||
-                    target.value === "MangroveJack" ||
-                    target.value === "RedStar" ||
-                    target.value === "Other"
-                    ? {
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead className="pb-4 text-center">
+                  {t("yeastBrand")}
+                </TableHead>
+                <TableHead className="pb-4 text-center">
+                  {t("yeastStrain")}
+                </TableHead>
+                <TableHead className="pb-4 text-center">
+                  <span className="flex flex-col items-center justify-center gap-2">
+                    <label htmlFor="volume">{t("nuteVolume")}</label>
+                    <Select
+                      onValueChange={(val) => {
+                        setData((prev) => {
+                          return {
+                            ...prev,
+                            selected: {
+                              ...prev.selected,
+                              volumeUnits: val,
+                            },
+                          };
+                        });
+                      }}
+                      value={selected.volumeUnits}
+                      name="volumeUnits"
+                    >
+                      <SelectTrigger>
+                        <SelectValue placeholder={t("GAL")} />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="gal">{t("GAL")}</SelectItem>
+                        <SelectItem value="liter">{t("LIT")}</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </span>
+                </TableHead>
+                <TableHead className="pb-4 text-center">
+                  <span className="flex items-center justify-center gap-1">
+                    {t("nuteSgLabel")}{" "}
+                    <Tooltip body={t("tipText.nutrientSg")} />
+                  </span>
+                </TableHead>
+                <TableHead className="pb-4 text-center">
+                  <span className="flex items-center justify-center gap-1">
+                    {t("offset")}
+                    <Tooltip body={t("tipText.offsetPpm")} />
+                  </span>
+                </TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              <TableRow>
+                <TableCell>
+                  <Select
+                    onValueChange={(val: FormData["selected"]["yeastBrand"]) =>
+                      setData((prev) => ({
                         ...prev,
                         selected: {
                           ...prev.selected,
-                          [e.target.name]: e.target.value,
-                          yeastStrain: yeasts[target.value][0].name,
+                          yeastBrand: val,
+                          yeastStrain: yeasts[val][0].name,
                         },
-                      }
-                    : prev;
-                })
-              }
-              name="yeastBrand"
-              id="yeastBrand"
-              className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-textColor hover:bg-sidebar hover:border-background w-11/12 my-2"
-            >
-              {Object.keys(yeasts).map((yeast) => {
-                return (
-                  <option key={yeast} value={yeast}>
-                    {t(`${lodash.camelCase(yeast)}.label`)}
-                  </option>
-                );
-              })}
-            </select>
-            <select
-              value={selected.yeastStrain}
-              onChange={handleSelected}
-              name="yeastStrain"
-              id="yeastStrain"
-              className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-textColor hover:bg-sidebar hover:border-background w-11/12 my-2"
-            >
-              {yeasts[selected.yeastBrand].map((yeast) => (
-                <option key={yeast.name} value={yeast.name}>
-                  {t(
-                    `${lodash.camelCase(
-                      selected.yeastBrand
-                    )}.yeasts.${lodash.camelCase(yeast.name)}`
-                  )}
-                </option>
-              ))}
-            </select>
-            <FirstLineInputs inputs={inputs} handleChange={handleChange} />
+                      }))
+                    }
+                    name="yeastBrand"
+                  >
+                    <SelectTrigger>
+                      <SelectValue placeholder={"Lalvin"} />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {Object.keys(yeasts).map((yeast) => {
+                        return (
+                          <SelectItem key={yeast} value={yeast}>
+                            {t(`${lodash.camelCase(yeast)}.label`)}
+                          </SelectItem>
+                        );
+                      })}
+                    </SelectContent>
+                  </Select>
+                </TableCell>
+                <TableCell>
+                  <Select
+                    value={selected.yeastStrain}
+                    onValueChange={(val) => {
+                      setData((prev) => {
+                        return {
+                          ...prev,
+                          selected: {
+                            ...prev.selected,
+                            yeastStrain: val,
+                          },
+                        };
+                      });
+                    }}
+                    name="yeastStrain"
+                  >
+                    <SelectTrigger>
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {yeasts[selected.yeastBrand].map((yeast) => (
+                        <SelectItem key={yeast.name} value={yeast.name}>
+                          {t(
+                            `${lodash.camelCase(
+                              selected.yeastBrand
+                            )}.yeasts.${lodash.camelCase(yeast.name)}`
+                          )}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </TableCell>
+                <FirstLineInputs inputs={inputs} handleChange={handleChange} />
+              </TableRow>
+            </TableBody>
 
-            <label
-              htmlFor="n2Requirement"
-              className="flex flex-col items-center justify-center gap-1"
-            >
-              {t("n2Requirement.label")}
-              <Tooltip body={t("tipText.nitrogenRequirements")} />
-            </label>
-            <label
-              htmlFor="schedule"
-              className="flex flex-col items-center justify-center gap-1"
-            >
-              {t("nuteSchedules.label")}
-              <Tooltip
-                body={t("tipText.preferredSchedule")}
-                link="https://meadmaking.wiki/en/process/nutrient_schedules"
-              />
-            </label>
-            <label
-              htmlFor="targetYan"
-              className="flex flex-col items-center justify-center"
-            >
-              {t("targetYan")}
-              <Tooltip body={t("tipText.yan")} />
-            </label>
-            <label
-              htmlFor="numberOfAdditions"
-              className="flex flex-col items-center justify-center"
-            >
-              {t("numberOfAdditions")}
-              <Tooltip body={t("tipText.numberOfAdditions")} />
-            </label>
-            <label
-              htmlFor="yeastAmount"
-              className="flex flex-col items-center justify-center"
-            >
-              {t("yeastAmount")}
-              <Tooltip body={t("tipText.yeastAmount")} />
-            </label>
-
-            <select
-              name="n2Requirement"
-              id="n2Requirement"
-              value={selected.n2Requirement}
-              className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-textColor hover:bg-sidebar hover:border-background w-11/12 my-2"
-              onChange={handleSelected}
-            >
-              <option value="Low">{t("n2Requirement.low")}</option>
-              <option value="Medium">{t("n2Requirement.medium")}</option>
-              <option value="High">{t("n2Requirement.high")}</option>
-              <option value="Very High">{t("n2Requirement.veryHigh")}</option>
-            </select>
-
-            <select
-              name="schedule"
-              id="schedule"
-              className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-textColor hover:bg-sidebar hover:border-background w-11/12 my-2"
-              value={selected.schedule}
-              onChange={handleSelected}
-            >
-              {maxGpl &&
-                keyArr.map((key) => {
-                  return (
-                    <option key={key} value={key}>
-                      {t(`nuteSchedules.${key}`)}
-                    </option>
-                  );
-                })}
-            </select>
-            <p id="targetYan">{target.targetString}</p>
-            <select
-              value={inputs?.numberOfAdditions}
-              onChange={handleChange}
-              name="numberOfAdditions"
-              id="numberOfAdditions"
-              className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-textColor hover:bg-sidebar hover:border-background w-11/12 my-2"
-            >
-              <option value={1}>1</option>
-              <option value={2}>2</option>
-              <option value={3}>3</option>
-              <option value={4}>4</option>
-            </select>
-            <input
-              type="number"
-              value={yeastAmount}
-              onChange={(e) => {
-                setRecalc(false);
-                setYeastAmount(Number(e.target.value));
-              }}
-              className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-textColor hover:bg-sidebar hover:border-background w-11/12 my-2"
-              onFocus={(e) => e.target.select()}
-            />
-          </form>
+            <TableHeader>
+              <TableRow>
+                <TableHead className="pb-4 text-center">
+                  <span className="flex items-center justify-center gap-1">
+                    {t("n2Requirement.label")}
+                    <Tooltip body={t("tipText.nitrogenRequirements")} />
+                  </span>
+                </TableHead>
+                <TableHead className="pb-4 text-center">
+                  <span className="flex items-center justify-center gap-1">
+                    {t("nuteSchedules.label")}
+                    <Tooltip
+                      body={t("tipText.preferredSchedule")}
+                      link="https://meadmaking.wiki/en/process/nutrient_schedules"
+                    />
+                  </span>
+                </TableHead>
+                <TableHead className="pb-4 text-center">
+                  <span className="flex items-center justify-center gap-1">
+                    {t("targetYan")}
+                    <Tooltip body={t("tipText.yan")} />
+                  </span>
+                </TableHead>
+                <TableHead className="pb-4 text-center">
+                  <span className="flex items-center justify-center gap-1">
+                    {t("numberOfAdditions")}
+                    <Tooltip body={t("tipText.numberOfAdditions")} />
+                  </span>
+                </TableHead>
+                <TableHead className="pb-4 text-center">
+                  <span className="flex items-center justify-center gap-1">
+                    {t("yeastAmount")}
+                    <Tooltip body={t("tipText.yeastAmount")} />
+                  </span>
+                </TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              <TableRow>
+                <TableCell>
+                  <Select
+                    name="n2Requirement"
+                    value={selected.n2Requirement}
+                    onValueChange={(val) => {
+                      setData((prev) => {
+                        return {
+                          ...prev,
+                          selected: {
+                            ...prev.selected,
+                            n2Requirement: val,
+                          },
+                        };
+                      });
+                    }}
+                  >
+                    <SelectTrigger>
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="Low">
+                        {t("n2Requirement.low")}
+                      </SelectItem>
+                      <SelectItem value="Medium">
+                        {t("n2Requirement.medium")}
+                      </SelectItem>
+                      <SelectItem value="High">
+                        {t("n2Requirement.high")}
+                      </SelectItem>
+                      <SelectItem value="Very High">
+                        {t("n2Requirement.veryHigh")}
+                      </SelectItem>
+                    </SelectContent>
+                  </Select>
+                </TableCell>
+                <TableCell>
+                  <Select
+                    name="schedule"
+                    value={selected.schedule}
+                    onValueChange={(val: FormData["selected"]["schedule"]) => {
+                      setData((prev) => {
+                        return {
+                          ...prev,
+                          selected: {
+                            ...prev.selected,
+                            schedule: val,
+                          },
+                        };
+                      });
+                    }}
+                  >
+                    <SelectTrigger>
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {maxGpl &&
+                        keyArr.map((key) => {
+                          return (
+                            <SelectItem key={key} value={key}>
+                              {t(`nuteSchedules.${key}`)}
+                            </SelectItem>
+                          );
+                        })}
+                    </SelectContent>
+                  </Select>
+                </TableCell>
+                <TableCell className="text-center">
+                  {target.targetString}
+                </TableCell>
+                <TableCell>
+                  <Select
+                    value={inputs?.numberOfAdditions.toString()}
+                    onValueChange={(val) => {
+                      setData((prev) => {
+                        return {
+                          ...prev,
+                          inputs: {
+                            ...prev.inputs,
+                            numberOfAdditions: Number(val),
+                          },
+                        };
+                      });
+                    }}
+                    name="numberOfAdditions"
+                  >
+                    <SelectTrigger>
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value={"1"}>1</SelectItem>
+                      <SelectItem value={"2"}>2</SelectItem>
+                      <SelectItem value={"3"}>3</SelectItem>
+                      <SelectItem value={"4"}>4</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </TableCell>
+                <TableCell>
+                  <Input
+                    type="number"
+                    value={yeastAmount}
+                    onChange={(e) => {
+                      setRecalc(false);
+                      setYeastAmount(Number(e.target.value));
+                    }}
+                    onFocus={(e) => e.target.select()}
+                  />
+                </TableCell>
+              </TableRow>
+            </TableBody>
+          </Table>
         </div>
       ) : (
         <Loading />

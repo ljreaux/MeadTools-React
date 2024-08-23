@@ -11,6 +11,25 @@ import { useTranslation } from "react-i18next";
 import Loading from "../Loading";
 import { List } from "../../App";
 import Tooltip from "../Tooltips";
+import { Button } from "../ui/button";
+import { Input } from "../ui/input";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableFooter,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "../ui/table";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "../ui/select";
+import { Switch } from "../ui/switch";
 
 export default function RecipeBuilder({
   ingredients,
@@ -34,12 +53,15 @@ export default function RecipeBuilder({
   const [firstMount, setFirstMount] = useState(true);
   useEffect(() => setFirstMount(false), []);
 
+  const [showBrix, setShowBrix] = useState(false);
+
   const totalBlended = ingredients.map((ingredient) => {
     return [toSG(ingredient.brix), ingredient.details[1]];
   });
   const withOutSecondary: number[][] = [];
   const justSecondary: number[][] = [];
   const offsetArr: number[] = [];
+
   ingredients.forEach((ingredient) => {
     if (!ingredient.secondary) {
       withOutSecondary.push([toSG(ingredient.brix), ingredient.details[1]]);
@@ -97,7 +119,7 @@ export default function RecipeBuilder({
         ingredients: [
           ...prev.ingredients,
           {
-            name: "honey",
+            name: "Honey",
             brix: 79.6,
             details: [0, 0],
             secondary: false,
@@ -222,7 +244,7 @@ export default function RecipeBuilder({
     <>
       {loading && <Loading />}
       <form
-        className={`w-11/12 sm:w-9/12 flex flex-col items-center justify-center text-center rounded-xl bg-sidebar p-2 sm:p-8 my-24 aspect-video text-xs sm:text-base ${
+        className={`w-11/12 flex flex-col items-center justify-center text-center rounded-xl bg-background p-2 sm:p-8 mt-24 mb-8 text-xs sm:text-base ${
           loading ? "hidden" : ""
         }`}
         onSubmit={(e) => {
@@ -230,195 +252,236 @@ export default function RecipeBuilder({
           runBlends();
         }}
       >
-        <Title header={t("recipeBuilder.homeHeading")} />
+        <Title header={t("recipeBuilder.homeHeading")} />{" "}
         {recipeName && <p className="text-3xl py-2.5">{recipeName}</p>}
-        <div className="grid grid-cols-5 gap-4 w-[97%]">
-          <label
-            htmlFor="ingredients"
-            className="flex items-center justify-center gap-1"
-          >
-            {t("recipeBuilder.labels.ingredients")}
-            <Tooltip body={t("tipText.volumeLines")} />
-          </label>
-          <label htmlFor="weight">
-            {t("recipeBuilder.labels.weight")}
-            <select
-              name="weightUnits"
-              id="weightUnits"
-              className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-textColor hover:bg-sidebar hover:border-background w-11/12 my-2"
-              value={units.weight}
-              onChange={(e) => {
-                setRecipeData((prev) => {
-                  return e.target.value === "lbs" || e.target.value === "kg"
-                    ? {
-                        ...prev,
-                        units: {
-                          ...prev.units,
-                          weight: e.target.value,
-                        },
-                      }
-                    : prev;
-                });
-              }}
-            >
-              <option value="lbs">{t("LBS")}</option>
-              <option value="kg">{t("KG")}</option>
-            </select>
-          </label>
-          <label
-            htmlFor="brix"
-            className="flex items-center justify-center gap-1"
-          >
-            {t("recipeBuilder.labels.brix")}{" "}
-            <Tooltip body={t("tipText.brix")} />
-          </label>
-          <label htmlFor="volume">
-            {t("recipeBuilder.labels.volume")}
-            <select
-              name="volumeUnits"
-              id="volumeUnits"
-              className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-textColor hover:bg-sidebar hover:border-background w-11/12 my-2"
-              value={units.volume}
-              onChange={(e) => {
-                setRecipeData((prev) => {
-                  return e.target.value === "gal" || e.target.value === "liter"
-                    ? {
-                        ...prev,
-                        units: {
-                          ...prev.units,
-                          volume: e.target.value,
-                        },
-                      }
-                    : prev;
-                });
-              }}
-            >
-              <option value="gal">{t("GAL")}</option>
-              <option value="liter">{t("LIT")}</option>
-            </select>
-          </label>
-          <label htmlFor="secondary">
-            {t("recipeBuilder.labels.secondary")}
-          </label>
-        </div>
-        {ingredients.map((ingredient, i) => (
-          <Ingredient
-            ingredient={ingredient}
-            index={i}
-            ingredientsList={ingredientsList}
-            setIngredients={setIngredients}
-            setIndividual={setIndividual}
-            removeLine={removeLine}
-            filterTerm={i <= 1 ? ["water", "juice"] : null}
-            units={units}
-            setChecked={setChecked}
-            key={i + ingredient.name}
-            setLoading={setLoading}
+        <span className="flex items-center justify-center gap-2 py-4 ml-auto">
+          {t("showBrix")}
+          <Switch
+            checked={showBrix}
+            onCheckedChange={() => setShowBrix(!showBrix)}
           />
-        ))}
+        </span>
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead className="pb-4 text-center">
+                <div className="flex items-center justify-center gap-1">
+                  {t("recipeBuilder.labels.ingredients")}
+                  <Tooltip body={t("tipText.volumeLines")} />
+                </div>
+              </TableHead>
+              {showBrix && (
+                <TableHead className="pb-4 text-center">
+                  <div className="flex items-center justify-center gap-1">
+                    {t("recipeBuilder.labels.brix")}{" "}
+                    <Tooltip body={t("tipText.brix")} />
+                  </div>
+                </TableHead>
+              )}
+              <TableHead className="pb-4 text-center">
+                {t("recipeBuilder.labels.weight")}
+                <Select
+                  name="weightUnits"
+                  value={units.weight}
+                  onValueChange={(val) => {
+                    setRecipeData((prev) => {
+                      return val === "lbs" || val === "kg"
+                        ? {
+                            ...prev,
+                            units: {
+                              ...prev.units,
+                              weight: val,
+                            },
+                          }
+                        : prev;
+                    });
+                  }}
+                >
+                  <SelectTrigger className="h-8 mt-2">
+                    <SelectValue placeholder={t("LBS")} />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="lbs">{t("LBS")}</SelectItem>
+                    <SelectItem value="kg">{t("KG")}</SelectItem>
+                  </SelectContent>
+                </Select>
+              </TableHead>
+
+              <TableHead className="pb-4 text-center">
+                {t("recipeBuilder.labels.volume")}
+                <Select
+                  name="volumeUnits"
+                  value={units.volume}
+                  onValueChange={(val) => {
+                    setRecipeData((prev) => {
+                      return val === "gal" || val === "liter"
+                        ? {
+                            ...prev,
+                            units: {
+                              ...prev.units,
+                              volume: val,
+                            },
+                          }
+                        : prev;
+                    });
+                  }}
+                >
+                  <SelectTrigger className="h-8 mt-2">
+                    <SelectValue placeholder={t("GAL")} />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="gal">{t("GAL")}</SelectItem>
+                    <SelectItem value="liter">{t("LIT")}</SelectItem>
+                  </SelectContent>
+                </Select>
+              </TableHead>
+              <TableHead className="pb-4 text-center">
+                {t("recipeBuilder.labels.secondary")}
+              </TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {ingredients.map((ingredient, i) => {
+              return (
+                <Ingredient
+                  ingredient={ingredient}
+                  index={i}
+                  ingredientsList={ingredientsList}
+                  setIngredients={setIngredients}
+                  setIndividual={setIndividual}
+                  removeLine={removeLine}
+                  filterTerm={i <= 1 ? ["water", "juice"] : null}
+                  units={units}
+                  setChecked={setChecked}
+                  key={i + ingredient.name}
+                  setLoading={setLoading}
+                  showBrix={showBrix}
+                />
+              );
+            })}
+          </TableBody>
+        </Table>
         {ingredients.length < 9 && (
           <button onClick={addIngredientLine} type="button">
             {t("recipeBuilder.addNew")}
           </button>
         )}
-        <div className="flex items-center justify-center col-span-5 gap-4 px-2 py-1 my-4 text-lg border-2 border-solid border-textColor hover:bg-sidebar hover:border-background md:text-lg disabled:bg-sidebar disabled:hover:border-textColor disabled:hover:text-sidebar disabled:cursor-not-allowed bg-background rounded-2xl sm:gap-8 group">
+        <div className="flex items-center justify-center col-span-5 gap-4 px-2 py-1 my-4 text-lg border border-solid rounded-lg bg-background text-foreground hover:bg-foreground hover:border-background hover:text-background sm:gap-8 group">
           <button
             type="button"
-            className={`group w-fit text-sidebar hover:text-textColor transition-colors disabled:cursor-not-allowed`}
+            className={`group w-fit text-sidebar hover:text-foreground transition-colors disabled:cursor-not-allowed`}
             disabled={ingredients.length > 9}
             onClick={addIngredientLine}
           >
-            <FaPlusSquare className="group-hover:scale-125 group-hover:text-textColor " />
+            <FaPlusSquare className="group-hover:scale-125 group-hover:text-background" />
           </button>
           <button
             type="button"
-            className={`group w-fit text-sidebar hover:text-textColor transition-colors disabled:cursor-not-allowed`}
+            className={`group w-fit text-sidebar hover:text-foreground transition-colors disabled:cursor-not-allowed`}
             disabled={ingredients.length <= 4}
             onClick={() => removeLine(ingredients.length - 1)}
           >
-            <FaMinusSquare className="group-hover:scale-125 group-hover:text-textColor" />
+            <FaMinusSquare className="group-hover:scale-125 group-hover:text-background" />
           </button>
         </div>
-        <button
-          className="px-2 py-1 border-2 border-solid border-textColor hover:bg-sidebar hover:border-background md:text-lg disabled:bg-sidebar disabled:hover:border-textColor disabled:hover:text-sidebar disabled:cursor-not-allowed bg-background rounded-2xl"
-          type="submit"
-        >
+        <Button variant={"secondary"} type="submit">
           {t("recipeBuilder.submit")}
-        </button>{" "}
+        </Button>
         {blend.blendedValue > 0 && (
-          <div className="grid items-center justify-center w-full grid-cols-5 mt-4 text-center">
-            <label htmlFor="estOG">
-              {t("recipeBuilder.resultsLabels.estOG")}
-            </label>
+          <Table className="mt-6">
+            <TableHeader>
+              <TableRow>
+                <TableHead className="pb-4 text-center">
+                  {t("recipeBuilder.resultsLabels.estOG")}
+                </TableHead>
 
-            <label
-              htmlFor="estFG"
-              className="flex flex-col items-center justify-center"
-            >
-              {t("recipeBuilder.resultsLabels.estFG")}
-              <Tooltip body={t("tipText.estimatedFg")} />
-            </label>
-            <label htmlFor="backFG" className="flex justify-center item-center">
-              {t("recipeBuilder.resultsLabels.backFG")}
-            </label>
-            <label htmlFor="abv">{t("recipeBuilder.resultsLabels.abv")}</label>
-            <label htmlFor="delle" className="flex items-center justify-center">
-              {t("recipeBuilder.resultsLabels.delle")}
-              <Tooltip
-                body={t("tipText.delleUnits")}
-                link="https://meadmaking.wiki/en/process/stabilization#via-yeast-alcohol-tolerance"
-              />
-            </label>
-            <p id="estOG">
-              {Math.round(noSecondaryBlend.blendedValue * 1000) / 1000}
-            </p>
+                <TableHead className="pb-4 text-center">
+                  <div className="flex items-center justify-center gap-1">
+                    {t("recipeBuilder.resultsLabels.estFG")}
+                    <Tooltip body={t("tipText.estimatedFg")} />
+                  </div>
+                </TableHead>
+                <TableHead className="pb-4 text-center">
+                  {t("recipeBuilder.resultsLabels.backFG")}
+                </TableHead>
+                <TableHead className="pb-4 text-center">
+                  {t("recipeBuilder.resultsLabels.abv")}
+                </TableHead>
+                <TableHead className="pb-4 text-center">
+                  <div className="flex items-center justify-center gap-1">
+                    {t("recipeBuilder.resultsLabels.delle")}
+                    <Tooltip
+                      body={t("tipText.delleUnits")}
+                      link="https://meadmaking.wiki/en/process/stabilization#via-yeast-alcohol-tolerance"
+                    />
+                  </div>
+                </TableHead>
+              </TableRow>
+            </TableHeader>
 
-            <input
-              type="number"
-              value={FG}
-              step={0.001}
-              className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-textColor hover:bg-sidebar hover:border-background w-11/12 my-2"
-              onChange={(e) => {
-                setRecipeData((prev) => {
-                  return {
-                    ...prev,
-                    FG: Number(e.target.value),
-                  };
-                });
-              }}
-              onFocus={(e) => e.target.select()}
-            />
-            <p id="backFG">{blendFG}</p>
-            <p>
-              {Math.round(ABV * 100) / 100}
-              {t("recipeBuilder.percent")}
-            </p>
-            <p>
-              {Math.round(delle)} {t("DU")}
-            </p>
-            <label
-              htmlFor="totalVolume"
-              className="flex justify-center item-center"
-            >
-              {t("recipeBuilder.resultsLabels.totalPrimary")}
-              <Tooltip body={t("tipText.totalVolume")} />
-            </label>
-            <p id="totalVolume">
-              {Math.round(noSecondaryBlend.totalVolume * 1000) / 1000}{" "}
-              {units.volume}
-            </p>
+            <TableFooter>
+              <TableRow>
+                <TableCell id="estOG">
+                  <p className="flex items-center justify-center text-center">
+                    {Math.round(noSecondaryBlend.blendedValue * 1000) / 1000}
+                  </p>
+                </TableCell>
+                <TableCell>
+                  <Input
+                    type="number"
+                    value={FG}
+                    step={0.001}
+                    className="h-8"
+                    onChange={(e) => {
+                      setRecipeData((prev) => {
+                        return {
+                          ...prev,
+                          FG: Number(e.target.value),
+                        };
+                      });
+                    }}
+                    onFocus={(e) => e.target.select()}
+                  />
+                </TableCell>
+                <TableCell id="backFG" className="text-center">
+                  {blendFG}
+                </TableCell>
+                <TableCell className="text-center">
+                  {Math.round(ABV * 100) / 100}
+                  {t("recipeBuilder.percent")}
+                </TableCell>
+                <TableCell className="text-center">
+                  {Math.round(delle)} {t("DU")}
+                </TableCell>
+              </TableRow>
 
-            <label
-              htmlFor="totalSecondaryVolume"
-              className="flex justify-center col-start-4 item-center"
-            >
-              {t("recipeBuilder.resultsLabels.totalSecondary")}
-              <Tooltip body={t("tipText.totalSecondary")} />
-            </label>
-            <p id="totalVolume">
-              {Math.round(blend.totalVolume * 1000) / 1000} {units.volume}
-            </p>
-          </div>
+              <TableRow className="bg-background">
+                <TableCell colSpan={2}>
+                  <div className="flex items-center justify-center gap-1">
+                    {t("recipeBuilder.resultsLabels.totalPrimary")}
+                    <Tooltip body={t("tipText.totalVolume")} />
+                  </div>
+                </TableCell>
+
+                <TableCell colSpan={3}>
+                  <div className="flex items-center justify-center gap-1">
+                    {t("recipeBuilder.resultsLabels.totalSecondary")}
+                    <Tooltip body={t("tipText.totalSecondary")} />
+                  </div>
+                </TableCell>
+              </TableRow>
+
+              <TableRow>
+                <TableCell id="totalVolume" className="text-center" colSpan={2}>
+                  {Math.round(noSecondaryBlend.totalVolume * 1000) / 1000}
+                  {units.volume}
+                </TableCell>
+                <TableCell className="text-center" colSpan={3}>
+                  {Math.round(blend.totalVolume * 1000) / 1000} {units.volume}
+                </TableCell>
+              </TableRow>
+            </TableFooter>
+          </Table>
         )}
       </form>
     </>

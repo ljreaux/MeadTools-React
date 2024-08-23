@@ -16,7 +16,7 @@ import useAbv from "../../hooks/useAbv.ts";
 import { FormData } from "../Nutrients/NutrientCalc";
 import calcSb from "../../helpers/calcSb";
 import i18n from "../../localization/i18n.ts";
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 
 // Create styles
 const styles = StyleSheet.create({
@@ -25,7 +25,6 @@ const styles = StyleSheet.create({
     textAlign: "center",
     justifyContent: "flex-start",
     alignItems: "center",
-    // backgroundColor: "#E4E4E4",
     fontFamily: "Times-Roman",
     fontSize: 12,
     boxSizing: "border-box",
@@ -93,17 +92,14 @@ const MyDocument = ({
   const { delle } = useAbv(ABVOBJ);
 
   const [primary, setPrimary] = useState<Ingredient[]>([]);
-  const [secondary, setSecondary] = useState<Ingredient[]>(
-    ingredients
-      ? ingredients.filter((item) => item.secondary && item.details[0] > 0)
-      : []
-  );
+  const [secondary, setSecondary] = useState<Ingredient[]>([]);
 
   useEffect(() => {
     if (ingredients) {
       setPrimary(
         ingredients.filter((item) => !item.secondary && item.details[0] > 0)
       );
+
       setSecondary(
         ingredients.filter((item) => item.secondary && item.details[0] > 0)
       );
@@ -613,9 +609,8 @@ const MyDocument = ({
             </Text>
             {primaryNotes.map((note, i) => {
               return (
-                <>
+                <Fragment key={"primary note #" + i}>
                   <Text
-                    key={"note #" + i}
                     style={[
                       styles.tableAlign,
                       { width: "75%", textAlign: "left", paddingLeft: 10 },
@@ -626,7 +621,7 @@ const MyDocument = ({
                   <Text style={[styles.tableAlign, { width: "25%" }]}>
                     {note[1]}
                   </Text>
-                </>
+                </Fragment>
               );
             })}
           </View>
@@ -777,9 +772,8 @@ const MyDocument = ({
             </Text>
             {secondaryNotes.map((note, i) => {
               return (
-                <>
+                <Fragment key={"secondaryNotes " + i}>
                   <Text
-                    key={"secondaryNotes " + i}
                     style={[
                       styles.tableAlign,
                       { width: "75%", textAlign: "left", paddingLeft: 10 },
@@ -790,7 +784,7 @@ const MyDocument = ({
                   <Text style={[styles.tableAlign, { width: "25%" }]}>
                     {note[1]}
                   </Text>
-                </>
+                </Fragment>
               );
             })}
           </View>

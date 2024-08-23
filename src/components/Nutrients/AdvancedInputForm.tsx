@@ -1,6 +1,15 @@
 import { SetStateAction, Dispatch } from "react";
 import Title from "../Title";
 import { useTranslation } from "react-i18next";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "../ui/table";
+import { Input } from "../ui/input";
 
 export default function AdvancedInputForm({
   yanFromSource,
@@ -16,127 +25,143 @@ export default function AdvancedInputForm({
 }) {
   const { t } = useTranslation();
   return (
-    <div className="w-11/12 sm:w-9/12 flex flex-col items-center justify-center rounded-xl bg-sidebar p-8 my-8 aspect-video">
-      <div className="text-center">
-        <Title header={t("advancedNutrition.label")} />
-        <label htmlFor="yanContribution" className="w-full">
-          {t("advancedNutrition.yanContribution")}
-        </label>
-        <div
-          id="yanContribution"
-          className="grid grid-cols-3 gap-4 text-center"
-        >
-          <label htmlFor="fermaidO">
-            {t("nutrients.fermO")}
-            <input
-              type="number"
-              className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-textColor hover:bg-sidebar hover:border-background w-11/12 my-2"
-              value={yanContribution[0]}
-              onFocus={(e) => e.target.select()}
-              onChange={(e) =>
-                setYanContribution((prev) => {
-                  return prev.map((item, i) => {
-                    return i === 0 ? Number(e.target.value) : item;
-                  });
-                })
-              }
-            />
-          </label>
-          <label htmlFor="fermaidK">
-            {t("nutrients.fermK")}
-            <input
-              type="number"
-              className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-textColor hover:bg-sidebar hover:border-background w-11/12 my-2"
-              value={yanContribution[1]}
-              onFocus={(e) => e.target.select()}
-              onChange={(e) =>
-                setYanContribution((prev) => {
-                  return prev.map((item, i) => {
-                    return i === 1 ? Number(e.target.value) : item;
-                  });
-                })
-              }
-            />
-          </label>
-          <label htmlFor="dap">
-            {t("nutrients.dap")}
-            <input
-              type="number"
-              className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-textColor hover:bg-sidebar hover:border-background w-11/12 my-2"
-              value={yanContribution[2]}
-              onFocus={(e) => e.target.select()}
-              onChange={(e) =>
-                setYanContribution((prev) => {
-                  return prev.map((item, i) => {
-                    return i === 2 ? Number(e.target.value) : item;
-                  });
-                })
-              }
-            />
-          </label>
-        </div>
-      </div>
-      <div className="text-center">
-        <label htmlFor="yanFromSource" className="w-full">
-          {t("advancedNutrition.yanFromSource")}
-        </label>
-        <div id="yanFromSource" className="grid grid-cols-3 gap-4 text-center">
-          <label htmlFor="fermaidO">
-            {t("nutrients.fermO")}
-            <input
-              type="number"
-              className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-textColor hover:bg-sidebar hover:border-background w-11/12 my-2"
-              value={yanFromSource ? yanFromSource[0] : 0}
-              onFocus={(e) => e.target.select()}
-              onChange={(e) => {
-                setYanFromSource((prev: null | number[]) => {
-                  if (prev) {
-                    return prev.map((item, i) => {
-                      return i === 0 ? Number(e.target.value) : item;
+    <div className="flex flex-col items-center justify-center w-11/12 p-8 my-8 sm:w-9/12 rounded-xl bg-background ">
+      <Title header={t("advancedNutrition.label")} />
+      <Table>
+        <TableHeader>
+          <TableRow>
+            <TableHead colSpan={3} className="text-center ">
+              {t("advancedNutrition.yanContribution")}
+            </TableHead>
+          </TableRow>
+        </TableHeader>
+
+        <TableBody>
+          <TableRow>
+            <TableCell className="mt-6 text-center">
+              <span className="flex flex-col gap-2">
+                {t("nutrients.fermO")}
+                <Input
+                  type="number"
+                  value={yanContribution[0]}
+                  onFocus={(e) => e.target.select()}
+                  onChange={(e) =>
+                    setYanContribution((prev) => {
+                      return prev.map((item, i) => {
+                        return i === 0 ? Number(e.target.value) : item;
+                      });
+                    })
+                  }
+                />
+              </span>
+            </TableCell>
+            <TableCell className="mt-6 text-center ">
+              <span className="flex flex-col gap-2">
+                {t("nutrients.fermK")}
+                <Input
+                  type="number"
+                  value={yanContribution[1]}
+                  onFocus={(e) => e.target.select()}
+                  onChange={(e) =>
+                    setYanContribution((prev) => {
+                      return prev.map((item, i) => {
+                        return i === 1 ? Number(e.target.value) : item;
+                      });
+                    })
+                  }
+                />
+              </span>
+            </TableCell>
+            <TableCell className="mt-6 text-center ">
+              <span className="flex flex-col gap-2">
+                {t("nutrients.dap")}
+                <Input
+                  type="number"
+                  value={yanContribution[2]}
+                  onFocus={(e) => e.target.select()}
+                  onChange={(e) =>
+                    setYanContribution((prev) => {
+                      return prev.map((item, i) => {
+                        return i === 2 ? Number(e.target.value) : item;
+                      });
+                    })
+                  }
+                />
+              </span>
+            </TableCell>
+          </TableRow>
+        </TableBody>
+
+        <TableHeader>
+          <TableRow className="text-center">
+            <TableHead colSpan={3} className="text-center ">
+              {t("advancedNutrition.yanFromSource")}
+            </TableHead>
+          </TableRow>
+        </TableHeader>
+
+        <TableBody id="yanFromSource">
+          <TableRow>
+            <TableCell className="mt-6 text-center ">
+              <span className="flex flex-col gap-2">
+                {t("nutrients.fermO")}
+                <Input
+                  type="number"
+                  value={yanFromSource ? yanFromSource[0] : 0}
+                  onFocus={(e) => e.target.select()}
+                  onChange={(e) => {
+                    setYanFromSource((prev: null | number[]) => {
+                      if (prev) {
+                        return prev.map((item, i) => {
+                          return i === 0 ? Number(e.target.value) : item;
+                        });
+                      } else return null;
                     });
-                  } else return null;
-                });
-              }}
-            />
-          </label>
-          <label htmlFor="fermaidK">
-            {t("nutrients.fermK")}
-            <input
-              type="number"
-              className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-textColor hover:bg-sidebar hover:border-background w-11/12 my-2"
-              value={yanFromSource ? yanFromSource[1] : 0}
-              onFocus={(e) => e.target.select()}
-              onChange={(e) => {
-                setYanFromSource((prev: null | number[]) => {
-                  if (prev) {
-                    return prev.map((item, i) => {
-                      return i === 1 ? Number(e.target.value) : item;
+                  }}
+                />
+              </span>
+            </TableCell>
+            <TableCell className="mt-6 text-center ">
+              <span className="flex flex-col gap-2">
+                {t("nutrients.fermK")}
+                <Input
+                  type="number"
+                  value={yanFromSource ? yanFromSource[1] : 0}
+                  onFocus={(e) => e.target.select()}
+                  onChange={(e) => {
+                    setYanFromSource((prev: null | number[]) => {
+                      if (prev) {
+                        return prev.map((item, i) => {
+                          return i === 1 ? Number(e.target.value) : item;
+                        });
+                      } else return null;
                     });
-                  } else return null;
-                });
-              }}
-            />
-          </label>
-          <label htmlFor="dap">
-            {t("nutrients.dap")}
-            <input
-              type="number"
-              className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-textColor hover:bg-sidebar hover:border-background w-11/12 my-2"
-              value={yanFromSource ? yanFromSource[2] : 0}
-              onFocus={(e) => e.target.select()}
-              onChange={(e) => {
-                setYanFromSource((prev: null | number[]) => {
-                  if (prev) {
-                    return prev.map((item, i) => {
-                      return i === 2 ? Number(e.target.value) : item;
+                  }}
+                />
+              </span>
+            </TableCell>
+            <TableCell className="mt-6 text-center ">
+              <span className="flex flex-col gap-2">
+                {t("nutrients.dap")}
+                <Input
+                  type="number"
+                  value={yanFromSource ? yanFromSource[2] : 0}
+                  onFocus={(e) => e.target.select()}
+                  onChange={(e) => {
+                    setYanFromSource((prev: null | number[]) => {
+                      if (prev) {
+                        return prev.map((item, i) => {
+                          return i === 2 ? Number(e.target.value) : item;
+                        });
+                      } else return null;
                     });
-                  } else return null;
-                });
-              }}
-            />
-          </label>
-        </div>
-      </div>
+                  }}
+                />
+              </span>
+            </TableCell>
+          </TableRow>
+        </TableBody>
+      </Table>
     </div>
   );
 }

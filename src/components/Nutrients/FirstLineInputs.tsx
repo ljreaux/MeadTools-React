@@ -1,5 +1,7 @@
 import { FormEvent } from "react";
 import { toBrix } from "../../helpers/unitConverters";
+import { TableCell } from "../ui/table";
+import { Input } from "../ui/input";
 
 export default function FirstLineInputs({
   inputs,
@@ -15,37 +17,40 @@ export default function FirstLineInputs({
 }) {
   return (
     <>
-      <input
-        type="number"
-        id="volume"
-        name="volume"
-        value={inputs.volume}
-        className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-textColor hover:bg-sidebar hover:border-background w-11/12 my-2"
-        onChange={handleChange}
-        onFocus={(e) => e.target.select()}
-      />
-      <div className="flex ">
-        <input
+      <TableCell>
+        <Input
+          type="number"
+          id="volume"
+          name="volume"
+          value={inputs.volume}
+          onChange={handleChange}
+          onFocus={(e) => e.target.select()}
+        />
+      </TableCell>
+      <TableCell className="flex gap-4">
+        <Input
           type="number"
           id="specificGravity"
           name="sg"
           value={inputs.sg}
-          className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-textColor hover:bg-sidebar hover:border-background w-11/12 my-2"
           onChange={handleChange}
           onFocus={(e) => e.target.select()}
-          step={.001}
+          step={0.001}
         />{" "}
-        <p>{Math.round(toBrix(inputs.sg) * 100) / 100} Brix</p>
-      </div>
-      <input
-        type="number"
-        id="offsetPpm"
-        name="offset"
-        value={inputs.offset}
-        className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-textColor hover:bg-sidebar hover:border-background w-11/12 my-2"
-        onChange={handleChange}
-        onFocus={(e) => e.target.select()}
-      />
+        <p className="text-center">
+          {Math.round(toBrix(inputs.sg) * 100) / 100} Brix
+        </p>
+      </TableCell>
+      <TableCell>
+        <Input
+          type="number"
+          id="offsetPpm"
+          name="offset"
+          value={inputs.offset}
+          onChange={handleChange}
+          onFocus={(e) => e.target.select()}
+        />
+      </TableCell>
     </>
   );
 }

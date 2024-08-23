@@ -4,6 +4,7 @@ import useAbv from "../../../hooks/useAbv";
 import { toBrix } from "../../../helpers/unitConverters";
 import AbvLine from "../../AbvLine";
 import { useTranslation } from "react-i18next";
+import { Input } from "@/components/ui/input";
 
 interface Gravity {
   fgh: number;
@@ -22,35 +23,35 @@ export default function EstimatedOG() {
     1000;
   const abv = useAbv({ OG: estOG, FG: gravity.fgh });
   return (
-    <div className="w-11/12 sm:w-9/12 flex flex-col items-center justify-center rounded-xl bg-sidebar p-8 my-8 aspect-video">
+    <div className="flex flex-col items-center justify-center w-11/12 p-8 my-40 sm:my-8 sm:w-1/2 rounded-xl bg-background">
       <Title header={t("ogHeading")} />
-      <label className="text-center mx-2 my-2" htmlFor="hydrometerFG">
+      <label className="mx-2 my-2 text-center" htmlFor="hydrometerFG">
         {t("hydrometerFG")}{" "}
       </label>
-      <input
+      <Input
         value={gravity.fgh}
         onChange={(e) =>
           setGravity((prev) => ({ ...prev, fgh: Number(e.target.value) }))
         }
         type="number"
         id="hydrometerFG"
-        className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-textColor hover:bg-sidebar hover:border-background w-1/4"
+        className="max-w-96"
         onFocus={(e) => e.target.select()}
       />
-      <label className="text-center mx-2 my-2" htmlFor="refractometerFG">
+      <label className="mx-2 my-2 text-center" htmlFor="refractometerFG">
         {t("refractometerFG")}{" "}
       </label>
-      <input
+      <Input
         value={gravity.fgr}
         onChange={(e) =>
           setGravity((prev) => ({ ...prev, fgr: Number(e.target.value) }))
         }
         type="number"
         id="refractometerFG"
-        className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-textColor hover:bg-sidebar hover:border-background w-1/4"
+        className="max-w-96"
         onFocus={(e) => e.target.select()}
       />
-      <div className="text-2xl flex gap-2 mt-8">
+      <div className="flex gap-2 mt-8 text-lg text-center sm:text-2xl">
         <p>
           {t("estimatedOG")} {estOG}
         </p>
@@ -58,7 +59,7 @@ export default function EstimatedOG() {
           {Math.round(toBrix(estOG) * 100) / 100} {t("BRIX")}
         </p>
       </div>
-      <AbvLine {...abv} />
+      <AbvLine {...abv} textSize="text-lg" />
     </div>
   );
 }

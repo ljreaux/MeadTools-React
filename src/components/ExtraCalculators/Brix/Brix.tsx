@@ -1,8 +1,16 @@
-import { useState, FormEvent } from "react";
+import { useState } from "react";
 import Title from "../../Title";
 import useBrixUnitsChange from "../../../hooks/useBrixUnitsChange";
 import { toBrix, toSG } from "../../../helpers/unitConverters";
 import { useTranslation } from "react-i18next";
+import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+  SelectContent,
+} from "@/components/ui/select";
 
 export interface Brix {
   value: number;
@@ -17,9 +25,8 @@ export default function Brix() {
     unit: "SG",
   });
 
-  const handleUnitChange = (e: FormEvent<EventTarget>) => {
-    const target = e.target as HTMLInputElement;
-    const unit = target.value;
+  const handleUnitChange = (val: string) => {
+    const unit = val;
     if (unit === "SG" || unit === "Brix")
       setBrixObj((prev) => ({ ...prev, unit: unit }));
   };
@@ -36,13 +43,13 @@ export default function Brix() {
       : Math.round(toSG(brixObj.value) * 1000) / 1000;
 
   return (
-    <div className="w-11/12 sm:w-9/12 flex flex-col items-center justify-center rounded-xl bg-sidebar p-8 my-8 aspect-video">
+    <div className="flex flex-col items-center justify-center w-11/12 gap-2 p-8 my-8 sm:w-1/2 rounded-xl bg-background ">
       <Title header={t("brixHeading")} />
-      <label className="text-center mx-2 my-2" htmlFor="gravity">
+      <label className="mx-2 my-2 text-center" htmlFor="gravity">
         {t("gravityLabel")}
       </label>
-      <input
-        className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-textColor hover:bg-sidebar hover:border-background w-1/4"
+      <Input
+        className="max-w-96"
         type="number"
         id="gravity"
         value={brixObj.value}
@@ -52,15 +59,19 @@ export default function Brix() {
         onFocus={(e) => e.target.select()}
       />
       <p>{brixObj.unit === "Brix" ? t(brixObj.unit.toUpperCase()) : null}</p>
-      <select
+      <Select
         name="units"
-        id="units"
-        onChange={handleUnitChange}
-        className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-textColor hover:bg-sidebar hover:border-background w-1/4"
+        value={brixObj.unit}
+        onValueChange={handleUnitChange}
       >
-        <option value="SG">{t("SG")}</option>
-        <option value="Brix">{t("BRIX")}</option>
-      </select>
+        <SelectTrigger className="max-w-96">
+          <SelectValue placeholder={t("SG")} />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectItem value="SG">{t("SG")}</SelectItem>
+          <SelectItem value="Brix">{t("BRIX")}</SelectItem>
+        </SelectContent>
+      </Select>
       <p>{displayString}</p>
     </div>
   );

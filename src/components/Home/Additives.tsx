@@ -4,6 +4,15 @@ import lodash from "lodash";
 import { useTranslation } from "react-i18next";
 import { FaMinusSquare, FaPlusSquare } from "react-icons/fa";
 import Tooltip from "../Tooltips";
+import { Input } from "../ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "../ui/select";
+import { Table, TableBody, TableCell, TableRow } from "../ui/table";
 
 export default function Additives({
   additives,
@@ -110,9 +119,9 @@ export default function Additives({
   ];
 
   return (
-    <div className="grid grid-cols-4 w-11/12 sm:w-9/12 items-center justify-center rounded-xl bg-sidebar p-8 my-24">
-      <div className="col-span-4 flex justify-center gap-1 items-center">
-        <Title header={t("additivesHeading")} />
+    <div className="w-11/12 p-8 my-24 sm:w-9/12 rounded-xl bg-background">
+      <div className="flex items-center justify-center gap-1">
+        <Title header={t("additivesHeading")} styles="text-lg md:text-4xl" />
         <Tooltip body={t("tipText.additives")} />
       </div>
       <datalist id="additives">
@@ -149,88 +158,97 @@ export default function Additives({
           value={t(`list.${lodash.camelCase("Potassium Carbonate")}`)}
         ></option>
       </datalist>
-      {additives.map((additive, i) => {
-        return (
-          <div key={`additive ${i}`} className="col-span-4 flex">
-            <input
-              type="text"
-              list="additives"
-              id="additionalIngredients"
-              value={additive.name}
-              onChange={(e) => {
-                const multiplier = volumeUnits === "liter" ? 0.264172 : 1;
-                const details = additiveDosage.find(
-                  (additive) => additive.name === e.target.value
-                );
-                if (details) {
-                  editAdditives(
-                    {
-                      name: details.name,
-                      amount:
-                        Math.round(
-                          details.dosage * multiplier * batchVolume * 1000
-                        ) / 1000,
-                      unit: details.unit,
-                    },
-                    i
-                  );
-                } else {
-                  editAdditives({ ...additive, name: e.target.value }, i);
-                }
-              }}
-              className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-textColor hover:bg-sidebar hover:border-background w-11/12 my-2 disabled:bg-sidebar
-            disabled:cursor-not-allowed"
-              onFocus={(e) => e.target.select()}
-            />
-            <input
-              type="number"
-              value={additive.amount}
-              onChange={(e) => {
-                editAdditives(
-                  { ...additive, amount: Number(e.target.value) },
-                  i
-                );
-              }}
-              className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-textColor hover:bg-sidebar hover:border-background w-11/12 my-2 disabled:bg-sidebar
-            disabled:cursor-not-allowed"
-              onFocus={(e) => e.target.select()}
-            />
-            <select
-              name="additiveUnits"
-              id="additiveUnits"
-              className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-textColor hover:bg-sidebar hover:border-background w-11/12 my-2 disabled:bg-sidebar
-            disabled:cursor-not-allowed"
-              value={additive.unit}
-              onChange={(e) => {
-                editAdditives({ ...additive, unit: e.target.value }, i);
-              }}
-            >
-              <option value="g">{t("G")}</option>
-              <option value="mg">{t("MG")}</option>
-              <option value="kg">{t("KG")}</option>
-              <option value="oz">{t("OZ")}</option>
-              <option value="lbs">{t("LBS")}</option>
-              <option value="ml">{t("ML")}</option>
-              <option value="liters">{t("LIT").toLowerCase()}</option>
-              <option value="fl oz">{t("FLOZ")}</option>
-              <option value="quarts">{t("QUARTS")}</option>
-              <option value="gal">{t("GALS")}</option>
-              <option value="tsp">{t("TSP")}</option>
-              <option value="tbsp">{t("TBSP")}</option>
-              <option value="units">{t("UNITS")}</option>
-            </select>
-            {additives.length > 1 && i !== 0 && (
-              <button className="ml-4" onClick={() => deleteAdditive(i)}>
-                <FaMinusSquare />
-              </button>
-            )}
-          </div>
-        );
-      })}
-
-      <div className="col-span-4 flex justify-center">
+      <Table>
+        <TableBody>
+          {additives.map((additive, i) => {
+            return (
+              <TableRow key={`additive ${i}`}>
+                <TableCell className="p-1 sm:p-4">
+                  <Input
+                    type="text"
+                    list="additives"
+                    id="additionalIngredients"
+                    value={additive.name}
+                    onChange={(e) => {
+                      const multiplier = volumeUnits === "liter" ? 0.264172 : 1;
+                      const details = additiveDosage.find(
+                        (additive) => additive.name === e.target.value
+                      );
+                      if (details) {
+                        editAdditives(
+                          {
+                            name: details.name,
+                            amount:
+                              Math.round(
+                                details.dosage * multiplier * batchVolume * 1000
+                              ) / 1000,
+                            unit: details.unit,
+                          },
+                          i
+                        );
+                      } else {
+                        editAdditives({ ...additive, name: e.target.value }, i);
+                      }
+                    }}
+                    onFocus={(e) => e.target.select()}
+                  />
+                </TableCell>
+                <TableCell className="p-1 sm:p-4">
+                  <Input
+                    type="number"
+                    value={additive.amount}
+                    onChange={(e) => {
+                      editAdditives(
+                        { ...additive, amount: Number(e.target.value) },
+                        i
+                      );
+                    }}
+                    onFocus={(e) => e.target.select()}
+                  />
+                </TableCell>
+                <TableCell className="flex items-center justify-between p-1 sm:p-4 min-w-24">
+                  <Select
+                    name="additiveUnits"
+                    value={additive.unit}
+                    onValueChange={(val) => {
+                      editAdditives({ ...additive, unit: val }, i);
+                    }}
+                  >
+                    <SelectTrigger className="w-3/4">
+                      <SelectValue placeholder={t("G")} />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="g">{t("G")}</SelectItem>
+                      <SelectItem value="mg">{t("MG")}</SelectItem>
+                      <SelectItem value="kg">{t("KG")}</SelectItem>
+                      <SelectItem value="oz">{t("OZ")}</SelectItem>
+                      <SelectItem value="lbs">{t("LBS")}</SelectItem>
+                      <SelectItem value="ml">{t("ML")}</SelectItem>
+                      <SelectItem value="liters">
+                        {t("LIT").toLowerCase()}
+                      </SelectItem>
+                      <SelectItem value="fl oz">{t("FLOZ")}</SelectItem>
+                      <SelectItem value="quarts">{t("QUARTS")}</SelectItem>
+                      <SelectItem value="gal">{t("GALS")}</SelectItem>
+                      <SelectItem value="tsp">{t("TSP")}</SelectItem>
+                      <SelectItem value="tbsp">{t("TBSP")}</SelectItem>
+                      <SelectItem value="units">{t("UNITS")}</SelectItem>
+                    </SelectContent>
+                  </Select>
+                  {additives.length > 1 && i !== 0 && (
+                    <button onClick={() => deleteAdditive(i)}>
+                      <FaMinusSquare />
+                    </button>
+                  )}
+                </TableCell>
+              </TableRow>
+            );
+          })}
+        </TableBody>
+      </Table>
+      <div className="flex justify-center ">
         <button
-          className="bg-background rounded-2xl border-2 border-solid border-textColor  hover:bg-sidebar hover:border-background md:text-lg text-base px-2 py-1 disabled:bg-sidebar disabled:hover:border-textColor disabled:hover:text-sidebar disabled:cursor-not-allowed w-1/4 flex justify-center items-center"
+          className="flex items-center justify-center gap-4 px-8 py-2 my-4 text-lg border border-solid rounded-lg bg-background text-foreground hover:bg-foreground hover:border-background hover:text-background sm:gap-8 group"
           type="button"
           onClick={addAdditive}
           disabled={additives.length >= 10}

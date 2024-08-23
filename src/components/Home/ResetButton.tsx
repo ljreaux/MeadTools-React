@@ -69,8 +69,8 @@ export default function ResetButton({
   return (
     <>
       <AlertDialog>
-        <AlertDialogTrigger>
-          <Button className="px-4 py-1 text-base border-2 border-solid hover:bg-background rounded-2xl hover:border-textColor bg-sidebar border-background md:text-lg disabled:bg-sidebar disabled:hover:border-textColor disabled:hover:text-sidebar disabled:cursor-not-allowed grow">
+        <AlertDialogTrigger className="flex-1 w-full" asChild>
+          <Button variant={"secondary"} className="flex-1 w-full">
             {t("recipeBuilder.reset")}
           </Button>
         </AlertDialogTrigger>

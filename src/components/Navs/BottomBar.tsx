@@ -5,56 +5,59 @@ import { FaFacebook } from "react-icons/fa";
 import { AiFillInstagram } from "react-icons/ai";
 import { MdEmail } from "react-icons/md";
 import { Link } from "react-router-dom";
+
+const socials = [
+  {
+    href: "https://github.com/ljreaux/MeadTools-React/tree/main",
+    logo: <FaGithub />,
+  },
+  {
+    href: "https://www.linkedin.com/in/ljreaux/",
+    logo: <FaLinkedin />,
+  },
+  {
+    href: "https://discord.gg/Wbx9DWWqFC",
+    logo: <FaDiscord />,
+  },
+  {
+    href: "https://www.facebook.com/profile.php?id=61555860082002",
+    logo: <FaFacebook />,
+  },
+  {
+    href: "https://www.instagram.com/meadtools/",
+    logo: <AiFillInstagram />,
+  },
+];
+
 export default function BottomBar() {
   return (
-    <div className=" w-screen fixed bottom-0 left-0 text-textColor">
+    <footer className="fixed bottom-0 left-0 w-screen text-foreground">
       <div className="w-full ">
         <span className="sm:flex sm:w-full sm:justify-center">
-          <div className="flex w-full sm:w-fit sm:px-4 sm:my-2 sm:rounded-2xl items-center justify-center gap-1 bg-sidebar">
-            <a
-              className=" hover:text-background md:hover:scale-105 transition-all py-2 "
-              href="https://github.com/ljreaux/MeadTools-React/tree/main"
-              target="to_blank"
-            >
-              <FaGithub />
-            </a>
-            <a
-              className=" hover:text-background md:hover:scale-105 transition-all py-2 "
-              href="https://www.linkedin.com/in/ljreaux/"
-              target="to_blank"
-            >
-              <FaLinkedin />
-            </a>
-            <a
-              className=" hover:text-background md:hover:scale-105 transition-all py-2 "
-              href="https://discord.gg/Wbx9DWWqFC"
-              target="to_blank"
-            >
-              <FaDiscord />
-            </a>
-            <a
-              className=" hover:text-background md:hover:scale-105 transition-all py-2 "
-              href="https://www.facebook.com/profile.php?id=61555860082002"
-              target="to_blank"
-            >
-              <FaFacebook />
-            </a>
-            <a
-              className=" hover:text-background md:hover:scale-105 transition-all py-2"
-              href="https://www.instagram.com/meadtools/"
-              target="to_blank"
-            >
-              <AiFillInstagram />
-            </a>
+          <div className="flex items-center justify-center w-full gap-1 text-xl sm:w-fit sm:px-4 sm:my-2 sm:rounded-2xl bg-background sm:border-2 sm:border-foreground">
+            {socials.map((social) => {
+              return (
+                <a
+                  href={social.href}
+                  className="py-2 transition-all hover:text-secondary md:hover:scale-105"
+                  key={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {social.logo}
+                </a>
+              );
+            })}
+
             <Link
               to="/contact"
-              className="hover:text-background md:hover:scale-105 transition-all py-2"
+              className="py-2 transition-all hover:text-secondary md:hover:scale-105"
             >
               <MdEmail />
             </Link>
           </div>
         </span>
       </div>
-    </div>
+    </footer>
   );
 }

@@ -5,6 +5,22 @@ import useAbv from "../../../hooks/useAbv";
 import refracCalc from "../../../helpers/refracCalc";
 import AbvLine from "../../AbvLine";
 import { useTranslation } from "react-i18next";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableFooter,
+  TableHead,
+  TableRow,
+} from "@/components/ui/table";
+import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 export default function Refractometer() {
   const { t } = useTranslation();
@@ -27,10 +43,8 @@ export default function Refractometer() {
       [target.name]: target.value,
     }));
   };
-  const handleUnitChange = (e: FormEvent<EventTarget>) => {
-    const target = e.target as HTMLInputElement;
-    const unit = target.value;
-    setRefrac((prev) => ({ ...prev, units: unit }));
+  const handleUnitChange = (val: string) => {
+    setRefrac((prev) => ({ ...prev, units: val }));
   };
 
   const abv = useAbv({ OG: og, FG: refrac.calcSg });
@@ -49,52 +63,84 @@ export default function Refractometer() {
   }, [refrac.cf, refrac.og, refrac.fgInBrix, refrac.units]);
 
   return (
-    <form className="w-11/12 sm:w-9/12 flex flex-col items-center justify-center rounded-xl bg-sidebar p-8 my-8 aspect-video">
+    <form className="flex flex-col items-center justify-center w-11/12 p-8 my-40 sm:my-8 sm:w-1/2 rounded-xl bg-background">
       <Title header={t("refractometerHeading")} />
-      <label htmlFor="cf">{t("correctionFactor")} </label>
-      <input
-        className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-textColor hover:bg-sidebar hover:border-background w-1/4"
-        type="number"
-        name="cf"
-        id="cf"
-        value={refrac.cf}
-        onChange={handleChange}
-        onFocus={(e) => e.target.select()}
-      />
-      <label htmlFor="og">{t("ogLabel")} </label>
-      <select
-        className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-textColor hover:bg-sidebar hover:border-background w-1/4"
-        name="units"
-        id="units"
-        onChange={handleUnitChange}
-      >
-        <option value="SG">{t("SG")}</option>
-        <option value="Brix">{t("BRIX")}</option>
-      </select>
-      <input
-        className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-textColor hover:bg-sidebar hover:border-background w-1/4"
-        type="number"
-        name="og"
-        id="og"
-        value={refrac.og}
-        onChange={handleChange}
-        onFocus={(e) => e.target.select()}
-      />
-      <label htmlFor="fg">{t("fgInBrix")} </label>
-      <input
-        className="h-5 bg-background text-center text-[.5rem]  md:text-sm rounded-xl  border-2 border-solid border-textColor hover:bg-sidebar hover:border-background w-1/4"
-        type="number"
-        name="fgInBrix"
-        id="fg"
-        value={refrac.fgInBrix}
-        onChange={handleChange}
-        onFocus={(e) => e.target.select()}
-      />
-      <p>{Math.round(refrac.calcSg * 1000) / 1000}</p>
-      <p>
-        {Math.round(refrac.calcBrix * 100) / 100} {t("BRIX")}
-      </p>
-      <AbvLine {...abv} />
+      <Table>
+        <TableBody>
+          <TableRow>
+            <TableHead>{t("correctionFactor")} </TableHead>
+            <TableCell colSpan={2}>
+              <Input
+                type="number"
+                name="cf"
+                id="cf"
+                value={refrac.cf}
+                onChange={handleChange}
+                onFocus={(e) => e.target.select()}
+              />
+            </TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell>{t("ogLabel")} </TableCell>
+            <TableCell className="p-1 md:p-4">
+              <Select
+                name="units"
+                value={refrac.units}
+                onValueChange={handleUnitChange}
+              >
+                <SelectTrigger>
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="SG">{t("SG")}</SelectItem>
+                  <SelectItem value="Brix">{t("BRIX")}</SelectItem>
+                </SelectContent>
+              </Select>
+            </TableCell>
+            <TableCell className="p-1 md:p-4">
+              <Input
+                type="number"
+                name="og"
+                id="og"
+                value={refrac.og}
+                onChange={handleChange}
+                onFocus={(e) => e.target.select()}
+              />
+            </TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell>{t("fgInBrix")} </TableCell>
+            <TableCell colSpan={2}>
+              <span className="flex justify-between gap-1">
+                <Input
+                  type="number"
+                  name="fgInBrix"
+                  id="fg"
+                  value={refrac.fgInBrix}
+                  onChange={handleChange}
+                  onFocus={(e) => e.target.select()}
+                  className="w-10/12"
+                />
+                <span className="text-center">
+                  <p>{Math.round(refrac.calcSg * 1000) / 1000}</p>
+                  <p>
+                    {Math.round(refrac.calcBrix * 100) / 100} {t("BRIX")}
+                  </p>
+                </span>
+              </span>
+            </TableCell>
+          </TableRow>
+        </TableBody>
+        <TableFooter>
+          <TableRow>
+            <TableCell colSpan={3}>
+              <span className="flex items-center justify-center text-center">
+                <AbvLine {...abv} textSize="text-lg" />
+              </span>
+            </TableCell>
+          </TableRow>
+        </TableFooter>
+      </Table>
     </form>
   );
 }
