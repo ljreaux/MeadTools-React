@@ -94,7 +94,7 @@ export default function Ingredient({
   ingredient,
   index,
   ingredientsList: ingredients,
-  filterTerm,
+  filterTerms,
   units,
   setIngredients,
   removeLine,
@@ -102,11 +102,12 @@ export default function Ingredient({
   setIndividual,
   setLoading,
   showBrix,
+  deleteable,
 }: {
   ingredient: IngredientType;
   index: number;
   ingredientsList: List;
-  filterTerm: null | string[];
+  filterTerms: null | string[];
   units: {
     weight: "lbs" | "kg";
     volume: "gal" | "liter";
@@ -117,6 +118,7 @@ export default function Ingredient({
   setIndividual: (index: number, obj: Partial<IngredientType>) => void;
   setLoading: React.Dispatch<React.SetStateAction<boolean>>;
   showBrix: boolean;
+  deleteable: boolean;
 }) {
   const converter =
     units.weight === "kg" && units.volume === "liter"
@@ -127,11 +129,9 @@ export default function Ingredient({
       ? 8.345 / 3.78541
       : 8.345;
 
-  const filtered = filterTerm
-    ? ingredients.filter(
-        (ingredient) =>
-          ingredient.category === filterTerm[0] ||
-          ingredient.category === filterTerm[1]
+  const filtered = filterTerms
+    ? ingredients.filter((ingredient) =>
+        filterTerms.includes(ingredient.category)
       )
     : ingredients;
   function changeIngredient(ingName: string, index: number) {
@@ -248,7 +248,7 @@ export default function Ingredient({
           onCheckedChange={() => setChecked(index)}
         />
 
-        {index > 3 && (
+        {deleteable && (
           <button
             className="absolute right-0 w-8 text-xl"
             onClick={() => removeLine(index)}
