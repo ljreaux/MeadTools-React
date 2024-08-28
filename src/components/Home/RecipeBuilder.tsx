@@ -342,6 +342,12 @@ export default function RecipeBuilder({
           </TableHeader>
           <TableBody>
             {ingredients.map((ingredient, i) => {
+              const filterTerms = ["water", "juice"];
+              const deletable =
+                i >= 3 ||
+                (i === 1 &&
+                  (filterTerms.includes(ingredient.category) ||
+                    ingredients.length === 3));
               return (
                 <Ingredient
                   ingredient={ingredient}
@@ -350,12 +356,17 @@ export default function RecipeBuilder({
                   setIngredients={setIngredients}
                   setIndividual={setIndividual}
                   removeLine={removeLine}
-                  filterTerm={i <= 1 ? ["water", "juice"] : null}
+                  filterTerms={
+                    i <= 1 && filterTerms.includes(ingredient.category)
+                      ? filterTerms
+                      : null
+                  }
                   units={units}
                   setChecked={setChecked}
                   key={i + ingredient.name}
                   setLoading={setLoading}
                   showBrix={showBrix}
+                  deleteable={deletable}
                 />
               );
             })}
