@@ -15,6 +15,7 @@ import {
   SelectValue,
 } from "../ui/select";
 import useJuice from "@/hooks/useJuice";
+import { useTranslation } from "react-i18next";
 
 function Juice() {
   const {
@@ -32,8 +33,9 @@ function Juice() {
     sg,
     totalSugar,
   } = useJuice();
+  const { t } = useTranslation();
   return (
-    <div className="flex flex-col items-center justify-center w-11/12 gap-4 p-8 my-40 md:my-8 rounded-xl bg-background">
+    <div className="flex flex-col items-center justify-center w-11/12 gap-4 p-8 my-40 md:my-8 md:w-1/2 rounded-xl bg-background">
       <Table>
         <TableHeader>
           <TableRow>
@@ -47,6 +49,7 @@ function Juice() {
             <TableCell>Sugar per serving</TableCell>
             <TableCell>
               <Input
+                className="min-w-16"
                 type="number"
                 onFocus={(e) => e.target.select()}
                 value={sugar}
@@ -59,8 +62,8 @@ function Juice() {
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="g">grams</SelectItem>
-                  <SelectItem value="mg">milligrams</SelectItem>
+                  <SelectItem value="g">{t("G")}</SelectItem>
+                  <SelectItem value="mg">{t("MG")}</SelectItem>
                 </SelectContent>
               </Select>
             </TableCell>
@@ -69,6 +72,7 @@ function Juice() {
             <TableCell>Serving Size</TableCell>
             <TableCell>
               <Input
+                className="min-w-16"
                 type="number"
                 onFocus={(e) => e.target.select()}
                 value={servingSize}
@@ -84,8 +88,8 @@ function Juice() {
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="ml">milliliters</SelectItem>
-                  <SelectItem value="floz">fl oz</SelectItem>
+                  <SelectItem value="ml">{t("ML")}</SelectItem>
+                  <SelectItem value="floz">{t("FLOZ")}</SelectItem>
                 </SelectContent>
               </Select>
             </TableCell>
@@ -103,7 +107,7 @@ function Juice() {
           </TableRow>
           <TableRow>
             <TableCell colSpan={3} className="py-4 text-3xl text-center">
-              {brix} Brix, {sg.toFixed(3)}
+              {brix} {t("BRIX")}, {sg.toFixed(3)}
             </TableCell>
           </TableRow>
           <TableRow>
