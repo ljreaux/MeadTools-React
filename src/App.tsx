@@ -14,6 +14,7 @@ import Account from "./components/Account/Account";
 import useLocalStorage from "./hooks/useLocalStorage";
 // import useAbv from "./hooks/useAbv";
 import Recipes from "./components/Recipes/Recipes";
+import Juice from "./components/Juice/Juice";
 
 export interface Additive {
   name: string;
@@ -156,6 +157,7 @@ function App() {
               />
             }
           />
+          <Route path="/juice" element={<Juice />} />
         </Routes>
         <BottomBar />
       </main>

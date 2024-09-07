@@ -26,6 +26,7 @@ const navbar = {
       label: "Additional Links",
       about: "About",
       contact: "Contact",
+      juice: 'Juice Calc'
     },
   },
   de: {
