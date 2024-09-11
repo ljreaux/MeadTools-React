@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
 import "./index.css";
 import { BrowserRouter } from "react-router-dom";
-import "./localization/i18n";
+import "./lib/i18n.ts";
 import { Toaster } from "@/components/ui/toaster";
 import { ThemeProvider } from "./components/ui/theme-provider.tsx";
 

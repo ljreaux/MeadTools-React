@@ -14,6 +14,7 @@ import Account from "./components/Account/Account";
 import useLocalStorage from "./hooks/useLocalStorage";
 // import useAbv from "./hooks/useAbv";
 import Recipes from "./components/Recipes/Recipes";
+import Juice from "./components/Juice/Juice";
 
 export interface Additive {
   name: string;
@@ -59,7 +60,6 @@ export type Opened = {
 
 function App() {
   const [isMetric, setIsMetric] = useLocalStorage("metric", false);
-  const [theme, setTheme] = useLocalStorage("theme", true);
 
   const [ingredientsList, setIngredientsList] = useState<List>([]);
   const [recipeData, setRecipeData] = useLocalStorage<RecipeData>(
@@ -88,11 +88,6 @@ function App() {
   } | null>("user", null);
 
   const [, setBlendSG] = useState([0.996, 0.996]);
-
-  useEffect(() => {
-    const body = document.querySelector("body");
-    body?.setAttribute("data-theme", theme ? "dark" : "light");
-  }, [theme]);
 
   useEffect(() => {
     setRecipeData((prev) => ({
@@ -126,10 +121,7 @@ function App() {
           <Route path="/ExtraCalcs/*" element={<ExtraCalcs />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<ContactUs />} />
-          <Route
-            path="/login"
-            element={<Login setToken={setToken} theme={theme} />}
-          />
+          <Route path="/login" element={<Login setToken={setToken} />} />
           <Route
             path="/account"
             element={
@@ -138,8 +130,6 @@ function App() {
                 setToken={setToken}
                 setUser={setUser}
                 user={user}
-                isDarkTheme={theme}
-                setTheme={setTheme}
                 isMetric={isMetric}
                 setIsMetric={setIsMetric}
               />
@@ -156,6 +146,7 @@ function App() {
               />
             }
           />
+          <Route path="/juice" element={<Juice />} />
         </Routes>
         <BottomBar />
       </main>

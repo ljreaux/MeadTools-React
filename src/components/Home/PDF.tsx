@@ -15,7 +15,7 @@ import { toBrix } from "../../helpers/unitConverters";
 import useAbv from "../../hooks/useAbv.ts";
 import { FormData } from "../Nutrients/NutrientCalc";
 import calcSb from "../../helpers/calcSb";
-import i18n from "../../localization/i18n.ts";
+import i18n from "../../lib/i18n.ts";
 import { Fragment, useEffect, useState } from "react";
 
 // Create styles

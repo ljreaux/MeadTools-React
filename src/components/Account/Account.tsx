@@ -45,8 +45,6 @@ export default function Account({
       email: string;
     } | null>
   >;
-  isDarkTheme: boolean;
-  setTheme: React.Dispatch<SetStateAction<boolean>>;
   isMetric: boolean;
   setIsMetric: React.Dispatch<SetStateAction<boolean>>;
 }) {

@@ -6,13 +6,14 @@ import { login, register } from "../../helpers/Login";
 import Form from "./Form";
 import { useTranslation } from "react-i18next";
 import { API_URL } from "../../main";
+import { useTheme } from "../ui/theme-provider";
 export default function Login({
   setToken,
-  theme: isDarkTheme,
 }: {
   setToken: Dispatch<SetStateAction<string | null>>;
-  theme: boolean;
 }) {
+  const { isDarkTheme } = useTheme();
+
   const { t } = useTranslation();
   const { goTo, step, currentStepIndex } = useMultiStepForm([
     <Form
@@ -40,7 +41,7 @@ export default function Login({
         {step}
         <button
           onClick={() => goTo(index)}
-          className="font-bold underline transition-all  text-foreground hover:text-sidebar"
+          className="font-bold underline transition-all text-foreground hover:text-sidebar"
         >
           {buttonMessage}
         </button>
