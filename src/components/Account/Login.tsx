@@ -12,17 +12,8 @@ export default function Login({
 }: {
   setToken: Dispatch<SetStateAction<string | null>>;
 }) {
-  const { theme } = useTheme();
-  const [isDarkTheme, setIsDarkTheme] = useState(theme === "dark");
-  useEffect(() => {
-    let systemTheme = theme;
-    if (theme === "system") {
-      systemTheme = window.matchMedia("(prefers-color-scheme: dark)").matches
-        ? "dark"
-        : "light";
-    }
-    setIsDarkTheme(systemTheme === "dark");
-  }, [theme]);
+  const { isDarkTheme } = useTheme();
+
   const { t } = useTranslation();
   const { goTo, step, currentStepIndex } = useMultiStepForm([
     <Form
