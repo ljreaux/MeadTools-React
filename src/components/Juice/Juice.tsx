@@ -40,13 +40,13 @@ function Juice() {
         <TableHeader>
           <TableRow>
             <TableHead colSpan={3} className="py-4 text-3xl text-center">
-              <h1>Juice Calc</h1>
+              <h1>{t("juiceHeading")}</h1>
             </TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
           <TableRow>
-            <TableCell>Sugar per serving</TableCell>
+            <TableCell>{t("sugPerServe")}</TableCell>
             <TableCell>
               <Input
                 className="min-w-16"
@@ -69,7 +69,7 @@ function Juice() {
             </TableCell>
           </TableRow>
           <TableRow>
-            <TableCell>Serving Size</TableCell>
+            <TableCell>{t("servingSize")}</TableCell>
             <TableCell>
               <Input
                 className="min-w-16"
@@ -95,7 +95,7 @@ function Juice() {
             </TableCell>
           </TableRow>
           <TableRow>
-            <TableCell>Servings per container</TableCell>
+            <TableCell>{t("perContainer")}</TableCell>
             <TableCell colSpan={2}>
               <Input
                 type="number"
@@ -113,7 +113,7 @@ function Juice() {
           <TableRow>
             <TableCell colSpan={3} className="py-4 text-3xl text-center">
               {totalSugar}
-              {sugarUnits} sugar/container
+              {sugarUnits} {t("juiceUnits")}
             </TableCell>
           </TableRow>
         </TableBody>
