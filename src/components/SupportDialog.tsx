@@ -17,6 +17,10 @@ import useSupportDialog from "@/hooks/useSupportDialog";
 function SupportDialog() {
   const { open, setOpen } = useSupportDialog();
   const { t } = useTranslation();
+  const splitText = (text: string) => {
+    const paragraphs = text.split("\n");
+    return paragraphs.map((p, i) => <p key={i}>{p}</p>);
+  };
   return (
     <AlertDialog open={open} defaultOpen={open} onOpenChange={setOpen}>
       <AlertDialogTrigger className="fixed bottom-2 right-2">
@@ -28,8 +32,8 @@ function SupportDialog() {
       <AlertDialogContent>
         <AlertDialogHeader>
           <AlertDialogTitle>{t("donate.dialog.title")}</AlertDialogTitle>
-          <AlertDialogDescription>
-            {t("donate.dialog.content")}
+          <AlertDialogDescription className="flex flex-col gap-2">
+            {splitText(t("donate.dialog.content"))}
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
