@@ -60,13 +60,6 @@ export type Opened = {
 };
 
 function App() {
-  const [supportDialogOpen, setSupportDialogOpen] = useState(
-    !!JSON.parse(localStorage.getItem("supportDialogOpen") || "true")
-  );
-  useEffect(() => {
-    localStorage.setItem("supportDialogOpen", supportDialogOpen.toString());
-  }, [supportDialogOpen]);
-
   const [isMetric, setIsMetric] = useLocalStorage("metric", false);
 
   const [ingredientsList, setIngredientsList] = useState<List>([]);
@@ -157,10 +150,7 @@ function App() {
           <Route path="/juice" element={<Juice />} />
         </Routes>
         <BottomBar />
-        <SupportDialog
-          setOpen={setSupportDialogOpen}
-          open={supportDialogOpen}
-        />
+        <SupportDialog />
       </main>
     </>
   );

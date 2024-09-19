@@ -12,14 +12,10 @@ import {
 } from "./ui/alert-dialog";
 import { Button } from "./ui/button";
 import { LiaMoneyBillWaveSolid } from "react-icons/lia";
+import useSupportDialog from "@/hooks/useSupportDialog";
 
-function SupportDialog({
-  open,
-  setOpen,
-}: {
-  open: boolean;
-  setOpen: (val: boolean) => void;
-}) {
+function SupportDialog() {
+  const { open, setOpen } = useSupportDialog();
   const { t } = useTranslation();
   return (
     <AlertDialog open={open} defaultOpen={open} onOpenChange={setOpen}>
