@@ -70,3 +70,20 @@
     font-family: "Libre Baskerville", serif;
   }
 }
+
+.floatingchat-container-wrap {
+  left: unset;
+  right: 2rem;
+  bottom: 0.5rem;
+}
+.floating-chat-kofi-popup-iframe {
+  left: unset;
+  right: 2rem;
+}
+
+.floatingchat-container-wrap-mobi {
+  bottom: 3rem;
+}
+.floating-chat-kofi-popup-iframe-mobi {
+  bottom: 6rem;
+}

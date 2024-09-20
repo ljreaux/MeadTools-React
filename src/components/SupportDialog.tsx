@@ -8,10 +8,8 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-  AlertDialogTrigger,
 } from "./ui/alert-dialog";
-import { Button } from "./ui/button";
-import { LiaMoneyBillWaveSolid } from "react-icons/lia";
+
 import useSupportDialog from "@/hooks/useSupportDialog";
 
 function SupportDialog() {
@@ -23,13 +21,7 @@ function SupportDialog() {
   };
   return (
     <AlertDialog open={open} defaultOpen={open} onOpenChange={setOpen}>
-      <AlertDialogTrigger className="fixed bottom-2 right-2">
-        <Button variant={"emphasis"} className="gap-2">
-          <LiaMoneyBillWaveSolid />
-          {t("donate.trigger")}
-        </Button>
-      </AlertDialogTrigger>
-      <AlertDialogContent>
+      <AlertDialogContent className="z-[1000] max-w-screen">
         <AlertDialogHeader>
           <AlertDialogTitle>{t("donate.dialog.title")}</AlertDialogTitle>
           <AlertDialogDescription className="flex flex-col gap-2">
