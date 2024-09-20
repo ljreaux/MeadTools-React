@@ -72,18 +72,18 @@
 }
 
 .floatingchat-container-wrap {
-  left: unset;
-  right: 2rem;
-  bottom: 0.5rem;
+  left: unset !important;
+  right: 2rem !important;
+  bottom: 0.5rem !important;
 }
 .floating-chat-kofi-popup-iframe {
-  left: unset;
-  right: 2rem;
+  left: unset !important;
+  right: 2rem !important;
 }
 
 .floatingchat-container-wrap-mobi {
-  bottom: 3rem;
+  bottom: 3rem !important;
 }
 .floating-chat-kofi-popup-iframe-mobi {
-  bottom: 6rem;
+  bottom: 6rem !important;
 }
