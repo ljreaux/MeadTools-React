@@ -242,6 +242,7 @@ export default function RecipeBuilder({
 
   const scaleRecipe = (curVol: number, targetVol: number) => {
     const scale = targetVol / curVol;
+
     const newIngredients = ingredients.map((ing) => {
       const newDetails = ing.details.map(
         (det) => Math.round(det * scale * 1000) / 1000
@@ -249,7 +250,12 @@ export default function RecipeBuilder({
       return { ...ing, details: newDetails };
     });
     setRecipeData((prev) => {
-      return { ...prev, ingredients: newIngredients };
+      const newAdditives = prev.additives.map((add) => ({
+        ...add,
+        amount: Math.round(add.amount * scale * 1000) / 1000,
+      }));
+
+      return { ...prev, ingredients: newIngredients, additives: newAdditives };
     });
     runBlends();
   };
