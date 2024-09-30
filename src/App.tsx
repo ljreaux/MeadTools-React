@@ -16,6 +16,7 @@ import useLocalStorage from "./hooks/useLocalStorage";
 import Recipes from "./components/Recipes/Recipes";
 import Juice from "./components/Juice/Juice";
 import SupportDialog from "./components/SupportDialog";
+import ISpindelDashboard from "./components/Account/iSpindel/Routes";
 
 export interface Additive {
   name: string;
@@ -124,7 +125,7 @@ function App() {
           <Route path="/contact" element={<ContactUs />} />
           <Route path="/login" element={<Login setToken={setToken} />} />
           <Route
-            path="/account"
+            path="/account/"
             element={
               <Account
                 token={token}
@@ -136,6 +137,7 @@ function App() {
               />
             }
           />
+          <Route path="/account/ispindel/*" element={<ISpindelDashboard />} />
           <Route
             path="/recipes/:recipeId"
             element={
