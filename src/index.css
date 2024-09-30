@@ -71,7 +71,7 @@
   }
 }
 
-.floatingchat-container-wrap {
+/* .floatingchat-container-wrap {
   left: unset !important;
   right: 2rem !important;
   bottom: 0.5rem !important;
@@ -79,7 +79,7 @@
 .floating-chat-kofi-popup-iframe {
   left: unset !important;
   right: 2rem !important;
-}
+} */
 
 .floatingchat-container-wrap-mobi {
   display: none !important;
