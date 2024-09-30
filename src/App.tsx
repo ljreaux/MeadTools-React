@@ -18,6 +18,7 @@ import Juice from "./components/Juice/Juice";
 import SupportDialog from "./components/SupportDialog";
 import ISpindelDashboard from "./components/Account/iSpindel/Routes";
 import DesktopDownload from "./components/DesktopDownload";
+import ISpindelDashboard from "./components/Account/iSpindel/Routes";
 
 export interface Additive {
   name: string;
