@@ -1,37 +1,45 @@
 import { useEffect, useState } from "react";
 import { Button, buttonVariants } from "./ui/button";
-import useChangeLogger from "@/hooks/useChangeLogger";
 import { Link } from "react-router-dom";
+import Title from "./Title";
+import { FaApple, FaUbuntu, FaWindows } from "react-icons/fa6";
+import { cn } from "@/lib/utils";
+import { useTranslation } from "react-i18next";
 
 type OSType = "windows" | "linux" | "macos-intel" | "macos-arm";
 
 function DesktopDownload() {
+  const { t } = useTranslation();
   const [os, setOs] = useState<null | OSType>(null);
   const downloadButtons = [
     {
       os: "Windows",
       href: "https://cdn.crabnebula.app/download/meadtools/meadtools/latest/platform/wix-x86_64",
       key: "windows",
+      logo: <FaWindows className="mx-1" />,
     },
     {
-      os: "Linux",
+      os: "Ubuntu",
       href: "https://cdn.crabnebula.app/download/meadtools/meadtools/latest/platform/debian-x86_64",
       key: "linux",
+      logo: <FaUbuntu className="mx-1" />,
     },
     {
-      os: "MacOS (intel)",
-      href: "https://cdn.crabnebula.app/download/meadtools/meadtools/latest/platform/dmg-aarch64",
+      os: "Mac (intel)",
+      href: "https://cdn.crabnebula.app/download/meadtools/meadtools/latest/MeadTools.app.tar.gz",
       key: "macos-intel",
+      logo: <FaApple className="mx-1" />,
     },
     {
-      os: "MacOS (arm)",
+      os: "Mac",
       href: "https://cdn.crabnebula.app/download/meadtools/meadtools/latest/platform/dmg-aarch64",
       key: "macos-arm",
+      logo: <FaApple className="mx-1" />,
     },
   ];
 
   const currentButton = downloadButtons.find((item) => item.key === os);
-  const buttonText = currentButton?.os;
+
   const otherButtons = downloadButtons.filter((item) => item.key !== os);
 
   useEffect(() => {
@@ -61,24 +69,60 @@ function DesktopDownload() {
   }, []);
 
   return (
-    <section className="flex items-center justify-center my-12 w-fit h-fit">
+    <section className="flex items-center justify-center w-full my-12 h-fit">
       <div className="flex flex-col items-center justify-center w-11/12 p-8 my-16 sm:w-9/12 rounded-xl bg-background text-foreground">
-        <Button variant={"secondary"}>Download for - {buttonText}</Button>
+        <Title header={t("downloadDesktop")} />
+        <p className="mb-4 text-destructive">Currently in Beta.</p>
+        <Button variant={"secondary"}>
+          {currentButton?.logo} {t("download")} {currentButton?.os}
+        </Button>
 
         <div>
           {otherButtons.map((button) => (
             <Link
-              className={buttonVariants({ variant: "ghost" })}
+              className={cn(
+                buttonVariants({ variant: "ghost" }),
+                "text-[rgb(200_215_255)]"
+              )}
               key={button.key}
               to={button.href}
             >
-              Download for - {button.os}
+              {button.logo} {t("download")} {button.os}
             </Link>
           ))}
         </div>
+        <p className="flex mt-4">
+          {t("poweredBy")}
+          <a
+            href="https://web.crabnebula.cloud/meadtools/meadtools/releases"
+            className="text-[rgb(200_215_255)] flex"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <CNLogo cn="fill-[rgb(200_215_255)] w-6 h-6" />
+            CrabNebula Cloud
+          </a>
+        </p>
       </div>
     </section>
   );
 }
 
 export default DesktopDownload;
+
+const CNLogo = ({ cn }: { cn?: string }) => (
+  <svg
+    width="332"
+    height="332"
+    viewBox="0 0 332 332"
+    xmlns="http://www.w3.org/2000/svg"
+    className={cn}
+  >
+    <path
+      fillRule="evenodd"
+      clipRule="evenodd"
+      d="M164.923 101.881C131.11 146.401 131.306 203.282 165.36 228.927C174.309 235.667 184.707 239.579 195.787 240.875C164.356 266.368 128.151 274.279 103.705 257.675C70.1784 234.904 71.4639 174.647 106.576 123.088C135.895 80.0339 179.53 56.6586 212.649 63.3761C195.156 71.1026 178.364 84.1831 164.923 101.881ZM209.351 158.739C193.56 173.643 175.512 183.55 160.274 186.845C169.271 218.962 203.857 221.431 203.857 221.431C203.857 221.431 224.44 216.704 239.983 181.83C252.781 153.111 251.666 123.437 238.765 108.335C237.694 122.931 227.161 141.932 209.351 158.739Z"
+      fill="rgb(200 215 255)"
+    />
+  </svg>
+);
