@@ -20,7 +20,7 @@ function DesktopDownload() {
     },
     {
       os: "Ubuntu",
-      href: "https://cdn.crabnebula.app/download/meadtools/meadtools/latest/platform/debian-x86_64",
+      href: "https://cdn.crabnebula.app/download/meadtools/meadtools/latest/platform/appimage-x86_64",
       key: "linux",
       logo: <FaUbuntu className="mx-1" />,
     },
