@@ -73,9 +73,12 @@ function DesktopDownload() {
       <div className="flex flex-col items-center justify-center w-11/12 p-8 my-16 sm:w-9/12 rounded-xl bg-background text-foreground">
         <Title header={t("downloadDesktop")} />
         <p className="mb-4 text-destructive">Currently in Beta.</p>
-        <Button variant={"secondary"}>
+        <Link
+          to={currentButton?.href || ""}
+          className={buttonVariants({ variant: "secondary" })}
+        >
           {currentButton?.logo} {t("download")} {currentButton?.os}
-        </Button>
+        </Link>
 
         <div>
           {otherButtons.map((button) => (
