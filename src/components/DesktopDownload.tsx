@@ -26,7 +26,7 @@ function DesktopDownload() {
     },
     {
       os: "Mac (intel)",
-      href: "https://cdn.crabnebula.app/download/meadtools/meadtools/latest/MeadTools.app.tar.gz",
+      href: "https://cdn.crabnebula.app/download/meadtools/meadtools/latest/platform/dmg-x86_64",
       key: "macos-intel",
       logo: <FaApple className="mx-1" />,
     },
