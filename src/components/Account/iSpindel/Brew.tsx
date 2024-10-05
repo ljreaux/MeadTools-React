@@ -6,7 +6,7 @@ import { useParams } from "react-router-dom";
 function Brew() {
   const { token } = useiSpindelContext();
   const { brewId } = useParams();
-  const [brew, setBrew] = useState<any>(null);
+  const [, setBrew] = useState<any>(null);
   useEffect(() => {
     if (brewId) {
       (async () => {
