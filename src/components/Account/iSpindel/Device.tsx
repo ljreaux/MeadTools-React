@@ -6,7 +6,7 @@ import { useParams } from "react-router-dom";
 function Device() {
   const { token } = useiSpindelContext();
   const { deviceId } = useParams();
-  const [device, setDevice] = useState<any>(null);
+  const [, setDevice] = useState<any>(null);
 
   useEffect(() => {
     if (deviceId) {
