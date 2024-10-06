@@ -7,8 +7,7 @@ import "./lib/i18n.ts";
 import { Toaster } from "@/components/ui/toaster";
 import { ThemeProvider } from "./components/ui/theme-provider.tsx";
 
-export const API_URL =
-  "https://mead-tools-api-git-ispindel-testt-larry-reauxs-projects.vercel.app/api";
+export const { VITE_API_URL: API_URL } = import.meta.env;
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
