@@ -54,10 +54,45 @@ export const generateToken = async (token: string) => {
   const { data, status } = await axios.post(`${API_URL}/ispindel/register`, {}, { headers: { Authorization: 'Bearer ' + token } });
 
   if (status === 200) {
-    console.log(data)
+
     return data as { token: string | null }
   } else {
     console.error('Failed to get device details', status)
     return { token: null };
   }
+}
+
+export const brew = async (token: string, id: string) => {
+  if (!token) return [];
+  const { data, status } = await axios.post(`${API_URL}/ispindel/brew`, { device_id: id }, { headers: { Authorization: 'Bearer ' + token } });
+  if (status === 200) {
+    return data as any[]
+  } else {
+    console.error('Failed to get device details', status)
+    return [];
+  }
+}
+
+export const stopBrew = async (token: string, device_id: string, brew_id: string) => {
+  if (!token) return [];
+  const { data, status } = await axios.patch(`${API_URL}/ispindel/brew`, { device_id, brew_id }, { headers: { Authorization: 'Bearer ' + token } });
+  if (status === 200) {
+    return data as any[]
+  } else {
+    console.error('Failed to get device details', status)
+    return [];
+  }
+}
+
+export const updateCoeff = async (token: string, device_id: string, coefficients: number[]) => {
+  if (!token) return null;
+  const { data, status } = await axios.patch(`${API_URL}/ispindel/device/${device_id}`, { coefficients }, { headers: { Authorization: 'Bearer ' + token } });
+  if (status === 200) {
+    console.log(data)
+    return data as any
+  } else {
+    console.error('Failed to get device details', status)
+    return null
+  }
+
 }
