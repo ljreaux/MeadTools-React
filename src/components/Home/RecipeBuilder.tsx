@@ -30,6 +30,7 @@ import {
   SelectValue,
 } from "../ui/select";
 import { Switch } from "../ui/switch";
+import { toast } from "../ui/use-toast";
 
 export default function RecipeBuilder({
   ingredients,
@@ -261,6 +262,12 @@ export default function RecipeBuilder({
   };
 
   const volumeRef = useRef<HTMLInputElement>(null!);
+
+  const validateVolume = (volume: string) => {
+    const parsed = volume.replace(",", ".");
+    const currentVolume = Number(parsed);
+    return { currentVolume, isValid: !isNaN(currentVolume) };
+  };
 
   return (
     <>
@@ -506,7 +513,7 @@ export default function RecipeBuilder({
 
               <TableRow>
                 <TableCell id="totalVolume" className="text-center" colSpan={2}>
-                  {Math.round(noSecondaryBlend.totalVolume * 1000) / 1000}
+                  {Math.round(noSecondaryBlend.totalVolume * 1000) / 1000}{" "}
                   {units.volume}
                 </TableCell>
                 <TableCell className="text-center" colSpan={3}>
@@ -550,9 +557,17 @@ export default function RecipeBuilder({
                     variant={"secondary"}
                     type="button"
                     onClick={() => {
-                      const newVolume =
-                        Number(volumeRef.current.value) ?? blend.totalVolume;
-                      scaleRecipe(blend.totalVolume, newVolume);
+                      const { currentVolume, isValid } = validateVolume(
+                        volumeRef.current.value
+                      );
+
+                      if (isValid)
+                        return scaleRecipe(blend.totalVolume, currentVolume);
+
+                      toast({
+                        description: t("validNumber"),
+                        variant: "destructive",
+                      });
                     }}
                   >
                     {t("scale.title")}
