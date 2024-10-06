@@ -1,4 +1,11 @@
-import { generateToken, getDeviceList, getLogs } from "@/helpers/iSpindel";
+import {
+  brew,
+  generateToken,
+  getDeviceList,
+  getLogs,
+  stopBrew,
+  updateCoeff,
+} from "@/helpers/iSpindel";
 import { createContext, useContext, useEffect, useState } from "react";
 
 export interface ISpindelContext {
@@ -10,6 +17,9 @@ export interface ISpindelContext {
   getNewHydrometerToken: () => void;
   hydrometerToken: string | null;
   loading: boolean;
+  startBrew: (id: string) => void;
+  endBrew: (deviceId: string, brewId: string | null) => void;
+  updateCoeff: (deviceId: string, coefficients: number[]) => void;
 }
 
 const HydroContext = createContext<any>(null);
@@ -40,6 +50,39 @@ export const ContextProvider = ({
     setToken(token);
   }, []);
 
+  const startBrew = async (id: string) => {
+    if (token) {
+      const [, { device }] = await brew(token, id);
+      console.log(device.brew_id);
+      setDeviceList((prev) =>
+        prev.map((dev) => (dev.id === id ? device : dev))
+      );
+    }
+  };
+
+  const endBrew = async (device_id: string, brew_id: string) => {
+    if (token) {
+      const [, { device }] = await stopBrew(token, device_id, brew_id);
+      console.log(device.brew_id);
+      setDeviceList((prev) =>
+        prev.map((dev) => (dev.id === device_id ? device : dev))
+      );
+    }
+  };
+
+  const updateCoefficients = async (
+    device_id: string,
+    coefficients: number[]
+  ) => {
+    if (token) {
+      const device = await updateCoeff(token, device_id, coefficients);
+      console.log(device.id);
+      setDeviceList((prev) =>
+        prev.map((dev) => (dev.id === device_id ? device : dev))
+      );
+    }
+  };
+
   useEffect(() => {
     if (token) {
       (async () => {
@@ -67,7 +110,7 @@ export const ContextProvider = ({
       setLoading(true);
       if (token) {
         const { token: hydroToken } = await generateToken(token);
-        console.log(hydroToken);
+
         setHydrometerToken(hydroToken);
       }
     } catch (error) {
@@ -84,6 +127,9 @@ export const ContextProvider = ({
     hydrometerToken,
     getNewHydrometerToken,
     loading,
+    startBrew,
+    endBrew,
+    updateCoeff: updateCoefficients,
   };
 
   return (
