@@ -12,11 +12,14 @@ import { toast } from "@/components/ui/use-toast";
 import { useiSpindelContext } from "@/hooks/useiSpindelContext";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import RecentLogsForm from "./RecentLogsForm";
+import LogTable from "./LogTable";
 
 function Device() {
   const [showTable, setShowTable] = useState(false);
 
-  const { deviceList, startBrew, endBrew, updateCoeff } = useiSpindelContext();
+  const { deviceList, startBrew, endBrew, updateCoeff, logs, setLogs } =
+    useiSpindelContext();
   const { deviceId } = useParams();
   const [device, setDevice] = useState<any>(null);
 
@@ -61,11 +64,15 @@ function Device() {
     if (device?.coefficients?.length === 4)
       setCoefficients(device.coefficients);
   }, [device]);
+  const removeLog = (id: string) => {
+    const updatedLogs = logs.filter((log) => log.id !== id);
+    setLogs(updatedLogs);
+  };
 
   if (!device) return null;
 
   return (
-    <div>
+    <div className="w-full">
       <p>{device.device_name}</p>
       {!device.brew_id ? (
         <Button variant={"secondary"} onClick={() => startBrew(device.id)}>
@@ -149,6 +156,11 @@ function Device() {
       ) : (
         <Button onClick={() => setShowTable(true)}>Update Coefficients</Button>
       )}
+
+      <RecentLogsForm deviceId={device.id} />
+      <div className="max-w-full">
+        <LogTable logs={logs} removeLog={removeLog} />
+      </div>
     </div>
   );
 }

@@ -16,9 +16,9 @@ export const getDeviceList = async (token: string | null) => {
 
 }
 
-export const getLogs = async (token: string | null, num: number = 5) => {
+export const getLogs = async (token: string | null, start_date: string, end_date: string, device_id: string) => {
   if (!token) return []
-  const { data, status } = await axios.get(`${API_URL}/ispindel/logs?num=${num}`, { headers: { Authorization: 'Bearer ' + token } });
+  const { data, status } = await axios.post(`${API_URL}/ispindel/logs?start_date=${start_date}&end_date=${end_date}`, { device_id }, { headers: { Authorization: 'Bearer ' + token } });
   if (status === 200) {
     return data as any[];
   } else {
@@ -95,4 +95,54 @@ export const updateCoeff = async (token: string, device_id: string, coefficients
     return null
   }
 
+}
+
+export const fetchAllBrews = async (token: string) => {
+  if (!token) return [];
+  const { data, status } = await axios.get(`${API_URL}/ispindel/brew`, { headers: { Authorization: 'Bearer ' + token } });
+
+  if (status === 200) {
+    return data as any[]
+  } else {
+    console.error('Failed to get device details', status)
+    return [];
+  }
+}
+
+export const getBrewLogs = async (token: string | null, brewId: string) => {
+  if (!token) return [];
+  const { data, status } = await axios.get(`${API_URL}/ispindel/logs/${brewId}`, { headers: { Authorization: 'Bearer ' + token } });
+  if (status === 200) {
+    return data as any[]
+  } else {
+    console.error('Failed to get device details', status)
+    return [];
+  }
+}
+
+
+export const deleteLog = async (token: string | null, logId: string, deviceId: string) => {
+  if (!token) return null;
+  const { data, status } = await axios.delete(`${API_URL}/ispindel/logs/${logId}?device_id=${deviceId}`, { headers: { Authorization: 'Bearer ' + token } });
+
+  if (status === 200) {
+    console.log(data)
+    return data as any
+  } else {
+    console.error('Failed to delete log', status)
+    return null;
+  }
+}
+
+export const updateUserLog = async (token: string | null, log: any) => {
+  if (!token) return null;
+  const { data, status } = await axios.patch(`${API_URL}/ispindel/logs/${log.id}?device_id=${log.device_id}`, log, { headers: { Authorization: 'Bearer ' + token } });
+
+  if (status === 200) {
+    console.log(data)
+    return data as any
+  } else {
+    console.error('Failed to update log', status)
+    return null;
+  }
 }

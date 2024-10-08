@@ -1,8 +1,8 @@
 import {
   brew,
+  fetchAllBrews,
   generateToken,
   getDeviceList,
-  getLogs,
   stopBrew,
   updateCoeff,
 } from "@/helpers/iSpindel";
@@ -12,14 +12,16 @@ export interface ISpindelContext {
   token: string | null;
   deviceList: any[];
   logs: any[];
+  setLogs: (logs: any[]) => void;
   logCount: number;
-  getMoreLogs: () => void;
+
   getNewHydrometerToken: () => void;
   hydrometerToken: string | null;
   loading: boolean;
   startBrew: (id: string) => void;
   endBrew: (deviceId: string, brewId: string | null) => void;
   updateCoeff: (deviceId: string, coefficients: number[]) => void;
+  brews: any[];
 }
 
 const HydroContext = createContext<any>(null);
@@ -37,13 +39,9 @@ export const ContextProvider = ({
   const [token, setToken] = useState<string | null>(null);
   const [deviceList, setDeviceList] = useState<any[]>([]);
   const [logs, setLogs] = useState<any[]>([]);
-  const [logCount, setLogCount] = useState(logs.length);
+
   const [hydrometerToken, setHydrometerToken] = useState<null | string>(null);
-  const getMoreLogs = async () => {
-    const moreLogs = await getLogs(token, logCount + 5);
-    setLogs([...logs, ...moreLogs]);
-    setLogCount(logCount + moreLogs.length);
-  };
+  const [brews, setBrews] = useState<any>([]);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -95,16 +93,6 @@ export const ContextProvider = ({
     }
   }, [token]);
 
-  useEffect(() => {
-    if (token) {
-      (async () => {
-        const logs = await getLogs(token);
-        setLogs(logs);
-        setLogCount(logs.length);
-      })();
-    }
-  }, [token]);
-
   const getNewHydrometerToken = async () => {
     try {
       setLoading(true);
@@ -120,16 +108,44 @@ export const ContextProvider = ({
     }
   };
 
+  const getBrews = async () => {
+    try {
+      setLoading(true);
+      if (token) {
+        const brews = await fetchAllBrews(token);
+        return brews;
+      }
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    if (token) {
+      getBrews()
+        .then((brews) => {
+          setBrews(brews);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    }
+  }, [token]);
+
   const context = {
+    token,
     deviceList,
     logs,
-    getMoreLogs,
+    setLogs,
     hydrometerToken,
     getNewHydrometerToken,
     loading,
     startBrew,
     endBrew,
     updateCoeff: updateCoefficients,
+    brews,
   };
 
   return (

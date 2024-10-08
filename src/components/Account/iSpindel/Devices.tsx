@@ -4,13 +4,12 @@ import { useNavigate } from "react-router-dom";
 
 function Devices() {
   const { deviceList, hydrometerToken } = useiSpindelContext();
-  console.log(deviceList);
   return (
     <div>
       {hydrometerToken}
       {deviceList.length || <p>No Devices yet.</p>}
       {deviceList.map((dev) => (
-        <DeviceCard device={dev} />
+        <DeviceCard device={dev} key={dev.id} />
       ))}
     </div>
   );
