@@ -146,3 +146,17 @@ export const updateUserLog = async (token: string | null, log: any) => {
     return null;
   }
 }
+
+export const linkBrew = async (token: string | null, recipe_id: string, brew_id?: string) => {
+  if (!token || !brew_id) return null;
+  const { data, status } = await axios.patch(`${API_URL}/ispindel/brew/${brew_id}`, { recipe_id }, { headers: { Authorization: 'Bearer ' + token } });
+
+  if (status === 200) {
+    console.log(data)
+    return data as any
+  } else {
+    console.error('Failed to link brew', status)
+    return null;
+  }
+
+}

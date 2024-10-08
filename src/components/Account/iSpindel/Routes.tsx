@@ -1,8 +1,6 @@
 import { Link, Route, Routes } from "react-router-dom";
 import Devices from "./Devices";
-import RegisterDevice from "./RegisterDevice";
 import Device from "./Device";
-import Logs from "./Logs";
 import Brew from "./Brew";
 
 import { ContextProvider } from "@/hooks/useiSpindelContext";
@@ -14,6 +12,8 @@ import {
 import { Button } from "@/components/ui/button";
 import { GiHamburgerMenu } from "react-icons/gi";
 import Brews from "./Brews";
+import Setup from "./Setup";
+import LinkBrew from "./LinkBrew";
 
 function ISpindelDashboard() {
   return (
@@ -23,11 +23,11 @@ function ISpindelDashboard() {
         <Nav />
         <Routes>
           <Route path="/" element={<Devices />} />
-          <Route path="/register" element={<RegisterDevice />} />
+          <Route path="/setup" element={<Setup />} />
           <Route path="/devices/:deviceId" element={<Device />} />
-          <Route path="/logs" element={<Logs />} />
           <Route path="/logs/:brewId" element={<Brew />} />
           <Route path="/brews" element={<Brews />} />
+          <Route path="/link/:brewId" element={<LinkBrew />} />
         </Routes>
       </div>
     </ContextProvider>
@@ -42,10 +42,6 @@ const Nav = () => {
     {
       name: "Device List",
       to: baseRoute,
-    },
-    {
-      name: "Generate Token",
-      to: baseRoute + "/register",
     },
     {
       name: "Brews",

@@ -2,12 +2,13 @@ import { getBrewLogs } from "@/helpers/iSpindel";
 import { useiSpindelContext } from "@/hooks/useiSpindelContext";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { HydrometerData } from "./HydrometerData";
 import { calcABV } from "@/hooks/useAbv";
 import useChangeLogger from "@/hooks/useChangeLogger";
 import { toSG } from "@/helpers/unitConverters";
 import LogTable from "./LogTable";
+import { buttonVariants } from "@/components/ui/button";
 
 function Brew() {
   const { i18n } = useTranslation();
@@ -57,16 +58,33 @@ function Brew() {
 
   return (
     <div className="max-w-full ">
-      <h1>Brew Details</h1>
-      {brew && (
-        <div>
-          <p>Start Time: {formatDate(brew.start_date)}</p>
-          <p>End Time: {formatDate(brew.end_date)}</p>
-        </div>
-      )}
+      <div>
+        <h1>Brew Details</h1>
+        {brew && (
+          <div>
+            <p>Start Time: {formatDate(brew.start_date)}</p>
+            <p>End Time: {formatDate(brew.end_date)}</p>
+          </div>
+        )}
+        {brew?.recipe_id ? (
+          <Link
+            to={`/recipes/${brew.recipe_id}`}
+            className={buttonVariants({ variant: "default" })}
+          >
+            Open Recipe
+          </Link>
+        ) : (
+          <Link
+            to={`/account/ispindel/link/${brewId}`}
+            className={buttonVariants({ variant: "default" })}
+          >
+            Link Recipe
+          </Link>
+        )}
+      </div>
       <h2>Logs</h2>
       <LogTable logs={logs} removeLog={removeLog}></LogTable>
-      {logs.length && (
+      {logs.length > 0 && (
         <HydrometerData
           chartData={chartData}
           tempUnits={logs[0].temp_units}

@@ -7,7 +7,7 @@ import { FaRegClipboard } from "react-icons/fa";
 
 import { FaCircleCheck } from "react-icons/fa6";
 
-function RegisterDevice() {
+function TokenGen() {
   const { hydrometerToken, loading, getNewHydrometerToken } =
     useiSpindelContext();
 
@@ -26,7 +26,7 @@ function RegisterDevice() {
   };
 
   return (
-    <div className="flex gap-0 flex-nowrap">
+    <div className="flex gap-0 flex-nowrap max-w-[500px] w-full">
       <LoadingButton
         loading={loading}
         onClick={getNewHydrometerToken}
@@ -52,4 +52,4 @@ function RegisterDevice() {
   );
 }
 
-export default RegisterDevice;
+export default TokenGen;
