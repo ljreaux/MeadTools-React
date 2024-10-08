@@ -1,13 +1,13 @@
 import { useiSpindelContext } from "@/hooks/useiSpindelContext";
 
 function Logs() {
-  const { logs, getMoreLogs } = useiSpindelContext();
+  const { logs } = useiSpindelContext();
   return (
     <div>
       {logs.map((log) => (
         <div key={log.id}>
           {log.message}
-          <button onClick={getMoreLogs}>More</button>
+          <button>More</button>
         </div>
       ))}
     </div>
