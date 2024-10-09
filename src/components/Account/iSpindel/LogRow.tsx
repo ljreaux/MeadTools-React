@@ -56,8 +56,7 @@ const LogRow = ({ log, remove }: { log: any; remove: () => void }) => {
 
   return (
     <TableRow>
-      <TableCell className="truncate max-w-24">{currentLog.id}</TableCell>
-      <TableCell className="">
+      <TableCell className="w-24 ">
         <DateTimePicker
           value={new Date(currentLog.datetime)}
           disabled={!editable}
@@ -65,6 +64,7 @@ const LogRow = ({ log, remove }: { log: any; remove: () => void }) => {
             setCurrentLog({ ...currentLog, datetime: val?.toISOString() })
           }
           locale={defaultLocale}
+          displayFormat={{ hour24: "Pp" }}
         />
       </TableCell>
       <TableCell>
@@ -74,6 +74,7 @@ const LogRow = ({ log, remove }: { log: any; remove: () => void }) => {
           onChange={(e) =>
             setCurrentLog({ ...currentLog, gravity: e.target.value })
           }
+          className="w-[4.5rem]"
         />
       </TableCell>
 
@@ -87,17 +88,20 @@ const LogRow = ({ log, remove }: { log: any; remove: () => void }) => {
         />
       </TableCell>
       <TableCell>
-        <Input
-          value={currentLog.temperature}
-          disabled={!editable}
-          onChange={(e) =>
-            setCurrentLog({ ...currentLog, temperature: e.target.value })
-          }
-        />
-        °{currentLog.temp_units}
+        <span className="flex items-center justify-center w-full gap-1">
+          <Input
+            value={currentLog.temperature}
+            disabled={!editable}
+            onChange={(e) =>
+              setCurrentLog({ ...currentLog, temperature: e.target.value })
+            }
+            className="w-[4.5rem]"
+          />
+          <p> °{currentLog.temp_units}</p>
+        </span>
       </TableCell>
 
-      <TableCell>{currentLog.interval}</TableCell>
+      <TableCell>{currentLog.angle}</TableCell>
 
       <TableCell>{currentLog.battery.toFixed(3)}</TableCell>
       <TableCell className="grid grid-flow-col gap-2 px-4">

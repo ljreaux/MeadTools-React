@@ -25,7 +25,8 @@ import {
   SelectTrigger,
 } from "@/components/ui/select";
 import { useState } from "react";
-import { toSG } from "@/helpers/unitConverters";
+import { toBrix } from "@/helpers/unitConverters";
+import ChartDownload from "./ChartDownload";
 type FileData = {
   date: string;
   temperature?: number;
@@ -46,7 +47,7 @@ export function HydrometerData({
   name?: string;
   tempUnits: "C" | "F";
 }) {
-  const [gravityUnits, setGravityUnits] = useState("Brix");
+  const [gravityUnits, setGravityUnits] = useState("SG");
   const chartConfig = {
     temperature: {
       label: "Temperature",
@@ -92,6 +93,7 @@ export function HydrometerData({
       year: "numeric",
     }
   );
+  const [fileName, setFileName] = useState("");
 
   return (
     <Card className="w-full">
@@ -103,14 +105,14 @@ export function HydrometerData({
         <CardContent>
           <Select
             onValueChange={(val) => {
-              const dataWithSG = chartData.map((data) => {
-                const newGravity = toSG(data.gravity);
+              const dataWithBrix = chartData.map((data) => {
+                const newGravity = toBrix(data.gravity);
                 return { ...data, gravity: newGravity };
               });
-              if (val === "Brix") {
+              if (val === "SG") {
                 setData(chartData);
-              } else if (val === "SG") {
-                setData(dataWithSG);
+              } else if (val === "Brix") {
+                setData(dataWithBrix);
               }
               setGravityUnits(val);
             }}
@@ -120,8 +122,8 @@ export function HydrometerData({
               <SelectValue></SelectValue>
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="Brix">Brix</SelectItem>
               <SelectItem value="SG">SG</SelectItem>
+              <SelectItem value="Brix">Brix</SelectItem>
             </SelectContent>
           </Select>
         </CardContent>
@@ -271,7 +273,13 @@ export function HydrometerData({
           </LineChart>
         </ChartContainer>
       </CardContent>
-      <CardFooter></CardFooter>
+      <CardFooter>
+        <ChartDownload
+          fileName={fileName}
+          updateFileName={(e) => setFileName(e.target.value)}
+          data={data}
+        ></ChartDownload>
+      </CardFooter>
     </Card>
   );
 }

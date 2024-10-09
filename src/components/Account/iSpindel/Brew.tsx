@@ -4,9 +4,8 @@ import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link, useParams } from "react-router-dom";
 import { HydrometerData } from "./HydrometerData";
-import { calcABV } from "@/hooks/useAbv";
 import useChangeLogger from "@/hooks/useChangeLogger";
-import { toSG } from "@/helpers/unitConverters";
+import { transformData } from "@/helpers/unitConverters";
 import LogTable from "./LogTable";
 import { buttonVariants } from "@/components/ui/button";
 
@@ -40,19 +39,7 @@ function Brew() {
     }
   }, [brewId, token]);
 
-  const og = logs[0]?.calculated_gravity || logs[0]?.gravity;
-
-  const chartData = logs.map((log) => {
-    const sg = log.calculated_gravity || log.gravity;
-    const abv = Math.round(calcABV(toSG(og), toSG(sg)) * 1000) / 1000;
-    return {
-      date: log.datetime,
-      temperature: log.temperature,
-      gravity: sg,
-      battery: log.battery,
-      abv,
-    };
-  });
+  const chartData = transformData(logs);
 
   useChangeLogger(chartData);
 

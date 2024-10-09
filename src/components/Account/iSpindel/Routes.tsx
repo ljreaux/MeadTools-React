@@ -14,6 +14,7 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import Brews from "./Brews";
 import Setup from "./Setup";
 import LinkBrew from "./LinkBrew";
+import Recipe from "./Recipe";
 
 function ISpindelDashboard() {
   return (
@@ -28,6 +29,7 @@ function ISpindelDashboard() {
           <Route path="/logs/:brewId" element={<Brew />} />
           <Route path="/brews" element={<Brews />} />
           <Route path="/link/:brewId" element={<LinkBrew />} />
+          <Route path="/recipe/:recipeId" element={<Recipe />} />
         </Routes>
       </div>
     </ContextProvider>

@@ -13,6 +13,8 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import { de, enUS } from "date-fns/locale";
+import { useTranslation } from "react-i18next";
 
 export function DatePickerWithRange({
   className,
@@ -22,6 +24,18 @@ export function DatePickerWithRange({
   date: DateRange | undefined;
   setDate: (date: DateRange | undefined) => void;
 }) {
+  const { i18n } = useTranslation();
+  const defaultLocale = i18n.resolvedLanguage?.includes("de") ? de : enUS;
+  let loc = enUS;
+  const { options, localize, formatLong } = defaultLocale;
+  if (options && localize && formatLong) {
+    loc = {
+      ...enUS,
+      options,
+      localize,
+      formatLong,
+    };
+  }
   return (
     <div className={cn("grid gap-2", className)}>
       <Popover>
@@ -38,11 +52,11 @@ export function DatePickerWithRange({
             {date?.from ? (
               date.to ? (
                 <>
-                  {format(date.from, "LLL dd, y")} -{" "}
-                  {format(date.to, "LLL dd, y")}
+                  {format(date.from, "P", { locale: loc })} -{" "}
+                  {format(date.to, "P", { locale: loc })}
                 </>
               ) : (
-                format(date.from, "LLL dd, y")
+                format(date.from, "P", { locale: loc })
               )
             ) : (
               <span>Pick a date</span>
@@ -57,6 +71,7 @@ export function DatePickerWithRange({
             selected={date}
             onSelect={setDate}
             numberOfMonths={2}
+            locale={loc}
           />
         </PopoverContent>
       </Popover>

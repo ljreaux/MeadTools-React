@@ -73,91 +73,97 @@ function Device() {
 
   return (
     <div className="w-full">
-      <p>{device.device_name}</p>
-      {!device.brew_id ? (
-        <Button variant={"secondary"} onClick={() => startBrew(device.id)}>
-          Start Brew
-        </Button>
-      ) : (
-        <>
-          <p>Brew ID: {device.brew_id}</p>
-          <Button
-            variant={"destructive"}
-            onClick={() => endBrew(device.id, device.brew_id)}
-          >
-            End Brew
-          </Button>
-        </>
-      )}
-      {showTable ? (
-        <form onSubmit={handleSubmit}>
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead>Coefficient</TableHead>
-                <TableHead></TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              <TableRow>
-                <TableCell>
-                  <Input
-                    value={coefficients[0]}
-                    onChange={(e) => updateCoefficients(0, e.target.value)}
-                  ></Input>
-                </TableCell>
-                <TableCell>
-                  &#215; angle<sup>3</sup> +
-                </TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell>
-                  <Input
-                    value={coefficients[1]}
-                    onChange={(e) => updateCoefficients(1, e.target.value)}
-                  ></Input>
-                </TableCell>
-                <TableCell>
-                  &#215; angle<sup>2</sup> +
-                </TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell>
-                  <Input
-                    value={coefficients[2]}
-                    onChange={(e) => updateCoefficients(2, e.target.value)}
-                  ></Input>
-                </TableCell>
-                <TableCell>&#215; angle +</TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell>
-                  <Input
-                    value={coefficients[3]}
-                    onChange={(e) => updateCoefficients(3, e.target.value)}
-                  ></Input>
-                </TableCell>
-              </TableRow>
-            </TableBody>
-          </Table>
-          <Button type="submit">Submit</Button>
-          <Button
-            type="button"
-            onClick={() => {
-              if (device?.coefficients?.length === 4)
-                setCoefficients(device.coefficients);
-              setShowTable(false);
-            }}
-            variant={"destructive"}
-          >
-            Cancel
-          </Button>
-        </form>
-      ) : (
-        <Button onClick={() => setShowTable(true)}>Update Coefficients</Button>
-      )}
-
-      <RecentLogsForm deviceId={device.id} />
+      <div className="grid items-center justify-center grid-cols-2">
+        <div className="flex flex-col items-center justify-center gap-4 my-2">
+          <p>{device.device_name}</p>
+          {!device.brew_id ? (
+            <Button variant={"secondary"} onClick={() => startBrew(device.id)}>
+              Start Brew
+            </Button>
+          ) : (
+            <>
+              <Button
+                variant={"destructive"}
+                onClick={() => endBrew(device.id, device.brew_id)}
+              >
+                End Brew
+              </Button>
+            </>
+          )}
+        </div>
+        <div className="flex flex-col items-center justify-center col-start-1">
+          {showTable ? (
+            <form onSubmit={handleSubmit}>
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead>Coefficient</TableHead>
+                    <TableHead></TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  <TableRow>
+                    <TableCell>
+                      <Input
+                        value={coefficients[0]}
+                        onChange={(e) => updateCoefficients(0, e.target.value)}
+                      ></Input>
+                    </TableCell>
+                    <TableCell>
+                      &#215; angle<sup>3</sup> +
+                    </TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell>
+                      <Input
+                        value={coefficients[1]}
+                        onChange={(e) => updateCoefficients(1, e.target.value)}
+                      ></Input>
+                    </TableCell>
+                    <TableCell>
+                      &#215; angle<sup>2</sup> +
+                    </TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell>
+                      <Input
+                        value={coefficients[2]}
+                        onChange={(e) => updateCoefficients(2, e.target.value)}
+                      ></Input>
+                    </TableCell>
+                    <TableCell>&#215; angle +</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell>
+                      <Input
+                        value={coefficients[3]}
+                        onChange={(e) => updateCoefficients(3, e.target.value)}
+                      ></Input>
+                    </TableCell>
+                  </TableRow>
+                </TableBody>
+              </Table>
+              <Button type="submit">Submit</Button>
+              <Button
+                type="button"
+                onClick={() => {
+                  if (device?.coefficients?.length === 4)
+                    setCoefficients(device.coefficients);
+                  setShowTable(false);
+                }}
+                variant={"destructive"}
+              >
+                Cancel
+              </Button>
+            </form>
+          ) : (
+            <Button onClick={() => setShowTable(true)} className="mx-auto my-2">
+              Update Coefficients
+            </Button>
+          )}
+        </div>
+        <RecentLogsForm deviceId={device.id} />
+      </div>
       <div className="max-w-full">
         <LogTable logs={logs} removeLog={removeLog} />
       </div>

@@ -28,7 +28,7 @@ const FormSchema = z
       }
     ),
   })
-  .refine((data) => data.dateRange.from < data.dateRange.to, {
+  .refine((data) => data.dateRange.from <= data.dateRange.to, {
     path: ["dateRange"],
     message: "From date must be before to date",
   });
@@ -50,8 +50,8 @@ const RecentLogsForm = ({ deviceId }: { deviceId: string }) => {
   async function onSubmit({
     dateRange: { from, to },
   }: z.infer<typeof FormSchema>) {
-    const start_date = from.toISOString();
-    const end_date = to.toISOString();
+    const start_date = new Date(from.setUTCHours(0, 0, 0, 0)).toISOString();
+    const end_date = new Date(to.setUTCHours(23, 59, 59, 999)).toISOString();
     try {
       const logs = await getLogs(token, start_date, end_date, deviceId);
       if (!logs.length) throw new Error("No logs to display");
@@ -64,7 +64,10 @@ const RecentLogsForm = ({ deviceId }: { deviceId: string }) => {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="w-2/3 space-y-6">
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="flex flex-col items-center justify-center col-start-2 row-span-2 row-start-1 space-y-4 "
+      >
         <FormField
           control={form.control}
           name="dateRange"

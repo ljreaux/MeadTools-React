@@ -19,11 +19,11 @@ function LogTable({
       <Table className="max-w-full">
         <TableHeader>
           <TableRow>
-            <TableHead>ID</TableHead> <TableHead>Date</TableHead>
+            <TableHead>Date</TableHead>
             <TableHead>Gravity</TableHead>
             <TableHead>Calculated Gravity</TableHead>
             <TableHead>Temperature</TableHead>
-            <TableHead>Interval</TableHead>
+            <TableHead>Angle</TableHead>
             <TableHead>Battery</TableHead>
             <TableHead>Edit/Delete</TableHead>
           </TableRow>

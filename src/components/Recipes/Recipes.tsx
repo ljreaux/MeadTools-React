@@ -36,6 +36,7 @@ import { MdPictureAsPdf } from "react-icons/md";
 import { useToast } from "../ui/use-toast";
 import { ToastAction } from "@radix-ui/react-toast";
 import { Button } from "../ui/button";
+import useChangeLogger from "@/hooks/useChangeLogger";
 
 export default function Recipes({
   ingredientsList,
@@ -61,6 +62,8 @@ export default function Recipes({
 
   const [primaryNotes, setPrimaryNotes] = useState<string[][]>([["", ""]]);
   const [secondaryNotes, setSecondaryNotes] = useState<string[][]>([["", ""]]);
+
+  const [brews, setBrews] = useState<any[]>([]);
 
   const [recipeData, setRecipeData] = useState<RecipeData>({
     ingredients: initialIngredients,
@@ -263,6 +266,8 @@ export default function Recipes({
         setPrimaryNotes(cocatNotes(primaryNotes));
         setSecondaryNotes(cocatNotes(secondaryNotes));
         setLoading(false);
+        console.log(recipe);
+        if (recipe.brews) setBrews(recipe.brews);
       } catch (err) {
         console.log(err);
         toast({
@@ -431,6 +436,8 @@ export default function Recipes({
     pdf && goTo(steps.length - 2);
   }, []);
 
+  useChangeLogger(brews);
+
   return (
     <div className="flex flex-col items-center justify-center w-full mt-12 mb-12">
       {loading ? <Loading /> : step}
@@ -460,7 +467,7 @@ export default function Recipes({
           </Button>
         )}
       </div>
-      <div className="w-1/4 flex items-center justify-center  mb-[3rem]">
+      <div className="flex items-center justify-center w-1/4">
         <ResetButton
           setRecipeData={setRecipeData}
           setData={setData}
@@ -477,6 +484,17 @@ export default function Recipes({
             <div className="flex items-center justify-center w-full h-full text-2xl">
               <MdPictureAsPdf />
             </div>
+          </Button>
+        )}
+      </div>
+      <div className="w-1/4 flex items-center justify-center  mb-[3rem]">
+        {brews.length > 0 && (
+          <Button
+            variant={"secondary"}
+            className="flex-1"
+            onClick={() => navigate(`/account/ispindel/recipe/${recipeId}`)}
+          >
+            View Brews
           </Button>
         )}
       </div>
