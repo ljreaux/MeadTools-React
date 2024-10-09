@@ -1,5 +1,5 @@
 import React, { SetStateAction, useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { getUserInfo } from "../../helpers/Login";
 import Loading from "../Loading";
 import RecipeCard from "./RecipeCard";
@@ -90,9 +90,6 @@ export default function Account({
       {userInfo ? (
         <div className="relative flex flex-col items-center w-11/12 p-8 sm:w-9/12 rounded-xl bg-background">
           <div className="absolute flex items-center justify-center w-12 gap-2 text-3xl right-12 top-4">
-            <Link to={"/account/ispindel"} className="text-xs">
-              Manage iSpindel
-            </Link>
             <button
               onClick={() => {
                 localStorage.removeItem("token");

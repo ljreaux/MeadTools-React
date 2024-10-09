@@ -7,6 +7,9 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import LogRow from "./LogRow";
+import { usePagination } from "@/hooks/usePagination";
+import ReactPaginate from "react-paginate";
+import { FaAngleLeft, FaAngleRight } from "react-icons/fa6";
 function LogTable({
   logs,
   removeLog,
@@ -14,6 +17,7 @@ function LogTable({
   logs: any[];
   removeLog: (id: string) => void;
 }) {
+  const { handlePageClick, currentItems, pageCount } = usePagination(10, logs);
   return (
     <div className="max-h-[500px] overflow-y-scroll border-2 border-input my-4 rounded-sm max-w-full">
       <Table className="max-w-full">
@@ -36,11 +40,25 @@ function LogTable({
               </TableCell>
             </TableRow>
           )}
-          {logs.map((log) => {
+          {currentItems.map((log) => {
             return (
               <LogRow key={log.id} log={log} remove={() => removeLog(log.id)} />
             );
           })}
+          <TableRow>
+            <TableCell colSpan={5}>
+              <ReactPaginate
+                breakLabel="..."
+                nextLabel={<FaAngleRight />}
+                onPageChange={handlePageClick}
+                pageRangeDisplayed={5}
+                pageCount={pageCount}
+                previousLabel={<FaAngleLeft />}
+                renderOnZeroPageCount={null}
+                className="react-paginate"
+              />
+            </TableCell>
+          </TableRow>
         </TableBody>
       </Table>
     </div>
