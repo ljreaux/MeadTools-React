@@ -23,7 +23,7 @@ export const transformData = (logs: any[]) => {
       temperature: log.temperature,
       gravity: sg,
       battery: log.battery,
-      abv,
+      abv: Math.max(abv, 0),
     };
   });
 }

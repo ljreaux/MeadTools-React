@@ -49,7 +49,7 @@ function Brew() {
   const chartData = transformData(logs);
 
   return (
-    <div className="max-w-full ">
+    <div className="w-full">
       <div className="my-4">
         <h1>Brew Details</h1>
         {brew && (

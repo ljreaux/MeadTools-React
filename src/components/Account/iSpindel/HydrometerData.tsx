@@ -168,6 +168,7 @@ export function HydrometerData({
               yAxisId={"gravity"}
               tickFormatter={(val) => val.toFixed(3)}
               padding={yPadding}
+              className={!checkObj.gravity ? "hidden" : "block"}
             />
             <YAxis
               domain={["dataMin - 5", "dataMax + 5"]}
@@ -178,6 +179,7 @@ export function HydrometerData({
               tickFormatter={(val) => val.toFixed()}
               padding={yPadding}
               unit={`°${tempUnits}`}
+              className={!checkObj.temperature ? "hidden" : "block"}
             />
             <YAxis
               domain={[0, "dataMax"]}
@@ -187,6 +189,7 @@ export function HydrometerData({
               tickFormatter={(val) => val.toFixed(1)}
               padding={yPadding}
               unit={"%"}
+              className={!checkObj.abv ? "hidden" : "block"}
             />
             {showBattery && (
               <YAxis
@@ -197,6 +200,7 @@ export function HydrometerData({
                 mirror
                 padding={yPadding}
                 unit={"V"}
+                className={!checkObj.battery ? "hidden" : "block"}
               />
             )}
             {showSignalStrength && (
@@ -210,6 +214,7 @@ export function HydrometerData({
                 tickMargin={10}
                 padding={yPadding}
                 unit={"dB"}
+                className={!checkObj.signalStrength ? "hidden" : "block"}
               />
             )}
             <ChartTooltip
@@ -238,6 +243,7 @@ export function HydrometerData({
                 dot={false}
                 yAxisId={"signalStrength"}
                 unit={"dB"}
+                className={!checkObj.signalStrength ? "hidden" : "block"}
               />
             )}
             {showBattery && (

@@ -24,13 +24,13 @@ function ChartDownload({
   data: any[];
 }) {
   return (
-    <span>
+    <span className="flex items-center justify-center gap-4">
       Download Chart data for MeadTools Desktop.
       <AlertDialog>
         <AlertDialogTrigger className={buttonVariants({ variant: "default" })}>
           Download
         </AlertDialogTrigger>
-        <AlertDialogContent className="z-[1000] max-w-screen">
+        <AlertDialogContent className="z-[1000] w-11/12">
           <AlertDialogHeader>
             <AlertDialogTitle>Enter File Name</AlertDialogTitle>
             <AlertDialogDescription className="flex flex-col gap-2">
