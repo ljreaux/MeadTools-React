@@ -10,6 +10,14 @@ import LogRow from "./LogRow";
 import { usePagination } from "@/hooks/usePagination";
 import ReactPaginate from "react-paginate";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa6";
+import {
+  Select,
+  SelectTrigger,
+  SelectContent,
+  SelectItem,
+  SelectValue,
+} from "@/components/ui/select";
+import { Label } from "@/components/ui/label";
 function LogTable({
   logs,
   removeLog,
@@ -17,9 +25,15 @@ function LogTable({
   logs: any[];
   removeLog: (id: string) => void;
 }) {
-  const { handlePageClick, currentItems, pageCount } = usePagination(10, logs);
+  const {
+    handlePageClick,
+    currentItems,
+    pageCount,
+    options,
+    setNumberPerPage,
+  } = usePagination(10, logs);
   return (
-    <div className="max-h-[500px] overflow-y-scroll border-2 border-input my-4 rounded-sm max-w-full">
+    <div className="max-w-full my-4 border-2 rounded-sm border-input">
       <Table className="max-w-full">
         <TableHeader>
           <TableRow>
@@ -31,6 +45,35 @@ function LogTable({
             <TableHead>Battery</TableHead>
             <TableHead>Edit/Delete</TableHead>
           </TableRow>
+          {options.length > 0 && (
+            <TableRow>
+              <TableCell colSpan={7}>
+                <Label htmlFor="itemCount" className="flex flex-col gap-4">
+                  Number per page.
+                  <Select
+                    defaultValue={options[0].label}
+                    onValueChange={(val) => {
+                      setNumberPerPage(parseInt(val));
+                    }}
+                  >
+                    <SelectTrigger>
+                      <SelectValue></SelectValue>
+                    </SelectTrigger>
+                    <SelectContent>
+                      {options.map((opt) => (
+                        <SelectItem
+                          key={opt.value}
+                          value={opt.value.toString()}
+                        >
+                          {opt.label}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </Label>
+              </TableCell>
+            </TableRow>
+          )}
         </TableHeader>
         <TableBody>
           {logs.length === 0 && (
@@ -45,20 +88,22 @@ function LogTable({
               <LogRow key={log.id} log={log} remove={() => removeLog(log.id)} />
             );
           })}
-          <TableRow>
-            <TableCell colSpan={5}>
-              <ReactPaginate
-                breakLabel="..."
-                nextLabel={<FaAngleRight />}
-                onPageChange={handlePageClick}
-                pageRangeDisplayed={5}
-                pageCount={pageCount}
-                previousLabel={<FaAngleLeft />}
-                renderOnZeroPageCount={null}
-                className="react-paginate"
-              />
-            </TableCell>
-          </TableRow>
+          {pageCount > 1 && (
+            <TableRow>
+              <TableCell colSpan={5}>
+                <ReactPaginate
+                  breakLabel="..."
+                  nextLabel={<FaAngleRight />}
+                  onPageChange={handlePageClick}
+                  pageRangeDisplayed={5}
+                  pageCount={pageCount}
+                  previousLabel={<FaAngleLeft />}
+                  renderOnZeroPageCount={null}
+                  className="react-paginate"
+                />
+              </TableCell>
+            </TableRow>
+          )}
         </TableBody>
       </Table>
     </div>

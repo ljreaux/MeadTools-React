@@ -13,10 +13,25 @@ import { Link } from "react-router-dom";
 import ReactPaginate from "react-paginate";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa6";
 import { usePagination } from "@/hooks/usePagination";
+
+import {
+  Select,
+  SelectTrigger,
+  SelectContent,
+  SelectItem,
+  SelectValue,
+} from "@/components/ui/select";
+import { Label } from "@/components/ui/label";
 function Brews() {
   const { brews } = useiSpindelContext();
 
-  const { currentItems, handlePageClick, pageCount } = usePagination(5, brews);
+  const {
+    currentItems,
+    handlePageClick,
+    pageCount,
+    options,
+    setNumberPerPage,
+  } = usePagination(5, brews);
 
   if (!brews.length) return null;
 
@@ -32,23 +47,54 @@ function Brews() {
             <TableHead>Latest Gravity</TableHead>
             <TableHead>Recipe Link</TableHead>
           </TableRow>
+          {options.length > 0 && (
+            <TableRow>
+              <TableCell colSpan={7}>
+                <Label htmlFor="itemCount" className="flex flex-col gap-4">
+                  Number per page.
+                  <Select
+                    defaultValue={options[0].label}
+                    onValueChange={(val) => {
+                      setNumberPerPage(parseInt(val));
+                    }}
+                  >
+                    <SelectTrigger>
+                      <SelectValue></SelectValue>
+                    </SelectTrigger>
+                    <SelectContent>
+                      {options.map((opt) => (
+                        <SelectItem
+                          key={opt.value}
+                          value={opt.value.toString()}
+                        >
+                          {opt.label}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </Label>
+              </TableCell>
+            </TableRow>
+          )}
         </TableHeader>
         <TableBody>
           <BrewRow currentItems={currentItems} />
-          <TableRow>
-            <TableCell colSpan={5}>
-              <ReactPaginate
-                breakLabel="..."
-                nextLabel={<FaAngleRight />}
-                onPageChange={handlePageClick}
-                pageRangeDisplayed={5}
-                pageCount={pageCount}
-                previousLabel={<FaAngleLeft />}
-                renderOnZeroPageCount={null}
-                className="react-paginate"
-              />
-            </TableCell>
-          </TableRow>
+          {pageCount > 1 && (
+            <TableRow>
+              <TableCell colSpan={5}>
+                <ReactPaginate
+                  breakLabel="..."
+                  nextLabel={<FaAngleRight />}
+                  onPageChange={handlePageClick}
+                  pageRangeDisplayed={5}
+                  pageCount={pageCount}
+                  previousLabel={<FaAngleLeft />}
+                  renderOnZeroPageCount={null}
+                  className="react-paginate"
+                />
+              </TableCell>
+            </TableRow>
+          )}
         </TableBody>
       </Table>
     </>
