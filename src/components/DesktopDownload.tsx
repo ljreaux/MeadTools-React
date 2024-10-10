@@ -72,12 +72,11 @@ function DesktopDownload() {
     <section className="flex items-center justify-center w-full my-12 h-fit">
       <div className="flex flex-col items-center justify-center w-11/12 p-8 my-16 sm:w-9/12 rounded-xl bg-background text-foreground">
         <Title header={t("downloadDesktop")} />
-        <p className="mb-4 text-destructive">Currently in Beta.</p>
+        <p className="my-2 text-xl">1.0.0</p>
         <Button variant={"secondary"}>
           {currentButton?.logo} {t("download")} {currentButton?.os}
         </Button>
-
-        <div>
+        <div className="flex my-4">
           {otherButtons.map((button) => (
             <Link
               className={cn(
@@ -90,6 +89,28 @@ function DesktopDownload() {
               {button.logo} {t("download")} {button.os}
             </Link>
           ))}
+        </div>{" "}
+        <h2 className="text-xl">New Features</h2>
+        <div>
+          <div>
+            <h3 className="text-lg">Offline capability</h3>
+            <p>
+              MeadTools desktop requires no online capability. All data is
+              stored locally. It also allows you to save recipes locally as{" "}
+              <code>.mead</code> files.
+            </p>
+          </div>
+          <div>
+            <h3 className="text-lg">Ingredient Customization</h3>
+            <p>
+              All ingredients and yeasts can be modified or added to. This
+              allows you to have a truly customized experience.
+            </p>
+          </div>
+          <div>
+            <h3 className="text-lg">Recipe Charting</h3>
+            <p>Upload your Tilt, Rapt Pill, or iSpindel data.</p>
+          </div>
         </div>
         <p className="flex mt-4">
           {t("poweredBy")}
