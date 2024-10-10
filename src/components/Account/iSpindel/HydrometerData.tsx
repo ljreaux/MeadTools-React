@@ -95,6 +95,14 @@ export function HydrometerData({
   );
   const [fileName, setFileName] = useState("");
 
+  const initialChecked = Object.keys(chartConfig).reduce((acc, key) => {
+    const label = key;
+    acc[label] = true;
+    return acc;
+  }, {} as { [key: string]: boolean });
+
+  const [checkObj, setCheckObj] = useState(initialChecked);
+
   return (
     <Card className="w-full">
       <CardHeader>
@@ -182,13 +190,13 @@ export function HydrometerData({
             />
             {showBattery && (
               <YAxis
-                domain={[0, 100]}
+                domain={[3.5, 4.2]}
                 dataKey={"battery"}
                 yAxisId={"battery"}
-                tickFormatter={(val) => val.toFixed()}
+                tickFormatter={(val) => val.toFixed(2)}
                 mirror
                 padding={yPadding}
-                unit={"%"}
+                unit={"V"}
               />
             )}
             {showSignalStrength && (
@@ -241,6 +249,7 @@ export function HydrometerData({
                 dot={false}
                 yAxisId={"battery"}
                 unit={"%"}
+                className={!checkObj.battery ? "hidden" : "block"}
               />
             )}
             <Line
@@ -251,6 +260,7 @@ export function HydrometerData({
               dot={false}
               yAxisId={"abv"}
               unit={"%"}
+              className={!checkObj.abv ? "hidden" : "block"}
             />
             <Line
               dataKey="temperature"
@@ -260,6 +270,7 @@ export function HydrometerData({
               dot={false}
               yAxisId={"temperature"}
               unit={`°${tempUnits}`}
+              className={!checkObj.temperature ? "hidden" : "block"}
             />
             <Line
               dataKey="gravity"
@@ -268,8 +279,18 @@ export function HydrometerData({
               strokeWidth={2}
               dot={false}
               yAxisId={"gravity"}
+              className={!checkObj.gravity ? "hidden" : "block"}
             />
-            <ChartLegend content={<ChartLegendContent />} />
+            <ChartLegend
+              content={
+                <ChartLegendContent
+                  checkObj={checkObj}
+                  updateCheckObj={(newCheckObj) =>
+                    setCheckObj(newCheckObj.checkObj)
+                  }
+                />
+              }
+            />
           </LineChart>
         </ChartContainer>
       </CardContent>

@@ -36,7 +36,6 @@ import { MdPictureAsPdf } from "react-icons/md";
 import { useToast } from "../ui/use-toast";
 import { ToastAction } from "@radix-ui/react-toast";
 import { Button } from "../ui/button";
-import useChangeLogger from "@/hooks/useChangeLogger";
 
 export default function Recipes({
   ingredientsList,
@@ -435,8 +434,6 @@ export default function Recipes({
   useEffect(() => {
     pdf && goTo(steps.length - 2);
   }, []);
-
-  useChangeLogger(brews);
 
   return (
     <div className="flex flex-col items-center justify-center w-full mt-12 mb-12">

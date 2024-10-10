@@ -4,10 +4,16 @@ import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link, useParams } from "react-router-dom";
 import { HydrometerData } from "./HydrometerData";
-import useChangeLogger from "@/hooks/useChangeLogger";
 import { transformData } from "@/helpers/unitConverters";
 import LogTable from "./LogTable";
-import { buttonVariants } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@radix-ui/react-collapsible";
+
+import { CaretSortIcon } from "@radix-ui/react-icons";
 
 function Brew() {
   const { i18n } = useTranslation();
@@ -20,6 +26,7 @@ function Brew() {
   const { brewId } = useParams();
   const [brew, setBrew] = useState<any>(null);
   const [logs, setLogs] = useState<any[]>([]);
+  const [isOpen, setIsOpen] = useState(false);
 
   const removeLog = (id: string) => {
     const updatedLogs = logs.filter((log) => log.id !== id);
@@ -41,11 +48,9 @@ function Brew() {
 
   const chartData = transformData(logs);
 
-  useChangeLogger(chartData);
-
   return (
     <div className="max-w-full ">
-      <div>
+      <div className="my-4">
         <h1>Brew Details</h1>
         {brew && (
           <div>
@@ -69,14 +74,27 @@ function Brew() {
           </Link>
         )}
       </div>
-      <h2>Logs</h2>
-      <LogTable logs={logs} removeLog={removeLog}></LogTable>
+
       {logs.length > 0 && (
         <HydrometerData
           chartData={chartData}
           tempUnits={logs[0].temp_units}
         ></HydrometerData>
       )}
+      <Collapsible open={isOpen} onOpenChange={setIsOpen}>
+        <div className="flex items-center justify-center">
+          <CollapsibleTrigger asChild>
+            <Button variant="ghost" size="sm">
+              <h3>Show Logs</h3>
+              <CaretSortIcon className="w-4 h-4" />
+              <span className="sr-only">Toggle</span>
+            </Button>
+          </CollapsibleTrigger>
+        </div>
+        <CollapsibleContent>
+          <LogTable logs={[...logs].reverse()} removeLog={removeLog}></LogTable>
+        </CollapsibleContent>
+      </Collapsible>
     </div>
   );
 }
