@@ -5,6 +5,8 @@ import Title from "./Title";
 import { FaApple, FaUbuntu, FaWindows } from "react-icons/fa6";
 import { cn } from "@/lib/utils";
 import { useTranslation } from "react-i18next";
+import hydroFile from "@/assets/chart-images/hydro-file.png";
+import pillFile from "@/assets/chart-images/pill-file.png";
 
 type OSType = "windows" | "linux" | "macos-intel" | "macos-arm";
 
@@ -76,7 +78,7 @@ function DesktopDownload() {
         <Button variant={"secondary"}>
           {currentButton?.logo} {t("download")} {currentButton?.os}
         </Button>
-        <div className="flex my-4">
+        <div className="flex flex-wrap items-center justify-center my-4">
           {otherButtons.map((button) => (
             <Link
               className={cn(
@@ -91,25 +93,32 @@ function DesktopDownload() {
           ))}
         </div>{" "}
         <h2 className="text-xl">New Features</h2>
-        <div>
+        <iframe
+          className="w-full my-4 aspect-video"
+          src="https://www.youtube.com/embed/I1OSPqiaOfs"
+          title=""
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerPolicy="strict-origin-when-cross-origin"
+          allowFullScreen
+        />
+        <div className="flex flex-col gap-4">
           <div>
-            <h3 className="text-lg">Offline capability</h3>
-            <p>
-              MeadTools desktop requires no online capability. All data is
-              stored locally. It also allows you to save recipes locally as{" "}
-              <code>.mead</code> files.
-            </p>
+            <h3 className="text-lg">{t("desktop.features.offline.label")}</h3>
+            <p>{t("desktop.features.offline.body")}</p>
           </div>
           <div>
-            <h3 className="text-lg">Ingredient Customization</h3>
-            <p>
-              All ingredients and yeasts can be modified or added to. This
-              allows you to have a truly customized experience.
-            </p>
+            <h3 className="text-lg">
+              {t("desktop.features.customization.label")}
+            </h3>
+            <p>{t("desktop.features.customization.body")}</p>
           </div>
           <div>
-            <h3 className="text-lg">Recipe Charting</h3>
-            <p>Upload your Tilt, Rapt Pill, or iSpindel data.</p>
+            <h3 className="text-lg">{t("desktop.features.charts.label")}</h3>
+            <p>{t("desktop.features.charts.body")}</p>
+            <div className="grid w-full gap-2 my-4 sm:grid-cols-2">
+              <img src={pillFile} alt="Rapt pill chart" />
+              <img src={hydroFile} alt="Manual hydrometer data chart" />
+            </div>
           </div>
         </div>
         <p className="flex mt-4">
