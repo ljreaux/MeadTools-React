@@ -18,7 +18,9 @@ export const getDeviceList = async (token: string | null) => {
 
 export const getLogs = async (token: string | null, start_date: string, end_date: string, device_id: string) => {
   if (!token) return []
-  const { data, status } = await axios.post(`${API_URL}/ispindel/logs?start_date=${start_date}&end_date=${end_date}`, { device_id }, { headers: { Authorization: 'Bearer ' + token } });
+  const url = `${API_URL}/ispindel/logs?start_date=${start_date}&end_date=${end_date}&device_id=${device_id}`
+
+  const { data, status } = await axios.get(url, { headers: { Authorization: 'Bearer ' + token } });
   if (status === 200) {
     return data as any[];
   } else {
