@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Button, buttonVariants } from "./ui/button";
+import { buttonVariants } from "./ui/button";
 import { Link } from "react-router-dom";
 import Title from "./Title";
 import { FaApple, FaUbuntu, FaWindows } from "react-icons/fa6";
@@ -75,9 +75,15 @@ function DesktopDownload() {
       <div className="flex flex-col items-center justify-center w-11/12 p-8 my-16 sm:w-9/12 rounded-xl bg-background text-foreground">
         <Title header={t("downloadDesktop")} />
         <p className="my-2 text-xl">1.0.0</p>
-        <Button variant={"secondary"}>
+        <Link
+          to={currentButton?.href || ""}
+          className={cn(
+            buttonVariants({ variant: "secondary" }),
+            "text-[rgb(200_215_255)]"
+          )}
+        >
           {currentButton?.logo} {t("download")} {currentButton?.os}
-        </Button>
+        </Link>
         <div className="flex flex-wrap items-center justify-center my-4">
           {otherButtons.map((button) => (
             <Link
