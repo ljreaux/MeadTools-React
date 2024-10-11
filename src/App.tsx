@@ -18,6 +18,7 @@ import Juice from "./components/Juice/Juice";
 import SupportDialog from "./components/SupportDialog";
 import DesktopDownload from "./components/DesktopDownload";
 import ISpindelDashboard from "./components/Account/iSpindel/Routes";
+import DesktopDialog from "./components/DesktopDialog";
 
 export interface Additive {
   name: string;
@@ -154,6 +155,7 @@ function App() {
           <Route path="/desktop" element={<DesktopDownload />} />
         </Routes>
         <BottomBar />
+        <DesktopDialog />
         <SupportDialog />
       </main>
     </>

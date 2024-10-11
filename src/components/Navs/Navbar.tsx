@@ -76,6 +76,10 @@ const extraLinks = [
     label: "additionalLinks.juice",
   },
   {
+    path: "/desktop",
+    label: "additionalLinks.desktop",
+  },
+  {
     path: "https://yeasts.meadtools.com",
     label: "yeasts",
   },

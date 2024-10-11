@@ -10,33 +10,29 @@ import {
   AlertDialogTitle,
 } from "./ui/alert-dialog";
 
-import useSupportDialog from "@/hooks/useSupportDialog";
+import { useNavigate } from "react-router-dom";
+import useDesktopDialog from "@/hooks/useDesktopDialog";
 
-function SupportDialog() {
-  const { open, setOpen } = useSupportDialog();
+function DesktopDialog() {
+  const { open, setOpen } = useDesktopDialog();
   const { t } = useTranslation();
-  const splitText = (text: string) => {
-    const paragraphs = text.split("\n");
-    return paragraphs.map((p, i) => <p key={i}>{p}</p>);
-  };
+  const nav = useNavigate();
   return (
     <AlertDialog open={open} defaultOpen={open} onOpenChange={setOpen}>
       <AlertDialogContent className="z-[1000]">
         <AlertDialogHeader>
-          <AlertDialogTitle>{t("donate.dialog.title")}</AlertDialogTitle>
-          <AlertDialogDescription className="flex flex-col gap-2">
-            {splitText(t("donate.dialog.content"))}
-          </AlertDialogDescription>
+          <AlertDialogTitle>{t("desktop.dialog.title")}</AlertDialogTitle>
+          <AlertDialogDescription className="flex flex-col gap-2"></AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel>{t("donate.dialog.cancel")}</AlertDialogCancel>
           <AlertDialogAction
             onClick={() => {
               setOpen(false);
-              window.open("https://ko-fi.com/meadtools", "_blank");
+              nav("/desktop");
             }}
           >
-            {t("donate.dialog.support")}
+            {t("desktop.dialog.download")}
           </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
@@ -44,4 +40,4 @@ function SupportDialog() {
   );
 }
 
-export default SupportDialog;
+export default DesktopDialog;
