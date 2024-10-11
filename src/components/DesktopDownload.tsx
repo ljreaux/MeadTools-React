@@ -16,7 +16,7 @@ function DesktopDownload() {
   const downloadButtons = [
     {
       os: "Windows",
-      href: "https://cdn.crabnebula.app/download/meadtools/meadtools/latest/platform/wix-x86_64",
+      href: "https://cdn.crabnebula.app/download/meadtools/meadtools/latest/platform/nsis-x86_64",
       key: "windows",
       logo: <FaWindows className="mx-1" />,
     },
