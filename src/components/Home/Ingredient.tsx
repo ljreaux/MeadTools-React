@@ -213,6 +213,7 @@ export default function Ingredient({
         <TableCell>
           <Input
             type="number"
+            step={0.01}
             name="ingredientBrix"
             value={ingredient.brix}
             className="h-8"
@@ -224,6 +225,7 @@ export default function Ingredient({
       <TableCell>
         <Input
           type="number"
+          step={0.01}
           name="ingredientWeight"
           value={ingredient.details[0]}
           className="h-8"
@@ -236,6 +238,7 @@ export default function Ingredient({
         <Input
           type="number"
           name="ingredientVolume"
+          step={0.01}
           value={ingredient.details[1]}
           className="h-8"
           onChange={(e) => handleChange(e, index, 1)}
