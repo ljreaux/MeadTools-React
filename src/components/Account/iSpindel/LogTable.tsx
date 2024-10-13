@@ -18,6 +18,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Label } from "@/components/ui/label";
+import { useTranslation } from "react-i18next";
 function LogTable({
   logs,
   removeLog,
@@ -32,24 +33,32 @@ function LogTable({
     options,
     setNumberPerPage,
   } = usePagination(10, logs);
+  const { t } = useTranslation();
+
+  const headerKeys = [
+    "date",
+    "gravity",
+    "iSpindelDashboard.calculatedGravity",
+    "temperature",
+    "iSpindelDashboard.angle",
+    "iSpindelDashboard.batteryLevel",
+    "desktop.editOrDelete",
+  ];
+
   return (
     <div className="max-w-full my-4 border-2 rounded-sm border-input">
       <Table className="max-w-full">
         <TableHeader>
           <TableRow>
-            <TableHead>Date</TableHead>
-            <TableHead>Gravity</TableHead>
-            <TableHead>Calculated Gravity</TableHead>
-            <TableHead>Temperature</TableHead>
-            <TableHead>Angle</TableHead>
-            <TableHead>Battery</TableHead>
-            <TableHead>Edit/Delete</TableHead>
+            {headerKeys.map((key) => (
+              <TableHead key={key}>{t(key)}</TableHead>
+            ))}
           </TableRow>
           {options.length > 0 && (
             <TableRow>
               <TableCell colSpan={7}>
                 <Label htmlFor="itemCount" className="flex flex-col gap-4">
-                  Number per page.
+                  {t("iSpindelDashboard.pagination")}
                   <Select
                     defaultValue={options[0].label}
                     onValueChange={(val) => {
@@ -79,7 +88,7 @@ function LogTable({
           {logs.length === 0 && (
             <TableRow>
               <TableCell colSpan={8} className="text-center">
-                No logs to display for this date range
+                {t("noLogs")}
               </TableCell>
             </TableRow>
           )}

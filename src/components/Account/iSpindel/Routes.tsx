@@ -15,12 +15,14 @@ import Brews from "./Brews";
 import Setup from "./Setup";
 import LinkBrew from "./LinkBrew";
 import Recipe from "./Recipe";
+import { useTranslation } from "react-i18next";
 
 function ISpindelDashboard() {
+  const { t } = useTranslation();
   return (
     <ContextProvider>
       <div className="relative flex flex-col items-center w-11/12 p-8 my-24 sm:w-9/12 rounded-xl bg-background">
-        <h1 className="text-2xl">iSpindel Dashboard</h1>
+        <h1 className="text-2xl">{t("iSpindelDashboard.label")}</h1>
         <Nav />
         <Routes>
           <Route path="/" element={<Devices />} />
@@ -39,18 +41,19 @@ function ISpindelDashboard() {
 export default ISpindelDashboard;
 
 const Nav = () => {
+  const { t } = useTranslation();
   const baseRoute = "/account/ispindel";
   const navLinks = [
     {
-      name: "Device List",
+      name: "iSpindelDashboard.nav.device",
       to: baseRoute,
     },
     {
-      name: "Brews",
+      name: "iSpindelDashboard.nav.brews",
       to: baseRoute + "/brews",
     },
     {
-      name: "Setup",
+      name: "iSpindelDashboard.nav.setup",
       to: baseRoute + "/setup",
     },
   ];
@@ -65,7 +68,7 @@ const Nav = () => {
       <DropdownMenuContent className="grid p-6 space-y-2">
         {navLinks.map((navLink) => (
           <Link to={navLink.to} key={navLink.name}>
-            {navLink.name}
+            {t(navLink.name)}
           </Link>
         ))}
       </DropdownMenuContent>

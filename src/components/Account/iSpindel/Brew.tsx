@@ -47,15 +47,20 @@ function Brew() {
   }, [brewId, token]);
 
   const chartData = transformData(logs);
-
+  const { t } = useTranslation();
   return (
     <div className="w-full">
       <div className="my-4">
-        <h1>Brew Details</h1>
+        <h1>{t("iSpindelDashboard.brews.details")}</h1>
         {brew && (
           <div>
-            <p>Start Time: {formatDate(brew.start_date)}</p>
-            <p>End Time: {formatDate(brew.end_date)}</p>
+            <p>
+              {t("iSpindelDashboard.brews.startTime")}{" "}
+              {formatDate(brew.start_date)}
+            </p>
+            <p>
+              {t("iSpindelDashboard.brews.endTime")} {formatDate(brew.end_date)}
+            </p>
           </div>
         )}
         {brew?.recipe_id ? (
@@ -63,14 +68,14 @@ function Brew() {
             to={`/recipes/${brew.recipe_id}`}
             className={buttonVariants({ variant: "default" })}
           >
-            Open Recipe
+            {t("iSpindelDashboard.brews.open")}
           </Link>
         ) : (
           <Link
             to={`/account/ispindel/link/${brewId}`}
             className={buttonVariants({ variant: "default" })}
           >
-            Link Recipe
+            {t("iSpindelDashboard.brews.link")}
           </Link>
         )}
       </div>
@@ -85,7 +90,7 @@ function Brew() {
         <div className="flex items-center justify-center">
           <CollapsibleTrigger asChild>
             <Button variant="ghost" size="sm">
-              <h3>Show Logs</h3>
+              <h3>{t("iSpindelDashboard.brews.showLogs")}</h3>
               <CaretSortIcon className="w-4 h-4" />
               <span className="sr-only">Toggle</span>
             </Button>

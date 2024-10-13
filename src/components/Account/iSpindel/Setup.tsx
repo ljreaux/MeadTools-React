@@ -6,27 +6,30 @@ import { Input } from "@/components/ui/input";
 import { FaCircleCheck, FaRegClipboard } from "react-icons/fa6";
 import { toast } from "@/components/ui/use-toast";
 import { Button } from "@/components/ui/button";
+import { useTranslation } from "react-i18next";
 
 function Setup() {
+  const { t } = useTranslation();
   const [displayUrl] = API_URL.split("/api");
 
   return (
     <div className="flex flex-col items-center justify-center gap-6">
-      <h2 className="my-4 text-2xl">Setup iSpindel</h2>
+      <h2 className="my-4 text-2xl">{t("iSpindelDashboard.setup.title")}</h2>
       <TokenGen />
-      <p>
-        The above token is used along with the iSpindel Name to identify your
-        devices and link them to your account. Please make sure that you have a
-        different iSpindel Name for each of your devices to avoid overlap when
-        logging data.
-      </p>
+      <p>{t("iSpindelDashboard.setup.info")}</p>
       <UrlCopyButton
-        buttonDetails={{ url: displayUrl, buttonText: "Server Address" }}
+        buttonDetails={{
+          url: displayUrl,
+          buttonText: "iSpindelDashboard.buttonText.server",
+        }}
       />
       <UrlCopyButton
-        buttonDetails={{ url: "/api/ispindel", buttonText: "Path / URI" }}
+        buttonDetails={{
+          url: "/api/ispindel",
+          buttonText: "iSpindelDashboard.buttonText.path",
+        }}
       />
-      <p>Service Type: HTTPS Post</p>
+      <p>{t("iSpindelDashboard.setup.serviceType")}</p>
     </div>
   );
 }
@@ -38,13 +41,14 @@ const UrlCopyButton = ({
 }: {
   buttonDetails: { url: string; buttonText: string };
 }) => {
+  const { t } = useTranslation();
   const handleClick = async () => {
     navigator.clipboard.writeText(buttonDetails.url);
     toast({
       description: (
         <div className="flex items-center justify-center gap-2">
           <FaCircleCheck className="text-xl text-green-500" />
-          Text successfully copied to clipboard.
+          {t("iSpindelDashboard.copyToken")}
         </div>
       ),
     });
@@ -52,7 +56,7 @@ const UrlCopyButton = ({
   return (
     <div className="flex gap-0 flex-nowrap max-w-[500px] w-full">
       <LoadingButton disabled className="rounded-r-none" variant={"secondary"}>
-        {buttonDetails.buttonText}
+        {t(buttonDetails.buttonText)}
       </LoadingButton>
       <Input
         readOnly

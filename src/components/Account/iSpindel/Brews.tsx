@@ -24,6 +24,7 @@ import {
 import { Label } from "@/components/ui/label";
 function Brews() {
   const { brews } = useiSpindelContext();
+  const { t } = useTranslation();
 
   const {
     currentItems,
@@ -37,21 +38,21 @@ function Brews() {
 
   return (
     <>
-      <h2 className="my-4 text-2xl">Brews</h2>
+      <h2 className="my-4 text-2xl">{t("iSpindelDashboard.brews.label")}</h2>
       <Table>
         <TableHeader>
           <TableRow>
-            <TableHead>ID</TableHead>
-            <TableHead>Start Date</TableHead>
-            <TableHead>End Date</TableHead>
-            <TableHead>Latest Gravity</TableHead>
-            <TableHead>Recipe Link</TableHead>
+            <TableHead>{t("id")}</TableHead>
+            <TableHead>{t("iSpindelDashboard.brews.startDate")}</TableHead>
+            <TableHead>{t("iSpindelDashboard.brews.endDate")}</TableHead>
+            <TableHead>{t("iSpindelDashboard.brews.latestGrav")}</TableHead>
+            <TableHead>{t("iSpindelDashboard.brews.recipeLink")}</TableHead>
           </TableRow>
           {options.length > 0 && (
             <TableRow>
               <TableCell colSpan={7}>
                 <Label htmlFor="itemCount" className="flex flex-col gap-4">
-                  Number per page.
+                  {t("iSpindelDashboard.pagination")}
                   <Select
                     defaultValue={options[0].label}
                     onValueChange={(val) => {
@@ -104,12 +105,13 @@ function Brews() {
 export default Brews;
 
 const BrewRow = ({ currentItems }: { currentItems: any[] }) => {
-  const { i18n } = useTranslation();
+  const { i18n, t } = useTranslation();
   const formatter = new Intl.DateTimeFormat(i18n.resolvedLanguage, {
     dateStyle: "short",
     timeStyle: "short",
   });
   const formatDate = (date: Date) => formatter.format(new Date(date));
+
   return (
     <>
       {currentItems &&
@@ -129,14 +131,14 @@ const BrewRow = ({ currentItems }: { currentItems: any[] }) => {
                   to={`/recipes/${brew.recipe_id}`}
                   className={buttonVariants({ variant: "default" })}
                 >
-                  Open Recipe
+                  {t("iSpindelDashboard.brews.open")}
                 </Link>
               ) : (
                 <Link
                   to={`/account/ispindel/link/${brew.id}`}
                   className={buttonVariants({ variant: "default" })}
                 >
-                  Link Recipe
+                  {t("iSpindelDashboard.brews.link")}
                 </Link>
               )}
             </TableCell>

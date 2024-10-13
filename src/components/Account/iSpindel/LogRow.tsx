@@ -141,7 +141,7 @@ const DeleteButton = ({ handleClick }: { handleClick: () => void }) => {
         <AlertDialogHeader>
           <AlertDialogTitle>{t("desktop.confirm")}</AlertDialogTitle>
           <AlertDialogDescription>
-            This action cannot be undone. This will permanently delete this log.
+            {t("iSpindelDashboard.deleteLog")}
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>

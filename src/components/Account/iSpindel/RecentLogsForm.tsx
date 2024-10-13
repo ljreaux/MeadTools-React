@@ -14,6 +14,7 @@ import { DatePickerWithRange } from "@/components/ui/daterange-picker";
 import { getLogs } from "@/helpers/iSpindel";
 import { useiSpindelContext } from "@/hooks/useiSpindelContext";
 import { toast } from "@/components/ui/use-toast";
+import { useTranslation } from "react-i18next";
 
 const FormSchema = z
   .object({
@@ -44,7 +45,7 @@ const RecentLogsForm = ({ deviceId }: { deviceId: string }) => {
     defaultValues: DEFAULT_VALUE,
     resolver: zodResolver(FormSchema),
   });
-
+  const { t } = useTranslation();
   const { token, setLogs } = useiSpindelContext();
 
   async function onSubmit({
@@ -73,7 +74,9 @@ const RecentLogsForm = ({ deviceId }: { deviceId: string }) => {
           name="dateRange"
           render={({ field }) => (
             <FormItem className="flex flex-col gap-2 w-72">
-              <FormLabel htmlFor="datetime">Start Date</FormLabel>
+              <FormLabel htmlFor="datetime">
+                {t("iSpindelDashboard.brews.startDate")}
+              </FormLabel>
               <FormControl>
                 <DatePickerWithRange
                   date={field.value}

@@ -33,7 +33,7 @@ function LinkBrew() {
 
   return (
     <div>
-      <h2>Link Brew to Recipe</h2>
+      <h2>{t("iSpindelDashboard.brews.link")}</h2>
       <div>
         {userRecipes.map((rec) => {
           const isCurrentRecipe = rec.id === brew?.recipe_id;
@@ -55,7 +55,7 @@ function LinkBrew() {
                 }
                 disabled={isCurrentRecipe}
               >
-                Link Brew to Recipe
+                {t("iSpindelDashboard.brews.link")}
               </Button>
             </div>
           );

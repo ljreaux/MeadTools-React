@@ -48,33 +48,33 @@ export function HydrometerData({
   tempUnits: "C" | "F";
 }) {
   const [gravityUnits, setGravityUnits] = useState("SG");
-  const chartConfig = {
-    temperature: {
-      label: "Temperature",
-      color: "hsl(var(--chart-1))",
-    },
-    gravity: {
-      label: gravityUnits === "Brix" ? "Brix" : "Specific Gravity",
-      color: "hsl(var(--chart-2))",
-    },
-    signalStrength: {
-      label: "Signal Strength",
-      color: "hsl(var(--chart-3))",
-    },
-    battery: {
-      label: "Battery Level",
-      color: "hsl(var(--chart-4))",
-    },
-    abv: {
-      label: "Alcohol by Volume",
-      color: "hsl(var(--chart-5))",
-    },
-  } satisfies ChartConfig;
 
-  const { i18n } = useTranslation();
+  const { i18n, t } = useTranslation();
   const lang = i18n.resolvedLanguage || "en-US";
   const [data, setData] = useState(chartData);
 
+  const chartConfig = {
+    temperature: {
+      label: t("temperature"),
+      color: "hsl(var(--chart-1))",
+    },
+    gravity: {
+      label: gravityUnits === "Brix" ? t("BRIX") : t("nuteSgLabel"),
+      color: "hsl(var(--chart-2))",
+    },
+    signalStrength: {
+      label: t("iSpindelDashboard.signalStrength"),
+      color: "hsl(var(--chart-3))",
+    },
+    battery: {
+      label: t("iSpindelDashboard.batteryLevel"),
+      color: "hsl(var(--chart-4))",
+    },
+    abv: {
+      label: t("ABV"),
+      color: "hsl(var(--chart-5))",
+    },
+  } satisfies ChartConfig;
   const showSignalStrength = !!data[0].signalStrength;
   const showBattery = !!data[0].battery;
   const yPadding =
@@ -130,8 +130,8 @@ export function HydrometerData({
               <SelectValue></SelectValue>
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="SG">SG</SelectItem>
-              <SelectItem value="Brix">Brix</SelectItem>
+              <SelectItem value="SG">{t("SG")}</SelectItem>
+              <SelectItem value="Brix">{t("BRIX")}</SelectItem>
             </SelectContent>
           </Select>
         </CardContent>

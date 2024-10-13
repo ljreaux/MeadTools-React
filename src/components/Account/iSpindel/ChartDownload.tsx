@@ -12,6 +12,7 @@ import {
 import { buttonVariants } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ChangeEvent } from "react";
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
 function ChartDownload({
@@ -23,22 +24,23 @@ function ChartDownload({
   updateFileName: (e: ChangeEvent<HTMLInputElement>) => void;
   data: any[];
 }) {
+  const { t } = useTranslation();
   return (
     <span className="flex items-center justify-center gap-4">
-      Download Chart data for MeadTools Desktop.
+      {t("iSpindelDashboard.chartDownload.desc")}
       <AlertDialog>
         <AlertDialogTrigger className={buttonVariants({ variant: "default" })}>
-          Download
+          {t("download")}
         </AlertDialogTrigger>
         <AlertDialogContent className="z-[1000] w-11/12">
           <AlertDialogHeader>
-            <AlertDialogTitle>Enter File Name</AlertDialogTitle>
+            <AlertDialogTitle>{t("iSpindelDashboard.enter")}</AlertDialogTitle>
             <AlertDialogDescription className="flex flex-col gap-2">
               <Input value={fileName} onChange={updateFileName} />
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogCancel>{t("cancel")}</AlertDialogCancel>
             <AlertDialogAction asChild>
               <Link
                 to={`data:text/json;charset=utf-8,${encodeURIComponent(
@@ -50,7 +52,7 @@ function ChartDownload({
                   fileName.length > 0 ? fileName : "meadtools"
                 }.hydro`}
               >
-                Download File
+                {t("download")}
               </Link>
             </AlertDialogAction>
           </AlertDialogFooter>

@@ -11,8 +11,10 @@ import { useParams } from "react-router-dom";
 import { HydrometerData } from "./HydrometerData";
 import { transformData } from "@/helpers/unitConverters";
 import { getBrewLogs } from "@/helpers/iSpindel";
+import { useTranslation } from "react-i18next";
 
 function Recipe() {
+  const { t } = useTranslation();
   const { recipeId } = useParams();
   const { brews: allBrews, token } = useiSpindelContext();
 
@@ -55,7 +57,7 @@ function Recipe() {
           tempUnits={logs[0].temp_units}
         ></HydrometerData>
       ) : (
-        <>No logs found.</>
+        <>{t("noLogs")}</>
       )}
     </div>
   );

@@ -177,7 +177,7 @@ export default function Navbar({
                           to={"/account/ispindel"}
                           className="p-3 space-y-1 leading-none no-underline transition-colors rounded-md outline-none select-none hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
                         >
-                          Manage iSpindel
+                          {t("iSpindelDashboard.manage")}
                         </Link>
                         <button
                           onClick={() => {

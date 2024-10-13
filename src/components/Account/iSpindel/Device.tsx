@@ -14,8 +14,10 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import RecentLogsForm from "./RecentLogsForm";
 import LogTable from "./LogTable";
+import { useTranslation } from "react-i18next";
 
 function Device() {
+  const { t } = useTranslation();
   const [showTable, setShowTable] = useState(false);
 
   const { deviceList, startBrew, endBrew, updateCoeff, logs, setLogs } =
@@ -78,7 +80,7 @@ function Device() {
           <p>{device.device_name}</p>
           {!device.brew_id ? (
             <Button variant={"secondary"} onClick={() => startBrew(device.id)}>
-              Start Brew
+              {t("iSpindelDashboard.startBrew")}
             </Button>
           ) : (
             <>
@@ -86,7 +88,7 @@ function Device() {
                 variant={"destructive"}
                 onClick={() => endBrew(device.id, device.brew_id)}
               >
-                End Brew
+                {t("iSpindelDashboard.endBrew")}
               </Button>
             </>
           )}
@@ -158,7 +160,7 @@ function Device() {
             </form>
           ) : (
             <Button onClick={() => setShowTable(true)} className="mx-auto my-2">
-              Update Coefficients
+              {t("iSpindelDashboard.updateCoefficients")}
             </Button>
           )}
         </div>

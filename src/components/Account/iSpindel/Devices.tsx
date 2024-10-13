@@ -2,14 +2,16 @@ import { Button } from "@/components/ui/button";
 import { useiSpindelContext } from "@/hooks/useiSpindelContext";
 import { useNavigate } from "react-router-dom";
 import TokenGen from "./RegisterDevice";
+import { useTranslation } from "react-i18next";
 
 function Devices() {
   const { deviceList } = useiSpindelContext();
+  const { t } = useTranslation();
   return (
     <div className="flex flex-col items-center justify-center gap-4 my-4 text-center">
       <TokenGen />
       <div className="flex">
-        {deviceList.length === 0 && <p>No Devices yet.</p>}
+        {deviceList.length === 0 && <p>{t("noDevices")}</p>}
         {deviceList.map((dev) => (
           <DeviceCard device={dev} key={dev.id} />
         ))}
@@ -31,6 +33,7 @@ type DeviceType = {
 const DeviceCard = ({ device }: { device: DeviceType }) => {
   const { startBrew, endBrew } = useiSpindelContext();
   const nav = useNavigate();
+  const { t } = useTranslation();
   return (
     <div key={device.id} className="flex flex-col gap-2">
       <h2>{device.device_name}</h2>
@@ -39,19 +42,19 @@ const DeviceCard = ({ device }: { device: DeviceType }) => {
           variant={"secondary"}
           onClick={() => nav(`./devices/${device.id}`)}
         >
-          View Device Details
+          {t("iSpindelDashboard.deviceDetails")}
         </Button>
 
         {!device.brew_id ? (
           <Button variant={"secondary"} onClick={() => startBrew(device.id)}>
-            Start Brew
+            {t("iSpindelDashboard.startBrew")}
           </Button>
         ) : (
           <Button
             variant={"destructive"}
             onClick={() => endBrew(device.id, device.brew_id)}
           >
-            End Brew
+            {t("iSpindelDashboard.endBrew")}
           </Button>
         )}
       </div>
