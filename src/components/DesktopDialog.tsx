@@ -19,7 +19,7 @@ function DesktopDialog() {
   const nav = useNavigate();
   return (
     <AlertDialog open={open} defaultOpen={open} onOpenChange={setOpen}>
-      <AlertDialogContent className="z-[1000]">
+      <AlertDialogContent className="z-[1000] overflow-scroll max-h-screen">
         <AlertDialogHeader>
           <AlertDialogTitle>{t("desktop.dialog.title")}</AlertDialogTitle>
           <AlertDialogDescription className="flex flex-col gap-2"></AlertDialogDescription>
