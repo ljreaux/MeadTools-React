@@ -1,4 +1,4 @@
-import { getBrewLogs } from "@/helpers/iSpindel";
+import { getBrewLogs, updateBrewName } from "@/helpers/iSpindel";
 import { useiSpindelContext } from "@/hooks/useiSpindelContext";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -12,8 +12,20 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@radix-ui/react-collapsible";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 
 import { CaretSortIcon } from "@radix-ui/react-icons";
+import { Input } from "@/components/ui/input";
 
 function Brew() {
   const { i18n } = useTranslation();
@@ -48,12 +60,58 @@ function Brew() {
 
   const chartData = transformData(logs);
   const { t } = useTranslation();
+  const [fileName, setFileName] = useState("");
+  const updateFileName = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFileName(e.target.value);
+  };
+  console.log(brew);
   return (
     <div className="w-full">
       <div className="my-4">
-        <h1>{t("iSpindelDashboard.brews.details")}</h1>
+        <h1>{t("iSpindelDashboard.brews.details")}:</h1>
         {brew && (
           <div>
+            {brew.name ? (
+              <p>Name: {brew.name}</p>
+            ) : (
+              <>
+                <AlertDialog>
+                  <AlertDialogTrigger
+                    className={buttonVariants({ variant: "secondary" })}
+                  >
+                    {t("iSpindelDashboard.addBrewName")}
+                  </AlertDialogTrigger>
+                  <AlertDialogContent className="z-[1000] w-11/12">
+                    <AlertDialogHeader>
+                      <AlertDialogTitle>
+                        {t("iSpindelDashboard.addBrewName")}
+                      </AlertDialogTitle>
+                      <AlertDialogDescription className="flex flex-col gap-2">
+                        <Input value={fileName} onChange={updateFileName} />
+                      </AlertDialogDescription>
+                    </AlertDialogHeader>
+                    <AlertDialogFooter>
+                      <AlertDialogCancel>{t("cancel")}</AlertDialogCancel>
+                      <AlertDialogAction asChild>
+                        <Button
+                          variant={"secondary"}
+                          onClick={() =>
+                            updateBrewName(token, brew.id, fileName).then(() =>
+                              setBrew((brew: any) => ({
+                                ...brew,
+                                name: fileName,
+                              }))
+                            )
+                          }
+                        >
+                          {t("iSpindelDashboard.addBrewName")}
+                        </Button>
+                      </AlertDialogAction>
+                    </AlertDialogFooter>
+                  </AlertDialogContent>
+                </AlertDialog>
+              </>
+            )}
             <p>
               {t("iSpindelDashboard.brews.startTime")}{" "}
               {formatDate(brew.start_date)}

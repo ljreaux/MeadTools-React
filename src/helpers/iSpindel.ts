@@ -64,9 +64,20 @@ export const generateToken = async (token: string) => {
   }
 }
 
-export const brew = async (token: string, id: string) => {
+export const brew = async (token: string, id: string, brew_name = null) => {
   if (!token) return [];
-  const { data, status } = await axios.post(`${API_URL}/ispindel/brew`, { device_id: id }, { headers: { Authorization: 'Bearer ' + token } });
+  const { data, status } = await axios.post(`${API_URL}/ispindel/brew`, { device_id: id, brew_name }, { headers: { Authorization: 'Bearer ' + token } });
+  if (status === 200) {
+    return data as any[]
+  } else {
+    console.error('Failed to get device details', status)
+    return [];
+  }
+}
+
+export const updateBrewName = async (token: string | null, id: string, brew_name: string | null = null) => {
+  if (!token) return [];
+  const { data, status } = await axios.patch(`${API_URL}/ispindel/brew`, { brew_id: id, brew_name }, { headers: { Authorization: 'Bearer ' + token } });
   if (status === 200) {
     return data as any[]
   } else {

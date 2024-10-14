@@ -18,7 +18,7 @@ export interface ISpindelContext {
   getNewHydrometerToken: () => void;
   hydrometerToken: string | null;
   loading: boolean;
-  startBrew: (id: string) => void;
+  startBrew: (id: string, brewName: string | null) => void;
   endBrew: (deviceId: string, brewId: string | null) => void;
   updateCoeff: (deviceId: string, coefficients: number[]) => void;
   brews: any[];
@@ -48,9 +48,9 @@ export const ContextProvider = ({
     setToken(token);
   }, []);
 
-  const startBrew = async (id: string) => {
+  const startBrew = async (id: string, brewName = null) => {
     if (token) {
-      const [, { device }] = await brew(token, id);
+      const [, { device }] = await brew(token, id, brewName);
       console.log(device.brew_id);
       setDeviceList((prev) =>
         prev.map((dev) => (dev.id === id ? device : dev))

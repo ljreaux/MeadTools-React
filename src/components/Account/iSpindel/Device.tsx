@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import {
   Table,
@@ -15,6 +15,17 @@ import { useParams } from "react-router-dom";
 import RecentLogsForm from "./RecentLogsForm";
 import LogTable from "./LogTable";
 import { useTranslation } from "react-i18next";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 
 function Device() {
   const { t } = useTranslation();
@@ -71,6 +82,10 @@ function Device() {
     setLogs(updatedLogs);
   };
 
+  const [fileName, setFileName] = useState("");
+  const updateFileName = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFileName(e.target.value);
+  };
   if (!device) return null;
 
   return (
@@ -79,9 +94,36 @@ function Device() {
         <div className="flex flex-col items-center justify-center gap-4 my-2">
           <p>{device.device_name}</p>
           {!device.brew_id ? (
-            <Button variant={"secondary"} onClick={() => startBrew(device.id)}>
-              {t("iSpindelDashboard.startBrew")}
-            </Button>
+            <>
+              <AlertDialog>
+                <AlertDialogTrigger
+                  className={buttonVariants({ variant: "secondary" })}
+                >
+                  {t("iSpindelDashboard.startBrew")}
+                </AlertDialogTrigger>
+                <AlertDialogContent className="z-[1000] w-11/12">
+                  <AlertDialogHeader>
+                    <AlertDialogTitle>
+                      {t("iSpindelDashboard.addBrewName")}
+                    </AlertDialogTitle>
+                    <AlertDialogDescription className="flex flex-col gap-2">
+                      <Input value={fileName} onChange={updateFileName} />
+                    </AlertDialogDescription>
+                  </AlertDialogHeader>
+                  <AlertDialogFooter>
+                    <AlertDialogCancel>{t("cancel")}</AlertDialogCancel>
+                    <AlertDialogAction asChild>
+                      <Button
+                        variant={"secondary"}
+                        onClick={() => startBrew(device.id, fileName)}
+                      >
+                        {t("iSpindelDashboard.startBrew")}
+                      </Button>
+                    </AlertDialogAction>
+                  </AlertDialogFooter>
+                </AlertDialogContent>
+              </AlertDialog>
+            </>
           ) : (
             <>
               <Button

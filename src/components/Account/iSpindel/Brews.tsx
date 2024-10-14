@@ -25,7 +25,7 @@ import { Label } from "@/components/ui/label";
 function Brews() {
   const { brews } = useiSpindelContext();
   const { t } = useTranslation();
-
+  console.log(brews);
   const {
     currentItems,
     handlePageClick,
@@ -42,7 +42,7 @@ function Brews() {
       <Table>
         <TableHeader>
           <TableRow>
-            <TableHead>{t("id")}</TableHead>
+            <TableHead>{t("iSpindelDashboard.nameOrId")}</TableHead>
             <TableHead>{t("iSpindelDashboard.brews.startDate")}</TableHead>
             <TableHead>{t("iSpindelDashboard.brews.endDate")}</TableHead>
             <TableHead>{t("iSpindelDashboard.brews.latestGrav")}</TableHead>
@@ -118,13 +118,15 @@ const BrewRow = ({ currentItems }: { currentItems: any[] }) => {
         currentItems.map((brew) => (
           <TableRow key={brew.id}>
             <TableCell className="truncate max-w-24 text-[rgb(200_215_255)]">
-              <Link to={`/account/ispindel/logs/${brew.id}`}>{brew.id}</Link>
+              <Link to={`/account/ispindel/logs/${brew.id}`}>
+                {brew.name || brew.id}
+              </Link>
             </TableCell>
             <TableCell>{formatDate(brew.start_date)}</TableCell>
             <TableCell>
               {brew.end_date ? formatDate(brew.end_date) : "Ongoing"}
             </TableCell>
-            <TableCell>{brew.latest_gravity?.toFixed(3)}</TableCell>
+            <TableCell>{brew.latest_gravity?.toFixed(3) || "NA"}</TableCell>
             <TableCell>
               {brew.recipe_id ? (
                 <Link
