@@ -37,15 +37,15 @@ function Recipe() {
   const [chartData, setChartData] = useState(transformData(logs));
 
   return (
-    <div className="w-full">
+    <div className="w-full ">
       <Select value={selectedBrew?.id} onValueChange={handleChange}>
-        <SelectTrigger>
+        <SelectTrigger className="my-4">
           <SelectValue placeholder="Select a brew to see chart data"></SelectValue>
         </SelectTrigger>
         <SelectContent>
           {brews.map((brew) => (
             <SelectItem key={brew.id} value={brew.id}>
-              {brew.id}
+              {brew.name ?? brew.id}
             </SelectItem>
           ))}
         </SelectContent>
