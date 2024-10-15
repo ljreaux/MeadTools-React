@@ -177,6 +177,12 @@ export default function Navbar({
                         >
                           {t("account.label")}
                         </Link>
+                        <Link
+                          to={"/account/ispindel"}
+                          className="p-3 space-y-1 leading-none no-underline transition-colors rounded-md outline-none select-none hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                        >
+                          {t("iSpindelDashboard.manage")}
+                        </Link>
                         <button
                           onClick={() => {
                             localStorage.removeItem("token");
