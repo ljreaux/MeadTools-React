@@ -74,7 +74,7 @@ function DesktopDownload() {
     <section className="flex items-center justify-center w-full my-12 h-fit">
       <div className="flex flex-col items-center justify-center w-11/12 p-8 my-16 sm:w-9/12 rounded-xl bg-background text-foreground">
         <Title header={t("downloadDesktop")} />
-        <p className="my-2 text-xl">1.0.0</p>
+        <p className="my-2 text-xl">1.0.3</p>
         <Link
           to={currentButton?.href || ""}
           className={cn(
