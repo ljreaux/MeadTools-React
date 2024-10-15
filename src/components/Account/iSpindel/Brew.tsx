@@ -64,7 +64,7 @@ function Brew() {
   const updateFileName = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFileName(e.target.value);
   };
-  console.log(brew);
+
   return (
     <div className="w-full">
       <div className="my-4">
@@ -116,9 +116,12 @@ function Brew() {
               {t("iSpindelDashboard.brews.startTime")}{" "}
               {formatDate(brew.start_date)}
             </p>
-            <p>
-              {t("iSpindelDashboard.brews.endTime")} {formatDate(brew.end_date)}
-            </p>
+            {brew.end_date && (
+              <p>
+                {t("iSpindelDashboard.brews.endTime")}{" "}
+                {formatDate(brew.end_date)}
+              </p>
+            )}
           </div>
         )}
         {brew?.recipe_id ? (

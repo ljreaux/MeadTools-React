@@ -101,7 +101,7 @@ export const updateCoeff = async (token: string, device_id: string, coefficients
   if (!token) return null;
   const { data, status } = await axios.patch(`${API_URL}/ispindel/device/${device_id}`, { coefficients }, { headers: { Authorization: 'Bearer ' + token } });
   if (status === 200) {
-    console.log(data)
+
     return data as any
   } else {
     console.error('Failed to get device details', status)
@@ -139,7 +139,7 @@ export const deleteLog = async (token: string | null, logId: string, deviceId: s
   const { data, status } = await axios.delete(`${API_URL}/ispindel/logs/${logId}?device_id=${deviceId}`, { headers: { Authorization: 'Bearer ' + token } });
 
   if (status === 200) {
-    console.log(data)
+
     return data as any
   } else {
     console.error('Failed to delete log', status)
@@ -152,7 +152,7 @@ export const updateUserLog = async (token: string | null, log: any) => {
   const { data, status } = await axios.patch(`${API_URL}/ispindel/logs/${log.id}?device_id=${log.device_id}`, log, { headers: { Authorization: 'Bearer ' + token } });
 
   if (status === 200) {
-    console.log(data)
+
     return data as any
   } else {
     console.error('Failed to update log', status)
@@ -165,7 +165,7 @@ export const linkBrew = async (token: string | null, recipe_id: string, brew_id?
   const { data, status } = await axios.patch(`${API_URL}/ispindel/brew/${brew_id}`, { recipe_id }, { headers: { Authorization: 'Bearer ' + token } });
 
   if (status === 200) {
-    console.log(data)
+
     return data as any
   } else {
     console.error('Failed to link brew', status)

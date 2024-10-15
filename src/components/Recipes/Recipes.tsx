@@ -265,7 +265,7 @@ export default function Recipes({
         setPrimaryNotes(cocatNotes(primaryNotes));
         setSecondaryNotes(cocatNotes(secondaryNotes));
         setLoading(false);
-        console.log(recipe);
+
         if (recipe.brews) setBrews(recipe.brews);
       } catch (err) {
         console.log(err);

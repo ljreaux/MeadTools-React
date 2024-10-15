@@ -25,7 +25,7 @@ import { Label } from "@/components/ui/label";
 function Brews() {
   const { brews } = useiSpindelContext();
   const { t } = useTranslation();
-  console.log(brews);
+
   const {
     currentItems,
     handlePageClick,

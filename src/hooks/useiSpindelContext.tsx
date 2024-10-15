@@ -51,7 +51,7 @@ export const ContextProvider = ({
   const startBrew = async (id: string, brewName = null) => {
     if (token) {
       const [, { device }] = await brew(token, id, brewName);
-      console.log(device.brew_id);
+
       setDeviceList((prev) =>
         prev.map((dev) => (dev.id === id ? device : dev))
       );
@@ -61,7 +61,7 @@ export const ContextProvider = ({
   const endBrew = async (device_id: string, brew_id: string) => {
     if (token) {
       const [, { device }] = await stopBrew(token, device_id, brew_id);
-      console.log(device.brew_id);
+
       setDeviceList((prev) =>
         prev.map((dev) => (dev.id === device_id ? device : dev))
       );
@@ -74,7 +74,7 @@ export const ContextProvider = ({
   ) => {
     if (token) {
       const device = await updateCoeff(token, device_id, coefficients);
-      console.log(device.id);
+
       setDeviceList((prev) =>
         prev.map((dev) => (dev.id === device_id ? device : dev))
       );

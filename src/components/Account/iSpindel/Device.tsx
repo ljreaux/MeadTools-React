@@ -26,13 +26,22 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
+import { getLogs } from "@/helpers/iSpindel";
 
 function Device() {
   const { t } = useTranslation();
   const [showTable, setShowTable] = useState(false);
 
-  const { deviceList, startBrew, endBrew, updateCoeff, logs, setLogs } =
-    useiSpindelContext();
+  const {
+    deviceList,
+    startBrew,
+    endBrew,
+    updateCoeff,
+    logs,
+    setLogs,
+    token,
+    brews,
+  } = useiSpindelContext();
   const { deviceId } = useParams();
   const [device, setDevice] = useState<any>(null);
 
@@ -86,8 +95,24 @@ function Device() {
   const updateFileName = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFileName(e.target.value);
   };
-  if (!device) return null;
 
+  useEffect(() => {
+    const from = new Date();
+    const to = new Date();
+    from.setDate(from.getDate() - 1);
+
+    const start_date = new Date(from.setUTCHours(0, 0, 0, 0)).toISOString();
+    const end_date = new Date(to.setUTCHours(23, 59, 59, 999)).toISOString();
+
+    if (deviceId)
+      getLogs(token, start_date, end_date, deviceId)
+        .then((logs) => setLogs(logs))
+        .catch((err) => console.error(err));
+  }, [deviceId]);
+
+  const brewName = brews.find((brew) => brew?.id === device?.brew_id)?.name;
+
+  if (!device) return null;
   return (
     <div className="w-full">
       <div className="grid items-center justify-center grid-cols-2">
@@ -130,7 +155,7 @@ function Device() {
                 variant={"destructive"}
                 onClick={() => endBrew(device.id, device.brew_id)}
               >
-                {t("iSpindelDashboard.endBrew")}
+                {t("iSpindelDashboard.endBrew", { brew_name: brewName })}
               </Button>
             </>
           )}

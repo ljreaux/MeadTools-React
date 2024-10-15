@@ -1,7 +1,6 @@
 import { Button, buttonVariants } from "@/components/ui/button";
 import { useiSpindelContext } from "@/hooks/useiSpindelContext";
 import { useNavigate } from "react-router-dom";
-import TokenGen from "./RegisterDevice";
 import { useTranslation } from "react-i18next";
 import {
   AlertDialog,
@@ -22,8 +21,7 @@ function Devices() {
   const { t } = useTranslation();
   return (
     <div className="flex flex-col items-center justify-center gap-4 my-4 text-center">
-      <TokenGen />
-      <div className="flex">
+      <div className="flex gap-2">
         {deviceList.length === 0 && <p>{t("noDevices")}</p>}
         {deviceList.map((dev) => (
           <DeviceCard device={dev} key={dev.id} />
@@ -44,13 +42,16 @@ type DeviceType = {
 };
 
 const DeviceCard = ({ device }: { device: DeviceType }) => {
-  const { startBrew, endBrew } = useiSpindelContext();
+  const { startBrew, endBrew, brews } = useiSpindelContext();
   const nav = useNavigate();
   const { t } = useTranslation();
   const [fileName, setFileName] = useState("");
   const updateFileName = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFileName(e.target.value);
   };
+
+  const brewName = brews.find((brew) => brew.id === device.brew_id)?.name;
+
   return (
     <div key={device.id} className="flex flex-col gap-2">
       <h2>{device.device_name}</h2>
@@ -96,7 +97,7 @@ const DeviceCard = ({ device }: { device: DeviceType }) => {
             variant={"destructive"}
             onClick={() => endBrew(device.id, device.brew_id)}
           >
-            {t("iSpindelDashboard.endBrew")}
+            {t("iSpindelDashboard.endBrew", { brew_name: brewName })}
           </Button>
         )}
       </div>

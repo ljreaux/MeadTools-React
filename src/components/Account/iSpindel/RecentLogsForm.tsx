@@ -35,7 +35,7 @@ const FormSchema = z
   });
 const DEFAULT_VALUE = {
   dateRange: {
-    from: new Date(),
+    from: new Date(Date.now() - 86400000),
     to: new Date(),
   },
 };

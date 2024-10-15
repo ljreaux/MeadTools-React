@@ -23,11 +23,10 @@ function Recipe() {
   const [selectedBrew, setSelectedBrew] = useState<any>(null);
 
   const handleChange = async (value: string) => {
-    console.log(value, token);
     setSelectedBrew(brews.find((b) => b.id === value));
     if (token) {
       const logs = await getBrewLogs(token, value);
-      console.log(logs);
+
       setLogs(logs);
       setChartData(transformData(logs));
     }
