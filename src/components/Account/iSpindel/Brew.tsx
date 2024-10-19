@@ -51,14 +51,12 @@ function Brew() {
     if (brewId && token) {
       (async () => {
         const brew = brews.find((brew) => brew.id === brewId);
-
         setBrew(brew);
         const logs = await getBrewLogs(token, brewId);
-
         setLogs(logs);
       })();
     }
-  }, [brewId, token]);
+  }, [brewId, token, brews]);
 
   const chartData = transformData(logs);
   const { t } = useTranslation();
@@ -71,61 +69,65 @@ function Brew() {
     <div className="w-full">
       <div className="my-4">
         <h1>{t("iSpindelDashboard.brews.details")}:</h1>
-        {brew && (
-          <div>
-            {brew.name ? (
-              <p>Name: {brew.name}</p>
-            ) : (
-              <>
-                <AlertDialog>
-                  <AlertDialogTrigger
-                    className={buttonVariants({ variant: "secondary" })}
-                  >
-                    {t("iSpindelDashboard.addBrewName")}
-                  </AlertDialogTrigger>
-                  <AlertDialogContent className="z-[1000] w-11/12">
-                    <AlertDialogHeader>
-                      <AlertDialogTitle>
+
+        <div>
+          {brew?.name ? (
+            <p>Name: {brew.name}</p>
+          ) : (
+            <>
+              <AlertDialog>
+                <AlertDialogTrigger
+                  className={buttonVariants({ variant: "secondary" })}
+                >
+                  {t("iSpindelDashboard.addBrewName")}
+                </AlertDialogTrigger>
+                <AlertDialogContent className="z-[1000] w-11/12">
+                  <AlertDialogHeader>
+                    <AlertDialogTitle>
+                      {t("iSpindelDashboard.addBrewName")}
+                    </AlertDialogTitle>
+                    <AlertDialogDescription className="flex flex-col gap-2">
+                      <Input value={fileName} onChange={updateFileName} />
+                    </AlertDialogDescription>
+                  </AlertDialogHeader>
+                  <AlertDialogFooter>
+                    <AlertDialogCancel>{t("cancel")}</AlertDialogCancel>
+                    <AlertDialogAction asChild>
+                      <Button
+                        variant={"secondary"}
+                        onClick={() =>
+                          updateBrewName(token, brew.id, fileName).then(() =>
+                            setBrew((brew: any) => ({
+                              ...brew,
+                              name: fileName,
+                            }))
+                          )
+                        }
+                      >
                         {t("iSpindelDashboard.addBrewName")}
-                      </AlertDialogTitle>
-                      <AlertDialogDescription className="flex flex-col gap-2">
-                        <Input value={fileName} onChange={updateFileName} />
-                      </AlertDialogDescription>
-                    </AlertDialogHeader>
-                    <AlertDialogFooter>
-                      <AlertDialogCancel>{t("cancel")}</AlertDialogCancel>
-                      <AlertDialogAction asChild>
-                        <Button
-                          variant={"secondary"}
-                          onClick={() =>
-                            updateBrewName(token, brew.id, fileName).then(() =>
-                              setBrew((brew: any) => ({
-                                ...brew,
-                                name: fileName,
-                              }))
-                            )
-                          }
-                        >
-                          {t("iSpindelDashboard.addBrewName")}
-                        </Button>
-                      </AlertDialogAction>
-                    </AlertDialogFooter>
-                  </AlertDialogContent>
-                </AlertDialog>
-              </>
-            )}
-            <p>
-              {t("iSpindelDashboard.brews.startTime")}{" "}
-              {formatDate(brew.start_date)}
-            </p>
-            {brew.end_date && (
+                      </Button>
+                    </AlertDialogAction>
+                  </AlertDialogFooter>
+                </AlertDialogContent>
+              </AlertDialog>
+            </>
+          )}
+          {brew && (
+            <>
               <p>
-                {t("iSpindelDashboard.brews.endTime")}{" "}
-                {formatDate(brew.end_date)}
+                {t("iSpindelDashboard.brews.startTime")}{" "}
+                {formatDate(brew?.start_date)}
               </p>
-            )}
-          </div>
-        )}
+              {brew?.end_date && (
+                <p>
+                  {t("iSpindelDashboard.brews.endTime")}{" "}
+                  {formatDate(brew?.end_date)}
+                </p>
+              )}
+            </>
+          )}
+        </div>
+
         {brew?.recipe_id ? (
           <Link
             to={`/recipes/${brew.recipe_id}`}
@@ -186,7 +188,7 @@ function Brew() {
               <Button
                 onClick={() =>
                   deleteBrew(brew.id)
-                    .then(() => nav("/account/ispindel"))
+                    .then(() => nav("/account/ispindel/brews"))
                     .catch(() =>
                       toast({
                         description: "Something went wrong",

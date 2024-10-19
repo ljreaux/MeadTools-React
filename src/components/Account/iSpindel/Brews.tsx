@@ -34,70 +34,77 @@ function Brews() {
     setNumberPerPage,
   } = usePagination(5, brews);
 
-  if (!brews.length) return null;
-
   return (
     <>
-      <h2 className="my-4 text-2xl">{t("iSpindelDashboard.brews.label")}</h2>
-      <Table>
-        <TableHeader>
-          <TableRow>
-            <TableHead>{t("iSpindelDashboard.nameOrId")}</TableHead>
-            <TableHead>{t("iSpindelDashboard.brews.startDate")}</TableHead>
-            <TableHead>{t("iSpindelDashboard.brews.endDate")}</TableHead>
-            <TableHead>{t("iSpindelDashboard.brews.latestGrav")}</TableHead>
-            <TableHead>{t("iSpindelDashboard.brews.recipeLink")}</TableHead>
-          </TableRow>
-          {options.length > 0 && (
-            <TableRow>
-              <TableCell colSpan={7}>
-                <Label htmlFor="itemCount" className="flex flex-col gap-4">
-                  {t("iSpindelDashboard.pagination")}
-                  <Select
-                    defaultValue={options[0].label}
-                    onValueChange={(val) => {
-                      setNumberPerPage(parseInt(val));
-                    }}
-                  >
-                    <SelectTrigger>
-                      <SelectValue></SelectValue>
-                    </SelectTrigger>
-                    <SelectContent>
-                      {options.map((opt) => (
-                        <SelectItem
-                          key={opt.value}
-                          value={opt.value.toString()}
-                        >
-                          {opt.label}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </Label>
-              </TableCell>
-            </TableRow>
-          )}
-        </TableHeader>
-        <TableBody>
-          <BrewRow currentItems={currentItems} />
-          {pageCount > 1 && (
-            <TableRow>
-              <TableCell colSpan={5}>
-                <ReactPaginate
-                  breakLabel="..."
-                  nextLabel={<FaAngleRight />}
-                  onPageChange={handlePageClick}
-                  pageRangeDisplayed={5}
-                  pageCount={pageCount}
-                  previousLabel={<FaAngleLeft />}
-                  renderOnZeroPageCount={null}
-                  className="react-paginate"
-                />
-              </TableCell>
-            </TableRow>
-          )}
-        </TableBody>
-      </Table>
+      {brews.length > 0 ? (
+        <>
+          {" "}
+          <h2 className="my-4 text-2xl">
+            {t("iSpindelDashboard.brews.label")}
+          </h2>
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead>{t("iSpindelDashboard.nameOrId")}</TableHead>
+                <TableHead>{t("iSpindelDashboard.brews.startDate")}</TableHead>
+                <TableHead>{t("iSpindelDashboard.brews.endDate")}</TableHead>
+                <TableHead>{t("iSpindelDashboard.brews.latestGrav")}</TableHead>
+                <TableHead>{t("iSpindelDashboard.brews.recipeLink")}</TableHead>
+              </TableRow>
+              {options.length > 0 && (
+                <TableRow>
+                  <TableCell colSpan={7}>
+                    <Label htmlFor="itemCount" className="flex flex-col gap-4">
+                      {t("iSpindelDashboard.pagination")}
+                      <Select
+                        defaultValue={options[0].label}
+                        onValueChange={(val) => {
+                          setNumberPerPage(parseInt(val));
+                        }}
+                      >
+                        <SelectTrigger>
+                          <SelectValue></SelectValue>
+                        </SelectTrigger>
+                        <SelectContent>
+                          {options.map((opt) => (
+                            <SelectItem
+                              key={opt.value}
+                              value={opt.value.toString()}
+                            >
+                              {opt.label}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    </Label>
+                  </TableCell>
+                </TableRow>
+              )}
+            </TableHeader>
+            <TableBody>
+              <BrewRow currentItems={currentItems} />
+              {pageCount > 1 && (
+                <TableRow>
+                  <TableCell colSpan={5}>
+                    <ReactPaginate
+                      breakLabel="..."
+                      nextLabel={<FaAngleRight />}
+                      onPageChange={handlePageClick}
+                      pageRangeDisplayed={5}
+                      pageCount={pageCount}
+                      previousLabel={<FaAngleLeft />}
+                      renderOnZeroPageCount={null}
+                      className="react-paginate"
+                    />
+                  </TableCell>
+                </TableRow>
+              )}
+            </TableBody>
+          </Table>
+        </>
+      ) : (
+        <p>No brews yet.</p>
+      )}
     </>
   );
 }
