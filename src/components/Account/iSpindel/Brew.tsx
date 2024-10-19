@@ -2,7 +2,7 @@ import { getBrewLogs, updateBrewName } from "@/helpers/iSpindel";
 import { useiSpindelContext } from "@/hooks/useiSpindelContext";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { HydrometerData } from "./HydrometerData";
 import { transformData } from "@/helpers/unitConverters";
 import LogTable from "./LogTable";
@@ -26,15 +26,17 @@ import {
 
 import { CaretSortIcon } from "@radix-ui/react-icons";
 import { Input } from "@/components/ui/input";
+import { toast } from "@/components/ui/use-toast";
 
 function Brew() {
   const { i18n } = useTranslation();
+  const nav = useNavigate();
   const formatter = new Intl.DateTimeFormat(i18n.resolvedLanguage, {
     dateStyle: "short",
     timeStyle: "short",
   });
   const formatDate = (date: Date) => formatter.format(new Date(date));
-  const { token, brews } = useiSpindelContext();
+  const { token, brews, deleteBrew } = useiSpindelContext();
   const { brewId } = useParams();
   const [brew, setBrew] = useState<any>(null);
   const [logs, setLogs] = useState<any[]>([]);
@@ -161,6 +163,44 @@ function Brew() {
           <LogTable logs={[...logs].reverse()} removeLog={removeLog}></LogTable>
         </CollapsibleContent>
       </Collapsible>
+      <AlertDialog>
+        <AlertDialogTrigger
+          className={buttonVariants({ variant: "destructive" })}
+        >
+          Delete Brew
+        </AlertDialogTrigger>
+        <AlertDialogContent className="z-[1000] w-11/12">
+          <AlertDialogHeader>
+            <AlertDialogTitle>Confirm Deletion</AlertDialogTitle>
+            <AlertDialogDescription className="flex flex-col gap-2">
+              Are you sure you want to delete this brew? This action cannot be
+              undone. All logs related to this brew will also be deleted.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>{t("cancel")}</AlertDialogCancel>
+            <AlertDialogAction
+              asChild
+              className={buttonVariants({ variant: "destructive" })}
+            >
+              <Button
+                onClick={() =>
+                  deleteBrew(brew.id)
+                    .then(() => nav("/account/ispindel"))
+                    .catch(() =>
+                      toast({
+                        description: "Something went wrong",
+                        variant: "destructive",
+                      })
+                    )
+                }
+              >
+                Delete Brew
+              </Button>
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   );
 }

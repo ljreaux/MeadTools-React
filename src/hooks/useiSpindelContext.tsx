@@ -1,5 +1,7 @@
 import {
   brew,
+  deleteBrew,
+  deleteDevice,
   fetchAllBrews,
   generateToken,
   getDeviceList,
@@ -22,6 +24,8 @@ export interface ISpindelContext {
   endBrew: (deviceId: string, brewId: string | null) => void;
   updateCoeff: (deviceId: string, coefficients: number[]) => void;
   brews: any[];
+  deleteDevice: (deviceId: string) => Promise<void>;
+  deleteBrew: (brewId: string) => Promise<void>;
 }
 
 const HydroContext = createContext<any>(null);
@@ -41,7 +45,7 @@ export const ContextProvider = ({
   const [logs, setLogs] = useState<any[]>([]);
 
   const [hydrometerToken, setHydrometerToken] = useState<null | string>(null);
-  const [brews, setBrews] = useState<any>([]);
+  const [brews, setBrews] = useState<any[]>([]);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -126,13 +130,29 @@ export const ContextProvider = ({
     if (token) {
       getBrews()
         .then((brews) => {
-          setBrews(brews);
+          if (brews) setBrews(brews);
         })
         .catch((error) => {
           console.error(error);
         });
     }
   }, [token]);
+
+  const removeDevice = async (deviceId: string) => {
+    deleteDevice(token, deviceId).then(() => {
+      setDeviceList((prev) => prev.filter((dev) => dev.id !== deviceId));
+    });
+  };
+
+  const removeBrew = async (brewId: string) => {
+    await deleteBrew(token, brewId)
+      .then(() => {
+        setBrews((prev) => prev.filter((brew) => brew.id !== brewId));
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
 
   const context = {
     token,
@@ -146,6 +166,8 @@ export const ContextProvider = ({
     endBrew,
     updateCoeff: updateCoefficients,
     brews,
+    deleteDevice: removeDevice,
+    deleteBrew: removeBrew,
   };
 
   return (

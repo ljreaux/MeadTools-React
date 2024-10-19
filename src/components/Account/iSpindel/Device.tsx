@@ -11,7 +11,7 @@ import {
 import { toast } from "@/components/ui/use-toast";
 import { useiSpindelContext } from "@/hooks/useiSpindelContext";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import RecentLogsForm from "./RecentLogsForm";
 import LogTable from "./LogTable";
 import { useTranslation } from "react-i18next";
@@ -41,6 +41,7 @@ function Device() {
     setLogs,
     token,
     brews,
+    deleteDevice,
   } = useiSpindelContext();
   const { deviceId } = useParams();
   const [device, setDevice] = useState<any>(null);
@@ -111,6 +112,8 @@ function Device() {
   }, [deviceId]);
 
   const brewName = brews.find((brew) => brew?.id === device?.brew_id)?.name;
+
+  const nav = useNavigate();
 
   if (!device) return null;
   return (
@@ -236,6 +239,45 @@ function Device() {
       <div className="max-w-full">
         <LogTable logs={logs} removeLog={removeLog} />
       </div>
+      <AlertDialog>
+        <AlertDialogTrigger
+          className={buttonVariants({ variant: "destructive" })}
+        >
+          Delete Device
+        </AlertDialogTrigger>
+        <AlertDialogContent className="z-[1000] w-11/12">
+          <AlertDialogHeader>
+            <AlertDialogTitle>Confirm Deletion</AlertDialogTitle>
+            <AlertDialogDescription className="flex flex-col gap-2">
+              Are you sure you want to delete this device? This action cannot be
+              undone. All logs related to this device that are not tied to any
+              brew will also be deleted.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>{t("cancel")}</AlertDialogCancel>
+            <AlertDialogAction
+              asChild
+              className={buttonVariants({ variant: "destructive" })}
+            >
+              <Button
+                onClick={() =>
+                  deleteDevice(device.id)
+                    .then(() => nav("/account/ispindel"))
+                    .catch(() =>
+                      toast({
+                        description: "Something went wrong",
+                        variant: "destructive",
+                      })
+                    )
+                }
+              >
+                Delete Device
+              </Button>
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   );
 }

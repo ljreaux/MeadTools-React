@@ -173,3 +173,29 @@ export const linkBrew = async (token: string | null, recipe_id: string, brew_id?
   }
 
 }
+
+export const deleteDevice = async (token: string | null, deviceId: string) => {
+  if (!token) return null;
+  const { data, status } = await axios.delete(`${API_URL}/ispindel/device/${deviceId}`, { headers: { Authorization: 'Bearer ' + token } });
+
+  if (status === 200) {
+
+    return data as any
+  } else {
+    console.error('Failed to delete device', status)
+    return null;
+  }
+}
+
+export const deleteBrew = async (token: string | null, brewId: string) => {
+  if (!token || !brewId) return null;
+  const { data, status } = await axios.delete(`${API_URL}/ispindel/brew/${brewId}`, { headers: { Authorization: 'Bearer ' + token } });
+
+  if (status === 200) {
+
+    return data as any
+  } else {
+    console.error('Failed to delete brew', status)
+    return null;
+  }
+}
