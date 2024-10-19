@@ -243,15 +243,15 @@ function Device() {
         <AlertDialogTrigger
           className={buttonVariants({ variant: "destructive" })}
         >
-          Delete Device
+          {t("iSpindelDashboard.deleteDevice")}
         </AlertDialogTrigger>
         <AlertDialogContent className="z-[1000] w-11/12">
           <AlertDialogHeader>
-            <AlertDialogTitle>Confirm Deletion</AlertDialogTitle>
+            <AlertDialogTitle>
+              {t("iSpindelDashboard.confirm")}
+            </AlertDialogTitle>
             <AlertDialogDescription className="flex flex-col gap-2">
-              Are you sure you want to delete this device? This action cannot be
-              undone. All logs related to this device that are not tied to any
-              brew will also be deleted.
+              {t("iSpindelDashboard.deleteDeviceAlert")}
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
@@ -272,7 +272,7 @@ function Device() {
                     )
                 }
               >
-                Delete Device
+                {t("iSpindelDashboard.deleteDevice")}
               </Button>
             </AlertDialogAction>
           </AlertDialogFooter>

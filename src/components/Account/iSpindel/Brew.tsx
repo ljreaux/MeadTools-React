@@ -169,14 +169,15 @@ function Brew() {
         <AlertDialogTrigger
           className={buttonVariants({ variant: "destructive" })}
         >
-          Delete Brew
+          {t("iSpindelDashboard.deleteBrew")}
         </AlertDialogTrigger>
         <AlertDialogContent className="z-[1000] w-11/12">
           <AlertDialogHeader>
-            <AlertDialogTitle>Confirm Deletion</AlertDialogTitle>
+            <AlertDialogTitle>
+              {t("iSpindelDashboard.confirm")}
+            </AlertDialogTitle>
             <AlertDialogDescription className="flex flex-col gap-2">
-              Are you sure you want to delete this brew? This action cannot be
-              undone. All logs related to this brew will also be deleted.
+              {t("iSpindelDashboard.deleteBrewAlert")}
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
@@ -197,7 +198,7 @@ function Brew() {
                     )
                 }
               >
-                Delete Brew
+                {t("iSpindelDashboard.deleteBrew")}
               </Button>
             </AlertDialogAction>
           </AlertDialogFooter>

@@ -103,7 +103,7 @@ function Brews() {
           </Table>
         </>
       ) : (
-        <p>No brews yet.</p>
+        <p>{t("iSpindelDashboard.noBrews")}</p>
       )}
     </>
   );
