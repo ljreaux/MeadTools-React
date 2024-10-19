@@ -3,13 +3,16 @@ import { Input } from "@/components/ui/input";
 import { LoadingButton } from "@/components/ui/LoadingButton";
 import { toast } from "@/components/ui/use-toast";
 import { useiSpindelContext } from "@/hooks/useiSpindelContext";
+import { useTranslation } from "react-i18next";
 import { FaRegClipboard } from "react-icons/fa";
 
 import { FaCircleCheck } from "react-icons/fa6";
 
-function RegisterDevice() {
+function TokenGen() {
   const { hydrometerToken, loading, getNewHydrometerToken } =
     useiSpindelContext();
+
+  const { t } = useTranslation();
 
   const handleClick = async () => {
     if (hydrometerToken) {
@@ -18,7 +21,7 @@ function RegisterDevice() {
         description: (
           <div className="flex items-center justify-center gap-2">
             <FaCircleCheck className="text-xl text-green-500" />
-            Token successfully copied to clipboard.
+            {t("iSpindelDashboard.copyToken")}
           </div>
         ),
       });
@@ -26,13 +29,13 @@ function RegisterDevice() {
   };
 
   return (
-    <div className="flex gap-0 flex-nowrap">
+    <div className="flex gap-0 flex-nowrap max-w-[500px] w-full">
       <LoadingButton
         loading={loading}
         onClick={getNewHydrometerToken}
         className="rounded-r-none"
       >
-        Generate Token
+        {t("iSpindelDashboard.genToken")}
       </LoadingButton>
       <Input
         readOnly
@@ -52,4 +55,4 @@ function RegisterDevice() {
   );
 }
 
-export default RegisterDevice;
+export default TokenGen;
