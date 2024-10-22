@@ -34,6 +34,7 @@ function Brews() {
     setNumberPerPage,
   } = usePagination(5, brews);
 
+  if (!brews) return null;
   return (
     <>
       {brews.length > 0 ? (

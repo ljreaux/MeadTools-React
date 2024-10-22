@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 
-export const usePagination = (itemsPerPage: number, data: any[]) => {
+export const usePagination = (itemsPerPage: number, data: any[] = []) => {
   const [numberPerPage, setNumberPerPage] = useState(itemsPerPage);
   const [options, setOptions] = useState<{ label: string; value: number }[]>(
     []
   );
 
   useEffect(() => {
+    if (!data) return
     const copy = [];
     for (let i = 5; i < data.length; i += 5) {
       copy.push({

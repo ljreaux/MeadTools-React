@@ -19,11 +19,12 @@ import { Input } from "@/components/ui/input";
 function Devices() {
   const { deviceList } = useiSpindelContext();
   const { t } = useTranslation();
+  if (!deviceList) return null;
   return (
     <div className="flex flex-col items-center justify-center gap-4 my-4 text-center">
       <div className="flex gap-2">
         {deviceList.length === 0 && <p>{t("noDevices")}</p>}
-        {deviceList.map((dev) => (
+        {deviceList?.map((dev) => (
           <DeviceCard device={dev} key={dev.id} />
         ))}
       </div>

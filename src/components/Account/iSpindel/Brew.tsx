@@ -66,8 +66,8 @@ function Brew() {
   };
 
   return (
-    <div className="w-full">
-      <div className="my-4">
+    <div className="flex flex-col items-center justify-center w-full">
+      <div className="w-full p-4 m-4">
         <h1>{t("iSpindelDashboard.brews.details")}:</h1>
 
         <div>
@@ -151,59 +151,64 @@ function Brew() {
           tempUnits={logs[0].temp_units}
         ></HydrometerData>
       )}
-      <Collapsible open={isOpen} onOpenChange={setIsOpen}>
-        <div className="flex items-center justify-center">
-          <CollapsibleTrigger asChild>
-            <Button variant="ghost" size="sm">
-              <h3>{t("iSpindelDashboard.brews.showLogs")}</h3>
-              <CaretSortIcon className="w-4 h-4" />
-              <span className="sr-only">Toggle</span>
-            </Button>
-          </CollapsibleTrigger>
-        </div>
-        <CollapsibleContent>
-          <LogTable logs={[...logs].reverse()} removeLog={removeLog}></LogTable>
-        </CollapsibleContent>
-      </Collapsible>
-      <AlertDialog>
-        <AlertDialogTrigger
-          className={buttonVariants({ variant: "destructive" })}
-        >
-          {t("iSpindelDashboard.deleteBrew")}
-        </AlertDialogTrigger>
-        <AlertDialogContent className="z-[1000] w-11/12">
-          <AlertDialogHeader>
-            <AlertDialogTitle>
-              {t("iSpindelDashboard.confirm")}
-            </AlertDialogTitle>
-            <AlertDialogDescription className="flex flex-col gap-2">
-              {t("iSpindelDashboard.deleteBrewAlert")}
-            </AlertDialogDescription>
-          </AlertDialogHeader>
-          <AlertDialogFooter>
-            <AlertDialogCancel>{t("cancel")}</AlertDialogCancel>
-            <AlertDialogAction
-              asChild
-              className={buttonVariants({ variant: "destructive" })}
-            >
-              <Button
-                onClick={() =>
-                  deleteBrew(brew.id)
-                    .then(() => nav("/account/ispindel/brews"))
-                    .catch(() =>
-                      toast({
-                        description: "Something went wrong",
-                        variant: "destructive",
-                      })
-                    )
-                }
-              >
-                {t("iSpindelDashboard.deleteBrew")}
+      <div>
+        <Collapsible open={isOpen} onOpenChange={setIsOpen}>
+          <div className="flex items-center justify-center">
+            <CollapsibleTrigger asChild>
+              <Button variant="ghost" size="sm">
+                <h3>{t("iSpindelDashboard.brews.showLogs")}</h3>
+                <CaretSortIcon className="w-4 h-4" />
+                <span className="sr-only">Toggle</span>
               </Button>
-            </AlertDialogAction>
-          </AlertDialogFooter>
-        </AlertDialogContent>
-      </AlertDialog>
+            </CollapsibleTrigger>
+          </div>
+          <CollapsibleContent>
+            <LogTable
+              logs={[...logs].reverse()}
+              removeLog={removeLog}
+            ></LogTable>
+          </CollapsibleContent>
+        </Collapsible>
+        <AlertDialog>
+          <AlertDialogTrigger
+            className={buttonVariants({ variant: "destructive" })}
+          >
+            {t("iSpindelDashboard.deleteBrew")}
+          </AlertDialogTrigger>
+          <AlertDialogContent className="z-[1000] w-11/12">
+            <AlertDialogHeader>
+              <AlertDialogTitle>
+                {t("iSpindelDashboard.confirm")}
+              </AlertDialogTitle>
+              <AlertDialogDescription className="flex flex-col gap-2">
+                {t("iSpindelDashboard.deleteBrewAlert")}
+              </AlertDialogDescription>
+            </AlertDialogHeader>
+            <AlertDialogFooter>
+              <AlertDialogCancel>{t("cancel")}</AlertDialogCancel>
+              <AlertDialogAction
+                asChild
+                className={buttonVariants({ variant: "destructive" })}
+              >
+                <Button
+                  onClick={() =>
+                    deleteBrew(brew.id)
+                      .then(() => nav("/account/ispindel/brews"))
+                      .catch(() =>
+                        toast({
+                          description: "Something went wrong",
+                          variant: "destructive",
+                        })
+                      )
+                  }
+                >
+                  {t("iSpindelDashboard.deleteBrew")}
+                </Button>
+              </AlertDialogAction>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialog>
+      </div>
     </div>
   );
 }

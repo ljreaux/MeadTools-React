@@ -37,7 +37,7 @@ function Recipe() {
   const [chartData, setChartData] = useState(transformData(logs));
 
   return (
-    <div className="w-full ">
+    <div className="flex flex-col items-center justify-center w-full">
       <Select value={selectedBrew?.id} onValueChange={handleChange}>
         <SelectTrigger className="my-4">
           <SelectValue placeholder="Select a brew to see chart data"></SelectValue>

@@ -100,11 +100,31 @@ export function HydrometerData({
     acc[label] = true;
     return acc;
   }, {} as { [key: string]: boolean });
-
+  const roundToNearest005 = (value: number) => {
+    return Math.round(value / 0.005) * 0.005;
+  };
   const [checkObj, setCheckObj] = useState(initialChecked);
+  const generateTicks = (
+    dataMin: number,
+    dataMax: number,
+    interval: number
+  ) => {
+    const ticks = [];
+    const min = roundToNearest005(dataMin - interval);
+    const max = roundToNearest005(dataMax + interval);
+
+    for (let i = min; i <= max; i += interval) {
+      ticks.push(i); // Ensures precision of 3 decimal places
+    }
+
+    return ticks;
+  };
+
+  const dataMin = Math.min(...data.map((d) => d.gravity));
+  const dataMax = Math.max(...data.map((d) => d.gravity));
 
   return (
-    <Card className="w-full">
+    <Card className="w-full max-w-[1240px] self-center">
       <CardHeader>
         <CardTitle>{name}</CardTitle>
         <CardDescription>
@@ -161,8 +181,12 @@ export function HydrometerData({
               padding={xPadding}
             />
             <YAxis
-              domain={[0.99, "dataMax + 0.01"]}
-              tickCount={15}
+              domain={[
+                (dataMin: number) => roundToNearest005(dataMin - 0.005),
+                (dataMax: number) => roundToNearest005(dataMax + 0.005),
+              ]}
+              ticks={generateTicks(dataMin, dataMax, 0.005)}
+              allowDecimals
               tickMargin={8}
               dataKey={"gravity"}
               yAxisId={"gravity"}
