@@ -151,7 +151,7 @@ function Brew() {
           tempUnits={logs[0].temp_units}
         ></HydrometerData>
       )}
-      <div>
+      <div className="max-w-full">
         <Collapsible open={isOpen} onOpenChange={setIsOpen}>
           <div className="flex items-center justify-center">
             <CollapsibleTrigger asChild>
@@ -162,7 +162,7 @@ function Brew() {
               </Button>
             </CollapsibleTrigger>
           </div>
-          <CollapsibleContent>
+          <CollapsibleContent className="max-w-full">
             <LogTable
               logs={[...logs].reverse()}
               removeLog={removeLog}

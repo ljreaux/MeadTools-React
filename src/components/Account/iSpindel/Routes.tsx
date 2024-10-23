@@ -21,7 +21,7 @@ function ISpindelDashboard() {
   const { t } = useTranslation();
   return (
     <ContextProvider>
-      <div className="relative flex flex-col items-center w-11/12 p-8 my-24 sm:w-9/12 rounded-xl bg-background">
+      <div className="relative flex flex-col items-center w-11/12 p-8 my-32 sm:my-24 sm:w-9/12 rounded-xl bg-background">
         <h1 className="text-2xl">{t("iSpindelDashboard.label")}</h1>
         <Nav />
         <Routes>
@@ -60,7 +60,7 @@ const Nav = () => {
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger asChild className="absolute top-2 left-4">
+      <DropdownMenuTrigger asChild className="absolute top-2 sm:left-4 left-1">
         <Button variant={"ghost"}>
           <GiHamburgerMenu />
         </Button>

@@ -47,13 +47,15 @@ function LogTable({
 
   return (
     <div className="max-w-full my-4 border-2 rounded-sm border-input">
-      <Table className="max-w-full">
+      <Table className="max-w-full ">
         <TableHeader>
-          <TableRow>
-            {headerKeys.map((key) => (
-              <TableHead key={key}>{t(key)}</TableHead>
-            ))}
-          </TableRow>
+          {options.length > 0 && (
+            <TableRow>
+              {headerKeys.map((key) => (
+                <TableHead key={key}>{t(key)}</TableHead>
+              ))}
+            </TableRow>
+          )}
           {options.length > 0 && (
             <TableRow>
               <TableCell colSpan={7}>
@@ -87,9 +89,7 @@ function LogTable({
         <TableBody>
           {logs.length === 0 && (
             <TableRow>
-              <TableCell colSpan={8} className="text-center">
-                {t("noLogs")}
-              </TableCell>
+              <TableCell colSpan={8}>{t("noLogs")}</TableCell>
             </TableRow>
           )}
           {currentItems.map((log) => {

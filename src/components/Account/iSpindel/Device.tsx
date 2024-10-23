@@ -118,7 +118,7 @@ function Device() {
   if (!device) return null;
   return (
     <div className="w-full">
-      <div className="grid items-center justify-center grid-cols-2">
+      <div className="grid items-center justify-center sm:grid-cols-2">
         <div className="flex flex-col items-center justify-center gap-4 my-2">
           <p>{device.device_name}</p>
           {!device.brew_id ? (
@@ -163,7 +163,7 @@ function Device() {
             </>
           )}
         </div>
-        <div className="flex flex-col items-center justify-center col-start-1">
+        <div className="flex flex-col items-center justify-center sm:col-start-1">
           {showTable ? (
             <form onSubmit={handleSubmit}>
               <Table>

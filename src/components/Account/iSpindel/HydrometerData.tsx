@@ -130,7 +130,10 @@ export function HydrometerData({
         <CardDescription>
           {beginDate} - {endDate}
         </CardDescription>
-        <CardContent>
+        <CardContent className="block md:hidden">
+          {t("mobileChartMessage")}
+        </CardContent>
+        <CardContent className="hidden md:block">
           <Select
             onValueChange={(val) => {
               const dataWithBrix = chartData.map((data) => {
@@ -156,7 +159,7 @@ export function HydrometerData({
           </Select>
         </CardContent>
       </CardHeader>
-      <CardContent>
+      <CardContent className="hidden md:block">
         <ChartContainer config={chartConfig}>
           <LineChart
             accessibilityLayer
@@ -324,7 +327,7 @@ export function HydrometerData({
           </LineChart>
         </ChartContainer>
       </CardContent>
-      <CardFooter>
+      <CardFooter className="hidden md:block">
         <ChartDownload
           fileName={fileName}
           updateFileName={(e) => setFileName(e.target.value)}

@@ -67,7 +67,7 @@ const RecentLogsForm = ({ deviceId }: { deviceId: string }) => {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="flex flex-col items-center justify-center col-start-2 row-span-2 row-start-1 space-y-4 "
+        className="flex flex-col items-center justify-center row-span-2 row-start-1 mt-4 space-y-4 sm:col-start-2 sm:mt-0"
       >
         <FormField
           control={form.control}
@@ -75,7 +75,7 @@ const RecentLogsForm = ({ deviceId }: { deviceId: string }) => {
           render={({ field }) => (
             <FormItem className="flex flex-col gap-2 w-72">
               <FormLabel htmlFor="datetime">
-                {t("iSpindelDashboard.brews.startDate")}
+                {t("iSpindelDashboard.brews.dateRange")}
               </FormLabel>
               <FormControl>
                 <DatePickerWithRange
