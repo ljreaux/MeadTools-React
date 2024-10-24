@@ -1,5 +1,6 @@
 import { CartesianGrid, Line, LineChart, XAxis, YAxis } from "recharts";
-
+import { saveAs } from "file-saver";
+import { useGenerateImage } from "recharts-to-png";
 import {
   Card,
   CardContent,
@@ -24,9 +25,10 @@ import {
   SelectContent,
   SelectTrigger,
 } from "@/components/ui/select";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { toBrix } from "@/helpers/unitConverters";
 import ChartDownload from "./ChartDownload";
+import { Button } from "@/components/ui/button";
 type FileData = {
   date: string;
   temperature?: number;
@@ -114,7 +116,7 @@ export function HydrometerData({
     const max = roundToNearest005(dataMax + interval);
 
     for (let i = min; i <= max; i += interval) {
-      ticks.push(i); // Ensures precision of 3 decimal places
+      ticks.push(i);
     }
 
     return ticks;
@@ -123,209 +125,223 @@ export function HydrometerData({
   const dataMin = Math.min(...data.map((d) => d.gravity));
   const dataMax = Math.max(...data.map((d) => d.gravity));
 
+  const [getDivJpeg, { ref }] = useGenerateImage<HTMLDivElement>({
+    quality: 0.8,
+    type: "image/png",
+  });
+
+  const handleDivDownload = useCallback(async () => {
+    const jpeg = await getDivJpeg();
+    if (jpeg) {
+      saveAs(jpeg, `${beginDate}-${endDate}.png`);
+    }
+  }, [getDivJpeg]);
+
   return (
     <Card className="w-full max-w-[1240px] self-center">
-      <CardHeader>
-        <CardTitle>{name}</CardTitle>
-        <CardDescription>
-          {beginDate} - {endDate}
-        </CardDescription>
-        <CardContent className="block md:hidden">
-          {t("mobileChartMessage")}
-        </CardContent>
+      <CardContent ref={ref} className="bg-inherit">
+        <CardHeader>
+          <CardTitle>{name}</CardTitle>
+          <CardDescription>
+            {beginDate} - {endDate}
+          </CardDescription>
+          <CardContent className="block md:hidden">
+            {t("mobileChartMessage")}
+          </CardContent>
+          <CardContent className="hidden md:block">
+            <Select
+              onValueChange={(val) => {
+                const dataWithBrix = chartData.map((data) => {
+                  const newGravity = toBrix(data.gravity);
+                  return { ...data, gravity: newGravity };
+                });
+                if (val === "SG") {
+                  setData(chartData);
+                } else if (val === "Brix") {
+                  setData(dataWithBrix);
+                }
+                setGravityUnits(val);
+              }}
+              value={gravityUnits}
+            >
+              <SelectTrigger>
+                <SelectValue></SelectValue>
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="SG">{t("SG")}</SelectItem>
+                <SelectItem value="Brix">{t("BRIX")}</SelectItem>
+              </SelectContent>
+            </Select>
+          </CardContent>
+        </CardHeader>
         <CardContent className="hidden md:block">
-          <Select
-            onValueChange={(val) => {
-              const dataWithBrix = chartData.map((data) => {
-                const newGravity = toBrix(data.gravity);
-                return { ...data, gravity: newGravity };
-              });
-              if (val === "SG") {
-                setData(chartData);
-              } else if (val === "Brix") {
-                setData(dataWithBrix);
-              }
-              setGravityUnits(val);
-            }}
-            value={gravityUnits}
-          >
-            <SelectTrigger>
-              <SelectValue></SelectValue>
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="SG">{t("SG")}</SelectItem>
-              <SelectItem value="Brix">{t("BRIX")}</SelectItem>
-            </SelectContent>
-          </Select>
-        </CardContent>
-      </CardHeader>
-      <CardContent className="hidden md:block">
-        <ChartContainer config={chartConfig}>
-          <LineChart
-            accessibilityLayer
-            data={data}
-            margin={{
-              left: 12,
-              right: 12,
-            }}
-          >
-            <CartesianGrid vertical={false} stroke="hsl(210, 13%, 35%)" />
-            <XAxis
-              dataKey="date"
-              tickMargin={8}
-              tickFormatter={(value) =>
-                new Date(value).toLocaleString(lang, {
-                  month: "short",
-                  weekday: "short",
-                  day: "numeric",
-                })
-              }
-              minTickGap={50}
-              padding={xPadding}
-            />
-            <YAxis
-              domain={[
-                (dataMin: number) => roundToNearest005(dataMin - 0.005),
-                (dataMax: number) => roundToNearest005(dataMax + 0.005),
-              ]}
-              ticks={generateTicks(dataMin, dataMax, 0.005)}
-              allowDecimals
-              tickMargin={8}
-              dataKey={"gravity"}
-              yAxisId={"gravity"}
-              tickFormatter={(val) => val.toFixed(3)}
-              padding={yPadding}
-              className={!checkObj.gravity ? "hidden" : "block"}
-            />
-            <YAxis
-              domain={["dataMin - 5", "dataMax + 5"]}
-              orientation="right"
-              dataKey={"temperature"}
-              yAxisId={"temperature"}
-              tickCount={10}
-              tickFormatter={(val) => val.toFixed()}
-              padding={yPadding}
-              unit={`°${tempUnits}`}
-              className={!checkObj.temperature ? "hidden" : "block"}
-            />
-            <YAxis
-              domain={[0, "dataMax"]}
-              orientation="right"
-              dataKey={"abv"}
-              yAxisId={"abv"}
-              tickFormatter={(val) => val.toFixed(1)}
-              padding={yPadding}
-              unit={"%"}
-              className={!checkObj.abv ? "hidden" : "block"}
-            />
-            {showBattery && (
-              <YAxis
-                domain={[3.5, 4.2]}
-                dataKey={"battery"}
-                yAxisId={"battery"}
-                tickFormatter={(val) => val.toFixed(2)}
-                mirror
-                padding={yPadding}
-                unit={"V"}
-                className={!checkObj.battery ? "hidden" : "block"}
+          <ChartContainer config={chartConfig}>
+            <LineChart
+              accessibilityLayer
+              data={data}
+              margin={{
+                left: 12,
+                right: 12,
+              }}
+            >
+              <CartesianGrid vertical={false} stroke="hsl(210, 13%, 35%)" />
+              <XAxis
+                dataKey="date"
+                tickMargin={8}
+                tickFormatter={(value) =>
+                  new Date(value).toLocaleString(lang, {
+                    month: "short",
+                    weekday: "short",
+                    day: "numeric",
+                  })
+                }
+                minTickGap={50}
+                padding={xPadding}
               />
-            )}
-            {showSignalStrength && (
               <YAxis
+                domain={[
+                  (dataMin: number) => roundToNearest005(dataMin - 0.005),
+                  (dataMax: number) => roundToNearest005(dataMax + 0.005),
+                ]}
+                ticks={generateTicks(dataMin, dataMax, 0.005)}
+                allowDecimals
+                tickMargin={8}
+                dataKey={"gravity"}
+                yAxisId={"gravity"}
+                tickFormatter={(val) => val.toFixed(3)}
+                padding={yPadding}
+                className={!checkObj.gravity ? "hidden" : "block"}
+              />
+              <YAxis
+                domain={["dataMin - 5", "dataMax + 5"]}
                 orientation="right"
-                dataKey={"signalStrength"}
-                yAxisId={"signalStrength"}
+                dataKey={"temperature"}
+                yAxisId={"temperature"}
                 tickCount={10}
                 tickFormatter={(val) => val.toFixed()}
-                mirror
-                tickMargin={10}
                 padding={yPadding}
-                unit={"dB"}
-                className={!checkObj.signalStrength ? "hidden" : "block"}
+                unit={`°${tempUnits}`}
+                className={!checkObj.temperature ? "hidden" : "block"}
               />
-            )}
-            <ChartTooltip
-              cursor={false}
-              content={
-                <ChartTooltipContent
-                  labelFormatter={(val) => {
-                    const date = new Date(val);
-
-                    const dateString = date.toLocaleString(lang, {
-                      timeStyle: "medium",
-                      dateStyle: "short",
-                    });
-
-                    return dateString;
-                  }}
-                />
-              }
-            />
-            {showSignalStrength && (
-              <Line
-                dataKey="signalStrength"
-                type="monotone"
-                stroke="var(--color-signalStrength)"
-                strokeWidth={2}
-                dot={false}
-                yAxisId={"signalStrength"}
-                unit={"dB"}
-                className={!checkObj.signalStrength ? "hidden" : "block"}
-              />
-            )}
-            {showBattery && (
-              <Line
-                dataKey="battery"
-                type="monotone"
-                stroke="var(--color-battery)"
-                strokeWidth={2}
-                dot={false}
-                yAxisId={"battery"}
+              <YAxis
+                domain={[0, "dataMax"]}
+                orientation="right"
+                dataKey={"abv"}
+                yAxisId={"abv"}
+                tickFormatter={(val) => val.toFixed(1)}
+                padding={yPadding}
                 unit={"%"}
-                className={!checkObj.battery ? "hidden" : "block"}
+                className={!checkObj.abv ? "hidden" : "block"}
               />
-            )}
-            <Line
-              dataKey="abv"
-              type="monotone"
-              stroke="var(--color-abv)"
-              strokeWidth={2}
-              dot={false}
-              yAxisId={"abv"}
-              unit={"%"}
-              className={!checkObj.abv ? "hidden" : "block"}
-            />
-            <Line
-              dataKey="temperature"
-              type="monotone"
-              stroke="var(--color-temperature)"
-              strokeWidth={2}
-              dot={false}
-              yAxisId={"temperature"}
-              unit={`°${tempUnits}`}
-              className={!checkObj.temperature ? "hidden" : "block"}
-            />
-            <Line
-              dataKey="gravity"
-              type="monotone"
-              stroke="var(--color-gravity)"
-              strokeWidth={2}
-              dot={false}
-              yAxisId={"gravity"}
-              className={!checkObj.gravity ? "hidden" : "block"}
-            />
-            <ChartLegend
-              content={
-                <ChartLegendContent
-                  checkObj={checkObj}
-                  updateCheckObj={(newCheckObj) =>
-                    setCheckObj(newCheckObj.checkObj)
-                  }
+              {showBattery && (
+                <YAxis
+                  domain={[3.5, 4.2]}
+                  dataKey={"battery"}
+                  yAxisId={"battery"}
+                  tickFormatter={(val) => val.toFixed(2)}
+                  mirror
+                  padding={yPadding}
+                  unit={"V"}
+                  className={!checkObj.battery ? "hidden" : "block"}
                 />
-              }
-            />
-          </LineChart>
-        </ChartContainer>
+              )}
+              {showSignalStrength && (
+                <YAxis
+                  orientation="right"
+                  dataKey={"signalStrength"}
+                  yAxisId={"signalStrength"}
+                  tickCount={10}
+                  tickFormatter={(val) => val.toFixed()}
+                  mirror
+                  tickMargin={10}
+                  padding={yPadding}
+                  unit={"dB"}
+                  className={!checkObj.signalStrength ? "hidden" : "block"}
+                />
+              )}
+              <ChartTooltip
+                cursor={false}
+                content={
+                  <ChartTooltipContent
+                    labelFormatter={(val) => {
+                      const date = new Date(val);
+
+                      const dateString = date.toLocaleString(lang, {
+                        timeStyle: "medium",
+                        dateStyle: "short",
+                      });
+
+                      return dateString;
+                    }}
+                  />
+                }
+              />
+              {showSignalStrength && (
+                <Line
+                  dataKey="signalStrength"
+                  type="monotone"
+                  stroke="var(--color-signalStrength)"
+                  strokeWidth={2}
+                  dot={false}
+                  yAxisId={"signalStrength"}
+                  unit={"dB"}
+                  className={!checkObj.signalStrength ? "hidden" : "block"}
+                />
+              )}
+              {showBattery && (
+                <Line
+                  dataKey="battery"
+                  type="monotone"
+                  stroke="var(--color-battery)"
+                  strokeWidth={2}
+                  dot={false}
+                  yAxisId={"battery"}
+                  unit={"%"}
+                  className={!checkObj.battery ? "hidden" : "block"}
+                />
+              )}
+              <Line
+                dataKey="abv"
+                type="monotone"
+                stroke="var(--color-abv)"
+                strokeWidth={2}
+                dot={false}
+                yAxisId={"abv"}
+                unit={"%"}
+                className={!checkObj.abv ? "hidden" : "block"}
+              />
+              <Line
+                dataKey="temperature"
+                type="monotone"
+                stroke="var(--color-temperature)"
+                strokeWidth={2}
+                dot={false}
+                yAxisId={"temperature"}
+                unit={`°${tempUnits}`}
+                className={!checkObj.temperature ? "hidden" : "block"}
+              />
+              <Line
+                dataKey="gravity"
+                type="monotone"
+                stroke="var(--color-gravity)"
+                strokeWidth={2}
+                dot={false}
+                yAxisId={"gravity"}
+                className={!checkObj.gravity ? "hidden" : "block"}
+              />
+              <ChartLegend
+                content={
+                  <ChartLegendContent
+                    checkObj={checkObj}
+                    updateCheckObj={(newCheckObj) =>
+                      setCheckObj(newCheckObj.checkObj)
+                    }
+                  />
+                }
+              />
+            </LineChart>
+          </ChartContainer>
+        </CardContent>
       </CardContent>
       <CardFooter className="hidden md:block">
         <ChartDownload
@@ -333,6 +349,9 @@ export function HydrometerData({
           updateFileName={(e) => setFileName(e.target.value)}
           data={data}
         ></ChartDownload>
+        <Button onClick={handleDivDownload} className="w-full my-4">
+          {t("downloadPNG")}
+        </Button>
       </CardFooter>
     </Card>
   );
