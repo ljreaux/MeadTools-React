@@ -199,3 +199,20 @@ export const deleteBrew = async (token: string | null, brewId: string) => {
     return null;
   }
 }
+
+export const deleteLogsInRange = async (token: string | null, start_date: Date,
+  end_date: Date,
+  deviceId: string
+) => {
+
+  if (!token || !deviceId) return 'Failed to delete'
+  const { data, status } = await axios.delete(`${API_URL}/ispindel/logs/range?start_date=${start_date.toISOString()}&end_date=${end_date.toISOString()}&device_id=${deviceId}`, { headers: { Authorization: 'Bearer ' + token } });
+
+
+  if (status === 200 && data.message === "Logs deleted successfully.") {
+    return data.message
+  } else {
+    console.error('Failed to delete logs.', data.message)
+    return data.message;
+  }
+}

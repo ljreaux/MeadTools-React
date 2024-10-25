@@ -237,7 +237,7 @@ function Device() {
         <RecentLogsForm deviceId={device.id} />
       </div>
       <div className="max-w-full">
-        <LogTable logs={logs} removeLog={removeLog} />
+        <LogTable logs={logs} removeLog={removeLog} deviceId={deviceId || ""} />
       </div>
       <AlertDialog>
         <AlertDialogTrigger

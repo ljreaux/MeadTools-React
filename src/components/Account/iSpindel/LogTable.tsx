@@ -2,6 +2,7 @@ import {
   Table,
   TableBody,
   TableCell,
+  TableFooter,
   TableHead,
   TableHeader,
   TableRow,
@@ -19,12 +20,23 @@ import {
 } from "@/components/ui/select";
 import { Label } from "@/components/ui/label";
 import { useTranslation } from "react-i18next";
+import LogBatchDeleteForm from "./LogBatchDeleteForm";
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@/components/ui/collapsible";
+import { Button } from "@/components/ui/button";
+import { CaretSortIcon } from "@radix-ui/react-icons";
+import { useState } from "react";
 function LogTable({
   logs,
   removeLog,
+  deviceId,
 }: {
   logs: any[];
   removeLog: (id: string) => void;
+  deviceId: string;
 }) {
   const {
     handlePageClick,
@@ -44,6 +56,8 @@ function LogTable({
     "iSpindelDashboard.batteryLevel",
     "desktop.editOrDelete",
   ];
+
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
     <div className="max-w-full my-4 border-2 rounded-sm border-input">
@@ -114,6 +128,26 @@ function LogTable({
             </TableRow>
           )}
         </TableBody>
+        <TableFooter>
+          <TableRow>
+            <TableCell colSpan={7}>
+              <Collapsible open={isOpen} onOpenChange={setIsOpen}>
+                <div className="flex items-center justify-center">
+                  <CollapsibleTrigger asChild>
+                    <Button variant="ghost" size="sm">
+                      <h3>{t("iSpindelDashboard.logDeleteRange")}</h3>
+                      <CaretSortIcon className="w-4 h-4" />
+                      <span className="sr-only">Toggle</span>
+                    </Button>
+                  </CollapsibleTrigger>
+                </div>
+                <CollapsibleContent className="max-w-full">
+                  <LogBatchDeleteForm deviceId={deviceId} />
+                </CollapsibleContent>
+              </Collapsible>
+            </TableCell>
+          </TableRow>
+        </TableFooter>
       </Table>
     </div>
   );

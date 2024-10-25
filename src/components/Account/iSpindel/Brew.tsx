@@ -52,6 +52,7 @@ function Brew() {
       (async () => {
         const brew = brews.find((brew) => brew.id === brewId);
         setBrew(brew);
+
         const logs = await getBrewLogs(token, brewId);
         setLogs(logs);
       })();
@@ -166,6 +167,7 @@ function Brew() {
             <LogTable
               logs={[...logs].reverse()}
               removeLog={removeLog}
+              deviceId={logs[0]?.device_id || ""}
             ></LogTable>
           </CollapsibleContent>
         </Collapsible>
