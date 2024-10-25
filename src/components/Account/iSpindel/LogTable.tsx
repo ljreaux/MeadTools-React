@@ -32,7 +32,7 @@ function LogTable({
     pageCount,
     options,
     setNumberPerPage,
-  } = usePagination(10, logs);
+  } = usePagination(5, logs);
   const { t } = useTranslation();
 
   const headerKeys = [

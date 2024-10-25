@@ -125,6 +125,12 @@ export function HydrometerData({
   const dataMin = Math.min(...data.map((d) => d.gravity));
   const dataMax = Math.max(...data.map((d) => d.gravity));
 
+  const abvMax = Math.max(...data.map((d) => d.abv));
+  const abvTicks = [];
+  for (let i = 0; i <= abvMax + 0.5; i += 2) {
+    abvTicks.push(i);
+  }
+
   const [getDivJpeg, { ref }] = useGenerateImage<HTMLDivElement>({
     quality: 0.8,
     type: "image/png",
@@ -210,7 +216,7 @@ export function HydrometerData({
                 yAxisId={"gravity"}
                 tickFormatter={(val) => val.toFixed(3)}
                 padding={yPadding}
-                className={!checkObj.gravity ? "hidden" : "block"}
+                hide={!checkObj.gravity}
               />
               <YAxis
                 domain={["dataMin - 5", "dataMax + 5"]}
@@ -221,17 +227,17 @@ export function HydrometerData({
                 tickFormatter={(val) => val.toFixed()}
                 padding={yPadding}
                 unit={`°${tempUnits}`}
-                className={!checkObj.temperature ? "hidden" : "block"}
+                hide={!checkObj.temperature}
               />
               <YAxis
-                domain={[0, "dataMax"]}
+                domain={[0, "dataMax + 0.5"]}
                 orientation="right"
                 dataKey={"abv"}
                 yAxisId={"abv"}
-                tickFormatter={(val) => val.toFixed(1)}
+                ticks={abvTicks}
                 padding={yPadding}
                 unit={"%"}
-                className={!checkObj.abv ? "hidden" : "block"}
+                hide={!checkObj.abv}
               />
               {showBattery && (
                 <YAxis
@@ -242,7 +248,7 @@ export function HydrometerData({
                   mirror
                   padding={yPadding}
                   unit={"V"}
-                  className={!checkObj.battery ? "hidden" : "block"}
+                  hide={!checkObj.battery}
                 />
               )}
               {showSignalStrength && (
@@ -256,7 +262,7 @@ export function HydrometerData({
                   tickMargin={10}
                   padding={yPadding}
                   unit={"dB"}
-                  className={!checkObj.signalStrength ? "hidden" : "block"}
+                  hide={!checkObj.signalStrength}
                 />
               )}
               <ChartTooltip
@@ -285,7 +291,7 @@ export function HydrometerData({
                   dot={false}
                   yAxisId={"signalStrength"}
                   unit={"dB"}
-                  className={!checkObj.signalStrength ? "hidden" : "block"}
+                  hide={!checkObj.signalStrength}
                 />
               )}
               {showBattery && (
@@ -296,8 +302,8 @@ export function HydrometerData({
                   strokeWidth={2}
                   dot={false}
                   yAxisId={"battery"}
-                  unit={"%"}
-                  className={!checkObj.battery ? "hidden" : "block"}
+                  unit={"V"}
+                  hide={!checkObj.battery}
                 />
               )}
               <Line
@@ -308,7 +314,7 @@ export function HydrometerData({
                 dot={false}
                 yAxisId={"abv"}
                 unit={"%"}
-                className={!checkObj.abv ? "hidden" : "block"}
+                hide={!checkObj.abv}
               />
               <Line
                 dataKey="temperature"
@@ -318,7 +324,7 @@ export function HydrometerData({
                 dot={false}
                 yAxisId={"temperature"}
                 unit={`°${tempUnits}`}
-                className={!checkObj.temperature ? "hidden" : "block"}
+                hide={!checkObj.temperature}
               />
               <Line
                 dataKey="gravity"
@@ -327,7 +333,7 @@ export function HydrometerData({
                 strokeWidth={2}
                 dot={false}
                 yAxisId={"gravity"}
-                className={!checkObj.gravity ? "hidden" : "block"}
+                hide={!checkObj.gravity}
               />
               <ChartLegend
                 content={
