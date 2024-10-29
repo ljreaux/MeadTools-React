@@ -7,7 +7,7 @@ export const usePagination = (itemsPerPage: number, data: any[] = []) => {
   );
 
   useEffect(() => {
-    if (!data) return
+    if (!data) return;
     const copy = [];
     for (let i = 5; i < data.length; i += 5) {
       copy.push({
@@ -23,7 +23,7 @@ export const usePagination = (itemsPerPage: number, data: any[] = []) => {
   const [itemOffset, setItemOffset] = useState(0);
 
   const endOffset = itemOffset + numberPerPage;
-  const currentItems = data.slice(itemOffset, endOffset);
+  const currentItems = data.length ? data.slice(itemOffset, endOffset) : [];
   const pageCount = Math.ceil(data.length / numberPerPage);
 
   // Invoke when user click to request another page.
@@ -31,5 +31,11 @@ export const usePagination = (itemsPerPage: number, data: any[] = []) => {
     const newOffset = (event.selected * numberPerPage) % data.length;
     setItemOffset(newOffset);
   };
-  return { handlePageClick, currentItems, pageCount, options, setNumberPerPage };
-}
+  return {
+    handlePageClick,
+    currentItems,
+    pageCount,
+    options,
+    setNumberPerPage,
+  };
+};

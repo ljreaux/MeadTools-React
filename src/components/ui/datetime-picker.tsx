@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/popover";
 import { cn } from "@/lib/utils";
 import { add, format } from "date-fns";
-import { type Locale, enUS } from "date-fns/locale";
+import { type Locale, de, enUS } from "date-fns/locale";
 import {
   Calendar as CalendarIcon,
   ChevronLeft,
@@ -26,6 +26,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { DayPicker } from "react-day-picker";
+import { useTranslation } from "react-i18next";
 
 // ---------- utils start ----------
 /**
@@ -751,11 +752,12 @@ const DateTimePicker = React.forwardRef<
         `PPP HH:mm${!granularity || granularity === "second" ? ":ss" : ""}`,
       hour12:
         displayFormat?.hour12 ??
-        `PP hh:mm${!granularity || granularity === "second" ? ":ss" : ""} b`,
+        `PP h:mm${!granularity || granularity === "second" ? ":ss" : ""} b`,
     };
-
+    const { i18n } = useTranslation();
+    const defaultLocale = i18n.resolvedLanguage?.includes("de") ? de : enUS;
     let loc = enUS;
-    const { options, localize, formatLong } = locale;
+    const { options, localize, formatLong } = defaultLocale;
     if (options && localize && formatLong) {
       loc = {
         ...enUS,
