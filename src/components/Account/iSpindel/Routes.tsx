@@ -16,9 +16,13 @@ import Setup from "./Setup";
 import LinkBrew from "./LinkBrew";
 import Recipe from "./Recipe";
 import { useTranslation } from "react-i18next";
+import { useState } from "react";
+import useAuth from "@/hooks/useAuth";
 
 function ISpindelDashboard() {
   const { t } = useTranslation();
+  const [, setUser] = useState<any>(null!);
+  useAuth(localStorage.getItem("token"), setUser);
   return (
     <ContextProvider>
       <div className="relative flex flex-col items-center w-11/12 p-8 my-32 sm:my-24 sm:w-9/12 rounded-xl bg-background">
