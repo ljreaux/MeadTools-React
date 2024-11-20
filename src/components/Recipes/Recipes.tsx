@@ -200,6 +200,7 @@ export default function Recipes({
         nuteInfo={nuteInfo}
         primaryNotes={primaryNotes}
         secondaryNotes={secondaryNotes}
+        recipeName={recipeName}
       />
     ),
   });
@@ -214,9 +215,10 @@ export default function Recipes({
         nuteInfo={nuteInfo}
         primaryNotes={primaryNotes}
         secondaryNotes={secondaryNotes}
+        recipeName={recipeName}
       />
     );
-  }, [recipeData, ingredientsList, data, yeasts, nuteInfo]);
+  }, [recipeData, ingredientsList, data, yeasts, nuteInfo, recipeName]);
 
   const { recipeId } = useParams();
   useEffect(() => {

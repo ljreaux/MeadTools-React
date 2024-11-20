@@ -69,6 +69,7 @@ const MyDocument = ({
   additives,
   primaryNotes,
   secondaryNotes,
+  recipeName,
 }: Partial<RecipeData> &
   Partial<FormData> & {
     nuteInfo: null | {
@@ -86,6 +87,7 @@ const MyDocument = ({
   } & {
     primaryNotes: string[][];
     secondaryNotes: string[][];
+    recipeName?: string;
   }) => {
   const { t } = useTranslation();
   const ABVOBJ = OG && FG ? { OG, FG } : { OG: 1, FG: 1 };
@@ -122,7 +124,7 @@ const MyDocument = ({
         >
           <Image src={logo} style={styles.image} />
           <Text style={{ marginTop: "-8%", paddingBottom: 8, fontSize: 24 }}>
-            {t("PDF.pageTitle")}
+            {recipeName ? recipeName : t("PDF.pageTitle")}
           </Text>
         </View>
         <View
