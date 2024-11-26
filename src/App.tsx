@@ -18,6 +18,7 @@ import Juice from "./components/Juice/Juice";
 import SupportDialog from "./components/SupportDialog";
 import DesktopDownload from "./components/DesktopDownload";
 import ISpindelDashboard from "./components/Account/iSpindel/Routes";
+import Stabilizers from "./components/Stabilizers/Stabilizers";
 
 export interface Additive {
   name: string;
@@ -121,6 +122,7 @@ function App() {
             }
           />
           <Route path="/NuteCalc" element={<NutrientCalc />} />
+          <Route path="/stabilizers" element={<Stabilizers />} />
           <Route path="/ExtraCalcs/*" element={<ExtraCalcs />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<ContactUs />} />

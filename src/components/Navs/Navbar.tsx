@@ -25,6 +25,10 @@ const mainCalcs = [
     path: "/NuteCalc/",
     label: "calculators.nutes",
   },
+  {
+    path: "/stabilizers/",
+    label: "calculators.extraCalcs.stabilizers",
+  },
 ];
 
 const extraCalculatorLinks = [
