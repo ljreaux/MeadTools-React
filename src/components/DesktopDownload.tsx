@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
-import { Button, buttonVariants } from "./ui/button";
+import { buttonVariants } from "./ui/button";
 import { Link } from "react-router-dom";
 import Title from "./Title";
 import { FaApple, FaUbuntu, FaWindows } from "react-icons/fa6";
 import { cn } from "@/lib/utils";
 import { useTranslation } from "react-i18next";
+import hydroFile from "@/assets/chart-images/hydro-file.png";
+import pillFile from "@/assets/chart-images/pill-file.png";
 
 type OSType = "windows" | "linux" | "macos-intel" | "macos-arm";
 
@@ -14,7 +16,7 @@ function DesktopDownload() {
   const downloadButtons = [
     {
       os: "Windows",
-      href: "https://cdn.crabnebula.app/download/meadtools/meadtools/latest/platform/wix-x86_64",
+      href: "https://cdn.crabnebula.app/download/meadtools/meadtools/latest/platform/nsis-x86_64",
       key: "windows",
       logo: <FaWindows className="mx-1" />,
     },
@@ -72,12 +74,17 @@ function DesktopDownload() {
     <section className="flex items-center justify-center w-full my-12 h-fit">
       <div className="flex flex-col items-center justify-center w-11/12 p-8 my-16 sm:w-9/12 rounded-xl bg-background text-foreground">
         <Title header={t("downloadDesktop")} />
-        <p className="mb-4 text-destructive">Currently in Beta.</p>
-        <Button variant={"secondary"}>
+        <p className="my-2 text-xl">1.0.3</p>
+        <Link
+          to={currentButton?.href || ""}
+          className={cn(
+            buttonVariants({ variant: "secondary" }),
+            "text-[rgb(200_215_255)]"
+          )}
+        >
           {currentButton?.logo} {t("download")} {currentButton?.os}
-        </Button>
-
-        <div>
+        </Link>
+        <div className="flex flex-wrap items-center justify-center my-4">
           {otherButtons.map((button) => (
             <Link
               className={cn(
@@ -90,6 +97,35 @@ function DesktopDownload() {
               {button.logo} {t("download")} {button.os}
             </Link>
           ))}
+        </div>{" "}
+        <h2 className="text-xl">New Features</h2>
+        <iframe
+          className="w-full my-4 aspect-video"
+          src="https://www.youtube.com/embed/I1OSPqiaOfs"
+          title=""
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerPolicy="strict-origin-when-cross-origin"
+          allowFullScreen
+        />
+        <div className="flex flex-col gap-4">
+          <div>
+            <h3 className="text-lg">{t("desktop.features.offline.label")}</h3>
+            <p>{t("desktop.features.offline.body")}</p>
+          </div>
+          <div>
+            <h3 className="text-lg">
+              {t("desktop.features.customization.label")}
+            </h3>
+            <p>{t("desktop.features.customization.body")}</p>
+          </div>
+          <div>
+            <h3 className="text-lg">{t("desktop.features.charts.label")}</h3>
+            <p>{t("desktop.features.charts.body")}</p>
+            <div className="grid w-full gap-2 my-4 sm:grid-cols-2">
+              <img src={pillFile} alt="Rapt pill chart" />
+              <img src={hydroFile} alt="Manual hydrometer data chart" />
+            </div>
+          </div>
         </div>
         <p className="flex mt-4">
           {t("poweredBy")}
