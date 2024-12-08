@@ -25,6 +25,10 @@ const mainCalcs = [
     path: "/NuteCalc/",
     label: "calculators.nutes",
   },
+  {
+    path: "/stabilizers/",
+    label: "calculators.extraCalcs.stabilizers",
+  },
 ];
 
 const extraCalculatorLinks = [
@@ -45,8 +49,12 @@ const extraCalculatorLinks = [
     label: "calculators.extraCalcs.benchTrials",
   },
   {
-    path: "/ExtraCalcs/stabilizers",
-    label: "calculators.extraCalcs.stabilizers",
+    path: "/ExtraCalcs/sulfite",
+    label: "sulfiteHeading",
+  },
+  {
+    path: "/ExtraCalcs/sorbate",
+    label: "sorbateHeading",
   },
   {
     path: "/ExtraCalcs/RefractometerCorrection",
@@ -176,6 +184,12 @@ export default function Navbar({
                           to="/account"
                         >
                           {t("account.label")}
+                        </Link>
+                        <Link
+                          to={"/account/ispindel"}
+                          className="p-3 space-y-1 leading-none no-underline transition-colors rounded-md outline-none select-none hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                        >
+                          {t("iSpindelDashboard.manage")}
                         </Link>
                         <button
                           onClick={() => {

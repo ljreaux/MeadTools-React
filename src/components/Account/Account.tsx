@@ -1,12 +1,10 @@
-import React, { SetStateAction, useEffect, useState } from "react";
+import React, { SetStateAction, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { getUserInfo } from "../../helpers/Login";
 import Loading from "../Loading";
 import RecipeCard from "./RecipeCard";
 import Title from "../Title";
 import { IoSettingsSharp, IoLogOutSharp } from "react-icons/io5";
 import { useTranslation } from "react-i18next";
-import { useToast } from "../ui/use-toast";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { Button } from "../ui/button";
 import {
@@ -18,14 +16,7 @@ import {
 } from "../ui/select";
 import { ModeToggle } from "../ui/mode-toggle";
 import LanguageSwitcher from "../ui/Language-switcher";
-
-interface UserInfo {
-  id: number;
-  email: string;
-  google_id: string | null;
-  role: "user" | "admin";
-  recipes: { id: number; user_id: number; name: string; private: boolean }[];
-}
+import useAuth from "@/hooks/useAuth";
 
 export default function Account({
   token,
@@ -48,36 +39,11 @@ export default function Account({
   isMetric: boolean;
   setIsMetric: React.Dispatch<SetStateAction<boolean>>;
 }) {
-  const [reload, setReload] = useState(false);
-
   const { t } = useTranslation();
-  const [userInfo, setUserInfo] = useState<UserInfo | null>(null);
-  const { toast } = useToast();
+  const { userInfo, setReload } = useAuth(token, setUser);
 
   const navigate = useNavigate();
-  useEffect(() => {
-    if (!token) navigate("/login");
-    else
-      (async () => {
-        const user = await getUserInfo(token);
-        if (user) {
-          setUserInfo(user);
-          setUser((prev) => ({
-            ...prev,
-            id: user.id,
-            role: user.role,
-            email: user.email,
-          }));
-        } else {
-          toast({
-            title: "Account Error",
-            description: "Please Login Again",
-            variant: "destructive",
-          });
-          navigate("/login");
-        }
-      })();
-  }, [token, reload]);
+
   useEffect(() => {
     if (user) {
       localStorage.setItem("user", JSON.stringify(user));
@@ -90,9 +56,6 @@ export default function Account({
       {userInfo ? (
         <div className="relative flex flex-col items-center w-11/12 p-8 sm:w-9/12 rounded-xl bg-background">
           <div className="absolute flex items-center justify-center w-12 gap-2 text-3xl right-12 top-4">
-            {/* <Link to={"/account/ispindel"} className="text-xs">
-              Manage iSpindel
-            </Link> */}
             <button
               onClick={() => {
                 localStorage.removeItem("token");

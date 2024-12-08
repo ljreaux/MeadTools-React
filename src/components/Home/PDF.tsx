@@ -69,6 +69,7 @@ const MyDocument = ({
   additives,
   primaryNotes,
   secondaryNotes,
+  recipeName,
 }: Partial<RecipeData> &
   Partial<FormData> & {
     nuteInfo: null | {
@@ -86,6 +87,7 @@ const MyDocument = ({
   } & {
     primaryNotes: string[][];
     secondaryNotes: string[][];
+    recipeName?: string;
   }) => {
   const [adding, setAdding] = useState(false);
   useEffect(() => {
@@ -143,7 +145,7 @@ const MyDocument = ({
         >
           <Image src={logo} style={styles.image} />
           <Text style={{ marginTop: "-8%", paddingBottom: 8, fontSize: 24 }}>
-            {t("PDF.pageTitle")}
+            {recipeName ? recipeName : t("PDF.pageTitle")}
           </Text>
         </View>
         <View
