@@ -1,14 +1,33 @@
-html {
-  background-color: grey;
+.printable-content {
+  background-color: gray;
+  padding-block: 1rem;
+}
+.pdf-page {
+  width: 8.5in; /* Simulate US Letter width. Alternatively, 816px at 96 DPI */
+  margin: 0 auto; /* center the page horizontally */
+  background: #fff;
+  padding: 0.5in; /* adjust as needed */
+  box-sizing: border-box;
+  border: 1px solid #ccc; /* a light border to simulate paper edges */
 }
 
-/* iframe-styles.css */
+.page-one,
+.page-two {
+  min-height: 11in;
+}
+
+/* Reset some global styles */
+html,
 body {
-  margin: 2rem;
-  padding: 2rem;
+  margin: 0;
+  padding: 0;
+  background-color: grey;
+}
+/* If you had previously set margins or padding on body, remove them or keep minimal. */
+body {
+  background-color: #fff;
   font-family: Arial, sans-serif;
   color: #333;
-  background-color: #fff;
 }
 
 h1 {
@@ -24,21 +43,19 @@ h1 {
 } */
 
 header {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  display: grid;
+  place-content: center;
+  text-align: center;
 }
 
 img {
   display: block;
   object-fit: cover;
-  height: 250px;
+  width: 300px;
 }
 header h1 {
   font-size: 2.5rem;
   font-weight: lighter;
-  margin-top: -3rem;
 }
 
 table {
@@ -63,6 +80,7 @@ td {
   justify-content: center;
   align-items: center;
   position: relative;
+  padding-top: 1rem;
 }
 
 .img-container::before {
@@ -71,25 +89,32 @@ td {
   width: 200%;
   height: 10px;
   background-color: grey;
-  top: 10%;
+  top: 0%;
 }
 
 @media print {
   @page {
     margin: 0;
   }
+  html,
   body {
-    margin: 0;
-    border: none;
+    background-color: #fff;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
   }
-  html {
-    background-color: white;
+  .pdf-page {
+    border: none; /* remove border for the final print */
+  }
+
+  .page-one,
+  .page-two {
+    min-height: auto;
   }
   .img-container::before {
     display: none;
   }
-}
-
-.seconday-section {
-  margin-top: 3rem;
+  .printable-content {
+    background-color: transparent; /* remove background color for the final print */
+    padding: 0;
+  }
 }

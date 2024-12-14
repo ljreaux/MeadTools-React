@@ -1,6 +1,5 @@
 import { RecipeData } from "@/App";
 import { FormData } from "../Nutrients/NutrientCalc";
-import logo from "../../assets/full-logo.png";
 import { useTranslation } from "react-i18next";
 import { toBrix } from "@/helpers/unitConverters";
 import calcSb from "@/helpers/calcSb";
@@ -72,247 +71,202 @@ function RecipeView({
     }) || [];
 
   return (
-    <div>
-      <header>
-        <img src={logo} />
+    <div className="pdf-page">
+      <div className="page-one">
+        <header>
+          <img src="/pdf-logo.png" />
 
-        <h1>{recipeName ? recipeName : t("PDF.pageTitle")}</h1>
-      </header>
-      <section>
-        <table>
-          <thead>
-            <tr>
-              <td>{t("PDF.totalVolume")}</td>
-              <td> {t("PDF.yeast")}</td>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>
-                <p>
-                  {volume} {units && units.volume}
-                </p>
-                <p>
-                  {nuteInfo &&
-                    nuteInfo.gf.gf > 0 &&
-                    `${nuteInfo.gf.gf}g ${nuteInfo.gf.gfType || "Go-Ferm"} ${t(
-                      "PDF.with"
-                    )} ${nuteInfo.gf.gfWater}ml ${t("water")}`}
-                </p>
-              </td>
-              <td>
-                <p>
-                  {outputs &&
-                    `${Math.round(outputs?.yeastAmount * 100) / 100}g ${t(
-                      "PDF.of"
-                    )} ${
-                      selected?.yeastBrand !== "Other"
-                        ? selected?.yeastBrand
-                        : ""
-                    } ${selected?.yeastDetails.name}`}
-                </p>
-                <p>{tempString}</p>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </section>
-      <section>
-        <table>
-          <thead>
-            <tr>
-              <td>{t("PDF.estimatedOG")}</td>
-              <td>{t("PDF.estimatedFG")}</td>
-              <td>{t("PDF.tolerance")}</td>
-              <td>{t("PDF.expectedABV")}</td>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>
-                <p>{OG !== undefined && Math.round(OG * 1000) / 1000}</p>
-                <p>
-                  {OG !== undefined &&
-                    `${Math.round(toBrix(OG) * 100) / 100} ${t("BRIX")}`}
-                </p>
-              </td>
-              <td>
-                <p>{FG && Math.round(FG * 1000) / 1000}</p>
-                <p>
-                  {FG && `${Math.round(toBrix(FG) * 100) / 100} ${t("BRIX")}`}
-                </p>
-              </td>
-              <td>
-                <p>{`${selected?.yeastDetails.tolerance}%`}</p>
-                <p>
-                  {OG !== undefined
-                    ? `${t("PDF.sugarBreak")} ${
-                        Math.round(calcSb(OG) * 1000) / 1000
-                      }`
-                    : ""}
-                </p>
-              </td>
-              <td>
-                <p>{ABV && Math.round(ABV * 100) / 100}%</p>
-                <p>
-                  {Math.round(delle)} {t("DU")}
-                </p>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-        <table>
-          <thead>
-            <tr>
-              <td> {t("PDF.nutrient")}</td>
-              <td>{t("PDF.numberOfAdditions")}</td>
-              <td> {t("PDF.amount")}</td>
-              <td> {t("PDF.total")}</td>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>{t(`nuteSchedules.${selected?.schedule}`)}</td>
-              <td>{inputs?.numberOfAdditions}</td>
-              <td>
-                <p>
-                  {nuteInfo &&
-                    !isNaN(nuteInfo.perAddition[0]) &&
-                    `${
-                      Math.round(nuteInfo?.perAddition[0] * 100) / 100
-                    }g Fermaid O`}
-                </p>
-                <p>
-                  {nuteInfo &&
-                    !isNaN(nuteInfo.perAddition[1]) &&
-                    `${
-                      Math.round(nuteInfo?.perAddition[1] * 100) / 100
-                    }g Fermaid K`}
-                </p>
-                <p>
-                  {nuteInfo &&
-                    !isNaN(nuteInfo.perAddition[2]) &&
-                    `${Math.round(nuteInfo?.perAddition[2] * 100) / 100}g DAP`}
-                </p>
-              </td>
-              <td>
-                <p>
-                  {nuteInfo &&
-                    !isNaN(nuteInfo.totalGrams[0]) &&
-                    `${
-                      Math.round(nuteInfo?.totalGrams[0] * 100) / 100
-                    }g Fermaid O`}
-                </p>
-                <p>
-                  {nuteInfo &&
-                    !isNaN(nuteInfo.totalGrams[1]) &&
-                    `${
-                      Math.round(nuteInfo?.totalGrams[1] * 100) / 100
-                    }g Fermaid K`}
-                </p>
-                <p>
-                  {nuteInfo &&
-                    !isNaN(nuteInfo.totalGrams[2]) &&
-                    `${Math.round(nuteInfo?.totalGrams[2] * 100) / 100}g DAP`}
-                </p>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </section>
-      <section>
-        <table>
-          <thead>
-            <tr>
-              {adding && <td>{t("PDF.stabilizers")}</td>}
-
-              <td>{t("PDF.remaining")}</td>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              {adding && (
-                <td>
-                  <p>
-                    {sulfite &&
-                      campden &&
-                      `${Math.round(sulfite * 1000) / 1000}g ${t(
-                        "PDF.kmeta"
-                      )} ${t("accountPage.or")} ${
-                        Math.round(campden * 10) / 10
-                      } ${t("list.campden")}`}
-                  </p>
-                  <p>
-                    {sorbate &&
-                      `${Math.round(sorbate * 1000) / 1000}g ${t("PDF.ksorb")}`}
-                  </p>
-                </td>
-              )}
-              <td>
-                {" "}
-                {nuteInfo ? `${Math.round(nuteInfo?.remainingYan)}PPM` : "0PPM"}
-              </td>
-            </tr>
-          </tbody>
-        </table>
-        <table>
-          <thead>
-            <tr>
-              <td>{t("PDF.primary")}</td>
-              <td>
-                {t("PDF.weight")} {units && units.weight}
-              </td>
-              <td>
-                {t("PDF.volume")} {units && units.volume}
-              </td>
-            </tr>
-          </thead>
-          <tbody>
-            {primary?.map((item, i) => (
-              <tr key={item.name + i}>
-                <td>
-                  {i + 1}. {t(`${lodash.camelCase(item.name)}`)}
-                </td>
-                <td>{item.details[0]}</td>
-                <td>{item.details[1]}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </section>
-      <section style={{ pageBreakAfter: "always" }}>
-        {primaryNotes.length > 0 && primaryNotes[0][0].length > 0 && (
+          <h1>{recipeName ? recipeName : t("PDF.pageTitle")}</h1>
+        </header>
+        <section>
           <table>
             <thead>
               <tr>
-                <td>{t("PDF.primaryNotes")}</td>
-                <td> {t("PDF.details")}</td>
+                <td>{t("PDF.totalVolume")}</td>
+                <td> {t("PDF.yeast")}</td>
               </tr>
             </thead>
             <tbody>
-              {primaryNotes.map((note, i) => {
-                return (
-                  <tr key={"primary note #" + i}>
-                    <td>
-                      {i + 1}. {note[0]}
-                    </td>
-                    <td>{note[1]}</td>
-                  </tr>
-                );
-              })}
+              <tr>
+                <td>
+                  <p>
+                    {volume} {units && units.volume}
+                  </p>
+                  <p>
+                    {nuteInfo &&
+                      nuteInfo.gf.gf > 0 &&
+                      `${nuteInfo.gf.gf}g ${
+                        nuteInfo.gf.gfType || "Go-Ferm"
+                      } ${t("PDF.with")} ${nuteInfo.gf.gfWater}ml ${t(
+                        "water"
+                      )}`}
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    {outputs &&
+                      `${Math.round(outputs?.yeastAmount * 100) / 100}g ${t(
+                        "PDF.of"
+                      )} ${
+                        selected?.yeastBrand !== "Other"
+                          ? selected?.yeastBrand
+                          : ""
+                      } ${selected?.yeastDetails.name}`}
+                  </p>
+                  <p>{tempString}</p>
+                </td>
+              </tr>
             </tbody>
           </table>
-        )}
-      </section>
-      <div className="img-container">
-        <img src={logo} />
-      </div>
-      <section className="secondary-section">
-        {secondary?.length && (
+        </section>
+        <section>
           <table>
             <thead>
               <tr>
-                <td>{t("PDF.secondary")}</td>
+                <td>{t("PDF.estimatedOG")}</td>
+                <td>{t("PDF.estimatedFG")}</td>
+                <td>{t("PDF.tolerance")}</td>
+                <td>{t("PDF.expectedABV")}</td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <p>{OG !== undefined && Math.round(OG * 1000) / 1000}</p>
+                  <p>
+                    {OG !== undefined &&
+                      `${Math.round(toBrix(OG) * 100) / 100} ${t("BRIX")}`}
+                  </p>
+                </td>
+                <td>
+                  <p>{FG && Math.round(FG * 1000) / 1000}</p>
+                  <p>
+                    {FG && `${Math.round(toBrix(FG) * 100) / 100} ${t("BRIX")}`}
+                  </p>
+                </td>
+                <td>
+                  <p>{`${selected?.yeastDetails.tolerance}%`}</p>
+                  <p>
+                    {OG !== undefined
+                      ? `${t("PDF.sugarBreak")} ${
+                          Math.round(calcSb(OG) * 1000) / 1000
+                        }`
+                      : ""}
+                  </p>
+                </td>
+                <td>
+                  <p>{ABV && Math.round(ABV * 100) / 100}%</p>
+                  <p>
+                    {Math.round(delle)} {t("DU")}
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <table>
+            <thead>
+              <tr>
+                <td> {t("PDF.nutrient")}</td>
+                <td>{t("PDF.numberOfAdditions")}</td>
+                <td> {t("PDF.amount")}</td>
+                <td> {t("PDF.total")}</td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>{t(`nuteSchedules.${selected?.schedule}`)}</td>
+                <td>{inputs?.numberOfAdditions}</td>
+                <td>
+                  <p>
+                    {nuteInfo &&
+                      !isNaN(nuteInfo.perAddition[0]) &&
+                      `${
+                        Math.round(nuteInfo?.perAddition[0] * 100) / 100
+                      }g Fermaid O`}
+                  </p>
+                  <p>
+                    {nuteInfo &&
+                      !isNaN(nuteInfo.perAddition[1]) &&
+                      `${
+                        Math.round(nuteInfo?.perAddition[1] * 100) / 100
+                      }g Fermaid K`}
+                  </p>
+                  <p>
+                    {nuteInfo &&
+                      !isNaN(nuteInfo.perAddition[2]) &&
+                      `${
+                        Math.round(nuteInfo?.perAddition[2] * 100) / 100
+                      }g DAP`}
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    {nuteInfo &&
+                      !isNaN(nuteInfo.totalGrams[0]) &&
+                      `${
+                        Math.round(nuteInfo?.totalGrams[0] * 100) / 100
+                      }g Fermaid O`}
+                  </p>
+                  <p>
+                    {nuteInfo &&
+                      !isNaN(nuteInfo.totalGrams[1]) &&
+                      `${
+                        Math.round(nuteInfo?.totalGrams[1] * 100) / 100
+                      }g Fermaid K`}
+                  </p>
+                  <p>
+                    {nuteInfo &&
+                      !isNaN(nuteInfo.totalGrams[2]) &&
+                      `${Math.round(nuteInfo?.totalGrams[2] * 100) / 100}g DAP`}
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+        <section>
+          <table>
+            <thead>
+              <tr>
+                {adding && <td>{t("PDF.stabilizers")}</td>}
+
+                <td>{t("PDF.remaining")}</td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                {adding && (
+                  <td>
+                    <p>
+                      {sulfite &&
+                        campden &&
+                        `${Math.round(sulfite * 1000) / 1000}g ${t(
+                          "PDF.kmeta"
+                        )} ${t("accountPage.or")} ${
+                          Math.round(campden * 10) / 10
+                        } ${t("list.campden")}`}
+                    </p>
+                    <p>
+                      {sorbate &&
+                        `${Math.round(sorbate * 1000) / 1000}g ${t(
+                          "PDF.ksorb"
+                        )}`}
+                    </p>
+                  </td>
+                )}
+                <td>
+                  {" "}
+                  {nuteInfo
+                    ? `${Math.round(nuteInfo?.remainingYan)}PPM`
+                    : "0PPM"}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <table>
+            <thead>
+              <tr>
+                <td>{t("PDF.primary")}</td>
                 <td>
                   {t("PDF.weight")} {units && units.weight}
                 </td>
@@ -322,7 +276,7 @@ function RecipeView({
               </tr>
             </thead>
             <tbody>
-              {secondary?.map((item, i) => (
+              {primary?.map((item, i) => (
                 <tr key={item.name + i}>
                   <td>
                     {i + 1}. {t(`${lodash.camelCase(item.name)}`)}
@@ -333,55 +287,114 @@ function RecipeView({
               ))}
             </tbody>
           </table>
+        </section>
+        <section style={{ pageBreakAfter: "always" }}>
+          {primaryNotes.length > 0 && primaryNotes[0][0].length > 0 && (
+            <table>
+              <thead>
+                <tr>
+                  <td>{t("PDF.primaryNotes")}</td>
+                  <td> {t("PDF.details")}</td>
+                </tr>
+              </thead>
+              <tbody>
+                {primaryNotes.map((note, i) => {
+                  return (
+                    <tr key={"primary note #" + i}>
+                      <td>
+                        {i + 1}. {note[0]}
+                      </td>
+                      <td>{note[1]}</td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          )}
+        </section>
+      </div>
+      <div className="page-two">
+        <div className="img-container">
+          <img src="/pdf-logo.png" />
+        </div>
+        <section className="secondary-section">
+          {secondary?.length && (
+            <table>
+              <thead>
+                <tr>
+                  <td>{t("PDF.secondary")}</td>
+                  <td>
+                    {t("PDF.weight")} {units && units.weight}
+                  </td>
+                  <td>
+                    {t("PDF.volume")} {units && units.volume}
+                  </td>
+                </tr>
+              </thead>
+              <tbody>
+                {secondary?.map((item, i) => (
+                  <tr key={item.name + i}>
+                    <td>
+                      {i + 1}. {t(`${lodash.camelCase(item.name)}`)}
+                    </td>
+                    <td>{item.details[0]}</td>
+                    <td>{item.details[1]}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          )}
+        </section>
+        {filteredAdditives.length > 0 && (
+          <section>
+            <table>
+              <thead>
+                <tr>
+                  <td>Additives</td>
+
+                  <td>Amount</td>
+                </tr>
+              </thead>
+              <tbody>
+                {filteredAdditives?.map((item, i) => (
+                  <tr key={"additive " + i}>
+                    <td>
+                      {i + 1}. {item.name}
+                    </td>
+                    <td>
+                      {`${item.amount} ${
+                        item.unit !== "units" ? item.unit : ""
+                      }`}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </section>
         )}
-      </section>
-      {filteredAdditives.length > 0 && (
-        <section>
+        {secondaryNotes.length > 0 && secondaryNotes[0][0].length > 0 && (
           <table>
             <thead>
               <tr>
-                <td>Additives</td>
-
-                <td>Amount</td>
+                <td>{t("PDF.secondaryNotes")}</td>
+                <td> {t("PDF.details")}</td>
               </tr>
             </thead>
             <tbody>
-              {filteredAdditives?.map((item, i) => (
-                <tr key={"additive " + i}>
-                  <td>
-                    {i + 1}. {item.name}
-                  </td>
-                  <td>
-                    {`${item.amount} ${item.unit !== "units" ? item.unit : ""}`}
-                  </td>
-                </tr>
-              ))}
+              {secondaryNotes.map((note, i) => {
+                return (
+                  <tr key={"secondary note #" + i}>
+                    <td>
+                      {i + 1}. {note[0]}
+                    </td>
+                    <td>{note[1]}</td>
+                  </tr>
+                );
+              })}
             </tbody>
           </table>
-        </section>
-      )}
-      {secondaryNotes.length > 0 && secondaryNotes[0][0].length > 0 && (
-        <table>
-          <thead>
-            <tr>
-              <td>{t("PDF.secondaryNotes")}</td>
-              <td> {t("PDF.details")}</td>
-            </tr>
-          </thead>
-          <tbody>
-            {secondaryNotes.map((note, i) => {
-              return (
-                <tr key={"secondary note #" + i}>
-                  <td>
-                    {i + 1}. {note[0]}
-                  </td>
-                  <td>{note[1]}</td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
-      )}
+        )}
+      </div>
     </div>
   );
 }
