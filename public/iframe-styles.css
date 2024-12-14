@@ -1,0 +1,95 @@
+html {
+  background-color: grey;
+}
+
+/* iframe-styles.css */
+body {
+  margin: 2rem;
+  padding: 2rem;
+  font-family: Arial, sans-serif;
+  color: #333;
+  background-color: #fff;
+}
+
+h1 {
+  font-size: 24px;
+  font-weight: bold;
+  color: #1a202c; /* Tailwind's gray-900 equivalent */
+}
+
+/* p {
+  margin-top: 8px;
+  font-size: 16px;
+  line-height: 1.5;
+} */
+
+header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+img {
+  display: block;
+  object-fit: cover;
+  height: 250px;
+}
+header h1 {
+  font-size: 2.5rem;
+  font-weight: lighter;
+  margin-top: -3rem;
+}
+
+table {
+  border-collapse: collapse;
+  place-items: center;
+  width: 100%;
+  table-layout: fixed;
+  margin-block: 1rem;
+}
+
+thead td {
+  background-color: gray;
+  font-weight: bold;
+}
+
+td {
+  border: 1px solid black;
+  padding: 5px;
+}
+.img-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.img-container::before {
+  content: "";
+  position: absolute;
+  width: 200%;
+  height: 10px;
+  background-color: grey;
+  top: 10%;
+}
+
+@media print {
+  @page {
+    margin: 0;
+  }
+  body {
+    margin: 0;
+    border: none;
+  }
+  html {
+    background-color: white;
+  }
+  .img-container::before {
+    display: none;
+  }
+}
+
+.seconday-section {
+  margin-top: 3rem;
+}

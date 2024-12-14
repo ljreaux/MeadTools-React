@@ -24,9 +24,6 @@
     "@radix-ui/react-slot": "^1.1.0",
     "@radix-ui/react-switch": "^1.1.0",
     "@radix-ui/react-toast": "^1.1.5",
-    "@react-pdf-viewer/core": "^3.12.0",
-    "@react-pdf-viewer/default-layout": "^3.12.0",
-    "@react-pdf/renderer": "^3.4.2",
     "axios": "^1.7.7",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
@@ -44,7 +41,6 @@
     "react-i18next": "^14.1.0",
     "react-icons": "^5.0.1",
     "react-paginate": "^8.2.0",
-    "react-pdf": "^7.7.1",
     "react-router-dom": "^6.22.3",
     "recharts": "^2.12.7",
     "recharts-to-png": "^2.3.2",
@@ -53,7 +49,6 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
-    "@react-pdf/types": "^2.4.1",
     "@types/file-saver": "^2.0.7",
     "@types/lodash": "^4.17.0",
     "@types/node": "^20.14.6",
