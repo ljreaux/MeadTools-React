@@ -62,9 +62,8 @@ function RecipeView({
   const primary = ingredients?.filter(
     (item) => !item.secondary && item.details[0] > 0
   );
-  const secondary = ingredients?.filter(
-    (item) => item.secondary && item.details[0] > 0
-  );
+  const secondary =
+    ingredients?.filter((item) => item.secondary && item.details[0] > 0) || [];
   const filteredAdditives =
     additives?.filter((item) => {
       return item.amount > 0 && item.name.length > 0;
@@ -318,7 +317,7 @@ function RecipeView({
           <img src="/pdf-logo.png" />
         </div>
         <section className="secondary-section">
-          {secondary?.length && (
+          {secondary?.length > 0 && (
             <table>
               <thead>
                 <tr>
