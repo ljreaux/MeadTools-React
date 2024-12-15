@@ -89,7 +89,7 @@ td {
   width: 200%;
   height: 10px;
   background-color: grey;
-  top: 0%;
+  top: calc(0% - 10px);
 }
 
 @media print {

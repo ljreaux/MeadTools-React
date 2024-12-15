@@ -69,6 +69,13 @@ function RecipeView({
       return item.amount > 0 && item.name.length > 0;
     }) || [];
 
+  const secondaryNotesExist =
+    secondaryNotes.length > 0 &&
+    (secondaryNotes[0][0].length > 0 || secondaryNotes[0][1].length > 0);
+
+  const showPageTwo =
+    secondary.length > 0 || secondaryNotesExist || filteredAdditives.length > 0;
+
   return (
     <div className="pdf-page">
       <div className="page-one">
@@ -312,88 +319,90 @@ function RecipeView({
           )}
         </section>
       </div>
-      <div className="page-two">
-        <div className="img-container">
-          <img src="/pdf-logo.png" />
-        </div>
-        <section className="secondary-section">
-          {secondary?.length > 0 && (
+      {showPageTwo && (
+        <div className="page-two">
+          <div className="img-container">
+            <img src="/pdf-logo.png" />
+          </div>
+          <section className="secondary-section">
+            {secondary?.length > 0 && (
+              <table>
+                <thead>
+                  <tr>
+                    <td>{t("PDF.secondary")}</td>
+                    <td>
+                      {t("PDF.weight")} {units && units.weight}
+                    </td>
+                    <td>
+                      {t("PDF.volume")} {units && units.volume}
+                    </td>
+                  </tr>
+                </thead>
+                <tbody>
+                  {secondary?.map((item, i) => (
+                    <tr key={item.name + i}>
+                      <td>
+                        {i + 1}. {t(`${lodash.camelCase(item.name)}`)}
+                      </td>
+                      <td>{item.details[0]}</td>
+                      <td>{item.details[1]}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            )}
+          </section>
+          {filteredAdditives.length > 0 && (
+            <section>
+              <table>
+                <thead>
+                  <tr>
+                    <td>Additives</td>
+
+                    <td>Amount</td>
+                  </tr>
+                </thead>
+                <tbody>
+                  {filteredAdditives?.map((item, i) => (
+                    <tr key={"additive " + i}>
+                      <td>
+                        {i + 1}. {item.name}
+                      </td>
+                      <td>
+                        {`${item.amount} ${
+                          item.unit !== "units" ? item.unit : ""
+                        }`}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </section>
+          )}
+          {secondaryNotesExist && (
             <table>
               <thead>
                 <tr>
-                  <td>{t("PDF.secondary")}</td>
-                  <td>
-                    {t("PDF.weight")} {units && units.weight}
-                  </td>
-                  <td>
-                    {t("PDF.volume")} {units && units.volume}
-                  </td>
+                  <td>{t("PDF.secondaryNotes")}</td>
+                  <td> {t("PDF.details")}</td>
                 </tr>
               </thead>
               <tbody>
-                {secondary?.map((item, i) => (
-                  <tr key={item.name + i}>
-                    <td>
-                      {i + 1}. {t(`${lodash.camelCase(item.name)}`)}
-                    </td>
-                    <td>{item.details[0]}</td>
-                    <td>{item.details[1]}</td>
-                  </tr>
-                ))}
+                {secondaryNotes.map((note, i) => {
+                  return (
+                    <tr key={"secondary note #" + i}>
+                      <td>
+                        {i + 1}. {note[0]}
+                      </td>
+                      <td>{note[1]}</td>
+                    </tr>
+                  );
+                })}
               </tbody>
             </table>
           )}
-        </section>
-        {filteredAdditives.length > 0 && (
-          <section>
-            <table>
-              <thead>
-                <tr>
-                  <td>Additives</td>
-
-                  <td>Amount</td>
-                </tr>
-              </thead>
-              <tbody>
-                {filteredAdditives?.map((item, i) => (
-                  <tr key={"additive " + i}>
-                    <td>
-                      {i + 1}. {item.name}
-                    </td>
-                    <td>
-                      {`${item.amount} ${
-                        item.unit !== "units" ? item.unit : ""
-                      }`}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </section>
-        )}
-        {secondaryNotes.length > 0 && secondaryNotes[0][0].length > 0 && (
-          <table>
-            <thead>
-              <tr>
-                <td>{t("PDF.secondaryNotes")}</td>
-                <td> {t("PDF.details")}</td>
-              </tr>
-            </thead>
-            <tbody>
-              {secondaryNotes.map((note, i) => {
-                return (
-                  <tr key={"secondary note #" + i}>
-                    <td>
-                      {i + 1}. {note[0]}
-                    </td>
-                    <td>{note[1]}</td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
-        )}
-      </div>
+        </div>
+      )}
     </div>
   );
 }
