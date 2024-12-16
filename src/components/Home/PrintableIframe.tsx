@@ -4,6 +4,8 @@ import { renderToString } from "react-dom/server";
 import { Button } from "../ui/button";
 import { useTranslation } from "react-i18next";
 import Title from "../Title";
+import { FiPlus, FiMinus, FiDownload } from "react-icons/fi";
+import { Input } from "../ui/input";
 
 interface PrintableIframeProps {
   content: React.ReactNode;
@@ -13,9 +15,12 @@ const PrintableIframe: React.FC<PrintableIframeProps> = ({ content }) => {
   const iframeRef = useRef<HTMLIFrameElement>(null);
   const [iframeLoaded, setIframeLoaded] = useState(false);
   const [cssContent, setCssContent] = useState<string>("");
+  const [zoomFactor, setZoomFactor] = useState<number>(1);
+  const [inputValue, setInputValue] = useState<number>(100); // Keep initial input value as 100%
+
   const { t } = useTranslation();
 
-  // Fetch the CSS once when component mounts
+  // Fetch the CSS once
   useEffect(() => {
     fetch("/iframe-styles.css")
       .then((res) => res.text())
@@ -35,11 +40,16 @@ const PrintableIframe: React.FC<PrintableIframeProps> = ({ content }) => {
 
     const container = iframeDocument.createElement("div");
     container.className = "printable-content";
+
+    // Apply zoom
+    container.style.transform = `scale(${zoomFactor})`;
+    container.style.transformOrigin = "top left";
+
     iframeDocument.body.appendChild(container);
 
-    // Instead of linking the stylesheet, we'll just inject it as a <style> for the preview too.
     const style = iframeDocument.createElement("style");
-    style.innerHTML = cssContent;
+    // Append background color rule directly to the CSS so the entire iframe background is gray
+    style.innerHTML = `${cssContent}\nhtml, body { background-color: gray; }`;
     iframeDocument.head.appendChild(style);
 
     const root = createRoot(container);
@@ -67,11 +77,10 @@ const PrintableIframe: React.FC<PrintableIframeProps> = ({ content }) => {
     if (iframeLoaded && cssContent) {
       injectPreviewContent();
     }
-  }, [content, iframeLoaded, cssContent]);
+  }, [content, iframeLoaded, cssContent, zoomFactor]);
 
   const handlePrint = () => {
     if (!cssContent) {
-      // If CSS not loaded yet, just print without CSS or warn the user
       console.warn("CSS not loaded yet. Printing without styles.");
     }
 
@@ -81,7 +90,6 @@ const PrintableIframe: React.FC<PrintableIframeProps> = ({ content }) => {
     if (!newWindow) return;
 
     newWindow.document.open();
-    // Inject the fetched CSS as a <style> block here
     newWindow.document.write(`
       <html>
         <head>
@@ -94,26 +102,74 @@ const PrintableIframe: React.FC<PrintableIframeProps> = ({ content }) => {
     `);
     newWindow.document.close();
 
-    // Wait a short time to ensure rendering before print
-    // This tiny delay allows Firefox to layout the page with CSS
     setTimeout(() => {
       newWindow.focus();
       newWindow.print();
     }, 100);
   };
 
+  const handleZoomIn = () => {
+    const newZoom = Math.min(zoomFactor + 0.1, 3);
+    setZoomFactor(newZoom);
+    setInputValue(Math.round(newZoom * 100)); // Update input value to match zoom
+  };
+
+  const handleZoomOut = () => {
+    const newZoom = Math.max(zoomFactor - 0.1, 0.1);
+    setZoomFactor(newZoom);
+    setInputValue(Math.round(newZoom * 100)); // Update input value to match zoom
+  };
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = parseInt(e.target.value, 10);
+    if (!isNaN(value)) {
+      setInputValue(value); // Update the input field only
+    }
+  };
+
+  const handleInputKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      const newZoom = Math.max(0.1, Math.min(inputValue / 100, 3)); // Clamp between 10% and 300%
+      setZoomFactor(newZoom);
+    }
+  };
+
   return (
     <>
       <Title header={t("PDF.title")} />
-      <iframe
-        ref={iframeRef}
-        className="w-full my-4 border border-gray-300 rounded-sm h-96"
-        title="MeadTools Recipe PDF"
-        srcDoc="<html><head></head><body></body></html>"
-      />
-      <Button onClick={handlePrint} variant={"secondary"}>
-        {t("SAVE")}
-      </Button>
+      {/* The iframe and zoom buttons container */}
+      <div className="relative w-full my-4 border border-gray-300 rounded-sm h-96">
+        <iframe
+          ref={iframeRef}
+          className="w-full h-full"
+          title="MeadTools Recipe PDF"
+          srcDoc="<html><head></head><body></body></html>"
+        />
+        <div className="absolute flex items-center space-x-2 top-2 right-10">
+          <span className="flex gap-2 mr-2">
+            <Button onClick={handleZoomOut} variant="secondary">
+              <FiMinus />
+            </Button>
+            <span className="relative">
+              <Input
+                value={inputValue}
+                onChange={handleInputChange}
+                onKeyDown={handleInputKeyDown}
+                className="w-[4.5rem] text-center"
+              />
+              <span className="absolute -translate-y-1/2 right-2 top-1/2">
+                %
+              </span>
+            </span>
+            <Button onClick={handleZoomIn} variant="secondary">
+              <FiPlus />
+            </Button>
+          </span>
+          <Button onClick={handlePrint} variant="secondary">
+            <FiDownload />
+          </Button>
+        </div>
+      </div>
     </>
   );
 };
