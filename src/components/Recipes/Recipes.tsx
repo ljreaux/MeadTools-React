@@ -340,6 +340,7 @@ export default function Recipes({
               primaryNotes={primaryNotes}
               secondaryNotes={secondaryNotes}
               adding={adding}
+              recipeName={recipeName}
             />
           }
         />

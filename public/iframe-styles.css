@@ -52,6 +52,7 @@ img {
   display: block;
   object-fit: cover;
   width: 300px;
+  padding-left: 1.2rem;
 }
 header h1 {
   font-size: 2.5rem;
@@ -89,7 +90,7 @@ td {
   width: 200%;
   height: 10px;
   background-color: grey;
-  top: calc(0% - 10px);
+  top: calc(0% - 5px);
 }
 
 @media print {
