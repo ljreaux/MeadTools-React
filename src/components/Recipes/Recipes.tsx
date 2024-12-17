@@ -12,20 +12,10 @@ import { useTranslation } from "react-i18next";
 import { FormData } from "../Nutrients/NutrientCalc";
 import Stabilizers from "../Home/Stabilizers";
 import Additives from "../Home/Additives";
-import MyDocument from "../Home/PDF";
+
 import Loading from "../Loading";
 import { List } from "../../App";
-import { usePDF } from "@react-pdf/renderer";
-import { Viewer, Worker } from "@react-pdf-viewer/core";
-import { pdfjs } from "react-pdf";
-// Plugins
-import { defaultLayoutPlugin } from "@react-pdf-viewer/default-layout";
 
-// Import styles
-import "@react-pdf-viewer/core/lib/styles/index.css";
-import "@react-pdf-viewer/default-layout/lib/styles/index.css";
-
-import Title from "../Title";
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import { API_URL } from "../../main";
 import Notes from "../Home/Notes";
@@ -36,6 +26,8 @@ import { MdPictureAsPdf } from "react-icons/md";
 import { useToast } from "../ui/use-toast";
 import { ToastAction } from "@radix-ui/react-toast";
 import { Button } from "../ui/button";
+import PrintableIframe from "../Home/PrintableIframe";
+import RecipeView from "../Home/RecipeView";
 
 export default function Recipes({
   ingredientsList,
@@ -77,7 +69,6 @@ export default function Recipes({
     },
     additives: [{ name: "", amount: 0, unit: "g" }],
   });
-  const defaultLayoutPluginInstance = defaultLayoutPlugin();
   const [secondaryVolume, setSecondaryVolume] = useState(0);
   const [advanced, setAdvanced] = useState(false);
   const [nuteInfo, setNuteInfo] = useState<null | {
@@ -190,36 +181,6 @@ export default function Recipes({
     Other: [],
   });
 
-  const [instance, setInstance] = usePDF({
-    document: (
-      <MyDocument
-        {...recipeData}
-        {...ingredientsList}
-        {...data}
-        {...yeasts}
-        nuteInfo={nuteInfo}
-        primaryNotes={primaryNotes}
-        secondaryNotes={secondaryNotes}
-        recipeName={recipeName}
-      />
-    ),
-  });
-
-  useEffect(() => {
-    setInstance(
-      <MyDocument
-        {...recipeData}
-        {...ingredientsList}
-        {...data}
-        {...yeasts}
-        nuteInfo={nuteInfo}
-        primaryNotes={primaryNotes}
-        secondaryNotes={secondaryNotes}
-        recipeName={recipeName}
-      />
-    );
-  }, [recipeData, ingredientsList, data, yeasts, nuteInfo, recipeName]);
-
   const { recipeId } = useParams();
   useEffect(() => {
     function cocatNotes(notes: string[]): string[][] {
@@ -296,6 +257,13 @@ export default function Recipes({
         ),
       });
   }, [recipeUser]);
+  const [adding, setAdding] = useState(true);
+  useEffect(() => {
+    const adding = JSON.parse(
+      localStorage.getItem("addingStabilizers") || '{"adding": true}'
+    )?.adding;
+    setAdding(adding);
+  }, [recipeData.sorbate, recipeData.sulfite, recipeData.campden]);
   const { next, back, goTo, step, currentStepIndex, steps } = useMultiStepForm([
     <RecipeBuilder
       {...recipeData}
@@ -360,25 +328,23 @@ export default function Recipes({
       setSecondaryNotes={setSecondaryNotes}
     />,
     <>
-      {instance.loading && <Loading />}
-      {!instance.loading && instance.url && (
-        <div className="flex flex-col items-center justify-center w-11/12 p-8 mt-24 mb-8 rounded-xl bg-background aspect-video">
-          <Title header={t("PDF.title")} />
-          <div className="w-[80%] h-[50vh]">
-            <Worker
-              workerUrl={`https://unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.js`}
-            >
-              <Viewer
-                fileUrl={instance.url}
-                plugins={[
-                  // Register plugins
-                  defaultLayoutPluginInstance,
-                ]}
-              />
-            </Worker>
-          </div>
-        </div>
-      )}
+      <div className="flex flex-col items-center justify-center w-11/12 p-8 mt-24 mb-8 rounded-xl bg-background">
+        <PrintableIframe
+          content={
+            <RecipeView
+              {...recipeData}
+              {...ingredientsList}
+              {...data}
+              {...yeasts}
+              nuteInfo={nuteInfo}
+              primaryNotes={primaryNotes}
+              secondaryNotes={secondaryNotes}
+              adding={adding}
+              recipeName={recipeName}
+            />
+          }
+        />
+      </div>
     </>,
     <>
       {notCurrentUser ? (

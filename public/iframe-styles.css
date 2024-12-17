@@ -1,0 +1,123 @@
+.printable-content {
+  background-color: gray;
+  padding-block: 1rem;
+}
+.pdf-page {
+  width: 8.5in; /* Simulate US Letter width. Alternatively, 816px at 96 DPI */
+  margin: 0 auto; /* center the page horizontally */
+  background: #fff;
+  padding: 0.5in; /* adjust as needed */
+  box-sizing: border-box;
+  border: 1px solid #ccc; /* a light border to simulate paper edges */
+}
+
+.page-one,
+.page-two {
+  min-height: 11in;
+}
+
+/* Reset some global styles */
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background-color: grey;
+}
+/* If you had previously set margins or padding on body, remove them or keep minimal. */
+body {
+  background-color: #fff;
+  font-family: Arial, sans-serif;
+  color: #333;
+}
+
+h1 {
+  font-size: 24px;
+  font-weight: bold;
+  color: #1a202c; /* Tailwind's gray-900 equivalent */
+}
+
+/* p {
+  margin-top: 8px;
+  font-size: 16px;
+  line-height: 1.5;
+} */
+
+header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+img {
+  display: block;
+  object-fit: cover;
+  width: 300px;
+  padding-left: 1.2rem;
+}
+header h1 {
+  font-size: 2.5rem;
+  font-weight: lighter;
+}
+
+table {
+  border-collapse: collapse;
+  place-items: center;
+  width: 100%;
+  table-layout: fixed;
+  margin-block: 1rem;
+}
+
+thead td {
+  background-color: gray;
+  font-weight: bold;
+}
+
+td {
+  border: 1px solid black;
+  padding: 5px;
+}
+.img-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  padding-top: 1rem;
+}
+
+.img-container::before {
+  content: "";
+  position: absolute;
+  width: 200%;
+  height: 10px;
+  background-color: grey;
+  top: calc(0% - 5px);
+}
+
+@media print {
+  @page {
+    margin: 0;
+  }
+  html,
+  body {
+    background-color: #fff;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .pdf-page {
+    border: none; /* remove border for the final print */
+  }
+
+  .page-one,
+  .page-two {
+    min-height: auto;
+  }
+  .img-container::before {
+    display: none;
+  }
+  .printable-content {
+    background-color: transparent; /* remove background color for the final print */
+    padding: 0;
+  }
+}
