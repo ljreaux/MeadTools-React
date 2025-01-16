@@ -250,7 +250,7 @@ function RecipeView({
                           "PDF.kmeta"
                         )} ${t("accountPage.or")} ${
                           Math.round(campden * 10) / 10
-                        } ${t("list.campden")}`}
+                        } ${t("campden")}`}
                     </p>
                     <p>
                       {sorbate &&

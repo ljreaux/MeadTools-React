@@ -37,82 +37,82 @@ export default function Additives({
       unit: "g",
     },
     {
-      name: t(`list.${lodash.camelCase("Opti-Red")}`),
+      name: t(`${lodash.camelCase("Opti-Red")}`),
       dosage: 1,
       unit: "g",
     },
     {
-      name: t(`list.${lodash.camelCase("FT Blanc Soft")}`),
+      name: t(`${lodash.camelCase("FT Blanc Soft")}`),
       dosage: 0.2,
       unit: "g",
     },
     {
-      name: t(`list.${lodash.camelCase("Opti-White")}`),
+      name: t(`${lodash.camelCase("Opti-White")}`),
       dosage: 1.9,
       unit: "g",
     },
     {
-      name: t(`list.${lodash.camelCase("Tannin Complex")}`),
+      name: t(`${lodash.camelCase("Tannin Complex")}`),
       dosage: 0.2,
       unit: "g",
     },
     {
-      name: t(`list.${lodash.camelCase("Tannin Riche Extra")}`),
+      name: t(`${lodash.camelCase("Tannin Riche Extra")}`),
       dosage: 0.2,
       unit: "g",
     },
     {
-      name: t(`list.${lodash.camelCase("Bentonite")}`),
+      name: t(`${lodash.camelCase("Bentonite")}`),
       dosage: 6,
       unit: "g",
     },
     {
-      name: t(`list.${lodash.camelCase("Chitosan")}`),
+      name: t(`${lodash.camelCase("Chitosan")}`),
       dosage: 6,
       unit: "ml",
     },
     {
-      name: t(`list.${lodash.camelCase("Kieselsol")}`),
+      name: t(`${lodash.camelCase("Kieselsol")}`),
       dosage: 1,
       unit: "ml",
     },
     {
-      name: t(`list.${lodash.camelCase("Sparkolloid")}`),
+      name: t(`${lodash.camelCase("Sparkolloid")}`),
       dosage: 0.6,
       unit: "g",
     },
     {
-      name: t(`list.${lodash.camelCase("Pectic Enzyme")}`),
+      name: t(`${lodash.camelCase("Pectic Enzyme")}`),
       dosage: 0.4,
       unit: "tsp",
     },
     {
-      name: t(`list.${lodash.camelCase("Lallzyme EX-V")}`),
+      name: t(`${lodash.camelCase("Lallzyme EX-V")}`),
       dosage: 0.075,
       unit: "g",
     },
     {
-      name: t(`list.${lodash.camelCase("Lallzyme EX")}`),
+      name: t(`${lodash.camelCase("Lallzyme EX")}`),
       dosage: 0.1,
       unit: "g",
     },
     {
-      name: t(`list.${lodash.camelCase("Lallzyme C-Max")}`),
+      name: t(`${lodash.camelCase("Lallzyme C-Max")}`),
       dosage: 0.06,
       unit: "g",
     },
     {
-      name: t(`list.${lodash.camelCase("Oak Chips")}`),
+      name: t(`${lodash.camelCase("Oak Chips")}`),
       dosage: 0.25,
       unit: "oz",
     },
     {
-      name: t(`list.${lodash.camelCase("Oak Spirals")}`),
+      name: t(`${lodash.camelCase("Oak Spirals")}`),
       dosage: 1,
       unit: "units",
     },
     {
-      name: t(`list.${lodash.camelCase("Oak Cubes")}`),
+      name: t(`${lodash.camelCase("Oak Cubes")}`),
       dosage: 0.5,
       unit: "oz",
     },
@@ -125,37 +125,29 @@ export default function Additives({
         <Tooltip body={t("tipText.additives")} />
       </div>
       <datalist id="additives">
+        <option value={t(`${lodash.camelCase("Red Wine Tannin")}`)}></option>
+        <option value={t(`${lodash.camelCase("FT Rouge")}`)}></option>
+        <option value={t(`${lodash.camelCase("Opti-Red")}`)}></option>
+        <option value={t(`${lodash.camelCase("FT Blanc Soft")}`)}></option>
+        <option value={t(`${lodash.camelCase("Opti-White")}`)}></option>
+        <option value={t(`${lodash.camelCase("Tannin Complex")}`)}></option>
+        <option value={t(`${lodash.camelCase("Tannin Riche Extra")}`)}></option>
+        <option value={t(`${lodash.camelCase("Citric Acid")}`)}></option>
+        <option value={t(`${lodash.camelCase("Malic Acid")}`)}></option>
+        <option value={t(`${lodash.camelCase("Tartaric Acid")}`)}></option>
+        <option value={t(`${lodash.camelCase("Bentonite")}`)}></option>
+        <option value={t(`${lodash.camelCase("Chitosan")}`)}></option>
+        <option value={t(`${lodash.camelCase("Kieselsol")}`)}></option>
+        <option value={t(`${lodash.camelCase("Sparkolloid")}`)}></option>
+        <option value={t(`${lodash.camelCase("Pectic Enzyme")}`)}></option>
+        <option value={t(`${lodash.camelCase("Lallzyme EX-V")}`)}></option>
+        <option value={t(`${lodash.camelCase("Lallzyme EX")}`)}></option>
+        <option value={t(`${lodash.camelCase("Lallzyme C-Max")}`)}></option>
+        <option value={t(`${lodash.camelCase("Oak Chips")}`)}></option>
+        <option value={t(`${lodash.camelCase("Oak Spirals")}`)}></option>
+        <option value={t(`${lodash.camelCase("Oak Cubes")}`)}></option>
         <option
-          value={t(`list.${lodash.camelCase("Red Wine Tannin")}`)}
-        ></option>
-        <option value={t(`list.${lodash.camelCase("FT Rouge")}`)}></option>
-        <option value={t(`list.${lodash.camelCase("Opti-Red")}`)}></option>
-        <option value={t(`list.${lodash.camelCase("FT Blanc Soft")}`)}></option>
-        <option value={t(`list.${lodash.camelCase("Opti-White")}`)}></option>
-        <option
-          value={t(`list.${lodash.camelCase("Tannin Complex")}`)}
-        ></option>
-        <option
-          value={t(`list.${lodash.camelCase("Tannin Riche Extra")}`)}
-        ></option>
-        <option value={t(`list.${lodash.camelCase("Citric Acid")}`)}></option>
-        <option value={t(`list.${lodash.camelCase("Malic Acid")}`)}></option>
-        <option value={t(`list.${lodash.camelCase("Tartaric Acid")}`)}></option>
-        <option value={t(`list.${lodash.camelCase("Bentonite")}`)}></option>
-        <option value={t(`list.${lodash.camelCase("Chitosan")}`)}></option>
-        <option value={t(`list.${lodash.camelCase("Kieselsol")}`)}></option>
-        <option value={t(`list.${lodash.camelCase("Sparkolloid")}`)}></option>
-        <option value={t(`list.${lodash.camelCase("Pectic Enzyme")}`)}></option>
-        <option value={t(`list.${lodash.camelCase("Lallzyme EX-V")}`)}></option>
-        <option value={t(`list.${lodash.camelCase("Lallzyme EX")}`)}></option>
-        <option
-          value={t(`list.${lodash.camelCase("Lallzyme C-Max")}`)}
-        ></option>
-        <option value={t(`list.${lodash.camelCase("Oak Chips")}`)}></option>
-        <option value={t(`list.${lodash.camelCase("Oak Spirals")}`)}></option>
-        <option value={t(`list.${lodash.camelCase("Oak Cubes")}`)}></option>
-        <option
-          value={t(`list.${lodash.camelCase("Potassium Carbonate")}`)}
+          value={t(`${lodash.camelCase("Potassium Carbonate")}`)}
         ></option>
       </datalist>
       <Table>
